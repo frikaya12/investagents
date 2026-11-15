@@ -71,6 +71,17 @@ def test_amount_transform_and_missing_flag():
     assert pd.isna(x["global_practice"].iloc[1])  # chaîne vide -> manquant
 
 
+def test_country_groups_added_and_logged():
+    df = ieg_rows(gdp_pc=[1000.0, None, 0.0, 10.0, 20.0, 30.0], population=[1e6] * 6)
+    for col in ["gdp_growth", "inflation", "oda_gni", "cpia"]:
+        df[col] = 1.0
+    x = ft.build_features(df, groups=("wdi", "cpia"))
+    assert list(x.columns) == ft.FEATURES + ft.COUNTRY_GROUPS["wdi"] + ["cpia"]
+    assert x["log_gdp_pc"].iloc[0] == pytest.approx(6.9078, abs=1e-3)
+    assert pd.isna(x["log_gdp_pc"].iloc[1]) and pd.isna(x["log_gdp_pc"].iloc[2])
+    assert not [c for c in x.columns if ft.is_forbidden(c)]
+
+
 def test_target_is_failure():
     y = ft.target_failure(ieg_rows())
     assert y.tolist() == [0, 1, 0, 1, 0, 1]

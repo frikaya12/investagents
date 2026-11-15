@@ -38,12 +38,24 @@ def assign_split(approval_fy: pd.Series) -> pd.Series:
 def load_modeling_table(
     ieg_path: str = "data/processed/ieg_ratings.parquet",
     amounts_path: str = "data/processed/amounts_at_approval.parquet",
+    with_country_indicators: bool = False,
 ) -> pd.DataFrame:
-    """Projets notés, hors coffre-fort, joints au montant à l'approbation, avec `split`."""
+    """Projets notés, hors coffre-fort, joints au montant à l'approbation, avec `split`.
+
+    `with_country_indicators` : ajoute les indicateurs WDI / CPIA / WGI (valeur d'une année
+    ≤ approbation − 2), voir data/country_indicators.py.
+    """
     ieg = pd.read_parquet(ieg_path)
     ieg = ieg[ieg["satisfactory"].notna()]
     ieg = ieg[~vault_mask(ieg)]
     amounts = pd.read_parquet(amounts_path)[["project_id", "amount_at_approval_usd"]]
     df = ieg.merge(amounts, on="project_id", how="left")
+    if with_country_indicators:
+        from investagents.data import country_indicators as ci
+
+        countries = pd.read_parquet(ci.PROJECT_COUNTRY_PATH)[["project_id", "iso3"]]
+        long = pd.read_parquet(ci.LONG_PATH)
+        proj = df[["project_id", "approval_fy"]].merge(countries, on="project_id", how="left")
+        df = df.merge(ci.as_of_join(proj, long), on="project_id", how="left")
     df["split"] = assign_split(df["approval_fy"])
     return df.reset_index(drop=True)
