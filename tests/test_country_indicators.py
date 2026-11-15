@@ -57,14 +57,20 @@ def test_project_countries_most_frequent_code():
     assert "P2" not in out.index  # code régional (« 3A ») écarté
 
 
-def test_fetch_wdi_paginates():
+def test_fetch_wdi_paginates_by_window(monkeypatch):
+    monkeypatch.setattr(ci, "YEAR_WINDOWS", [(2000, 2004), (2005, 2009)])
+    calls = []
+
     def fake_get(url, params):
-        page = params["page"]
-        row = {"country": {"id": "ET"}, "countryiso3code": "ETH", "date": str(2000 + page)}
-        return [{"pages": 2}, [{**row, "value": 1.0 * page}, {**row, "value": None}]]
+        calls.append((params["date"], params["page"]))
+        start = int(params["date"].split(":")[0])
+        year = start + params["page"]
+        row = {"country": {"id": "ET"}, "countryiso3code": "ETH", "date": str(year)}
+        return [{"pages": 2}, [{**row, "value": 1.0}, {**row, "value": None}]]
 
     df, iso = ci.fetch_wdi("X", get=fake_get)
-    assert df["year"].tolist() == [2001, 2002]
+    assert calls == [("2000:2004", 1), ("2000:2004", 2), ("2005:2009", 1), ("2005:2009", 2)]
+    assert df["year"].tolist() == [2001, 2002, 2006, 2007]
     assert iso == {"ET": "ETH"}
 
 

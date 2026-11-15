@@ -58,25 +58,41 @@ LONG_PATH = Path("data/processed/country_year_indicators.parquet")
 PROJECT_COUNTRY_PATH = Path("data/processed/project_country.parquet")
 
 
+YEAR_WINDOWS = [(y, y + 4) for y in range(1960, 2026, 5)]  # requêtes par tranches de 5 ans
+
+
 def fetch_wdi(code: str, get=get_json) -> tuple[pd.DataFrame, dict[str, str]]:
-    """Toutes les années, tous les pays, pour un indicateur WDI ; + table ISO2 -> ISO3."""
-    rows, iso_map, page = [], {}, 1
-    while True:
-        r = get(
-            f"{API}/country/all/indicator/{code}",
-            {"format": "json", "source": 2, "date": "1960:2025", "per_page": 1000, "page": page},
-        )
-        meta, data = r[0], r[1] or []
-        for x in data:
-            iso_map[x["country"]["id"]] = x["countryiso3code"]
-            if x["value"] is not None and x["countryiso3code"]:
-                rows.append(
-                    {"iso3": x["countryiso3code"], "year": int(x["date"]), "value": x["value"]}
-                )
-        if page >= int(meta["pages"]):
-            break
-        page += 1
-    return pd.DataFrame(rows), iso_map
+    """Toutes les années, tous les pays, pour un indicateur WDI ; + table ISO2 -> ISO3.
+
+    Une requête 1960:2025 d'un coup expirait côté serveur (observé) ; par tranches de 5 ans,
+    chaque page répond en quelques secondes.
+    """
+    rows, iso_map = [], {}
+    for start, end in YEAR_WINDOWS:
+        page = 1
+        while True:
+            r = get(
+                f"{API}/country/all/indicator/{code}",
+                {
+                    "format": "json",
+                    "source": 2,
+                    "date": f"{start}:{end}",
+                    "per_page": 1000,
+                    "page": page,
+                },
+            )
+            meta, data = r[0], (r[1] if len(r) > 1 else None) or []
+            for x in data:
+                iso_map[x["country"]["id"]] = x["countryiso3code"]
+                if x["value"] is not None and x["countryiso3code"]:
+                    rows.append(
+                        {"iso3": x["countryiso3code"], "year": int(x["date"]), "value": x["value"]}
+                    )
+            if page >= int(meta.get("pages") or 1):
+                break
+            page += 1
+    df = pd.DataFrame(rows, columns=["iso3", "year", "value"]).drop_duplicates(["iso3", "year"])
+    return df, iso_map
 
 
 def read_wgi(zip_path: Path = WGI_ZIP) -> pd.DataFrame:
@@ -140,12 +156,20 @@ def main() -> None:
         iso_map = dict(pd.read_parquet(WDI_RAW.with_name("iso2_iso3.parquet")).values)
         print(f"Cache utilisé : {WDI_RAW}")
     else:
+        cache = WDI_RAW.parent / "wdi_cache"
+        cache.mkdir(parents=True, exist_ok=True)
         for code, name in WDI_CODES.items():
-            df, m = fetch_wdi(code)
+            part, part_iso = cache / f"{name}.parquet", cache / f"{name}_iso.parquet"
+            if part.exists():  # reprise après une coupure réseau
+                df, m = pd.read_parquet(part), dict(pd.read_parquet(part_iso).values)
+            else:
+                df, m = fetch_wdi(code)
+                df.to_parquet(part, index=False)
+                pd.DataFrame(list(m.items()), columns=["iso2", "iso3"]).to_parquet(part_iso)
             iso_map.update(m)
             df["indicator"] = name
             frames.append(df)
-            print(f"WDI {code} : {len(df)} valeurs")
+            print(f"WDI {code} : {len(df)} valeurs", flush=True)
         wdi = pd.concat(frames, ignore_index=True)
         wdi.to_parquet(WDI_RAW, index=False)
         pd.DataFrame(list(iso_map.items()), columns=["iso2", "iso3"]).to_parquet(
