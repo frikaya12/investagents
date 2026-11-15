@@ -68,6 +68,10 @@ On avance phase par phase. **On ne passe à la phase suivante que quand le livra
 
 Cible des modèles : `failure` = 1 si non satisfaisant (MU/U/HU), classe minoritaire ; AUC-PR calculée sur cette
 classe. Split temporel sur l'exercice d'approbation : entraînement ≤ 2007, validation 2008–2011, test 2012–2017.
+M1 et M1-texte sont **figés** (`experiments/phase2/frozen.json`) ; le test 2012–2017 a été consulté, ne plus
+l'utiliser pour des choix. Chiffres définitifs de tous les modèles : une seule fois, sur le coffre-fort, en fin de
+projet. **Dérive** : taux d'échec 28 % (≤ 2007) → 23 % (2008–2011) → 22 % (2012–2017) ; à corriger à la
+calibration (recalibrer sur la période récente de validation, jamais sur le test ni le coffre-fort).
 
 ## Comment me parler
 - Je suis Aya, élève ingénieure (data science / IA). Réponds en français, tutoiement, simple et direct.
