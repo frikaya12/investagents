@@ -1,0 +1,35 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# --- Environnement virtuel (recréé par `uv sync`) ---
+.venv/
+
+# --- Outils ---
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# --- Données ---
+# Données brutes téléchargées : volumineuses et re-téléchargeables, jamais versionnées.
+data/raw/*
+!data/raw/.gitkeep
+# Données transformées (Parquet) : régénérées par les scripts.
+data/processed/*
+!data/processed/.gitkeep
+
+# --- Secrets (clés d'API des futurs LLM) ---
+.env
+.env.*
+
+# --- Éditeurs / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

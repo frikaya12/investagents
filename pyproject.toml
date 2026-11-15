@@ -1,0 +1,37 @@
+[project]
+name = "investagents"
+version = "0.1.0"
+description = "Comité d'agents IA pour évaluer et sélectionner des projets d'investissement (projets Banque mondiale, vérité terrain IEG)."
+readme = "README.md"
+authors = [{ name = "frikaya12" }]
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=3.1.1",
+    "pyarrow>=26.0.1",
+    "requests>=2.34.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.17.5",
+]
+
+[build-system]
+requires = ["uv_build>=0.13.8,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+# E/F : erreurs de base ; I : tri des imports ; B : bugs fréquents ; UP : syntaxe Python moderne
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Les tests qui appellent les vraies API sont marqués « network » et exclus par défaut.
+addopts = "-m 'not network'"
+markers = ["network: appelle une vraie API sur Internet (lancer avec -m network)"]
