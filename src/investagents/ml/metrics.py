@@ -52,6 +52,27 @@ def bootstrap_ci(y, p, n_boot: int = 2000, seed: int = 0, alpha: float = 0.05) -
     return out
 
 
+def permutation_pvalue(y, p, metric: str = "auc_pr", n_perm: int = 2000, seed: int = 0) -> dict:
+    """Test « le modèle fait-il mieux que le hasard ? ».
+
+    On mélange les étiquettes `y` (ce qui casse tout lien entre scores et issue) et on recalcule
+    la métrique. p-valeur = part des mélanges qui font au moins aussi bien que le vrai score
+    (avec correction +1 pour ne jamais annoncer p = 0).
+    """
+    y = np.asarray(y)
+    p = np.asarray(p, dtype=float)
+    f = METRICS[metric]
+    observed = f(y, p)
+    rng = np.random.default_rng(seed)
+    null = np.array([f(rng.permutation(y), p) for _ in range(n_perm)])
+    return {
+        "observed": float(observed),
+        "null_mean": float(null.mean()),
+        "null_q95": float(np.quantile(null, 0.95)),
+        "p_value": float((1 + (null >= observed).sum()) / (n_perm + 1)),
+    }
+
+
 def bootstrap_diff(y, p_a, p_b, n_boot: int = 2000, seed: int = 0, alpha: float = 0.05) -> dict:
     """Écart apparié (modèle A − modèle B) sur les mêmes tirages, avec IC à 95 %.
 

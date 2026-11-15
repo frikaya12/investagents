@@ -48,6 +48,15 @@ def test_bootstrap_diff_detects_better_model():
     assert d["auc_roc"]["ci_low"] > 0
 
 
+def test_permutation_pvalue_signal_vs_noise():
+    rng = np.random.default_rng(0)
+    y = rng.integers(0, 2, 300)
+    good = y * 0.5 + rng.random(300)
+    noise = rng.random(300)
+    assert mt.permutation_pvalue(y, good, n_perm=300)["p_value"] < 0.01
+    assert mt.permutation_pvalue(y, noise, n_perm=300)["p_value"] > 0.05
+
+
 def test_base_rate():
     m = md.BaseRate().fit(None, [0, 0, 0, 1])
     assert m.predict_proba([1, 2])[:, 1].tolist() == [0.25, 0.25]

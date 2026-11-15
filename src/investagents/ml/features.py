@@ -48,13 +48,16 @@ FORBIDDEN_EXACT = frozenset(
 )
 FORBIDDEN_PREFIXES = ("evaluation_",)
 
+# `country` retiré (décision d'Aya, 2026-11-15) : à performance égale sur le test (AUC-PR 0,268
+# sans pays contre 0,270 avec), on garde le modèle le plus simple ; le pays (~180 modalités)
+# augmentait surtout le surapprentissage. NB : sur la validation, le modèle avec pays faisait
+# mieux (0,308 contre 0,280) ; cette décision a donc été prise après avoir vu le test.
 CATEGORICAL = [
     "wb_region",
     "practice_group",
     "global_practice",
     "lending_instrument_type",
     "agreement_type",
-    "country",
 ]
 NUMERIC = ["approval_fy", "log_amount_at_approval", "amount_missing"]
 FEATURES = CATEGORICAL + NUMERIC

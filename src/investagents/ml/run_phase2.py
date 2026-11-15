@@ -23,7 +23,12 @@ from sklearn.inspection import permutation_importance
 from investagents.data.corpus import CORPUS_INDEX_PATH, TEXT_DIR, read_text
 from investagents.ml import models as md
 from investagents.ml.features import build_features, target_failure
-from investagents.ml.metrics import bootstrap_ci, bootstrap_diff, compute_metrics
+from investagents.ml.metrics import (
+    bootstrap_ci,
+    bootstrap_diff,
+    compute_metrics,
+    permutation_pvalue,
+)
 from investagents.ml.split import load_modeling_table
 
 OUT_DIR = Path("experiments/phase2")
@@ -101,20 +106,6 @@ def main() -> None:
         "test_fit_on_train_valid": compute_metrics(preds["y"], preds["M1"]),
     }
 
-    # Ablation (information, ne change pas le modèle retenu) : M1 sans la variable pays.
-    no_country = [c for c in x_all.columns if c != "country"]
-    m1_nc_tr = md.make_m1(**best_m1).fit(x_all.loc[tr, no_country], y_all[tr])
-    m1_nc = md.make_m1(**best_m1).fit(x_all.loc[trva, no_country], y_all[trva])
-    preds["M1_no_country"] = m1_nc.predict_proba(x_all.loc[te, no_country])[:, 1]
-    results["m1_no_country_diagnostic"] = {
-        "train_fit_on_train": compute_metrics(
-            y_all[tr], m1_nc_tr.predict_proba(x_all.loc[tr, no_country])[:, 1]
-        ),
-        "valid_fit_on_train": compute_metrics(
-            y_all[va], m1_nc_tr.predict_proba(x_all.loc[va, no_country])[:, 1]
-        ),
-    }
-
     perm = permutation_importance(
         m1,
         x_all[te],
@@ -176,8 +167,15 @@ def main() -> None:
     # ---------------- métriques et IC
     y = preds["y"].to_numpy()
     results["test_full"] = {
-        m: bootstrap_ci(y, preds[m], n_boot=N_BOOT, seed=1)
-        for m in ["M0", "M1", "M1_no_country"]
+        m: bootstrap_ci(y, preds[m], n_boot=N_BOOT, seed=1) for m in ["M0", "M1"]
+    }
+    results["chance"] = {
+        "positive_class": "failure = non satisfaisant (MU/U/HU)",
+        "n_test": int(len(y)),
+        "n_positive": int(y.sum()),
+        "base_rate": float(y.mean()),
+        "M1_auc_pr_permutation": permutation_pvalue(y, preds["M1"], "auc_pr", N_BOOT, 6),
+        "M1_auc_roc_permutation": permutation_pvalue(y, preds["M1"], "auc_roc", N_BOOT, 7),
     }
     results["diff_full"] = {"M1 - M0": bootstrap_diff(y, preds["M1"], preds["M0"], N_BOOT, 2)}
     if text_ok is not None:
@@ -205,6 +203,20 @@ def main() -> None:
         f"| train | ≤ 2007 | {counts['train']['n']} | {counts['train']['failure_rate']:.1%} |",
         f"| valid | 2008–2011 | {counts['valid']['n']} | {counts['valid']['failure_rate']:.1%} |",
         f"| test | 2012–2017 | {counts['test']['n']} | {counts['test']['failure_rate']:.1%} |",
+        "",
+        "## Au-dessus du hasard ?",
+        "",
+        f"- Classe positive : {results['chance']['positive_class']}",
+        f"- Test : {results['chance']['n_positive']} positifs sur {results['chance']['n_test']}"
+        f" -> taux de base {results['chance']['base_rate']:.3f}"
+        " (= AUC-PR d'un classement au hasard)",
+        *[
+            f"- Test de permutation M1 {k.split('_')[1].upper()}-{k.split('_')[2].upper()} : "
+            f"observé {v['observed']:.3f}, hasard moyen {v['null_mean']:.3f}, "
+            f"95e centile du hasard {v['null_q95']:.3f}, p = {v['p_value']:.4f}"
+            for k, v in results["chance"].items()
+            if k.endswith("permutation")
+        ],
         "",
         f"## Jeu de test complet (n = {len(preds)})",
         "",
@@ -249,9 +261,6 @@ def main() -> None:
         "- M1 (entraîné sur train) : AUC-PR train "
         f"{results['m1_diagnostic']['train_fit_on_train']['auc_pr']:.3f}, valid "
         f"{results['m1_diagnostic']['valid_fit_on_train']['auc_pr']:.3f}",
-        "- M1 sans pays (ablation, entraîné sur train) : AUC-PR train "
-        f"{results['m1_no_country_diagnostic']['train_fit_on_train']['auc_pr']:.3f}, valid "
-        f"{results['m1_no_country_diagnostic']['valid_fit_on_train']['auc_pr']:.3f}",
         "",
         "Importance par permutation (M1, test, baisse d'AUC-PR) :",
         "",

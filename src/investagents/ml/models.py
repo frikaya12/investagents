@@ -34,14 +34,16 @@ class BaseRate:
 
 
 # ---------------------------------------------------------------- M1
-# Grille élargie vers plus de régularisation après un premier passage où le meilleur point était
-# au bord (lr 0,03, 100 arbres, 7 feuilles) : choix toujours fait sur la validation seule.
+# Grille orientée vers une forte régularisation (demande d'Aya : réduire l'écart
+# entraînement / validation). Arbres très courts, grosses feuilles, apprentissage lent,
+# sous-échantillonnage des variables. Choix fait sur la validation seule.
 M1_GRID = {
     "learning_rate": [0.01, 0.03, 0.1],
-    "max_iter": [50, 100, 300],
-    "max_leaf_nodes": [3, 7, 15],
-    "min_samples_leaf": [20, 80, 200],
-    "l2_regularization": [0.0, 1.0],
+    "max_iter": [50, 100, 200],
+    "max_depth": [1, 2, 3],
+    "min_samples_leaf": [100, 300, 600],
+    "l2_regularization": [1.0, 10.0],
+    "max_features": [0.5, 1.0],
 }
 
 
