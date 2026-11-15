@@ -34,11 +34,14 @@ class BaseRate:
 
 
 # ---------------------------------------------------------------- M1
+# Grille élargie vers plus de régularisation après un premier passage où le meilleur point était
+# au bord (lr 0,03, 100 arbres, 7 feuilles) : choix toujours fait sur la validation seule.
 M1_GRID = {
-    "learning_rate": [0.03, 0.1],
-    "max_iter": [100, 300],
-    "max_leaf_nodes": [7, 15, 31],
-    "min_samples_leaf": [20, 80],
+    "learning_rate": [0.01, 0.03, 0.1],
+    "max_iter": [50, 100, 300],
+    "max_leaf_nodes": [3, 7, 15],
+    "min_samples_leaf": [20, 80, 200],
+    "l2_regularization": [0.0, 1.0],
 }
 
 

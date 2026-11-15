@@ -15,6 +15,7 @@ Lancer : `uv run python -m investagents.data.corpus`
 from __future__ import annotations
 
 import gzip
+import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -29,7 +30,7 @@ PROJECTS_PATH = Path("data/processed/projects.parquet")
 TEXT_DIR = Path("data/raw/texts_gz")
 CORPUS_INDEX_PATH = Path("data/processed/corpus_index.parquet")
 MIN_CHARS = 10_000  # même seuil que la phase 1
-N_THREADS = 4
+N_THREADS = 2  # 4 connexions déclenchaient des 403 (limitation de débit du serveur)
 
 
 def select_main_documents(kept: pd.DataFrame) -> pd.DataFrame:
@@ -48,15 +49,30 @@ def read_text(doc_id: str, text_dir: Path = TEXT_DIR) -> str:
         return f.read()
 
 
-def download_gz(doc_id: str, txturl: str, text_dir: Path = TEXT_DIR, timeout_s: float = 120) -> int:
-    """Télécharge un texte (si absent du cache) ; renvoie sa longueur, 0 en cas d'échec."""
+def download_gz(
+    doc_id: str,
+    txturl: str,
+    text_dir: Path = TEXT_DIR,
+    timeout_s: float = 120,
+    retries: int = 5,
+    sleep=time.sleep,
+) -> int:
+    """Télécharge un texte (si absent du cache) ; renvoie sa longueur, 0 en cas d'échec.
+
+    Le serveur répond 403 ou 429 quand on va trop vite (observé en vrai) : on attend alors
+    15 s, 30 s, 60 s... avant de réessayer.
+    """
     path = text_path(doc_id, text_dir)
     if path.exists():
         return len(read_text(doc_id, text_dir))
-    for _ in range(3):
+    for attempt in range(retries):
         try:
             resp = requests.get(txturl.replace("http://", "https://", 1), timeout=timeout_s)
         except requests.RequestException:
+            sleep(5 * 2**attempt)
+            continue
+        if resp.status_code in (403, 429, 500, 502, 503, 504):
+            sleep(15 * 2**attempt)
             continue
         if resp.status_code == 200:
             resp.encoding = "utf-8"

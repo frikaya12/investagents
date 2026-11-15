@@ -6,8 +6,8 @@ Interdites (règle de CLAUDE.md) : les colonnes IEG jugées après le projet
 (`quality_at_entry`, `bank_performance`, `quality_of_supervision`, `me_quality`,
 `final_closing_fy`, toute colonne `evaluation_*`), la cible et ses variantes, et par prudence :
 - `country_fcs_status`, `country_fcs_lending_group`, `country_lending_group` : on ne sait pas à
-  quelle date l'IEG mesure le statut du pays (il varie dans le temps : l'Éthiopie est « FCS » pour
-  un projet approuvé en 2019, ce qui correspond plutôt à la date d'évaluation) ;
+  quelle date l'IEG mesure le statut du pays (il varie dans le temps pour 51 pays sur 187, sans
+  que l'on sache s'il est pris à l'approbation ou à l'évaluation) ;
 - `closing_date`, `total_amount_usd`, `status` de la Projects API : valeurs actuelles.
 
 `assert_no_forbidden` est appelée par `build_features` : si une colonne interdite entre dans les
