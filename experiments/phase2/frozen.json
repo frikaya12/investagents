@@ -13,5 +13,13 @@
       "max_features": 0.5
     },
     "valid_auc_pr": 0.30735225674158784
+  },
+  "m1_text": {
+    "params": {
+      "C": 1.0
+    },
+    "valid_auc_pr": 0.35508225711198155,
+    "n_train": 5810,
+    "n_valid": 869
   }
 }
