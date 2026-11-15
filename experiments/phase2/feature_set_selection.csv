@@ -1,0 +1,6 @@
+feature_set,valid_auc_pr,params
+base,0.2991448460594278,"{'learning_rate': 0.03, 'max_iter': 200, 'max_depth': 1, 'min_samples_leaf': 100, 'l2_regularization': 1.0, 'max_features': 0.5}"
+base+wdi,0.30735225674158784,"{'learning_rate': 0.1, 'max_iter': 100, 'max_depth': 1, 'min_samples_leaf': 100, 'l2_regularization': 1.0, 'max_features': 0.5}"
+base+cpia,0.3016405221402101,"{'learning_rate': 0.1, 'max_iter': 100, 'max_depth': 1, 'min_samples_leaf': 100, 'l2_regularization': 1.0, 'max_features': 0.5}"
+base+wgi,0.30388812715077107,"{'learning_rate': 0.03, 'max_iter': 200, 'max_depth': 1, 'min_samples_leaf': 600, 'l2_regularization': 10.0, 'max_features': 0.5}"
+base+wdi+cpia+wgi,0.3039235988353357,"{'learning_rate': 0.1, 'max_iter': 100, 'max_depth': 1, 'min_samples_leaf': 100, 'l2_regularization': 1.0, 'max_features': 0.5}"

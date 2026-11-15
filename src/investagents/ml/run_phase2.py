@@ -15,7 +15,7 @@
 Les chiffres définitifs de tous les modèles seront calculés une seule fois sur le coffre-fort,
 à la fin du projet (décision d'Aya).
 
-Lancer : `uv run python -m investagents.ml.run_phase2 --stage select [--skip-text]`
+Lancer : `uv run python -m investagents.ml.run_phase2 --stage select [--part m1|text|all]`
 puis    `uv run python -m investagents.ml.run_phase2 --stage evaluate`
 """
 
@@ -92,37 +92,39 @@ def load_texts(project_ids) -> pd.Series:
 
 
 # ============================================================== étape 1 : sélection
-def select(skip_text: bool) -> None:
+def select(part: str) -> None:
+    """part : "m1", "text" ou "all"."""
     table, y, split = load_data()
     tr, va = (split == "train"), (split == "valid")
     frozen = json.loads(FROZEN_PATH.read_text(encoding="utf-8")) if FROZEN_PATH.exists() else {}
 
-    rows = []
-    best = None
-    for name, groups in CANDIDATE_GROUPS.items():
-        x = build_features(table, groups)
-        params, log = md.tune(md.make_m1, md.M1_GRID, x[tr], y[tr], x[va], y[va])
-        score = float(log["valid_auc_pr"].max())
-        log.to_csv(OUT_DIR / f"tuning_m1_{name}.csv", index=False)
-        coverage = {
-            c: float(x.loc[tr | va, c].notna().mean())
-            for c in x.columns
-            if c not in build_features(table).columns
-        }
-        rows.append({"feature_set": name, "valid_auc_pr": score, "params": params})
-        print(f"{name:22s} AUC-PR validation {score:.4f}  {params}  couverture {coverage}")
-        if best is None or score > best["valid_auc_pr"]:
-            best = {
-                "feature_set": name,
-                "groups": list(groups),
-                "params": params,
-                "valid_auc_pr": score,
+    if part in ("m1", "all"):
+        rows = []
+        best = None
+        for name, groups in CANDIDATE_GROUPS.items():
+            x = build_features(table, groups)
+            params, log = md.tune(md.make_m1, md.M1_GRID, x[tr], y[tr], x[va], y[va])
+            score = float(log["valid_auc_pr"].max())
+            log.to_csv(OUT_DIR / f"tuning_m1_{name}.csv", index=False)
+            coverage = {
+                c: float(x.loc[tr | va, c].notna().mean())
+                for c in x.columns
+                if c not in build_features(table).columns
             }
-    pd.DataFrame(rows).to_csv(OUT_DIR / "feature_set_selection.csv", index=False)
-    frozen["m1"] = best
-    print("M1 figé :", best)
+            rows.append({"feature_set": name, "valid_auc_pr": score, "params": params})
+            print(f"{name:22s} AUC-PR validation {score:.4f}  {params}  couverture {coverage}")
+            if best is None or score > best["valid_auc_pr"]:
+                best = {
+                    "feature_set": name,
+                    "groups": list(groups),
+                    "params": params,
+                    "valid_auc_pr": score,
+                }
+        pd.DataFrame(rows).to_csv(OUT_DIR / "feature_set_selection.csv", index=False)
+        frozen["m1"] = best
+        print("M1 figé :", best)
 
-    if not skip_text:
+    if part in ("text", "all"):
         texts = load_texts(y.index[tr | va])
         has = pd.Series(y.index.isin(texts.index), index=y.index)
         tr_t, va_t = tr & has, va & has
@@ -324,11 +326,13 @@ def write_report(results, imp, words, flagged, n_test, n_text) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--stage", choices=["select", "evaluate"], required=True)
-    parser.add_argument("--skip-text", action="store_true", help="select : M1 seulement")
+    parser.add_argument(
+        "--part", choices=["m1", "text", "all"], default="all", help="select : quoi régler"
+    )
     args = parser.parse_args()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     if args.stage == "select":
-        select(args.skip_text)
+        select(args.part)
     else:
         evaluate()
 
