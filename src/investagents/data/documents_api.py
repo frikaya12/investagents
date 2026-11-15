@@ -116,6 +116,8 @@ def download_text(txturl: str, doc_id: str, *, text_dir: Path = TEXT_DIR, timeou
 
     Renvoie 0 si l'URL ne répond pas (le document compte alors comme « sans texte »).
     """
+    if not isinstance(txturl, str) or not txturl:  # None ou NaN (relu depuis Parquet)
+        return 0
     path = text_dir / f"{doc_id}.txt"
     if path.exists():
         return len(path.read_text(encoding="utf-8"))

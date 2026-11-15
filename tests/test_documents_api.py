@@ -70,6 +70,11 @@ def test_download_text_uses_cache(tmp_path):
     assert da.download_text("http://ignored", "D1", text_dir=tmp_path) == 3
 
 
+@pytest.mark.parametrize("url", [None, float("nan"), ""])
+def test_download_text_without_url(tmp_path, url):
+    assert da.download_text(url, "D3", text_dir=tmp_path) == 0
+
+
 def test_download_text_returns_zero_on_error(tmp_path, monkeypatch):
     class Resp:
         status_code = 404
