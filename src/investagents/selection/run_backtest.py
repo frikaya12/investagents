@@ -64,9 +64,10 @@ def calibrate(pred: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     report = {}
     for m in ["m1", "m1_text"]:
         va = pred[(pred.split == "valid") & pred[m].notna()]
-        te = pred[(pred.split == "test") & pred[m].notna()]
         cal = PlattCalibrator().fit(va.y_fail, va[m])
+        pred[f"{m}_cal"] = np.nan
         pred.loc[pred[m].notna(), f"{m}_cal"] = cal.transform(pred.loc[pred[m].notna(), m])
+        te = pred[(pred.split == "test") & pred[m].notna()]  # après création de la colonne
         report[m] = {
             "n_valid": len(va),
             "n_test": len(te),
@@ -131,7 +132,12 @@ def backtest(pool: pd.DataFrame) -> tuple[dict, pd.DataFrame]:
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     table, y, split = load_data()
-    pred = fit_predict(table, y, split)
+    raw_path = OUT_DIR / "predictions_raw.parquet"  # cache : le TF-IDF est long sur ce PC
+    if raw_path.exists():
+        pred = pd.read_parquet(raw_path)
+    else:
+        pred = fit_predict(table, y, split)
+        pred.to_parquet(raw_path)
     pred, cal_report = calibrate(pred)
 
     meta = table.set_index("project_id")[

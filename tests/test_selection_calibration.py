@@ -50,3 +50,25 @@ def test_platt_corrects_shift():
     cal = PlattCalibrator().fit(y[:1500], p_biased[:1500])
     after = ece(y[1500:], cal.transform(p_biased[1500:]))
     assert after < ece(y[1500:], p_biased[1500:]) / 2
+
+
+def test_calibrate_report_on_fake_predictions():
+    import pandas as pd
+
+    from investagents.selection.run_backtest import calibrate
+
+    rng = np.random.default_rng(0)
+    n = 400
+    p = rng.uniform(0.1, 0.5, n)
+    pred = pd.DataFrame(
+        {
+            "split": ["valid"] * 200 + ["test"] * 200,
+            "y_fail": (rng.random(n) < p - 0.05).astype(int),
+            "m1": p,
+            "m1_text": np.where(np.arange(n) % 3 == 0, np.nan, p),
+        }
+    )
+    out, report = calibrate(pred)
+    assert out["m1_cal"].notna().all()
+    assert out["m1_text_cal"].isna().sum() == pred["m1_text"].isna().sum()
+    assert report["m1"]["test_ece_after"] <= report["m1"]["test_ece_before"]

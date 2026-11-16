@@ -1,0 +1,201 @@
+{
+  "masked_id": "PROJET-002",
+  "project_id": "P149005",
+  "approval_fy": 2016,
+  "global_practice": "Education",
+  "outcome_ieg": "Moderately Satisfactory",
+  "model": "qwen2.5:3b",
+  "seconds_total": 368.4,
+  "sections_chars": 7998,
+  "sections": {
+    "objectives": "DEVELOPMENT OBJECTIVES A. PDO 12. The Project Development Objective (PDO) is to strengthen selected systems that contribute to quality, accountability, and efficiency improvements in education in the Republic of Kosovo. B. Project Beneficiaries 13. As the project focuses at the system level, its interventions would affect beneficiaries across all levels of the education system. At the same time, subcomponent 1.3 envisions support for targeted schools, focusing on poorer rural areas, covering approximately 45,000 students (around 20 percent of all primary schools). Indirect beneficiaries for that subcomponent would include school teachers, administrators, and other staff employed in those schools. Subcomponent 2.1 envisions support for the implementation of the teacher licensing and performance assessment, which would directly affect about 25,000 teachers in pre-university education. 4 C. PDO Level Results Indicators 14. The following PDO level indicators are proposed. Strengthened Systems Proposed PDO Corresponding Ultimate Contributing to Ultimate Results Indicators Sub-component Results (Expected Project Outcomes) 1. Percent of Strengthened accountability through Improved municipalities 1.1 - Strengthening strategic transparent budget allocation accountability allocating resources planning and financial to sch",
+    "description": "PROJECT DESCRIPTION A. Project Components 16. The proposed project is organized into three components: (i) Enhancing strategic planning, financial management, monitoring and decision-making; (ii) Strengthening management 5 capacity and accountability to enhance quality of education; and (iii) Implementation and communications support. The project builds upon the investments and achievements supported under IDEP, as illustrated below. Component 1: Enhancing strategic planning, financial management, monitoring and decision –making in the education sector (US$5.2 million equivalent) 17. This component is divided into three sub-components, as described below, and covers: (i) the national level through the MEST, (ii) the municipal level through Municipal Education Directorates (MEDs), as well as (iii) schools and universities. Subcomponent 1.1: Strengthening strategic planning, financial management capacities and decision making capacity 18. The objective of this subcomponent is to strengthen strategic planning and financial management capacities of MEST, MEDs, schools and universities to improve spending efficiency and increase accountability. 19. In pre-university education, this subcomponent would continue the work started under IDEP by supporting: (i) review of the adequacy and equity of existing allocation formu",
+    "risks": "risked crowding out the state budget for growth-stimulating and/or productivity-enhancing purposes. Additionally, Kosovo’s non-membership in the United Nations (UN) remains a key obstacle to political integration and socio-economic development. Still, the European Union (EU) has determined that there were no legal obstacles for Kosovo to open negotiations for a Stabilization and Association Agreement (SAA), the first formal step towards Kosovo’s eventual EU membership. The SAA, initialed in 2014, is expected to be signed in 2015. B. Sectoral and Institutional Context 3. In recent years, considerable progress has been made in improving access to education, mostly at the pre-primary and upper secondary levels, even though gender- balance has not (yet) been reached. As of 2012, enrollment rates for Grade 0 have increased to 72 percent. While enrollment rates in primary and lower secondary education are almost universal, upper secondary gross enrollments stand at 91.8 percent, after an increase by 50 percent between 2004 and 2012, due partly to demographic trends and partly to the fact that gross enrollment rates (GER) for basic education have increased since 2009 and remained at high levels between 97 and 100 percent. The GER for girls in grades 10–12 increased from 81 percent to 88 percent between 2010 and 2012, w",
+    "economic": "Economic Analysis 43. The proposed Project targets system reform rather than input investments, thus aiming at ensuring that current inputs are used more effectively to accelerate learning. Following the previous operations, the project adopts a similar approach to the World Bank’s Education Strategy 2020, which proposes “aligning governance, management of schools and teachers, financing rules, and incentive mechanisms with the goal of learning for all”. In particular, the project would focus on various aspects of the Strategy such as: (i) financial decentralization and planning capacities at all governance levels; (ii) enhancement of information systems to facilitate coordination and management decisions; (iii) strengthening and supporting the implementation of the teacher career system; and (iv) professionalizing the Curriculum, Standards and Assessment Agency for monitoring educational outcomes of student learning. Kosovo has significantly increased access to basic education, reaching almost universal levels of enrollment. Similarly, significant improvements are expected within the next years for pre-primary and upper secondary education. While a traditional cost-benefit analysis presents limitations to quantify the benefits of the proposed investments, there is extensive evidence supporting a systemic approa",
+    "implementation": "Implementation Arrangements 32. The project would be implemented over a four-year period by the Ministry of Education, Science and Technology (MEST) of the Republic of Kosovo. The Ministry will be responsible for the overall implementation of the project, the prioritization and preparation of the annual activity plans, and the coordination of various activities in the project across different departments, municipalities, schools and universities. MEST line units would be responsible for implementing activities corresponding to their areas of responsibility. On a need basis, external technical expertise can be recruited to support these units in implementing the project. 33. Policy oversight would be the responsibility of the Project Steering Committee (PSC) chaired by the Minister of Education, Science and Technology or his designee, and consisting of representatives from MEST, including its Donor Coordination Office, the Ministry of Finance, the Ministry of Local Government and Administration, and three municipalities on a rotating basis. The Steering Committee will meet on a semi-annual basis and on an ad-hoc basis, as required, to provide policy guidance, review and approve annual work plan and budget. 34. A Project Coordination Unit (PCU) would be established within MEST to support day-to-day project managem",
+    "lessons": "Lessons Learned and Reflected in the Project Design 29. Project design benefitted from implementation lessons of the previous education projects in Kosovo, the Institutional Development for Education Project (IDEP). The project emphasized the need for developing and strengthening institutions and mechanisms within the education system required to design and implement education policies. IDEP also demonstrated the benefits of community participation to foster accountability, particularly at the school level.2 These objectives are streamlined throughout the design of the proposed project. 30. Project design also considered the importance of avoiding overly complex projects, particularly in contexts of weak institutional capacity. The proposed project strikes a balance between realism and ambition; nearly all activities supported by the project are a natural continuation of activities initiated under the previous project, ensuring that its complexity is relative to the existing implementation capacity of the Recipient. 31. Finally, the proposed design also addresses lessons reflected in the 2014 Public Financing Review (PFR). In particular, the PFR highlights the need for continued reforms in teacher professional development and education financing to improve the efficiency of spending. 2 International evidence on "
+  },
+  "debate": {
+    "arguments": [
+      {
+        "criterion": "relevance",
+        "stance": "pro",
+        "claim": "The project's objectives align closely with the Republic of Kosovo's needs, specifically focusing on system-level improvements in education.",
+        "quote": "PDO 1. The Project Development Objective (PDO) is to strengthen selected systems that contribute to quality, accountability, and efficiency improvements in education in the Republic of Kosovo."
+      },
+      {
+        "criterion": "relevance",
+        "stance": "contra",
+        "claim": "The project's beneficiaries are not adequately defined, leading to unclear how the project will address Kosovo's specific needs.",
+        "quote": "Project Beneficiaries 13. As the project focuses at the system level, its interventions would affect beneficiaries across all levels of the education system. At the same time, subcomponent 1.3 envisions support for targeted schools, focusing on poorer rural areas, covering approximately 45,000 students (around 20 percent of all primary schools)."
+      },
+      {
+        "criterion": "economic_efficiency",
+        "stance": "pro",
+        "claim": "The project's economic analysis is robust, supporting system-level reforms rather than input investments, aligning with the World Bank’s Education Strategy 2020.",
+        "quote": "Economic Analysis 43. The proposed Project targets system reform rather than input investments, thus aiming at ensuring that current inputs are used more effectively to accelerate learning."
+      },
+      {
+        "criterion": "economic_efficiency",
+        "stance": "contra",
+        "claim": "The project lacks a traditional cost-benefit analysis, presenting limitations to quantify the benefits of the proposed investments.",
+        "quote": "Economic Analysis 43. While a traditional cost-benefit analysis presents limitations to quantify the benefits of the proposed investments, there is extensive evidence supporting a systemic approach."
+      },
+      {
+        "criterion": "feasibility",
+        "stance": "pro",
+        "claim": "The project is feasible, leveraging the existing implementation capacity of the Ministry of Education, Science and Technology (MEST), with support from external technical expertise as needed.",
+        "quote": "Implementation Arrangements 32. The project would be implemented over a four-year period by the Ministry of Education, Science and Technology (MEST) of the Republic of Kosovo. The Ministry will be responsible for the overall implementation of the project, the prioritization and preparation of the annual activity plans, and the coordination of various activities in the project across different de"
+      },
+      {
+        "criterion": "feasibility",
+        "stance": "contra",
+        "claim": "The project's complexity is overly ambitious, given the weak institutional capacity in the context of Kosovo's education system.",
+        "quote": "Implementation Arrangements 34. A Project Coordination Unit (PCU) would be established within MEST to support day-to-day project management, and the Steering Committee would meet on a semi-annual basis and on an ad-hoc basis, as required, to provide policy guidance, review and approve annual work plan and budget."
+      },
+      {
+        "criterion": "risk",
+        "stance": "pro",
+        "claim": "The project mitigates risks related to crowding out state budget for growth-stimulating and productivity-enhancing purposes, and the non-membership in the UN does not pose a significant obstacle to political integration and socio-economic development.",
+        "quote": "Risks 1. In recent years, considerable progress has been made in improving access to education, mostly at the pre-primary and upper secondary levels, even though gender balance has not yet been reached. As of 2012, enrollment rates for Grade 0 have increased to 72 percent. While enrollment rates in primary and lower secondary education are almost universal, upper secondary gross enrollments stand"
+      },
+      {
+        "criterion": "risk",
+        "stance": "contra",
+        "claim": "The project's success is contingent upon the implementation of the SAA, which is expected to be signed in 2015, posing a significant risk if negotiations do not proceed as planned.",
+        "quote": "Risks 2. Kosovo’s non-membership in the United Nations (UN) remains a key obstacle to political integration and socio-economic development. Still, the European Union (EU) has determined that there were no legal obstacles for Kosovo to open negotiations for a Stabilization and Association Agreement (SAA), the first formal step towards Kosovo’s eventual EU membership. The SAA, initialed in 2014, is"
+      },
+      {
+        "criterion": "impact_sustainability",
+        "stance": "pro",
+        "claim": "The project's focus on system-level reforms ensures long-term sustainability, as it addresses the root causes of inefficiency and lack of accountability.",
+        "quote": "PDO Level Results Indicators 14. The following PDO level indicators are proposed. Strengthened Systems Proposed PDO Corresponding Ultimate Contributing to Ultimate Results Indicators Sub-component Results (Expected Project Outcomes) 1. Percent of Strengthened accountability through Improved municipalities 1.1 - Strengthening strategic transparent budget allocation accountability allocating res"
+      },
+      {
+        "criterion": "impact_sustainability",
+        "stance": "contra",
+        "claim": "The project's success depends heavily on the implementation of the teacher career system, which may face challenges in a context of weak institutional capacity.",
+        "quote": "PROJECT DESCRIPTION A. Project Components 16. The proposed project is organized into three components: (i) Enhancing strategic planning, financial management, monitoring and decision-making; (ii) Strengthening management capacity and accountability to enhance quality of education; and (iii) Implementation and communications support. The project builds upon the investments and achievements supp"
+      }
+    ]
+  },
+  "judge": {
+    "scores": [
+      {
+        "criterion": "relevance",
+        "score": 8,
+        "justification": "The project's objectives align closely with Kosovo's needs, but the lack of defined beneficiaries could lead to unclear impact, warranting a moderate score."
+      },
+      {
+        "criterion": "economic_efficiency",
+        "score": 7,
+        "justification": "The project's economic analysis is robust, but the absence of a traditional cost-benefit analysis limits the quantification of benefits, necessitating a moderate score."
+      },
+      {
+        "criterion": "feasibility",
+        "score": 8,
+        "justification": "The project leverages existing implementation capacity and has a structured approach, but the complexity and weak institutional capacity pose challenges, warranting a moderate score."
+      },
+      {
+        "criterion": "risk",
+        "score": 3,
+        "justification": "While risks are mitigated, the contingent success of the project on the implementation of the SAA introduces significant uncertainty, warranting a low score."
+      },
+      {
+        "criterion": "impact_sustainability",
+        "score": 9,
+        "justification": "The focus on system-level reforms ensures long-term sustainability, but challenges in implementation may hinder success, warranting a high score."
+      }
+    ]
+  },
+  "citations": [
+    {
+      "criterion": "relevance",
+      "stance": "pro",
+      "quote": "PDO 1. The Project Development Objective (PDO) is to strengthen selected systems that contribute to quality, accountability, and efficiency improvements in education in the Republic of Kosovo.",
+      "found_in_agent_text": false,
+      "found_in_document": false
+    },
+    {
+      "criterion": "relevance",
+      "stance": "contra",
+      "quote": "Project Beneficiaries 13. As the project focuses at the system level, its interventions would affect beneficiaries across all levels of the education system. At the same time, subcomponent 1.3 envisions support for targeted schools, focusing on poorer rural areas, covering approximately 45,000 students (around 20 percent of all primary schools).",
+      "found_in_agent_text": true,
+      "found_in_document": true
+    },
+    {
+      "criterion": "economic_efficiency",
+      "stance": "pro",
+      "quote": "Economic Analysis 43. The proposed Project targets system reform rather than input investments, thus aiming at ensuring that current inputs are used more effectively to accelerate learning.",
+      "found_in_agent_text": true,
+      "found_in_document": true
+    },
+    {
+      "criterion": "economic_efficiency",
+      "stance": "contra",
+      "quote": "Economic Analysis 43. While a traditional cost-benefit analysis presents limitations to quantify the benefits of the proposed investments, there is extensive evidence supporting a systemic approach.",
+      "found_in_agent_text": false,
+      "found_in_document": false
+    },
+    {
+      "criterion": "feasibility",
+      "stance": "pro",
+      "quote": "Implementation Arrangements 32. The project would be implemented over a four-year period by the Ministry of Education, Science and Technology (MEST) of the Republic of Kosovo. The Ministry will be responsible for the overall implementation of the project, the prioritization and preparation of the annual activity plans, and the coordination of various activities in the project across different de",
+      "found_in_agent_text": true,
+      "found_in_document": true
+    },
+    {
+      "criterion": "feasibility",
+      "stance": "contra",
+      "quote": "Implementation Arrangements 34. A Project Coordination Unit (PCU) would be established within MEST to support day-to-day project management, and the Steering Committee would meet on a semi-annual basis and on an ad-hoc basis, as required, to provide policy guidance, review and approve annual work plan and budget.",
+      "found_in_agent_text": false,
+      "found_in_document": false
+    },
+    {
+      "criterion": "risk",
+      "stance": "pro",
+      "quote": "Risks 1. In recent years, considerable progress has been made in improving access to education, mostly at the pre-primary and upper secondary levels, even though gender balance has not yet been reached. As of 2012, enrollment rates for Grade 0 have increased to 72 percent. While enrollment rates in primary and lower secondary education are almost universal, upper secondary gross enrollments stand",
+      "found_in_agent_text": false,
+      "found_in_document": false
+    },
+    {
+      "criterion": "risk",
+      "stance": "contra",
+      "quote": "Risks 2. Kosovo’s non-membership in the United Nations (UN) remains a key obstacle to political integration and socio-economic development. Still, the European Union (EU) has determined that there were no legal obstacles for Kosovo to open negotiations for a Stabilization and Association Agreement (SAA), the first formal step towards Kosovo’s eventual EU membership. The SAA, initialed in 2014, is",
+      "found_in_agent_text": false,
+      "found_in_document": false
+    },
+    {
+      "criterion": "impact_sustainability",
+      "stance": "pro",
+      "quote": "PDO Level Results Indicators 14. The following PDO level indicators are proposed. Strengthened Systems Proposed PDO Corresponding Ultimate Contributing to Ultimate Results Indicators Sub-component Results (Expected Project Outcomes) 1. Percent of Strengthened accountability through Improved municipalities 1.1 - Strengthening strategic transparent budget allocation accountability allocating res",
+      "found_in_agent_text": true,
+      "found_in_document": true
+    },
+    {
+      "criterion": "impact_sustainability",
+      "stance": "contra",
+      "quote": "PROJECT DESCRIPTION A. Project Components 16. The proposed project is organized into three components: (i) Enhancing strategic planning, financial management, monitoring and decision-making; (ii) Strengthening management capacity and accountability to enhance quality of education; and (iii) Implementation and communications support. The project builds upon the investments and achievements supp",
+      "found_in_agent_text": false,
+      "found_in_document": false
+    }
+  ],
+  "citation_rate_document": 0.4,
+  "llm_stats": {
+    "debate": {
+      "attempts": 1,
+      "seconds": 290.3549268245697,
+      "prompt_tokens": 1848,
+      "output_tokens": 1250,
+      "errors": []
+    },
+    "judge": {
+      "attempts": 1,
+      "seconds": 76.98372960090637,
+      "prompt_tokens": 1233,
+      "output_tokens": 285,
+      "errors": []
+    }
+  },
+  "errors": []
+}
