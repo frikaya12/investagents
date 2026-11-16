@@ -72,6 +72,11 @@ M1 et M1-texte sont **figés** (`experiments/phase2/frozen.json`) ; le test 2012
 l'utiliser pour des choix. Chiffres définitifs de tous les modèles : une seule fois, sur le coffre-fort, en fin de
 projet. **Dérive** : taux d'échec 28 % (≤ 2007) → 23 % (2008–2011) → 22 % (2012–2017) ; à corriger à la
 calibration (recalibrer sur la période récente de validation, jamais sur le test ni le coffre-fort).
+La recalibration des probabilités se fait sur la validation uniquement, **avant** la sélection sous budget (phase 5).
+
+**Le pays revient par le texte.** Les mots les plus influents de M1-texte sont souvent des noms de pays (Cameroon,
+Zaire, Chad / China, Korea). En phase 4, prévoir une variante **M1-texte masqué** (noms de pays et de lieux masqués),
+réglée sur la validation uniquement, pour mesurer l'information du texte au-delà de l'identité du pays.
 
 ## Comment me parler
 - Je suis Aya, élève ingénieure (data science / IA). Réponds en français, tutoiement, simple et direct.
