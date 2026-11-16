@@ -1,0 +1,110 @@
+{
+  "calibration": {
+    "m1": {
+      "n_valid": 1243,
+      "n_test": 1294,
+      "test_brier_before": 0.1780126434302825,
+      "test_brier_after": 0.17128564946765484,
+      "test_ece_before": 0.07502152289369775,
+      "test_ece_after": 0.0442935886439154,
+      "test_mean_pred_before": 0.2921776279941614,
+      "test_mean_pred_after": 0.23006914813448726,
+      "test_failure_rate": 0.21715610510046368
+    },
+    "m1_text": {
+      "n_valid": 869,
+      "n_test": 755,
+      "test_brier_before": 0.16785406326751723,
+      "test_brier_after": 0.16617981880528054,
+      "test_ece_before": 0.0446872005116872,
+      "test_ece_after": 0.023438621067022575,
+      "test_mean_pred_before": 0.2605812402467865,
+      "test_mean_pred_after": 0.20250244823560945,
+      "test_failure_rate": 0.21589403973509932
+    }
+  },
+  "backtest": {
+    "10%": {
+      "budget_fraction": 0.1,
+      "base_rate": 0.7802197802197802,
+      "m1_text": {
+        "n_projects": 327,
+        "share_satisfactory": 0.7584097859327217,
+        "ci_low": 0.7091866068159485,
+        "ci_high": 0.8016318634127046,
+        "spent_usd": 10397951127.0
+      },
+      "m1": {
+        "n_projects": 327,
+        "share_satisfactory": 0.746177370030581,
+        "ci_low": 0.6963362043436575,
+        "ci_high": 0.7903015098978406,
+        "spent_usd": 10404951127.0
+      },
+      "random": {
+        "share_satisfactory": 0.7639235211854082,
+        "p2_5": 0.6941982138096507,
+        "p97_5": 0.8270876987550844,
+        "mean_n_projects": 125.299
+      },
+      "p_value_vs_random": 0.5734265734265734
+    },
+    "25%": {
+      "budget_fraction": 0.25,
+      "base_rate": 0.7802197802197802,
+      "m1_text": {
+        "n_projects": 488,
+        "share_satisfactory": 0.7602459016393442,
+        "ci_low": 0.7204270490989918,
+        "ci_high": 0.7959993776205049,
+        "spent_usd": 26028768627.0
+      },
+      "m1": {
+        "n_projects": 488,
+        "share_satisfactory": 0.7602459016393442,
+        "ci_low": 0.7204270490989918,
+        "ci_high": 0.7959993776205049,
+        "spent_usd": 26000808627.0
+      },
+      "random": {
+        "share_satisfactory": 0.7725114092359209,
+        "p2_5": 0.7280246002689779,
+        "p97_5": 0.8181818181818182,
+        "mean_n_projects": 228.053
+      },
+      "p_value_vs_random": 0.7082917082917083
+    },
+    "50%": {
+      "budget_fraction": 0.5,
+      "base_rate": 0.7802197802197802,
+      "m1_text": {
+        "n_projects": 619,
+        "share_satisfactory": 0.7754442649434572,
+        "ci_low": 0.740929229874738,
+        "ci_high": 0.8065614964993514,
+        "spent_usd": 51979498627.0
+      },
+      "m1": {
+        "n_projects": 619,
+        "share_satisfactory": 0.7738287560581584,
+        "ci_low": 0.7392409137992195,
+        "ci_high": 0.8050387232706231,
+        "spent_usd": 52025698627.0
+      },
+      "random": {
+        "share_satisfactory": 0.7766690526815869,
+        "p2_5": 0.7493917274939172,
+        "p97_5": 0.8038674033149171,
+        "mean_n_projects": 393.788
+      },
+      "p_value_vs_random": 0.5444555444555444
+    }
+  },
+  "n_pool": 728,
+  "budget_fractions": [
+    0.1,
+    0.25,
+    0.5
+  ],
+  "max_country_share": 0.25
+}
