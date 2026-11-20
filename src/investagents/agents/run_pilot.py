@@ -17,7 +17,6 @@ from pathlib import Path
 
 import pandas as pd
 
-from investagents.agents.citations import citation_rate
 from investagents.data.corpus import CORPUS_INDEX_PATH, read_text
 from investagents.graph.committee import build_committee
 from investagents.ml.split import load_modeling_table
@@ -56,7 +55,7 @@ def main() -> None:
                 "model": args.model,
             }
         )
-        quotes = [c["quote"] for c in state.get("citations", [])]
+        cites = state.get("citations", [])
         result = {
             "masked_id": f"PROJET-{i + 1:03d}",
             "project_id": row.project_id,  # gardé pour l'analyse, jamais envoyé au LLM
@@ -70,7 +69,8 @@ def main() -> None:
             "debate": state.get("debate"),
             "judge": state.get("judge"),
             "citations": state.get("citations", []),
-            "citation_rate_document": citation_rate(quotes, read_text(row.doc_id)),
+            "n_sentences": len(state.get("sentences", [])),
+            "citation_valid_rate": (sum(c["valid"] for c in cites) / len(cites)) if cites else 0.0,
             "llm_stats": state.get("llm_stats", {}),
             "errors": state.get("errors", []),
         }
@@ -78,7 +78,7 @@ def main() -> None:
         path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
         print(
             f"{result['masked_id']} ({row.project_id}) : {result['seconds_total']} s, "
-            f"citations retrouvées {result['citation_rate_document']:.0%}, "
+            f"citations valides {result['citation_valid_rate']:.0%}, "
             f"erreurs {result['errors']}",
             flush=True,
         )

@@ -26,7 +26,9 @@ class DebateArgument(BaseModel):
     criterion: Criterion
     stance: Literal["pro", "contra"]
     claim: str = Field(min_length=10, max_length=600)
-    quote: str = Field(min_length=10, max_length=400, description="Citation exacte du document")
+    sentence_ids: list[int] = Field(
+        min_length=1, max_length=3, description="Numéros des phrases citées (S1 = 1)"
+    )
 
 
 class DebateOutput(BaseModel):

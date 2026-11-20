@@ -128,7 +128,7 @@ else:
     d = data[label]
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Temps d'analyse", f"{d['seconds_total'] / 60:.1f} min")
-    c2.metric("Citations retrouvées", f"{d['citation_rate_document']:.0%}")
+    c2.metric("Citations valides", f"{d['citation_valid_rate']:.0%}")
     c3.metric("Secteur", d["global_practice"] or "—")
     c4.metric("Note IEG réelle", d["outcome_ieg"])
     if d["errors"]:
@@ -140,12 +140,9 @@ else:
         st.table(scores)
     if d.get("debate"):
         st.subheader("Arguments et citations")
-        found = {(c["criterion"], c["stance"], c["quote"]): c for c in d["citations"]}
         args = pd.DataFrame(d["debate"]["arguments"])
-        args["citation retrouvée"] = [
-            "oui" if found[(a.criterion, a.stance, a.quote)]["found_in_document"] else "NON"
-            for a in args.itertuples()
-        ]
+        args["phrases citées"] = [" / ".join(c["cited_text"]) for c in d["citations"]]
+        args["citation valide"] = ["oui" if c["valid"] else "NON" for c in d["citations"]]
         st.dataframe(args, use_container_width=True)
     with st.expander("Texte donné aux agents (sections clés, identifiants masqués)"):
         for k, v in d["sections"].items():

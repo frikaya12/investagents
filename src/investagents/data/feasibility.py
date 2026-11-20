@@ -245,8 +245,7 @@ def main() -> None:
         "",
         f"- Non satisfaisants (MU/U/HU) : {int((ex['satisfactory'] == 0).sum())} ; "
         f"satisfaisants : {int((ex['satisfactory'] == 1).sum())}",
-        f"- Dont évalués par l'IEG en exercice ≥ 2025 : "
-        f"{int((ex['evaluation_fy'] >= 2025).sum())}",
+        f"- Dont évalués par l'IEG en exercice ≥ 2025 : {int((ex['evaluation_fy'] >= 2025).sum())}",
         "",
     ]
     REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)

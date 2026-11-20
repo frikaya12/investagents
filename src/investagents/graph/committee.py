@@ -1,12 +1,14 @@
-"""Graphe LangGraph du comité compact (MVP).
+"""Graphe LangGraph du comité compact.
 
     extraire (Python) -> débattre (LLM, 1 appel) -> juger (LLM, 1 appel) -> vérifier (Python)
 
-- extraire : sections clés ≤ 8 000 caractères, identifiants masqués (agents/sections.py) ;
-- débattre : Pour et Contre pour chacun des 5 critères, avec citation exacte ;
-- juger : 5 notes de 0 à 10 à partir des seuls arguments ;
-- vérifier : chaque citation est recherchée dans le texte donné aux agents ET dans le document
-  complet (agents/citations.py). Aucun chiffre n'est produit par le LLM hors des notes du Juge.
+- extraire : sections clés ≤ 8 000 caractères, identifiants masqués, découpées en phrases
+  numérotées [S1], [S2]... (agents/sections.py) ;
+- débattre : Pour et Contre pour chacun des 5 critères ; chaque argument cite des NUMÉROS de
+  phrases (le modèle ne recopie plus de texte, il ne peut donc plus paraphraser une citation) ;
+- juger : 5 notes de 0 à 10 à partir des seuls arguments et des phrases citées valides ;
+- vérifier : chaque numéro doit exister ; la phrase correspondante doit être une sous-chaîne
+  exacte du document complet (masqué). Aucun chiffre n'est produit par le LLM hors des notes.
 Une sortie invalide deux fois de suite est consignée dans `errors` (signalée à l'humain), le
 graphe s'arrête proprement au lieu de planter.
 Inspiré du graphe de DIALECTIC (`src/agent/pipeline/graph.py`, MIT) en version réduite : pas de
@@ -25,7 +27,8 @@ from investagents.agents.sections import (
     extract_key_sections,
     mask_identifiers,
     normalize,
-    sections_to_prompt,
+    number_sentences,
+    sentences_to_prompt,
 )
 from investagents.debate.prompts import (
     CRITERIA_TEXT,
@@ -42,7 +45,9 @@ class CommitteeState(TypedDict, total=False):
     raw_text: str
     project_name: str
     model: str
+    masked_text: str
     sections: dict[str, str]
+    sentences: list[dict[str, Any]]
     agent_text: str
     debate: dict[str, Any] | None
     judge: dict[str, Any] | None
@@ -54,7 +59,14 @@ class CommitteeState(TypedDict, total=False):
 def extract(state: CommitteeState) -> dict:
     text = mask_identifiers(normalize(state["raw_text"]), name=state.get("project_name"))
     sections = extract_key_sections(text)
-    return {"sections": sections, "agent_text": sections_to_prompt(sections), "errors": []}
+    sentences = number_sentences(sections)
+    return {
+        "masked_text": text,
+        "sections": sections,
+        "sentences": sentences,
+        "agent_text": sentences_to_prompt(sentences),
+        "errors": [],
+    }
 
 
 def debate(state: CommitteeState) -> dict:
@@ -72,11 +84,18 @@ def debate(state: CommitteeState) -> dict:
     return {"debate": out.model_dump(), "llm_stats": {"debate": stats}}
 
 
+def _cited_text(ids: list[int], sentences: list[dict]) -> str:
+    by_id = {s["id"]: s["text"] for s in sentences}
+    return " ".join(f"[S{i}] {by_id[i]}" for i in ids if i in by_id)
+
+
 def judge(state: CommitteeState) -> dict:
     if not state.get("debate"):
         return {"judge": None}
+    sentences = state.get("sentences", [])
     args = "\n".join(
-        f'- {a["criterion"]} | {a["stance"]} | {a["claim"]} | "{a["quote"]}"'
+        f"- {a['criterion']} | {a['stance']} | {a['claim']} | "
+        f"{_cited_text(a['sentence_ids'], sentences) or '(no valid citation)'}"
         for a in state["debate"]["arguments"]
     )
     try:
@@ -94,19 +113,27 @@ def judge(state: CommitteeState) -> dict:
 
 
 def verify(state: CommitteeState) -> dict:
+    """Une citation (argument) est valide si TOUS ses numéros existent et que chaque phrase
+    citée se retrouve mot pour mot dans le document complet."""
     if not state.get("debate"):
         return {"citations": []}
-    full = normalize(state["raw_text"])
-    checks = [
-        {
-            "criterion": a["criterion"],
-            "stance": a["stance"],
-            "quote": a["quote"],
-            "found_in_agent_text": quote_found(a["quote"], state["agent_text"]),
-            "found_in_document": quote_found(a["quote"], full),
-        }
-        for a in state["debate"]["arguments"]
-    ]
+    by_id = {s["id"]: s["text"] for s in state.get("sentences", [])}
+    full = state.get("masked_text", normalize(state["raw_text"]))
+    checks = []
+    for a in state["debate"]["arguments"]:
+        ids = a["sentence_ids"]
+        known = [i for i in ids if i in by_id]
+        in_doc = all(quote_found(by_id[i], full) for i in known) if known else False
+        checks.append(
+            {
+                "criterion": a["criterion"],
+                "stance": a["stance"],
+                "sentence_ids": ids,
+                "unknown_ids": [i for i in ids if i not in by_id],
+                "cited_text": [by_id[i] for i in known],
+                "valid": len(known) == len(ids) and in_doc,
+            }
+        )
     return {"citations": checks}
 
 

@@ -55,3 +55,39 @@ def extract_key_sections(text: str, max_chars: int = 8000) -> dict[str, str]:
 
 def sections_to_prompt(sections: dict[str, str]) -> str:
     return "\n\n".join(f"[{k.upper()}]\n{v}" for k, v in sections.items())
+
+
+# Fin de phrase : ponctuation forte suivie d'un espace puis d'une majuscule, d'un chiffre ou d'une
+# parenthèse. Simple et suffisant pour des dossiers en anglais (OCR compris).
+_SENTENCE_END = re.compile(r"(?<=[.;!?])\s+(?=[A-Z0-9(])")
+MIN_SENTENCE_CHARS = 25
+
+
+def number_sentences(sections: dict[str, str]) -> list[dict]:
+    """Découpe les sections en phrases numérotées S1, S2... (numérotation continue).
+
+    Chaque phrase est une sous-chaîne exacte du texte donné aux agents. Les fragments trop
+    courts (< 25 caractères : numéros de paragraphe, titres) sont rattachés à la phrase suivante.
+    """
+    out, n = [], 0
+    for theme, text in sections.items():
+        buffer = ""
+        for piece in _SENTENCE_END.split(text):
+            buffer = f"{buffer} {piece}".strip() if buffer else piece.strip()
+            if len(buffer) >= MIN_SENTENCE_CHARS:
+                n += 1
+                out.append({"id": n, "theme": theme, "text": buffer})
+                buffer = ""
+        if buffer and out and out[-1]["theme"] == theme:
+            out[-1]["text"] = f"{out[-1]['text']} {buffer}"
+    return out
+
+
+def sentences_to_prompt(sentences: list[dict]) -> str:
+    lines, theme = [], None
+    for s in sentences:
+        if s["theme"] != theme:
+            theme = s["theme"]
+            lines.append(f"\n[{theme.upper()}]")
+        lines.append(f"[S{s['id']}] {s['text']}")
+    return "\n".join(lines).strip()

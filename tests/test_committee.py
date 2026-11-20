@@ -27,7 +27,7 @@ def full_debate():
                 "criterion": c,
                 "stance": s,
                 "claim": f"{s} argument about {c}.",
-                "quote": "improve access to water in rural areas",
+                "sentence_ids": [1],
             }
             for c in CRITERIA
             for s in ("pro", "contra")
@@ -124,8 +124,41 @@ def test_graph_end_to_end_with_fake_llm(monkeypatch):
     monkeypatch.setattr(cm, "call_json", fake_call)
     state = cm.build_committee().invoke({"raw_text": DOC, "project_name": "Rural Water"})
     assert len(state["judge"]["scores"]) == 5
-    assert all(c["found_in_document"] for c in state["citations"])
+    assert all(c["valid"] for c in state["citations"])
+    assert state["citations"][0]["cited_text"][0] == state["sentences"][0]["text"]
     assert state["errors"] == []
+
+
+def test_graph_marks_unknown_sentence_ids_invalid(monkeypatch):
+    def fake_call(system, user, schema, **kw):
+        if schema is DebateOutput:
+            data = full_debate()
+            data["arguments"][0]["sentence_ids"] = [1, 999]  # 999 n'existe pas
+            return schema.model_validate(data), {}
+        return schema.model_validate(full_judge()), {}
+
+    monkeypatch.setattr(cm, "call_json", fake_call)
+    state = cm.build_committee().invoke({"raw_text": DOC})
+    first = state["citations"][0]
+    assert first["valid"] is False and first["unknown_ids"] == [999]
+    assert all(c["valid"] for c in state["citations"][1:])
+
+
+def test_number_sentences_are_exact_substrings_and_continuous():
+    sections = sc.extract_key_sections(DOC, max_chars=900)
+    sentences = sc.number_sentences(sections)
+    assert [s["id"] for s in sentences] == list(range(1, len(sentences) + 1))
+    text = sc.normalize(DOC)
+    for s in sentences:
+        assert len(s["text"]) >= sc.MIN_SENTENCE_CHARS
+        assert s["text"] in text
+    prompt = sc.sentences_to_prompt(sentences)
+    assert "[S1] " in prompt and "[OBJECTIVES]" in prompt
+
+
+def test_number_sentences_merges_short_fragments():
+    out = sc.number_sentences({"risks": "4.2 Risks. The main risk is low capacity of the agency."})
+    assert len(out) == 1 and out[0]["text"].startswith("4.2 Risks.")
 
 
 def test_graph_flags_invalid_output(monkeypatch):

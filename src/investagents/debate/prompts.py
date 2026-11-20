@@ -30,8 +30,9 @@ DEBATE_USER = """Criteria:
 For EACH of the 5 criteria, write exactly one pro argument and one contra argument (10 in total).
 Each argument must:
 - be concise (max 2 sentences) and premises must be plausible, relevant and sufficient;
-- include a "quote": a passage copied EXACTLY, word for word, from the document (10 to 40 words).
-  Do not paraphrase the quote. If the document says nothing on a point, quote the closest passage.
+- cite its evidence with "sentence_ids": the numbers (1 to 3 of them) of the document sentences
+  that support it. The document sentences are numbered [S1], [S2]...; for [S12] write 12.
+  Use only numbers that appear in the document below.
 Lack of data alone is a weak contra argument.
 
 <document>
@@ -47,7 +48,7 @@ You score a project on 5 criteria using ONLY the pro and contra arguments given 
 JUDGE_USER = """Criteria:
 {criteria}
 
-Arguments (criterion, stance, claim, quote):
+Arguments (criterion, stance, claim, cited evidence):
 {arguments}
 
 For each of the 5 criteria give an integer score from 0 (very poor) to 10 (excellent) and a
