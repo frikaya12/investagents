@@ -78,6 +78,10 @@ La recalibration des probabilités se fait sur la validation uniquement, **avant
 Zaire, Chad / China, Korea). En phase 4, prévoir une variante **M1-texte masqué** (noms de pays et de lieux masqués),
 réglée sur la validation uniquement, pour mesurer l'information du texte au-delà de l'identité du pays.
 
+**Note pour le bloc C (comité à l'échelle).** Le Juge 3B donne 10/10 trop facilement. Prévoir une grille de notation
+avec ancres (exemples concrets de 2/10, 5/10 et 8/10 pour chaque critère) et mesurer la dispersion des notes
+(écart-type par critère, part des notes ≥ 9).
+
 ## Comment me parler
 - Je suis Aya, élève ingénieure (data science / IA). Réponds en français, tutoiement, simple et direct.
 - Je dois pouvoir défendre chaque ligne devant un jury : explique ce que fait chaque fichier que tu écris,
