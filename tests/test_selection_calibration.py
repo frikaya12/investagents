@@ -72,3 +72,28 @@ def test_calibrate_report_on_fake_predictions():
     assert out["m1_cal"].notna().all()
     assert out["m1_text_cal"].isna().sum() == pred["m1_text"].isna().sum()
     assert report["m1"]["test_ece_after"] <= report["m1"]["test_ece_before"]
+
+
+def test_objective_p_prefers_many_cheap_projects():
+    # Un gros projet très sûr contre deux petits moins sûrs : "p" compte les projets.
+    p, cost, country = [0.95, 0.6, 0.6], [100e6, 50e6, 50e6], ["A", "B", "C"]
+    x = select_portfolio(p, cost, country, 100e6, max_country_share=1.0, objective="p")
+    assert x.tolist() == [False, True, True]
+
+
+def test_objective_p_cost_prefers_high_probability_per_dollar():
+    p, cost, country = [0.95, 0.6, 0.6], [100e6, 50e6, 50e6], ["A", "B", "C"]
+    x = select_portfolio(p, cost, country, 100e6, max_country_share=1.0, objective="p_cost")
+    assert x.tolist() == [True, False, False]
+
+
+def test_objective_p_cost_min_excludes_low_probability():
+    p, cost, country = [0.95, 0.5, 0.9], [60e6, 30e6, 30e6], ["A", "B", "C"]
+    x = select_portfolio(
+        p, cost, country, 100e6, max_country_share=1.0, objective="p_cost_min", p_min=0.7
+    )
+    assert not x[1] and x[0] and x[2]
+    with pytest.raises(ValueError):
+        select_portfolio(p, cost, country, 100e6, objective="p_cost_min")
+    with pytest.raises(ValueError):
+        select_portfolio(p, cost, country, 100e6, objective="unknown")

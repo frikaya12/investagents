@@ -1,0 +1,169 @@
+{
+  "frozen": {
+    "objective": "p_cost",
+    "p_min": 0.7794811320754716,
+    "criterion": "moyenne budget_share_satisfactory",
+    "validation_scores": {
+      "p": 0.7921495220523719,
+      "p_cost": 0.9508992657334424,
+      "p_cost_min": 0.9508991706161795
+    },
+    "n_valid_pool": 848
+  },
+  "results": [
+    {
+      "budget": 0.1,
+      "base_rate_count": 0.7802197802197802,
+      "base_rate_budget": 0.823514134133215,
+      "chosen": {
+        "n_projects": 87,
+        "spent_usd": 10420489879.7,
+        "budget_share_satisfactory": 0.8358042645064918,
+        "count_share_satisfactory": 0.8045977011494253,
+        "budget_share_ci": [
+          0.7299863221903734,
+          0.9284395519212125
+        ],
+        "count_share_ci": [
+          0.7238505747126437,
+          0.8850574712643678
+        ],
+        "objective": "p_cost",
+        "p_value_budget_vs_random": 0.21478521478521478,
+        "p_value_count_vs_random": 0.12687312687312688
+      },
+      "initial_p": {
+        "n_projects": 327,
+        "spent_usd": 10397951127.0,
+        "budget_share_satisfactory": 0.776492025052389,
+        "count_share_satisfactory": 0.7584097859327217,
+        "budget_share_ci": [
+          0.7217306574573089,
+          0.8286200781597982
+        ],
+        "count_share_ci": [
+          0.709480122324159,
+          0.8042813455657493
+        ],
+        "objective": "p",
+        "p_value_budget_vs_random": 0.6443556443556444,
+        "p_value_count_vs_random": 0.5814185814185814
+      },
+      "random": {
+        "budget_share_satisfactory": {
+          "mean": 0.7936334090266705,
+          "p2_5": 0.6887350396578593,
+          "p97_5": 0.8809792647704041
+        },
+        "count_share_satisfactory": {
+          "mean": 0.764748501722544,
+          "p2_5": 0.6999796747967479,
+          "p97_5": 0.8294573643410853
+        }
+      }
+    },
+    {
+      "budget": 0.25,
+      "base_rate_count": 0.7802197802197802,
+      "base_rate_budget": 0.823514134133215,
+      "chosen": {
+        "n_projects": 150,
+        "spent_usd": 26052531879.7,
+        "budget_share_satisfactory": 0.8271388738416983,
+        "count_share_satisfactory": 0.8533333333333334,
+        "budget_share_ci": [
+          0.7304166243439567,
+          0.909153854292528
+        ],
+        "count_share_ci": [
+          0.7933333333333333,
+          0.9066666666666666
+        ],
+        "objective": "p_cost",
+        "p_value_budget_vs_random": 0.26173826173826176,
+        "p_value_count_vs_random": 0.000999000999000999
+      },
+      "initial_p": {
+        "n_projects": 488,
+        "spent_usd": 26028768627.0,
+        "budget_share_satisfactory": 0.7833153353958698,
+        "count_share_satisfactory": 0.7602459016393442,
+        "budget_share_ci": [
+          0.7405518869943691,
+          0.8256234479656294
+        ],
+        "count_share_ci": [
+          0.7213114754098361,
+          0.79718237704918
+        ],
+        "objective": "p",
+        "p_value_budget_vs_random": 0.7132867132867133,
+        "p_value_count_vs_random": 0.6983016983016983
+      },
+      "random": {
+        "budget_share_satisfactory": {
+          "mean": 0.8030985363289415,
+          "p2_5": 0.7274105550909806,
+          "p97_5": 0.8729417361925097
+        },
+        "count_share_satisfactory": {
+          "mean": 0.7724857314652525,
+          "p2_5": 0.7256593787957661,
+          "p97_5": 0.8208348880597015
+        }
+      }
+    },
+    {
+      "budget": 0.5,
+      "base_rate_count": 0.7802197802197802,
+      "base_rate_budget": 0.823514134133215,
+      "chosen": {
+        "n_projects": 273,
+        "spent_usd": 52107219879.7,
+        "budget_share_satisfactory": 0.8574070922003912,
+        "count_share_satisfactory": 0.8388278388278388,
+        "budget_share_ci": [
+          0.7962693799773367,
+          0.9109237917056967
+        ],
+        "count_share_ci": [
+          0.7912087912087912,
+          0.8827838827838828
+        ],
+        "objective": "p_cost",
+        "p_value_budget_vs_random": 0.04995004995004995,
+        "p_value_count_vs_random": 0.000999000999000999
+      },
+      "initial_p": {
+        "n_projects": 619,
+        "spent_usd": 51979498627.0,
+        "budget_share_satisfactory": 0.8140231195885637,
+        "count_share_satisfactory": 0.7754442649434572,
+        "budget_share_ci": [
+          0.7722241166806743,
+          0.8495550951429915
+        ],
+        "count_share_ci": [
+          0.7431340872374798,
+          0.8077544426494345
+        ],
+        "objective": "p",
+        "p_value_budget_vs_random": 0.6233766233766234,
+        "p_value_count_vs_random": 0.5484515484515484
+      },
+      "random": {
+        "budget_share_satisfactory": {
+          "mean": 0.8206483981703661,
+          "p2_5": 0.7770471256336408,
+          "p97_5": 0.8609447625817792
+        },
+        "count_share_satisfactory": {
+          "mean": 0.7770049270646403,
+          "p2_5": 0.7493206572769953,
+          "p97_5": 0.8042843691148776
+        }
+      }
+    }
+  ],
+  "n_test_pool": 728
+}

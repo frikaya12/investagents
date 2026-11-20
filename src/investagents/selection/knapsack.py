@@ -1,6 +1,10 @@
 """Sélection de portefeuille sous budget : sac à dos résolu exactement avec OR-Tools (CP-SAT).
 
-Maximiser  Σ p_i · x_i   (p_i = probabilité de succès calibrée du projet i)
+Objectifs disponibles (paramètre `objective`) :
+- "p"          : maximiser Σ p_i · x_i (objectif initial du cahier des charges) ;
+- "p_cost"     : maximiser Σ p_i · c_i · x_i (montant financé pondéré par la proba de succès) ;
+- "p_cost_min" : comme "p_cost", mais seuls les projets avec p_i ≥ p_min sont éligibles.
+(p_i = probabilité de succès calibrée du projet i, c_i = montant à l'approbation)
 sous       Σ c_i · x_i ≤ B                       (budget)
            Σ_{i ∈ pays k} c_i · x_i ≤ α · B      (pas plus de α du budget par pays, α = 25 %)
            x_i ∈ {0, 1}
@@ -23,8 +27,12 @@ def select_portfolio(
     budget_usd: float,
     max_country_share: float = 0.25,
     time_limit_s: float = 10.0,
+    objective: str = "p",
+    p_min: float | None = None,
 ) -> np.ndarray:
     """Renvoie un masque booléen des projets financés."""
+    if objective not in ("p", "p_cost", "p_cost_min"):
+        raise ValueError(f"Objectif inconnu : {objective}")
     p = np.asarray(p_success, dtype=float)
     c = np.round(np.asarray(cost_usd, dtype=float) / COST_UNIT).astype(int)
     country = np.asarray(country)
@@ -37,7 +45,15 @@ def select_portfolio(
     for k in np.unique(country):
         idx = np.flatnonzero(country == k)
         model.Add(sum(int(c[i]) * x[i] for i in idx) <= cap)
-    model.Maximize(sum(int(round(p[i] * PROB_SCALE)) * x[i] for i in range(len(p))))
+    if objective == "p_cost_min":
+        if p_min is None:
+            raise ValueError("p_min est requis pour l'objectif p_cost_min")
+        for i in np.flatnonzero(p < p_min):
+            model.Add(x[i] == 0)
+    weight = [int(round(p[i] * PROB_SCALE)) for i in range(len(p))]
+    if objective in ("p_cost", "p_cost_min"):
+        weight = [weight[i] * int(c[i]) for i in range(len(p))]
+    model.Maximize(sum(weight[i] * x[i] for i in range(len(p))))
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = time_limit_s

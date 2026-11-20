@@ -1,0 +1,11 @@
+{
+  "objective": "p_cost",
+  "p_min": 0.7794811320754716,
+  "criterion": "moyenne budget_share_satisfactory",
+  "validation_scores": {
+    "p": 0.7921495220523719,
+    "p_cost": 0.9508992657334424,
+    "p_cost_min": 0.9508991706161795
+  },
+  "n_valid_pool": 848
+}
