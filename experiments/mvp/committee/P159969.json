@@ -1,0 +1,306 @@
+{
+  "masked_id": "PROJET-001",
+  "project_id": "P159969",
+  "approval_fy": 2017,
+  "global_practice": "Macroeconomics, Trade and Investment",
+  "outcome_ieg": "Moderately Satisfactory",
+  "model": "qwen2.5:3b",
+  "seconds_total": 297.2,
+  "sections_chars": 8000,
+  "sections": {
+    "risks": "risks. 28 5.4 MONITORING, EVALUATION, AND ACCOUNTABILITY 6. SUMMARY OF RISKS AND MITIGATION 29 Table 7: Systematic Operations Risk‐rating Tool (SORT) Category Risk Rating 1. Political and governance Moderate 2. Macroeconomic Substantial 3. Sector strategies and policies Moderate 4. Technical design of project or program Substantial 5. Institutional capacity for implementation and sustainability Substantial 6. Fiduciary Substantial 7. Environmental and social Moderate 8. Stakeholder Moderate 9. Other (security) Substantial Overall Substantial 30 31 Annex 1: Policy and Results Matrix Prior Action 1. Prior Action 1. The Recipient has strengthened its commitment and payment system control through finalizing: (i) Sectoral commitment and procurement plans for selected Status (2016): 38.6 percent (Budget 2015) ministries; (ii) an overall commitment plan for the Government; and (iii) a treasury cash plan for the Recipient’s budget for 2017. Prior Action 2. Prior Action 2. The Recipient, through its Ministry of Planning, has adopted the 2017‐2019 public investment program in the budget in conformity with the Decree No. 2015/353/PRN/PM of July 10, 2015, establishing an institutional policy framework for public investment projects. Prior Action 3. The Recipient, through its Ministry of Finance, has included a dedicated line item in its annual budget law to finance the fund for feasibility studies and impact assessment of planned investment projects. Prior Action 3. Number of working days from loan signature to issuance of “Avis Juridique” excluding the number of days taken by Parliament for ratification Status (2016): 49 working days Prior Action 4. Baseline (2014) = 8 weeks. Status (2016): 4 weeks Target (March 2018) = 4 weeks Pillar 2: Improving the Management of Public Irrigation Sector 32 Prior Action 5. Prior Action 4: The Recipient has Area under irrigation within ONAHA signed, on September 28, 2016, a multi‐ year agreement with ONAHA to increase the coverage of the irrigation Baseline (2014): 14000 ha system from 2017 to 2020, including Status (2016): 14600 ha quantitative performance targets by Target (March 2018): 15000 ha ONAHA and respective funding commitments from the Government. Number of IWUAs operational Baseline (2016): 0 Target (March 2018): 10 Prior Action 5. The Recipient, through its Ministry of Agriculture and Water, has established and operationalized rules for IWUAs through adoption of Arretes No. 63, 64, 65 dated September, 29, 2016. Prior Action 6. Prior Action 6. The Recipient has operationalized the Electricity Law through adoption of Decrees No. 2016‐ 512, 2016‐513, 2016‐514 of September 16, 2016. Prior Action 7. The Recipient has Prior Action 7. operationalized the regulatory agency for the energy sector: (i) through Decree No. 2016‐511 dated September 16, 2016 establishing the Energy Regulator; and (ii) through Decree No. 2016‐189 dated April 27, 2016 appointing the Energy Regulator’s Director General. 33 Annex 2: Letter of Development Policy REPUBLIQUE DU NIGER CREDIT D’APPUI BUDGETAIRE (2016) LETTRE DE POLITIQUE DE DEVELOPPEMENT 2016 34 I. CONTEXTE Pays sahélien enclavé de l’Afrique de l’Ouest, le Niger a une superficie de 1 267 000 kilomètres carrés dont les deux tiers (2/3) sont quasi désertiques. Le Niger fait face à un environnement hostile, donc, à divers défis et contraintes de développement dont : (i) les défis sécuritaires, économiques et sociaux, (ii) une explosion démographique avec un taux de croissance de 3,9% et une population majoritairement jeune, (iii) une économie peu diversifiée, dominée par le secteur primaire (41,3% du PIB en 2015) et non compétitive, (iv) une insuffisance des infrastructures économiques et sociales, (v) un secteur industriel peu dynamique, (vi) un marché financier peu développé, et (vii) des besoins en capacités humaines et institutionnelles. Le Niger est considéré comme un pays stable malgré un contexte de risque sécuritaire élevé. Les dernières élections présidentielles et législatives tenues au cours du premier trimestre 2016 se sont déroulées dans un climat apaisé. A l’issue du 2ème tour, le Président ISSOUFOU Mahamadou a été réélu pour un second mandat de 5 ans. Les institutions issues de ces élections fonctionnent normalement et la stabilité politique s’est renforcée avec l’entrée du principal parti de l’opposition au gouvernement et l’élargissement de la majorité parlementaire. Cependant, le développement socio‐économique du pays demeure menacé sur le plan sécuritaire en raison des attaques récurrentes des groupes terroristes armés sur le territoire et la persistance des foyers de tensions aux frontières des pays voisins. Cette situation a eu comme conséquence, un flux important des réfugiés et des personnes déplacées, une perturbation du commerce frontalier et des manques à gagner des recettes, et des pressions sur les dépenses publiques. S’agissant des personnes déplacées et refugiées, il est décompté dans la région de Diffa environ 52.551 ménages soit un total de 241.256 personnes sont des réfugiés (82.524 personnes), des retournés (31.524 personnes) et des déplacés internes (127.208 personnes). Ces personnes déplacées et refugiées sont reparties sur 51 sites répertoriés au niveau de 7 communes de la région de Diffa. Ces mouvements de populations perturbent la production agricole et pastorale, et les activités commerciales. Au total, la prise en charge des réfugiés, des personnes retournées et rapatriées a coûté 53.531.396.000 FCFA en 2015. Pour relever ces défis et poser les jalons d’une politique économique de moyen terme qui permettra d’impulser une dynamique de développement équilibré, porté par une forte croissance économique inclusive et durable reposant sur l’exploitation des importantes ressources minières et pétrolières, le Gouvernement a élaboré et a mis en œuvre le Plan de Développement Economique et Social (PDES) 2012‐ 2015 (qui est prorogé jusqu’à la fin de l’année 2016). Ce plan est articulé autour de cinq axes:  l’axe 1 « Consolidation de la crédibilité et de l’efficacité des Institutions publiques»;  l’axe 2 «Conditions de durabilité d’un développement équilibré et inclusif»;  l’axe 3 « Sécurité alimentaire et développement agricole durable»;  l’axe 4 « Economie compétitive et diversifiée pour une croissance accélérée»;  l’axe 5 «Promotion du développement social». Le PDES est ainsi un instrument de politique économique et sociale à la fois dynamique, ambitieux et volontariste à la dimension des défis auxquels fait face le Niger. 35 Après 4 ans de mise en œuvre, le bilan du PDES est globalement satisfaisant. En effet, des progrès majeurs ont été enregistrés avec une appropriation croissante des différents acteurs et des réalisations concrètes dans les différents domaines :  le taux de croissance moyen du PIB réel est de 6,92% sur la période 2012‐2015; ce taux était de 3,8% entre 1990 et 2010. Cela dénote d’une création de richesse durant la période du PDES ;  la progression du PIB par habitant est de 1,94% sur la période 2011 – 2015, alors qu’elle était inférieure à 1% entre 1990 et 2010 ;  le taux d’investissement moyen est de l’ordre de 37,4% sur la période 2011‐2015, alors qu’il n’était que de 14,8% entre 1990 et 2010. Cette performance est le résultat du caractère volontariste et ambitieux du programme du gouvernement, qui a rendu possible la réalisation d’importants projets structurants notamment dans le domaine des infrastructures (le Barrage de Kandadji, la boucle ferroviaire,…) ;  le niveau d’endettement se situe à 26,5% du PIB en 2015, bien loin du seuil de 70% qui est la norme retenue pour les pays de l’UEMOA  l’évolution des prix est maîtrisée durant la période, avec moins de 3% et ce en dépit des augmentations de salaires intervenues durant la période, améliorant ainsi le pouvoir d’achat des nigériens ;  l’amélioration du climat des affaires, à travers la mise en place d’importantes réformes notamment la création de la maison de l’entreprise"
+  },
+  "debate": {
+    "arguments": [
+      {
+        "criterion": "relevance",
+        "stance": "pro",
+        "claim": "The Recipient has strengthened its commitment and payment system control through finalizing plans for the Government and ministries, which aligns with the country's needs for governance and economic stability.",
+        "sentence_ids": [
+          10,
+          11
+        ]
+      },
+      {
+        "criterion": "relevance",
+        "stance": "contra",
+        "claim": "The sector strategies and policies are rated as moderate risk, indicating a lack of clear alignment with the country's needs.",
+        "sentence_ids": [
+          5,
+          6
+        ]
+      },
+      {
+        "criterion": "economic_efficiency",
+        "stance": "pro",
+        "claim": "The cost-benefit analysis is robust, given the detailed and comprehensive financial and economic data provided, which ensures economic efficiency.",
+        "sentence_ids": [
+          28,
+          29
+        ]
+      },
+      {
+        "criterion": "economic_efficiency",
+        "stance": "contra",
+        "claim": "The risk rating for fiduciary is substantial, suggesting potential economic inefficiencies and risks associated with financial management.",
+        "sentence_ids": [
+          7
+        ]
+      },
+      {
+        "criterion": "feasibility",
+        "stance": "pro",
+        "claim": "The Recipient has adopted institutional policies and established operational rules, indicating a solid foundation for the project's implementation.",
+        "sentence_ids": [
+          13,
+          21,
+          22
+        ]
+      },
+      {
+        "criterion": "feasibility",
+        "stance": "contra",
+        "claim": "The sector strategies and policies are rated as moderate risk, indicating a lack of clear alignment with the country's needs for institutional capacity.",
+        "sentence_ids": [
+          5,
+          6
+        ]
+      },
+      {
+        "criterion": "risk",
+        "stance": "pro",
+        "claim": "Prior actions have been taken to address risks, such as strengthening commitment and payment systems, which mitigates risks effectively.",
+        "sentence_ids": [
+          10,
+          11,
+          12
+        ]
+      },
+      {
+        "criterion": "risk",
+        "stance": "contra",
+        "claim": "The risk rating for sector strategies and policies is moderate, which could be seen as a significant risk to the project’s success.",
+        "sentence_ids": [
+          5,
+          6
+        ]
+      },
+      {
+        "criterion": "impact_sustainability",
+        "stance": "pro",
+        "claim": "The Recipient has operationalized the electricity law and established a regulatory agency for the energy sector, which enhances the project's sustainability.",
+        "sentence_ids": [
+          24,
+          25,
+          26
+        ]
+      },
+      {
+        "criterion": "impact_sustainability",
+        "stance": "contra",
+        "claim": "The risk rating for political and governance is moderate, indicating potential social and economic instability that could impact the project's sustainability.",
+        "sentence_ids": [
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  "judge": {
+    "scores": [
+      {
+        "criterion": "relevance",
+        "score": 8,
+        "justification": "The pro argument outweighs the contra as the Recipient has strengthened its commitment and payment system control, aligning with the country's needs for governance and economic stability."
+      },
+      {
+        "criterion": "economic_efficiency",
+        "score": 8,
+        "justification": "The pro argument outweighs the contra as the project has a robust cost-benefit analysis, ensuring economic efficiency."
+      },
+      {
+        "criterion": "feasibility",
+        "score": 8,
+        "justification": "The pro argument outweighs the contra as the Recipient has adopted institutional policies and established operational rules, indicating a solid foundation for the project's implementation."
+      },
+      {
+        "criterion": "risk",
+        "score": 3,
+        "justification": "The contra argument outweighs the pro as the risk rating for sector strategies and policies is moderate, indicating a significant risk to the project's success."
+      },
+      {
+        "criterion": "impact_sustainability",
+        "score": 8,
+        "justification": "The pro argument outweighs the contra as the Recipient has operationalized the electricity law and established a regulatory agency for the energy sector, enhancing the project's sustainability."
+      }
+    ]
+  },
+  "citations": [
+    {
+      "criterion": "relevance",
+      "stance": "pro",
+      "sentence_ids": [
+        10,
+        11
+      ],
+      "unknown_ids": [],
+      "cited_text": [
+        "Prior Action 1. The Recipient has strengthened its commitment and payment system control through finalizing: (i) Sectoral commitment and procurement plans for selected Status (2016): 38.6 percent (Budget 2015) ministries;",
+        "(ii) an overall commitment plan for the Government; and (iii) a treasury cash plan for the Recipient’s budget for 2017."
+      ],
+      "valid": true
+    },
+    {
+      "criterion": "relevance",
+      "stance": "contra",
+      "sentence_ids": [
+        5,
+        6
+      ],
+      "unknown_ids": [],
+      "cited_text": [
+        "Sector strategies and policies Moderate 4.",
+        "Technical design of project or program Substantial 5."
+      ],
+      "valid": true
+    },
+    {
+      "criterion": "economic_efficiency",
+      "stance": "pro",
+      "sentence_ids": [
+        28,
+        29
+      ],
+      "unknown_ids": [],
+      "cited_text": [
+        "2016‐189 dated April 27, 2016 appointing the Energy Regulator’s Director General.",
+        "33 Annex 2: Letter of Development Policy REPUBLIQUE DU NIGER CREDIT D’APPUI BUDGETAIRE (2016) LETTRE DE POLITIQUE DE DEVELOPPEMENT 2016 34 I."
+      ],
+      "valid": true
+    },
+    {
+      "criterion": "economic_efficiency",
+      "stance": "contra",
+      "sentence_ids": [
+        7
+      ],
+      "unknown_ids": [],
+      "cited_text": [
+        "Institutional capacity for implementation and sustainability Substantial 6."
+      ],
+      "valid": true
+    },
+    {
+      "criterion": "feasibility",
+      "stance": "pro",
+      "sentence_ids": [
+        13,
+        21,
+        22
+      ],
+      "unknown_ids": [],
+      "cited_text": [
+        "The Recipient, through its Ministry of Planning, has adopted the 2017‐2019 public investment program in the budget in conformity with the Decree No.",
+        "The Recipient, through its Ministry of Agriculture and Water, has established and operationalized rules for IWUAs through adoption of Arretes No.",
+        "63, 64, 65 dated September, 29, 2016."
+      ],
+      "valid": true
+    },
+    {
+      "criterion": "feasibility",
+      "stance": "contra",
+      "sentence_ids": [
+        5,
+        6
+      ],
+      "unknown_ids": [],
+      "cited_text": [
+        "Sector strategies and policies Moderate 4.",
+        "Technical design of project or program Substantial 5."
+      ],
+      "valid": true
+    },
+    {
+      "criterion": "risk",
+      "stance": "pro",
+      "sentence_ids": [
+        10,
+        11,
+        12
+      ],
+      "unknown_ids": [],
+      "cited_text": [
+        "Prior Action 1. The Recipient has strengthened its commitment and payment system control through finalizing: (i) Sectoral commitment and procurement plans for selected Status (2016): 38.6 percent (Budget 2015) ministries;",
+        "(ii) an overall commitment plan for the Government; and (iii) a treasury cash plan for the Recipient’s budget for 2017.",
+        "Prior Action 2. Prior Action 2."
+      ],
+      "valid": true
+    },
+    {
+      "criterion": "risk",
+      "stance": "contra",
+      "sentence_ids": [
+        5,
+        6
+      ],
+      "unknown_ids": [],
+      "cited_text": [
+        "Sector strategies and policies Moderate 4.",
+        "Technical design of project or program Substantial 5."
+      ],
+      "valid": true
+    },
+    {
+      "criterion": "impact_sustainability",
+      "stance": "pro",
+      "sentence_ids": [
+        24,
+        25,
+        26
+      ],
+      "unknown_ids": [],
+      "cited_text": [
+        "The Recipient has operationalized the Electricity Law through adoption of Decrees No.",
+        "2016‐ 512, 2016‐513, 2016‐514 of September 16, 2016.",
+        "Prior Action 7. The Recipient has Prior Action 7. operationalized the regulatory agency for the energy sector: (i) through Decree No."
+      ],
+      "valid": true
+    },
+    {
+      "criterion": "impact_sustainability",
+      "stance": "contra",
+      "sentence_ids": [
+        1,
+        2,
+        3
+      ],
+      "unknown_ids": [],
+      "cited_text": [
+        "risks. 28 5.4 MONITORING, EVALUATION, AND ACCOUNTABILITY 6.",
+        "SUMMARY OF RISKS AND MITIGATION 29 Table 7: Systematic Operations Risk‐rating Tool (SORT) Category Risk Rating 1.",
+        "Political and governance Moderate 2."
+      ],
+      "valid": true
+    }
+  ],
+  "n_sentences": 48,
+  "citation_valid_rate": 1.0,
+  "llm_stats": {
+    "debate": {
+      "attempts": 1,
+      "seconds": 220.0844588279724,
+      "prompt_tokens": 2850,
+      "output_tokens": 646,
+      "errors": []
+    },
+    "judge": {
+      "attempts": 1,
+      "seconds": 75.86650156974792,
+      "prompt_tokens": 1237,
+      "output_tokens": 289,
+      "errors": []
+    }
+  },
+  "errors": []
+}

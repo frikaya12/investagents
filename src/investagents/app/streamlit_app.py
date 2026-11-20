@@ -20,6 +20,7 @@ from investagents.selection.knapsack import select_portfolio
 
 ROOT = Path(__file__).resolve().parents[3]
 MVP = ROOT / "experiments" / "mvp"
+BLOC_A = ROOT / "experiments" / "blocA"
 
 st.set_page_config(page_title="InvestAgents — démo", layout="wide")
 st.title("InvestAgents — démo MVP")
@@ -58,8 +59,19 @@ if page == "Portefeuille":
     year = col2.selectbox("Cohorte (exercice d'approbation)", years, index=len(years) - 1)
     cohort = pool[pool.approval_fy == year].copy()
     budget = frac * cohort.cost.sum()
+    frozen_path = BLOC_A / "objective_frozen.json"
+    objective = (
+        json.loads(frozen_path.read_text(encoding="utf-8"))["objective"]
+        if frozen_path.exists()
+        else "p"
+    )
     x = select_portfolio(
-        1 - cohort.m1_text_cal, cohort.cost, cohort.country, budget, results["max_country_share"]
+        1 - cohort.m1_text_cal,
+        cohort.cost,
+        cohort.country,
+        budget,
+        results["max_country_share"],
+        objective=objective,
     )
     chosen = cohort[x].copy()
     chosen["proba_succès"] = 1 - chosen.m1_text_cal
@@ -82,7 +94,42 @@ if page == "Portefeuille":
         hide_index=False,
     )
 
-    st.header("Backtest (toutes cohortes 2012–2017)")
+    st.caption(f"Objectif de sélection (choisi sur la validation) : `{objective}`.")
+    obj_test = BLOC_A / "objective_test.json"
+    if obj_test.exists():
+        st.header("Objectif figé contre le hasard (test 2012–2017, calculé une fois)")
+        rows = []
+        for r in json.loads(obj_test.read_text(encoding="utf-8"))["results"]:
+            for label, name in [
+                ("chosen", f"{r['chosen']['objective']} (figé)"),
+                ("initial_p", "p (initial)"),
+            ]:
+                m = r[label]
+                rows.append(
+                    {
+                        "budget": f"{r['budget']:.0%}",
+                        "objectif": name,
+                        "% budget → satisfaisants": f"{m['budget_share_satisfactory']:.1%}",
+                        "p (budget) vs hasard": f"{m['p_value_budget_vs_random']:.3f}",
+                        "% projets satisfaisants": f"{m['count_share_satisfactory']:.1%}",
+                        "p (projets) vs hasard": f"{m['p_value_count_vs_random']:.3f}",
+                    }
+                )
+            rc = r["random"]["count_share_satisfactory"]["mean"]
+            rb = r["random"]["budget_share_satisfactory"]["mean"]
+            rows.append(
+                {
+                    "budget": f"{r['budget']:.0%}",
+                    "objectif": "hasard (1 000)",
+                    "% budget → satisfaisants": f"{rb:.1%}",
+                    "p (budget) vs hasard": "—",
+                    "% projets satisfaisants": f"{rc:.1%}",
+                    "p (projets) vs hasard": "—",
+                }
+            )
+        st.table(pd.DataFrame(rows))
+
+    st.header("Backtest initial, objectif « p » (toutes cohortes 2012–2017)")
     rows = []
     for k, r in results["backtest"].items():
         rows.append(
