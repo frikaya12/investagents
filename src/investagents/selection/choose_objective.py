@@ -257,8 +257,9 @@ def stage_control() -> None:
     lines = [
         CONTROL_REPORT_MARKER,
         "",
-        f"Même objectif figé (`{frozen['objective']}`), mêmes tirages au hasard, sur le test ; seules",
-        "les probabilités changent. Avec M0 (probabilité constante), seul le montant des projets compte.",
+        f"Même objectif figé (`{frozen['objective']}`), mêmes tirages au hasard, sur le test ;",
+        "seules les probabilités changent. Avec M0 (probabilité constante), seul le montant",
+        "des projets compte.",
         f"Montant moyen d'un projet du test : {pool.cost.mean() / 1e6:.0f} M USD.",
         "",
         "| Budget | Probabilités | % budget → satisfaisants [IC 95 %] | p vs hasard | % projets satisfaisants [IC 95 %] | p vs hasard | Projets | Montant moyen (M USD) |",  # noqa: E501
