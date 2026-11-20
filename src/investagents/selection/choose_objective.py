@@ -194,6 +194,97 @@ def stage_evaluate() -> None:
     write_report(frozen, valid, results, len(pool))
 
 
+CONTROL_REPORT_MARKER = "## 3. Contrôle : d'où vient le gain ?"
+
+
+def stage_control() -> None:
+    """Contrôle (évaluation, pas réglage) : même objectif figé, autres probabilités, sur le test.
+
+    - M0 : probabilité constante (taux de succès de l'entraînement + validation). Avec Σ p·c, seul
+      le montant compte : le solveur remplit le budget au maximum, quelle que soit la qualité.
+    - M1 : variables structurées, recalibré sur la validation.
+    - M1-texte : rappel du résultat figé.
+    Mêmes cohortes, budgets, plafond et tirages au hasard (graine 2) que l'évaluation figée.
+    """
+    frozen = json.loads(FROZEN.read_text(encoding="utf-8"))
+    pred = pd.read_parquet(PRED_PATH)
+    base_success = float(1 - pred[pred.split.isin(["train", "valid"])].y_fail.mean())
+    pool = load_pool("test")
+    variants = {
+        "M0 (constante)": np.full(len(pool), base_success),
+        "M1": 1 - pool.m1_cal.to_numpy(),
+        "M1-texte": pool.p_success.to_numpy(),
+    }
+    results = []
+    for frac in BUDGETS:
+        rand = random_draws(pool, frac, N_RANDOM_TEST, seed=2)
+        row = {
+            "budget": frac,
+            "random": {
+                k: float(rand[k].mean())
+                for k in ["budget_share_satisfactory", "count_share_satisfactory"]
+            },
+        }
+        for name, p in variants.items():
+            chosen = select_all_cohorts(pool.assign(p_success=p), frac, frozen["objective"], None)
+            m = portfolio_metrics(chosen)
+            row[name] = {
+                **m,
+                **bootstrap_ci(chosen),
+                "p_value_budget_vs_random": float(
+                    (1 + (rand.budget_share_satisfactory >= m["budget_share_satisfactory"]).sum())
+                    / (len(rand) + 1)
+                ),
+                "p_value_count_vs_random": float(
+                    (1 + (rand.count_share_satisfactory >= m["count_share_satisfactory"]).sum())
+                    / (len(rand) + 1)
+                ),
+                "mean_cost_musd": float(chosen.cost.mean() / 1e6),
+            }
+        results.append(row)
+    (OUT_DIR / "objective_control.json").write_text(
+        json.dumps(
+            {
+                "objective": frozen["objective"],
+                "base_success": base_success,
+                "results": results,
+                "pool_mean_cost_musd": float(pool.cost.mean() / 1e6),
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    lines = [
+        CONTROL_REPORT_MARKER,
+        "",
+        f"Même objectif figé (`{frozen['objective']}`), mêmes tirages au hasard, sur le test ; seules",
+        "les probabilités changent. Avec M0 (probabilité constante), seul le montant des projets compte.",
+        f"Montant moyen d'un projet du test : {pool.cost.mean() / 1e6:.0f} M USD.",
+        "",
+        "| Budget | Probabilités | % budget → satisfaisants [IC 95 %] | p vs hasard | % projets satisfaisants [IC 95 %] | p vs hasard | Projets | Montant moyen (M USD) |",  # noqa: E501
+        "| --- | --- | --- | ---: | --- | ---: | ---: | ---: |",
+    ]
+    for r in results:
+        for name in variants:
+            m = r[name]
+            lines.append(
+                f"| {r['budget']:.0%} | {name} | {pct(m['budget_share_satisfactory'])} "
+                f"[{pct(m['budget_share_ci'][0])} ; {pct(m['budget_share_ci'][1])}] | "
+                f"{m['p_value_budget_vs_random']:.3f} | {pct(m['count_share_satisfactory'])} "
+                f"[{pct(m['count_share_ci'][0])} ; {pct(m['count_share_ci'][1])}] | "
+                f"{m['p_value_count_vs_random']:.3f} | {m['n_projects']} | {m['mean_cost_musd']:.0f} |"  # noqa: E501
+            )
+        lines.append(
+            f"| {r['budget']:.0%} | hasard (1 000) | {pct(r['random']['budget_share_satisfactory'])} "  # noqa: E501
+            f"| — | {pct(r['random']['count_share_satisfactory'])} | — | — | — |"
+        )
+    text = REPORT.read_text(encoding="utf-8")
+    if CONTROL_REPORT_MARKER in text:
+        text = text[: text.index(CONTROL_REPORT_MARKER)].rstrip() + "\n"
+    REPORT.write_text(text + "\n" + "\n".join(lines) + "\n", encoding="utf-8")
+    print("\n".join(lines))
+
+
 def pct(x):
     return f"{100 * x:.1f} %"
 
@@ -254,9 +345,9 @@ def write_report(frozen, valid, results, n_test) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--stage", choices=["select", "evaluate"], required=True)
+    parser.add_argument("--stage", choices=["select", "evaluate", "control"], required=True)
     args = parser.parse_args()
-    stage_select() if args.stage == "select" else stage_evaluate()
+    {"select": stage_select, "evaluate": stage_evaluate, "control": stage_control}[args.stage]()
 
 
 if __name__ == "__main__":

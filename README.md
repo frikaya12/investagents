@@ -84,6 +84,13 @@ projets : le solveur prend les moins chers et ne bat pas le hasard. Trois object
 validation (attendu : M1-texte et sa calibration ont été réglés sur la validation). Détail :
 `reports/objectif_selection.md`.
 
+**Contrôle : d'où vient le gain ?** Même objectif figé, sur le test, avec d'autres probabilités.
+Avec des probabilités constantes (M0 : seule la taille compte), le portefeuille ne bat pas le hasard
+(p = 0,64 à 25 % du budget). Avec M1 (sans texte), le gain est proche de celui de M1-texte (81,8 %
+contre 85,3 % de projets satisfaisants à 25 % du budget, intervalles qui se recouvrent). Le gain vient
+donc des probabilités du modèle, pas de la préférence pour les gros projets, et pas spécifiquement du
+texte.
+
 ## Limites (à lire avant de présenter)
 
 - **Signal faible.** Les variables ex ante prédisent peu l'issue d'un projet (AUC-ROC 0,57 pour M1) ;
