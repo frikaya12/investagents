@@ -23,3 +23,15 @@ def test_emb_model_learns_separable_signal():
     y = (x[:, 0] > 0).astype(int)
     m = make_emb_model(1.0).fit(x, y)
     assert (m.predict(x) == y).mean() > 0.95
+
+
+def test_chunk_text_never_exceeds_token_limit():
+    from investagents.ml.run_blocB import chunk_text
+
+    def n_tokens(t):  # « jeton » = mot, pour le test
+        return len(t.split())
+
+    text = "word " * 1000 + "1.2.3.4.5. " * 50
+    chunks = chunk_text(text, n_tokens, max_tokens=40)
+    assert max(n_tokens(c) for c in chunks) <= 40
+    assert "".join(chunks) == text  # rien n'est perdu

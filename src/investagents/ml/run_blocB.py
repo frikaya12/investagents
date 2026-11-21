@@ -43,7 +43,7 @@ OUT_DIR = Path("experiments/blocB")
 FROZEN = OUT_DIR / "frozen.json"
 REPORT = Path("reports/blocB_resultats.md")
 SECTIONS = Path("data/processed/sections_corpus.parquet")
-EMB_CACHE = Path("data/processed/emb_sections.npy")
+EMB_CACHE = Path("data/processed/emb_sections_v2.npy")  # v2 : sans troncature
 RAW_PRED = Path("experiments/mvp/predictions_raw.parquet")
 C_GRID = [0.03, 0.1, 0.3, 1.0, 3.0]
 EMB_C_GRID = [0.01, 0.03, 0.1, 0.3, 1.0]
@@ -67,16 +67,45 @@ def logit(p):
     return np.log(p / (1 - p))
 
 
+def split_to_fit(text: str, n_tokens, max_tokens: int) -> list[str]:
+    """Coupe un morceau en deux (récursivement) tant qu'il dépasse la fenêtre du modèle.
+
+    all-MiniLM-L6-v2 a max_seq_length = 256 : au-delà, la fin du morceau serait ignorée
+    (troncature silencieuse). On coupe au milieu, sur un espace si possible.
+    """
+    if len(text) < 2 or n_tokens(text) <= max_tokens:
+        return [text]
+    mid = len(text) // 2
+    cut = text.rfind(" ", 0, mid)
+    cut = cut if cut > 0 else mid
+    return split_to_fit(text[:cut], n_tokens, max_tokens) + split_to_fit(
+        text[cut:], n_tokens, max_tokens
+    )
+
+
+def chunk_text(text: str, n_tokens, max_tokens: int) -> list[str]:
+    """Morceaux de CHUNK_CHARS caractères, redécoupés si l'un dépasse max_tokens."""
+    parts = [text[j : j + CHUNK_CHARS] for j in range(0, len(text), CHUNK_CHARS)] or [""]
+    return [q for part in parts for q in split_to_fit(part, n_tokens, max_tokens)]
+
+
 def embed_sections(texts: list[str]) -> np.ndarray:
-    """Embedding d'un document = moyenne des embeddings de ses morceaux de 800 caractères."""
+    """Embedding d'un document = moyenne des embeddings de ses morceaux (aucun tronqué)."""
     from sentence_transformers import SentenceTransformer
 
     model = SentenceTransformer(EMB_MODEL, device="cpu")
+    max_tokens = model.max_seq_length  # 256, jetons spéciaux [CLS]/[SEP] compris
+
+    def n_tokens(t: str) -> int:
+        return len(model.tokenizer(t)["input_ids"])
+
     chunks, owner = [], []
     for i, t in enumerate(texts):
-        parts = [t[j : j + CHUNK_CHARS] for j in range(0, len(t), CHUNK_CHARS)] or [""]
+        parts = chunk_text(t, n_tokens, max_tokens)
         chunks += parts
         owner += [i] * len(parts)
+    assert max(n_tokens(c) for c in chunks) <= max_tokens  # garde : aucune troncature
+    print(f"Morceaux : {len(chunks)} pour {len(texts)} documents", flush=True)
     vecs = model.encode(chunks, batch_size=64, show_progress_bar=True, normalize_embeddings=True)
     owner = np.asarray(owner)
     return np.vstack([vecs[owner == i].mean(axis=0) for i in range(len(texts))])
@@ -275,6 +304,13 @@ def stage_evaluate() -> None:
         }
     ).to_parquet(OUT_DIR / "test_predictions.parquet", index=False)
     res["portfolio"] = portfolio_backtest(df[te], calibrated["chosen"])
+    # Contrôle de la sélection (évaluation, pas réglage) : même objectif figé, mêmes projets,
+    # autres probabilités. M0 = probabilité constante (taux d'échec de l'entraînement) :
+    # l'objectif ne voit alors que la taille des projets. M1 = sans texte.
+    res["portfolio_control"] = {
+        "m0": portfolio_backtest(df[te], np.full(int(te.sum()), float(y[tr].mean()))),
+        "m1": portfolio_backtest(df[te], calibrated["m1"]),
+    }
     (OUT_DIR / "results.json").write_text(json.dumps(res, indent=2), encoding="utf-8")
     write_report(frozen, res)
 
@@ -375,6 +411,26 @@ def write_report(frozen, res) -> None:
             f"{r['budget_share_ci'][1]:.1%}] | {r['random_budget']:.1%} | "
             f"{r['p_budget_vs_random']:.3f} | {r['n_projects']} |"
         )
+    lines += [
+        "",
+        "## 4. Contrôle de la sélection : même objectif, probabilités de M0 et de M1",
+        "",
+        "M0 = probabilité constante (seule la taille des projets compte) ; M1 = sans texte.",
+        "",
+        "| Budget | Modèle | % projets satisfaisants | hasard | p | % budget → satisfaisants "
+        "| hasard | p |",
+        "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+    ]
+    runs = {"figé": res["portfolio"], **res["portfolio_control"]}
+    for i, base in enumerate(res["portfolio"]):
+        for name, rows in runs.items():
+            r = rows[i]
+            lines.append(
+                f"| {base['budget']:.0%} | {name} | {r['count_share_satisfactory']:.1%} | "
+                f"{r['random_count']:.1%} | {r['p_count_vs_random']:.3f} | "
+                f"{r['budget_share_satisfactory']:.1%} | {r['random_budget']:.1%} | "
+                f"{r['p_budget_vs_random']:.3f} |"
+            )
     REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
 

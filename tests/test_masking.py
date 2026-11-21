@@ -24,3 +24,20 @@ def test_sections_text_masks_project_identifiers():
     out = sections_text(raw, "Rural Roads")
     assert "P123456" not in out and "Rural Roads" not in out
     assert "development objective" in out
+
+
+def test_capitals_accent_insensitive_and_case_sensitive():
+    from investagents.agents.masking import list_mask
+
+    out = list_mask(["Missions to Lomé and Lome; Bamako office; male farmers."])[0]
+    assert "Lom" not in out and "Bamako" not in out
+    assert "male farmers" in out  # « Male » (Maldives) exclue : mot anglais courant
+
+
+def test_country_list_handles_statement_format_and_old_names():
+    from investagents.agents.masking import list_mask
+
+    text = "Congo program; ZAIRE; Côte d'Ivoire and Cote d’Ivoire; Upper Volta."
+    out = list_mask([text], country_names=["Congo, Democratic Republic of"])[0]
+    for w in ["Congo", "ZAIRE", "Ivoire", "Volta"]:
+        assert w not in out
