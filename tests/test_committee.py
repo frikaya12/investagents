@@ -168,3 +168,73 @@ def test_graph_flags_invalid_output(monkeypatch):
     monkeypatch.setattr(cm, "call_json", failing)
     state = cm.build_committee().invoke({"raw_text": DOC})
     assert state["judge"] is None and state["errors"]
+
+
+# ---------------------------------------------------------------- comité complet (bloc C)
+def full_critique(n=10):
+    return {
+        "critiques": [
+            {"argument_index": i, "verdict": "weak" if i % 2 else "strong", "comment": "ok ok"}
+            for i in range(n)
+        ]
+    }
+
+
+def fake_full(calls, fail_on=None):
+    from investagents.schemas.committee import CritiqueOutput
+
+    def call(system, user, schema, **kw):
+        calls.append((schema.__name__, kw.get("url")))
+        if fail_on and schema.__name__ == fail_on:
+            raise llm.LLMOutputError("boom")
+        if schema is CritiqueOutput:
+            return schema.model_validate(full_critique()), {}
+        data = full_debate() if schema is DebateOutput else full_judge()
+        return schema.model_validate(data), {}
+
+    return call
+
+
+def test_full_committee_one_round_order_of_calls(monkeypatch):
+    calls = []
+    monkeypatch.setattr(cm, "call_json", fake_full(calls))
+    state = cm.build_full_committee().invoke(
+        {"raw_text": DOC, "project_name": "Rural Water", "ollama_url": "http://x:1/api/chat"}
+    )
+    names = [c[0] for c in calls]
+    assert names == ["DebateOutput", "CritiqueOutput", "DebateOutput", "JudgeOutput"]
+    assert {c[1] for c in calls} == {"http://x:1/api/chat"}  # serveur choisi respecté
+    assert len(state["rounds_history"]) == 1 and state["initial_debate"]
+    assert len(state["judge"]["scores"]) == 5 and state["errors"] == []
+
+
+def test_full_committee_rounds_zero_is_no_critique_ablation(monkeypatch):
+    calls = []
+    monkeypatch.setattr(cm, "call_json", fake_full(calls))
+    cm.build_full_committee().invoke({"raw_text": DOC, "rounds": 0})
+    assert [c[0] for c in calls] == ["DebateOutput", "JudgeOutput"]
+
+
+def test_full_committee_two_rounds(monkeypatch):
+    calls = []
+    monkeypatch.setattr(cm, "call_json", fake_full(calls))
+    state = cm.build_full_committee().invoke({"raw_text": DOC, "rounds": 2})
+    assert [c[0] for c in calls].count("CritiqueOutput") == 2
+    assert len(state["rounds_history"]) == 2
+
+
+def test_full_committee_with_given_sentences_and_no_full_text(monkeypatch):
+    calls = []
+    monkeypatch.setattr(cm, "call_json", fake_full(calls))
+    sentences = sc.number_sentences(sc.extract_key_sections(sc.normalize(DOC)))
+    state = cm.build_full_committee().invoke({"sentences": sentences})
+    assert state["agent_text"].startswith("[")
+    assert all(c["valid"] and not c["full_text_checked"] for c in state["citations"])
+
+
+def test_full_committee_critique_failure_keeps_initial_arguments(monkeypatch):
+    calls = []
+    monkeypatch.setattr(cm, "call_json", fake_full(calls, fail_on="CritiqueOutput"))
+    state = cm.build_full_committee().invoke({"raw_text": DOC})
+    assert state["judge"] is not None  # le Juge note quand même les arguments initiaux
+    assert any("critique" in e for e in state["errors"])

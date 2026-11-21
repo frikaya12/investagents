@@ -18,3 +18,7 @@ Noms encore présents en v2 (10 plus fréquents) :
 
 Lecture : le compteur « pays + capitales » est presque nul en v2 par construction ;
 le compteur indépendant (autres villes) dit ce que le masquage laisse passer.
+
+**Décision (validée par Aya) :** on garde le masquage v2. Limite assumée : environ 1 grande
+ville (hors capitales) reste visible par document (324 mentions pour 300 projets), contre une
+dizaine de [PLACE] par document. Le masquage réduit l'information pays sans la supprimer.

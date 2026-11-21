@@ -31,6 +31,7 @@ def call_json(
     num_predict: int = 1500,
     num_ctx: int = 8192,
     seed: int = 0,
+    url: str = OLLAMA_URL,
     post=requests.post,
 ) -> tuple[BaseModel, dict]:
     """Renvoie (objet validé, statistiques) ; lève LLMOutputError après 2 sorties invalides."""
@@ -39,7 +40,7 @@ def call_json(
         stats["attempts"] = attempt + 1
         t0 = time.time()
         r = post(
-            OLLAMA_URL,
+            url,
             json={
                 "model": model,
                 "messages": [

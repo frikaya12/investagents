@@ -59,3 +59,36 @@ class JudgeOutput(BaseModel):
         if sorted(s.criterion for s in scores) != sorted(CRITERIA):
             raise ValueError("Il faut exactement une note par critère")
         return scores
+
+
+# ---------------------------------------------------------------- comité complet (bloc C)
+class CritiqueItem(BaseModel):
+    """Critique d'UN argument (repris de l'évaluation d'arguments de DIALECTIC : acceptabilité,
+    pertinence, suffisance), sous forme de verdict qualitatif, sans chiffre."""
+
+    argument_index: int = Field(ge=0, le=19)
+    verdict: Literal["strong", "weak", "unsupported"]
+    comment: str = Field(min_length=5, max_length=400)
+
+
+class CritiqueOutput(BaseModel):
+    critiques: list[CritiqueItem] = Field(min_length=5, max_length=20)
+
+
+class RecognitionOutput(BaseModel):
+    """Test de reconnaissance : le modèle connaît-il déjà ce projet (mémorisation) ?
+    Les réponses sont comparées à la vérité EN LOCAL (la vérité n'est jamais envoyée)."""
+
+    recognized: bool
+    project_name_guess: str = Field(max_length=200)
+    country_guess: str = Field(max_length=100)
+    approval_year_guess: int | None = None
+    outcome_guess: Literal[
+        "Highly Satisfactory",
+        "Satisfactory",
+        "Moderately Satisfactory",
+        "Moderately Unsatisfactory",
+        "Unsatisfactory",
+        "Highly Unsatisfactory",
+        "unknown",
+    ]
