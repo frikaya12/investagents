@@ -7,7 +7,7 @@ budget 25 %, poids égaux, α fixés à l'avance.
 - **Ce que les agents ajoutent (selon leurs propres notes).** De α = 1 (ML seul) à α = 0 (comité
   seul), la note moyenne du portefeuille monte de +1,15 point d'impact sur la validation et de
   +0,75 sur le test. La pertinence ne monte que de +0,20 et +0,14 : elle est presque constante
-  (écart-type 0,65, la note 8 domine). L'efficience et la faisabilité montent aussi (+0,7 à +0,9).
+  (écart-type 0,65, la note 8 domine). L'efficience et la faisabilité montent aussi (+0,6 à +0,9).
   **Attention :** ce gain est mesuré avec les notes qui servent à choisir. Il est donc vrai par
   construction. Il dit que le portefeuille correspond mieux au jugement du comité, pas que les
   projets auront plus d'impact. Aucune donnée externe ne valide ces notes (elles ne prédisent pas
