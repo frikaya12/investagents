@@ -39,15 +39,19 @@ def load_modeling_table(
     ieg_path: str = "data/processed/ieg_ratings.parquet",
     amounts_path: str = "data/processed/amounts_at_approval.parquet",
     with_country_indicators: bool = False,
+    vault: bool = False,
 ) -> pd.DataFrame:
     """Projets notés, hors coffre-fort, joints au montant à l'approbation, avec `split`.
+
+    `vault=True` : renvoie AU CONTRAIRE uniquement les projets du coffre-fort (évaluation finale
+    unique, demandée par Aya ; experiments/vault/). Par défaut, jamais une ligne du coffre.
 
     `with_country_indicators` : ajoute les indicateurs WDI / CPIA / WGI (valeur d'une année
     ≤ approbation − 2), voir data/country_indicators.py.
     """
     ieg = pd.read_parquet(ieg_path)
     ieg = ieg[ieg["satisfactory"].notna()]
-    ieg = ieg[~vault_mask(ieg)]
+    ieg = ieg[vault_mask(ieg)] if vault else ieg[~vault_mask(ieg)]
     amounts = pd.read_parquet(amounts_path)[["project_id", "amount_at_approval_usd"]]
     df = ieg.merge(amounts, on="project_id", how="left")
     if with_country_indicators:

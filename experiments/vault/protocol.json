@@ -1,0 +1,21 @@
+{
+  "population": "tous les projets du coffre-fort (évaluation IEG ≥ 2025) avec une note d'issue ; M1-texte sur ceux qui ont un dossier ex ante exploitable (≥ 10 000 car.)",
+  "models": {
+    "M0": "taux d'échec de l'entraînement (≤ 2007), constant",
+    "M1": "gradient boosting, groupes base + wdi, hyperparamètres de experiments/phase2/frozen.json, entraîné sur ≤ 2007, Platt sur 2008–2011",
+    "M1-texte": "TF-IDF + régression logistique C = 1, entraîné sur ≤ 2007, Platt sur 2008–2011"
+  },
+  "metrics": [
+    "auc_pr (classe échec)",
+    "auc_roc",
+    "brier",
+    "ece (10 classes)"
+  ],
+  "ci": "bootstrap percentile 95 %, 2000 tirages, graine 31",
+  "paired": [
+    "M1-texte − M1 (projets avec texte)",
+    "M1 − M0"
+  ],
+  "breakdown": "approbation ≤ 2017 / ≥ 2018 (descriptif, aucun choix n'en dépend)",
+  "note": "Calcul unique ; aucun modèle, seuil ni réglage ne change après lecture."
+}

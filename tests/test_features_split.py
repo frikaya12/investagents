@@ -114,3 +114,15 @@ def test_load_modeling_table_excludes_vault(tmp_path):
     df = sp.load_modeling_table(str(tmp_path / "ieg.parquet"), str(tmp_path / "am.parquet"))
     assert (df["evaluation_fy"] < 2025).all()
     assert set(df["project_id"]) == {"P000000", "P000001", "P000004", "P000005"}
+
+
+def test_load_modeling_table_vault_option_returns_only_vault(tmp_path):
+    ieg = ieg_rows(evaluation_fy=[2010, 2024, 2025, 2026, 2015, 2020])
+    ieg.drop(columns=["amount_at_approval_usd"]).to_parquet(tmp_path / "ieg.parquet")
+    pd.DataFrame({"project_id": ["P000000"], "amount_at_approval_usd": [1.0]}).to_parquet(
+        tmp_path / "am.parquet"
+    )
+    df = sp.load_modeling_table(
+        str(tmp_path / "ieg.parquet"), str(tmp_path / "am.parquet"), vault=True
+    )
+    assert set(df["project_id"]) == {"P000002", "P000003"}
