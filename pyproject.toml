@@ -35,6 +35,8 @@ build-backend = "uv_build"
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+# notebooks Kaggle générés par committee_run/make_kernel.py (cellules shell « ! »)
+extend-exclude = ["kaggle"]
 
 [tool.ruff.lint]
 # E/F : erreurs de base ; I : tri des imports ; B : bugs fréquents ; UP : syntaxe Python moderne
