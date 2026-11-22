@@ -87,8 +87,15 @@ for u in URLS:  # chargement du modèle sur chaque GPU
 import tarfile, sys
 data_dir = os.path.dirname(glob.glob("/kaggle/input/**/projects.jsonl", recursive=True)[0])
 print("données :", data_dir, os.listdir(data_dir))
-tarfile.open(os.path.join(data_dir, "investagents_code.tar.gz")).extractall("/tmp/code")
-sys.path.insert(0, "/tmp/code")
+# Kaggle décompresse lui-même les .tar.gz d'un jeu de données : on cherche le dossier du code
+found = glob.glob("/kaggle/input/**/investagents/graph/committee.py", recursive=True)
+if found:
+    code_root = os.path.dirname(os.path.dirname(os.path.dirname(found[0])))
+else:
+    tarfile.open(os.path.join(data_dir, "investagents_code.tar.gz")).extractall("/tmp/code")
+    code_root = "/tmp/code"
+print("code :", code_root)
+sys.path.insert(0, code_root)
 import investagents.graph.committee  # vérifie que le code s'importe
 print("code OK ; installation :", f"{(time.time()-T0)/60:.1f} min")""",
     ),
@@ -99,7 +106,7 @@ print("code OK ; installation :", f"{(time.time()-T0)/60:.1f} min")""",
 deadline = {DEADLINE_HOURS} - (time.time() - T0) / 3600
 urls = " ".join(URLS)
 args = f"--data {{data_dir}} --out /kaggle/working --urls {{urls}} --deadline-hours {{deadline}}"
-!cd /tmp && PYTHONPATH=/tmp/code python -u -m investagents.committee_run.runner {{args}} --model {MODEL} --rounds 1""",  # noqa: E501
+!cd /tmp && PYTHONPATH={{code_root}} python -u -m investagents.committee_run.runner {{args}} --model {MODEL} --rounds 1""",  # noqa: E501
     ),
     (
         "code",
@@ -112,8 +119,9 @@ for p in procs:
 
 def notebook() -> dict:
     cells = []
-    for kind, src in CELLS:
-        cell = {"cell_type": kind, "metadata": {}, "source": src.splitlines(keepends=True)}
+    for i, (kind, src) in enumerate(CELLS):
+        cell = {"cell_type": kind, "id": f"cell-{i}", "metadata": {},
+                "source": src.splitlines(keepends=True)}  # fmt: skip
         if kind == "code":
             cell.update(outputs=[], execution_count=None)
         cells.append(cell)

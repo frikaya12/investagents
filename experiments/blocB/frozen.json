@@ -1,0 +1,33 @@
+{
+  "chosen": "m1_text_full",
+  "params": {
+    "m1_text_full": "phase 2 (C = 1)",
+    "tfidf_sections": {
+      "C": 1.0
+    },
+    "tfidf_masked": {
+      "C": 0.3
+    },
+    "emb_sections": {
+      "C": 0.01
+    },
+    "stack": {
+      "text_model": "m1_text_full",
+      "C": 1.0,
+      "cv": "5 plis dans la validation"
+    },
+    "m1 (r\u00e9f\u00e9rence, sans texte)": "phase 2"
+  },
+  "best_text_for_stack": "m1_text_full",
+  "valid_scores": {
+    "m1_text_full": 0.35508225711198155,
+    "tfidf_sections": 0.3035954672142126,
+    "tfidf_masked": 0.2937582916866335,
+    "emb_sections": 0.27249216259307907,
+    "stack": 0.3443191917748929,
+    "m1 (r\u00e9f\u00e9rence, sans texte)": 0.33090901244965637
+  },
+  "n_train": 5810,
+  "n_valid": 869,
+  "valid_failure_rate": 0.22784810126582278
+}

@@ -1,0 +1,7 @@
+candidate,valid_auc_pr,params
+m1_text_full,0.35508225711198155,phase 2 (C = 1)
+tfidf_sections,0.3035954672142126,{'C': 1.0}
+tfidf_masked,0.2937582916866335,{'C': 0.3}
+emb_sections,0.27249216259307907,{'C': 0.01}
+stack,0.3443191917748929,"{'text_model': 'm1_text_full', 'C': 1.0, 'cv': '5 plis dans la validation'}"
+"m1 (référence, sans texte)",0.33090901244965637,phase 2

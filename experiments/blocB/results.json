@@ -1,0 +1,328 @@
+{
+  "chosen": "m1_text_full",
+  "n_test": 755,
+  "test_failure_rate": 0.21589403973509932,
+  "models": {
+    "chosen": {
+      "auc_pr": {
+        "value": 0.29749038321530574,
+        "ci_low": 0.2454487595061603,
+        "ci_high": 0.36853232393752644
+      },
+      "auc_roc": {
+        "value": 0.5983564085557951,
+        "ci_low": 0.5456998416734845,
+        "ci_high": 0.6474937569787181
+      },
+      "brier": {
+        "value": 0.16617981880528054,
+        "ci_low": 0.14870442690462005,
+        "ci_high": 0.18332830558222807
+      },
+      "ece_before": 0.0446872005116872,
+      "ece_after": 0.023438621067022575,
+      "brier_before": 0.16785406326751723
+    },
+    "tfidf_masked": {
+      "auc_pr": {
+        "value": 0.252312040877781,
+        "ci_low": 0.21148550918451806,
+        "ci_high": 0.30841758485985693
+      },
+      "auc_roc": {
+        "value": 0.5719926214558116,
+        "ci_low": 0.5249384812281255,
+        "ci_high": 0.6211399085209943
+      },
+      "brier": {
+        "value": 0.16865885731038327,
+        "ci_low": 0.15190816476770067,
+        "ci_high": 0.1851880745561223
+      },
+      "ece_before": 0.061698182937662265,
+      "ece_after": 0.017673494306696232,
+      "brier_before": 0.17149668927921383
+    },
+    "m1": {
+      "auc_pr": {
+        "value": 0.25874202431192483,
+        "ci_low": 0.21323169715830542,
+        "ci_high": 0.31989795601509174
+      },
+      "auc_roc": {
+        "value": 0.5725574117061847,
+        "ci_low": 0.523350741474071,
+        "ci_high": 0.620643146975934
+      },
+      "brier": {
+        "value": 0.16858815738982,
+        "ci_low": 0.15254958297771135,
+        "ci_high": 0.18427726396961996
+      },
+      "ece_before": 0.06440067113722817,
+      "ece_after": 0.03689856124020251,
+      "brier_before": 0.17350909459038202
+    },
+    "m1_text": {
+      "auc_pr": {
+        "value": 0.29749038321530574,
+        "ci_low": 0.2454487595061603,
+        "ci_high": 0.36853232393752644
+      },
+      "auc_roc": {
+        "value": 0.5983564085557951,
+        "ci_low": 0.5456998416734845,
+        "ci_high": 0.6474937569787181
+      },
+      "brier": {
+        "value": 0.16617981880528054,
+        "ci_low": 0.14870442690462005,
+        "ci_high": 0.18332830558222807
+      },
+      "ece_before": 0.0446872005116872,
+      "ece_after": 0.023438621067022575,
+      "brier_before": 0.16785406326751723
+    }
+  },
+  "diffs": {
+    "chosen - m1": {
+      "auc_pr": {
+        "value": 0.03874835890338091,
+        "ci_low": 0.0025519092681064795,
+        "ci_high": 0.08236295135035207
+      },
+      "auc_roc": {
+        "value": 0.0257989968496104,
+        "ci_low": -0.01035768970376058,
+        "ci_high": 0.06325287010359663
+      },
+      "brier": {
+        "value": -0.0024083385845394545,
+        "ci_low": -0.006373855851847602,
+        "ci_high": 0.0014222944752992225
+      }
+    },
+    "chosen - m1_text": {
+      "auc_pr": {
+        "value": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "auc_roc": {
+        "value": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      },
+      "brier": {
+        "value": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0
+      }
+    },
+    "tfidf_masked - m1_text": {
+      "auc_pr": {
+        "value": -0.04517834233752477,
+        "ci_low": -0.09394557404242707,
+        "ci_high": -0.0029646903457000973
+      },
+      "auc_roc": {
+        "value": -0.026363787099983438,
+        "ci_low": -0.07233614722481971,
+        "ci_high": 0.015039839421567862
+      },
+      "brier": {
+        "value": 0.0024790385051027264,
+        "ci_low": -0.0016218902234868895,
+        "ci_high": 0.006879382903556372
+      }
+    }
+  },
+  "portfolio": [
+    {
+      "budget": 0.1,
+      "n_projects": 87,
+      "spent_usd": 10420489879.7,
+      "budget_share_satisfactory": 0.8358042645064918,
+      "count_share_satisfactory": 0.8045977011494253,
+      "budget_share_ci": [
+        0.7299863221903734,
+        0.9284395519212125
+      ],
+      "count_share_ci": [
+        0.7238505747126437,
+        0.8850574712643678
+      ],
+      "n_pool": 728,
+      "random_count": 0.764748501722544,
+      "random_budget": 0.7936334090266705,
+      "p_count_vs_random": 0.12687312687312688,
+      "p_budget_vs_random": 0.21478521478521478
+    },
+    {
+      "budget": 0.25,
+      "n_projects": 150,
+      "spent_usd": 26052531879.7,
+      "budget_share_satisfactory": 0.8271388738416983,
+      "count_share_satisfactory": 0.8533333333333334,
+      "budget_share_ci": [
+        0.7304166243439567,
+        0.909153854292528
+      ],
+      "count_share_ci": [
+        0.7933333333333333,
+        0.9066666666666666
+      ],
+      "n_pool": 728,
+      "random_count": 0.7724857314652525,
+      "random_budget": 0.8030985363289415,
+      "p_count_vs_random": 0.000999000999000999,
+      "p_budget_vs_random": 0.26173826173826176
+    },
+    {
+      "budget": 0.5,
+      "n_projects": 273,
+      "spent_usd": 52107219879.7,
+      "budget_share_satisfactory": 0.8574070922003912,
+      "count_share_satisfactory": 0.8388278388278388,
+      "budget_share_ci": [
+        0.7962693799773367,
+        0.9109237917056967
+      ],
+      "count_share_ci": [
+        0.7912087912087912,
+        0.8827838827838828
+      ],
+      "n_pool": 728,
+      "random_count": 0.7770049270646403,
+      "random_budget": 0.8206483981703661,
+      "p_count_vs_random": 0.000999000999000999,
+      "p_budget_vs_random": 0.04995004995004995
+    }
+  ],
+  "portfolio_control": {
+    "m0": [
+      {
+        "budget": 0.1,
+        "n_projects": 182,
+        "spent_usd": 10421844500.0,
+        "budget_share_satisfactory": 0.7474410599774349,
+        "count_share_satisfactory": 0.7417582417582418,
+        "budget_share_ci": [
+          0.6555136031623353,
+          0.8317642901299056
+        ],
+        "count_share_ci": [
+          0.6758241758241759,
+          0.8021978021978022
+        ],
+        "n_pool": 728,
+        "random_count": 0.764748501722544,
+        "random_budget": 0.7936334090266705,
+        "p_count_vs_random": 0.7492507492507493,
+        "p_budget_vs_random": 0.8261738261738262
+      },
+      {
+        "budget": 0.25,
+        "n_projects": 250,
+        "spent_usd": 26054814006.7,
+        "budget_share_satisfactory": 0.824446645490396,
+        "count_share_satisfactory": 0.764,
+        "budget_share_ci": [
+          0.7476970346348201,
+          0.8912290212334028
+        ],
+        "count_share_ci": [
+          0.7119,
+          0.816
+        ],
+        "n_pool": 728,
+        "random_count": 0.7724857314652525,
+        "random_budget": 0.8030985363289415,
+        "p_count_vs_random": 0.6413586413586414,
+        "p_budget_vs_random": 0.28771228771228774
+      },
+      {
+        "budget": 0.5,
+        "n_projects": 390,
+        "spent_usd": 52109683006.7,
+        "budget_share_satisfactory": 0.7840037714573542,
+        "count_share_satisfactory": 0.7512820512820513,
+        "budget_share_ci": [
+          0.7175318269313948,
+          0.8432320050913732
+        ],
+        "count_share_ci": [
+          0.7051282051282052,
+          0.7948717948717948
+        ],
+        "n_pool": 728,
+        "random_count": 0.7770049270646403,
+        "random_budget": 0.8206483981703661,
+        "p_count_vs_random": 0.9660339660339661,
+        "p_budget_vs_random": 0.948051948051948
+      }
+    ],
+    "m1": [
+      {
+        "budget": 0.1,
+        "n_projects": 79,
+        "spent_usd": 10419460000.0,
+        "budget_share_satisfactory": 0.8363446858090534,
+        "count_share_satisfactory": 0.8227848101265823,
+        "budget_share_ci": [
+          0.7156418949604364,
+          0.9387662040658618
+        ],
+        "count_share_ci": [
+          0.7341772151898734,
+          0.9113924050632911
+        ],
+        "n_pool": 728,
+        "random_count": 0.764748501722544,
+        "random_budget": 0.7936334090266705,
+        "p_count_vs_random": 0.04395604395604396,
+        "p_budget_vs_random": 0.21178821178821178
+      },
+      {
+        "budget": 0.25,
+        "n_projects": 165,
+        "spent_usd": 26053410000.0,
+        "budget_share_satisfactory": 0.8480862965730781,
+        "count_share_satisfactory": 0.8181818181818182,
+        "budget_share_ci": [
+          0.7641849322520032,
+          0.9231694213489415
+        ],
+        "count_share_ci": [
+          0.7575757575757576,
+          0.8787878787878788
+        ],
+        "n_pool": 728,
+        "random_count": 0.7724857314652525,
+        "random_budget": 0.8030985363289415,
+        "p_count_vs_random": 0.03496503496503497,
+        "p_budget_vs_random": 0.11588411588411589
+      },
+      {
+        "budget": 0.5,
+        "n_projects": 305,
+        "spent_usd": 52109092127.0,
+        "budget_share_satisfactory": 0.848278492729611,
+        "count_share_satisfactory": 0.819672131147541,
+        "budget_share_ci": [
+          0.787717147668283,
+          0.9034166359104973
+        ],
+        "count_share_ci": [
+          0.7770491803278688,
+          0.8622950819672132
+        ],
+        "n_pool": 728,
+        "random_count": 0.7770049270646403,
+        "random_budget": 0.8206483981703661,
+        "p_count_vs_random": 0.000999000999000999,
+        "p_budget_vs_random": 0.11188811188811189
+      }
+    ]
+  }
+}
