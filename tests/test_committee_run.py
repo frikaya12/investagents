@@ -82,3 +82,25 @@ def test_recognition_writes_one_line_per_project(tmp_path, monkeypatch):
     r = make(tmp_path)
     r.recognition(n=4)
     assert len(rn.load_jsonl(tmp_path / "recognition.jsonl")) == 4
+
+
+def test_m7_critique_features_counts():
+    from investagents.ml.run_m7 import critique_features
+
+    initial = [
+        {"criterion": "risk", "stance": "pro", "claim": "a", "sentence_ids": [1]},
+        {"criterion": "risk", "stance": "contra", "claim": "b", "sentence_ids": [2]},
+    ]
+    r = {
+        "initial_debate": {"arguments": initial},
+        "rounds_history": [{"critiques": [
+            {"argument_index": 0, "verdict": "strong", "comment": ""},
+            {"argument_index": 1, "verdict": "unsupported", "comment": ""},
+        ]}],
+        "debate": {"arguments": [initial[0], {**initial[1], "claim": "b réécrit"}]},
+    }  # fmt: skip
+    f = critique_features(r)
+    assert f["strong_pro_risk"] == 1 and f["strong_contra_risk"] == 0
+    assert f["share_unsupported"] == 0.5
+    assert f["share_rewritten"] == 0.5
+    assert f["contra_text"] == "b réécrit"  # texte Contre final, après raffinement

@@ -1,0 +1,90 @@
+{
+  "n_test": 300,
+  "test_failure_rate": 0.21333333333333335,
+  "models": {
+    "texte": {
+      "metrics": {
+        "auc_pr": 0.29367289462883983,
+        "auc_roc": 0.569186970338983,
+        "brier": 0.1674212059681289
+      },
+      "ci": {
+        "auc_pr": {
+          "value": 0.29367289462883983,
+          "ci_low": 0.2144749105518009,
+          "ci_high": 0.3955594329207053
+        },
+        "auc_roc": {
+          "value": 0.569186970338983,
+          "ci_low": 0.4866708913849234,
+          "ci_high": 0.6513340801843299
+        },
+        "brier": {
+          "value": 0.1674212059681289,
+          "ci_low": 0.13853448748093222,
+          "ci_high": 0.19544827573710055
+        }
+      },
+      "brier": 0.1674212059681289,
+      "ece": 0.030400708456314523
+    },
+    "m7": {
+      "metrics": {
+        "auc_pr": 0.3205189760433017,
+        "auc_roc": 0.6012314618644069,
+        "brier": 0.16803043426320302
+      },
+      "ci": {
+        "auc_pr": {
+          "value": 0.3205189760433017,
+          "ci_low": 0.23586432803850543,
+          "ci_high": 0.42726042516318274
+        },
+        "auc_roc": {
+          "value": 0.6012314618644069,
+          "ci_low": 0.5175538920708247,
+          "ci_high": 0.6857955165276605
+        },
+        "brier": {
+          "value": 0.16803043426320302,
+          "ci_low": 0.13822860295642678,
+          "ci_high": 0.1969867836481641
+        }
+      },
+      "brier": 0.16803043426320302,
+      "ece": 0.08767385931637472
+    }
+  },
+  "diff_m7_texte": {
+    "auc_pr": {
+      "value": 0.026846081414461875,
+      "ci_low": -0.05872465364448895,
+      "ci_high": 0.11165201296472672
+    },
+    "auc_roc": {
+      "value": 0.03204449152542388,
+      "ci_low": -0.04430908678188513,
+      "ci_high": 0.10969710669077753
+    },
+    "brier": {
+      "value": 0.0006092282950741212,
+      "ci_low": -0.010622755522582296,
+      "ci_high": 0.011935502685798594
+    }
+  },
+  "coefs_num": {
+    "logit_text": 0.6873,
+    "strong_pro_relevance": -0.1271,
+    "strong_contra_relevance": 0.3499,
+    "strong_pro_economic_efficiency": 0.1107,
+    "strong_contra_economic_efficiency": -0.1107,
+    "strong_pro_feasibility": 0.4883,
+    "strong_contra_feasibility": -0.4258,
+    "strong_pro_risk": 0.4337,
+    "strong_contra_risk": 0.0497,
+    "strong_pro_impact_sustainability": -0.1717,
+    "strong_contra_impact_sustainability": -0.0143,
+    "share_unsupported": 0.0141,
+    "share_rewritten": -0.0687
+  }
+}
