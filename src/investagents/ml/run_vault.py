@@ -11,6 +11,13 @@ jusqu'ici. Évaluation demandée par Aya en fin de projet.
    récent des PAD / SAR / Program Document) -> data/processed/vault_corpus_index.parquet.
 3. `--stage evaluate` : calcul unique ; refuse de tourner deux fois (results.json existe).
 
+AMENDEMENT (22/11/2026, avant toute lecture du coffre) : le serveur de documents répond 403 à
+presque toutes les requêtes ; seuls 78 des 550 dossiers ont pu être téléchargés (~60 h estimées
+pour le reste). `--stage amend` écrit experiments/vault/protocol_amendment.json ;
+`--stage texts-cache` construit l'index des textes à partir du cache local, sans réseau.
+M0 et M1 : tout le coffre (pas besoin de texte). M1-texte : seulement les projets dont le texte
+est téléchargé, présenté comme DESCRIPTIF (sous-échantillon non aléatoire).
+
 Chaîne figée (la même que le test du bloc B et la sélection de portefeuille) : M1 et M1-texte
 entraînés sur l'entraînement (≤ 2007) avec les hyperparamètres figés
 (experiments/phase2/frozen.json), probabilités recalibrées (Platt) sur la validation 2008–2011.
@@ -38,6 +45,7 @@ from investagents.data.corpus import (
     download_gz,
     read_text,
     select_main_documents,
+    text_path,
 )
 from investagents.data.leakage import filter_ex_ante
 from investagents.ml import models as md
@@ -49,6 +57,7 @@ from investagents.ml.split import load_modeling_table
 
 OUT = Path("experiments/vault")
 PROTOCOL = OUT / "protocol.json"
+AMENDMENT = OUT / "protocol_amendment.json"
 RESULTS = OUT / "results.json"
 VAULT_INDEX = Path("data/processed/vault_corpus_index.parquet")
 REPORT = Path("reports/coffre_fort.md")
@@ -78,6 +87,54 @@ def stage_protocol() -> None:
     }
     PROTOCOL.write_text(json.dumps(protocol, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Protocole figé : {PROTOCOL}")
+
+
+def stage_amend() -> None:
+    if AMENDMENT.exists():
+        raise SystemExit(f"Amendement déjà figé : {AMENDMENT}")
+    if RESULTS.exists():
+        raise SystemExit("Le coffre a déjà été évalué : trop tard pour amender.")
+    amendment = {
+        "date": "2026-11-22",
+        "reason": "Le serveur de documents de la Banque mondiale répond 403 Forbidden à presque "
+        "toutes les requêtes (réponse immédiate, ~0,4 s) ; avec 5 essais espacés de 15 à 240 s, "
+        "78 dossiers sur 550 téléchargés en ~9 h, ~60 h estimées pour le reste.",
+        "changes": {
+            "M0, M1": "inchangés : tout le coffre-fort, aucun texte nécessaire ; ce sont les "
+            "chiffres principaux du coffre",
+            "M1-texte": "seulement les projets dont le dossier ex ante est déjà dans le cache "
+            "local (aucun nouveau téléchargement) ; DESCRIPTIF : sous-échantillon non aléatoire "
+            "(dépend de l'ordre de téléchargement et des refus 403) ; M1 est donné sur le même "
+            "sous-échantillon pour comparaison",
+            "texts": "index construit depuis le cache (--stage texts-cache), mêmes règles "
+            "leakage.py et même seuil de 10 000 caractères",
+        },
+        "unchanged": "modèles, hyperparamètres, calibration, métriques, graine, découpage "
+        "≤ 2017 / ≥ 2018 : comme dans protocol.json",
+        "note": "Écrit et commité AVANT toute lecture des issues du coffre-fort.",
+    }
+    AMENDMENT.write_text(json.dumps(amendment, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"Amendement figé : {AMENDMENT}")
+
+
+def stage_texts_cache() -> None:
+    """Index des textes du coffre à partir du cache local seulement (aucun appel réseau)."""
+    if not AMENDMENT.exists():
+        raise SystemExit("Figer d'abord l'amendement (--stage amend).")
+    table = vault_table()
+    projects = pd.read_parquet(PROJECTS_PATH)[["project_id", "approval_date"]]
+    approvals = table[["project_id", "approval_fy"]].merge(projects, on="project_id", how="left")
+    census = pd.read_parquet(CENSUS_PATH)
+    census = census[census["project_id"].isin(set(table["project_id"]))]
+    docs = select_main_documents(filter_ex_ante(census, approvals))
+    cached = docs.doc_id.map(lambda d: text_path(d, TEXT_DIR).exists())
+    docs["n_chars"] = [len(read_text(d, TEXT_DIR)) if c else 0
+                       for d, c in zip(docs.doc_id, cached, strict=True)]  # fmt: skip
+    docs["usable"] = docs["n_chars"] >= MIN_CHARS
+    cols = ["project_id", "doc_id", "docty", "docdt", "approval_ref", "n_chars", "usable"]
+    docs[cols].to_parquet(VAULT_INDEX, index=False)
+    print(f"Dossiers ex ante attendus : {len(docs)} ; dans le cache : {int(cached.sum())} ; "
+          f"exploitables : {int(docs.usable.sum())} ; écrit : {VAULT_INDEX}")  # fmt: skip
 
 
 def vault_table() -> pd.DataFrame:
@@ -157,7 +214,11 @@ def stage_evaluate() -> None:
         out["diffs"]["M1 - M0"] = bootstrap_diff(yy, p_m1[mask], p_m0[mask], N_BOOT, SEED)
         mt_mask = mask & with_text
         yt = yv.to_numpy()[mt_mask]
-        out["text_subset"] = {"n": int(mt_mask.sum()), "failure_rate": float(yt.mean())}
+        out["text_subset"] = {"n": int(mt_mask.sum()),
+                              "failure_rate": float(yt.mean()) if len(yt) else None}  # fmt: skip
+        if len(yt) < 20 or yt.sum() < 3 or yt.sum() == len(yt):
+            out["text_subset"]["skipped"] = "trop peu de projets ou d'échecs pour des métriques"
+            return out
         for name, p in [("M1", p_m1), ("M1-texte", p_text)]:
             pp = p[mt_mask]
             out["text_subset"][name] = {
@@ -200,10 +261,19 @@ def write_report(res) -> None:
         f"par l'IEG en exercice ≥ 2025 ({res['n_vault']} projets, dont {res['n_with_text']}",
         "avec un dossier ex ante exploitable). Classe positive = échec.",
         "",
+        "**Amendement (experiments/vault/protocol_amendment.json, commité avant lecture).** Le",
+        "serveur de documents a refusé (403) presque tous les téléchargements : M0 et M1 portent",
+        "sur tout le coffre (chiffres principaux). M1-texte ne porte que sur les projets dont le",
+        "dossier était déjà téléchargé : **résultat descriptif**, sous-échantillon non aléatoire",
+        "(ordre de téléchargement, refus 403) et petit ; M1 est donné sur le même",
+        "sous-échantillon.",
+        "",
     ]
     for key in ("all", "le2017", "ge2018"):
         b = res[key]
         t = b["text_subset"]
+        if "skipped" in t:
+            lines_t = [f"Projets avec texte téléchargé : {t['n']} — {t['skipped']}.", ""]
         lines += [
             f"## {b['label']} ({b['n']} projets, taux d'échec {b['failure_rate']:.1%})",
             "",
@@ -218,7 +288,13 @@ def write_report(res) -> None:
             f"M1 − M0 : AUC-PR {fmt(b['diffs']['M1 - M0']['auc_pr'])}, Brier "
             f"{fmt(b['diffs']['M1 - M0']['brier'])}.",
             "",
-            f"Projets avec texte ({t['n']}, taux d'échec {t['failure_rate']:.1%}) :",
+        ]
+        if "skipped" in t:
+            lines += lines_t
+            continue
+        lines += [
+            f"Projets avec texte téléchargé ({t['n']}, taux d'échec {t['failure_rate']:.1%}) — "
+            "descriptif :",
             "",
             "| Modèle | AUC-PR [IC 95 %] | AUC-ROC [IC 95 %] | Brier | ECE |",
             "| --- | --- | --- | ---: | ---: |",
@@ -242,9 +318,10 @@ def write_report(res) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--stage", choices=["protocol", "texts", "evaluate"], required=True)
-    stage = parser.parse_args().stage
-    {"protocol": stage_protocol, "texts": stage_texts, "evaluate": stage_evaluate}[stage]()
+    stages = {"protocol": stage_protocol, "amend": stage_amend, "texts": stage_texts,
+              "texts-cache": stage_texts_cache, "evaluate": stage_evaluate}  # fmt: skip
+    parser.add_argument("--stage", choices=list(stages), required=True)
+    stages[parser.parse_args().stage]()
 
 
 if __name__ == "__main__":

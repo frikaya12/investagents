@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-22",
+  "reason": "Le serveur de documents de la Banque mondiale répond 403 Forbidden à presque toutes les requêtes (réponse immédiate, ~0,4 s) ; avec 5 essais espacés de 15 à 240 s, 78 dossiers sur 550 téléchargés en ~9 h, ~60 h estimées pour le reste.",
+  "changes": {
+    "M0, M1": "inchangés : tout le coffre-fort, aucun texte nécessaire ; ce sont les chiffres principaux du coffre",
+    "M1-texte": "seulement les projets dont le dossier ex ante est déjà dans le cache local (aucun nouveau téléchargement) ; DESCRIPTIF : sous-échantillon non aléatoire (dépend de l'ordre de téléchargement et des refus 403) ; M1 est donné sur le même sous-échantillon pour comparaison",
+    "texts": "index construit depuis le cache (--stage texts-cache), mêmes règles leakage.py et même seuil de 10 000 caractères"
+  },
+  "unchanged": "modèles, hyperparamètres, calibration, métriques, graine, découpage ≤ 2017 / ≥ 2018 : comme dans protocol.json",
+  "note": "Écrit et commité AVANT toute lecture des issues du coffre-fort."
+}
