@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "n_factors": 19,
+  "factors": [
+    {
+      "name": "components",
+      "kind": "list",
+      "question": "List the project components (short name of each component).",
+      "keywords": "\\bcomponent",
+      "categories": []
+    },
+    {
+      "name": "implementing_agencies",
+      "kind": "list",
+      "question": "List the agencies or entities responsible for implementing the project.",
+      "keywords": "implementing agenc|implementing entit|executing agenc|project implementation unit|\\bPIU\\b|\\bPMU\\b|implementation unit|responsible for implementation",
+      "categories": []
+    },
+    {
+      "name": "cofinanciers",
+      "kind": "list",
+      "question": "List the other financiers or donors co-financing the project (not the Bank, not the government).",
+      "keywords": "co-?financ|parallel financ|donors?\\b|trust fund|grant from",
+      "categories": []
+    },
+    {
+      "name": "first_operation",
+      "kind": "yes_no",
+      "question": "Is this described as the first Bank operation in this sector, with this agency, or in this country?",
+      "keywords": "first (?:bank|ida|world bank)?\\s*(?:operation|project|engagement|loan|credit)|first time|no previous|new to the bank",
+      "categories": []
+    },
+    {
+      "name": "follow_on_phase",
+      "kind": "yes_no",
+      "question": "Is the project a second (or later) phase, a follow-on, or part of an APL series?",
+      "keywords": "second phase|phase (?:2|ii|two)|follow-on|follow up|adaptable program|\\bAPL\\b|repeater|previous phase",
+      "categories": []
+    },
+    {
+      "name": "reform_to_adopt",
+      "kind": "yes_no",
+      "question": "Does the project depend on a law, regulation, decree or reform that must still be adopted (e.g. a condition of effectiveness or disbursement)?",
+      "keywords": "\\blaw\\b|legislation|decree|regulation|condition of effectiveness|effectiveness condition|disbursement condition|prior action|adoption of",
+      "categories": []
+    },
+    {
+      "name": "env_category",
+      "kind": "category",
+      "question": "What environmental assessment category is the project assigned?",
+      "keywords": "environmental (?:assessment |screening )?category|category [abc]\\b|\\bEA category|categor(?:y|ized) as",
+      "categories": [
+        "A",
+        "B",
+        "C",
+        "FI"
+      ]
+    },
+    {
+      "name": "overall_risk_rating",
+      "kind": "category",
+      "question": "What overall risk rating does the document give the project?",
+      "keywords": "overall risk|risk rating|rated (?:as )?(?:high|substantial|moderate|low|modest)|\\bSORT\\b",
+      "categories": [
+        "low",
+        "moderate",
+        "substantial",
+        "high"
+      ]
+    },
+    {
+      "name": "fiduciary_risk",
+      "kind": "category",
+      "question": "What risk rating is given to financial management or procurement?",
+      "keywords": "financial management risk|procurement risk|fiduciary risk|(?:financial management|procurement)[^.]{0,60}(?:rated|risk is|assessed)",
+      "categories": [
+        "low",
+        "moderate",
+        "substantial",
+        "high"
+      ]
+    },
+    {
+      "name": "baseline_values",
+      "kind": "yes_no",
+      "question": "Do the results / outcome indicators have baseline values stated?",
+      "keywords": "baseline|base year|indicator",
+      "categories": []
+    },
+    {
+      "name": "lessons_problems",
+      "kind": "yes_no",
+      "question": "Do the lessons learned mention a previous project that performed poorly, failed, or was rated unsatisfactory?",
+      "keywords": "lessons?|unsatisfactory|poor performance|did not achieve|failed|shortcoming",
+      "categories": []
+    },
+    {
+      "name": "fragility_conflict",
+      "kind": "yes_no",
+      "question": "Is the country or project area described as fragile, in conflict, or post-conflict?",
+      "keywords": "fragil|conflict|post-conflict|civil war|insecurity|violence|refugee",
+      "categories": []
+    },
+    {
+      "name": "weak_capacity",
+      "kind": "yes_no",
+      "question": "Does the document state that the implementing agency has weak or limited capacity?",
+      "keywords": "weak capacity|limited capacity|capacity constraint|lack of capacity|capacity is (?:weak|limited)|insufficient capacity|capacity weakness",
+      "categories": []
+    },
+    {
+      "name": "counterpart_funding",
+      "kind": "yes_no",
+      "question": "Is government counterpart funding required for the project?",
+      "keywords": "counterpart fund|government contribution|counterpart contribution|borrower contribution|co-financing by the government",
+      "categories": []
+    },
+    {
+      "name": "resettlement",
+      "kind": "yes_no",
+      "question": "Is the involuntary resettlement safeguard triggered, or is land acquisition or resettlement expected?",
+      "keywords": "resettlement|land acquisition|OP 4\\.12|OP/BP 4\\.12|displac",
+      "categories": []
+    },
+    {
+      "name": "decentralized_implementation",
+      "kind": "yes_no",
+      "question": "Is implementation decentralized to many local or sub-national entities (municipalities, provinces, communities)?",
+      "keywords": "municipalit|provinc|local government|communit|decentrali|sub-national|district",
+      "categories": []
+    },
+    {
+      "name": "pilot_innovative",
+      "kind": "yes_no",
+      "question": "Is the project described as a pilot or as an innovative approach new to the country?",
+      "keywords": "\\bpilot|innovative|new approach|first of its kind|demonstration",
+      "categories": []
+    },
+    {
+      "name": "political_risk",
+      "kind": "yes_no",
+      "question": "Does the document list political risk, elections, or weak government commitment as a risk?",
+      "keywords": "political|election|government commitment|ownership|political economy",
+      "categories": []
+    },
+    {
+      "name": "economic_return_reported",
+      "kind": "yes_no",
+      "question": "Does the document report an economic rate of return, net present value or cost-benefit result?",
+      "keywords": "economic rate of return|\\bERR\\b|\\bEIRR\\b|net present value|\\bNPV\\b|cost-benefit|benefit-cost|internal rate of return",
+      "categories": []
+    }
+  ],
+  "sha256": "6e4722954b82d1f0018d5e9eeb2030168b0e3f2661f83312e939af50da298a68"
+}
