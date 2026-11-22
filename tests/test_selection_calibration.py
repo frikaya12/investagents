@@ -97,3 +97,19 @@ def test_objective_p_cost_min_excludes_low_probability():
         select_portfolio(p, cost, country, 100e6, objective="p_cost_min")
     with pytest.raises(ValueError):
         select_portfolio(p, cost, country, 100e6, objective="unknown")
+
+
+def test_weighted_score_bounds_and_weights():
+    import pandas as pd
+    import pytest
+
+    from investagents.schemas.committee import CRITERIA
+    from investagents.selection.multicriteria import weighted_score
+
+    df = pd.DataFrame([{c: 10 for c in CRITERIA}, {c: 0 for c in CRITERIA}])
+    s = weighted_score(df, {c: 1 for c in CRITERIA})
+    assert s.tolist() == [1.0, 0.0]
+    df2 = pd.DataFrame([{**{c: 0 for c in CRITERIA}, "risk": 10}])
+    assert weighted_score(df2, {"risk": 1})[0] == 1.0  # seul le critère pondéré compte
+    with pytest.raises(ValueError):
+        weighted_score(df, {c: 0 for c in CRITERIA})
