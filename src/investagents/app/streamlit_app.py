@@ -166,65 +166,72 @@ if page == "Portefeuille":
 
 elif page == "Sélection multicritère (comité)":
     from investagents.schemas.committee import CRITERIA
-    from investagents.selection.multicriteria import scores_table, weighted_score
+    from investagents.selection.frontier import combined_score, committee_score, load_pool, select
 
-    st.header("Sélection multicritère à partir des notes du comité")
+    st.header("Décision multicritère : probabilité de réussite (ML) + notes du comité")
     st.warning(
         "Les notes du Juge servent à **classer les projets selon les préférences du décideur** "
         "(poids des 5 critères). Elles **ne prédisent pas l'échec** : AUC ≈ 0,5 sur la "
         "validation, et M3 / M4 ne font pas mieux que le hasard / que le texte seul au test "
-        "(reports/blocC_m3_m4.md). Pour prédire l'échec, voir la page Portefeuille."
+        "(reports/blocC_m3_m4.md). La probabilité de réussite vient du ML (M1-texte calibré)."
     )
-    results_path = ROOT / "experiments" / "blocC" / "kaggle_run1" / "results.jsonl"
-    sample_path = ROOT / "experiments" / "blocC" / "sample.csv"
-    if not results_path.exists():
+    if not (ROOT / "experiments" / "blocC" / "scores.parquet").exists():
         st.warning("Résultats du comité absents : voir kaggle/blocC/README.md")
         st.stop()
-    table = scores_table(results_path, sample_path)
-    table = table[(table.split == "valid") & table.amount_at_approval_usd.notna()].copy()
-    st.caption(
-        f"{len(table)} projets de la validation (2008–2011) notés par le comité (Qwen2.5 7B). "
-        "Le test n'est pas proposé ici : choisir des poids en regardant le test reviendrait à "
-        "régler sur le test."
+    pool = load_pool(
+        "valid", ROOT / "experiments/blocC/scores.parquet", MVP / "predictions.parquet"
     )
+    st.caption(
+        f"{len(pool)} projets de la validation (2008–2011) notés par le comité (Qwen2.5 7B). "
+        "Le test n'est pas proposé ici : choisir α ou des poids en regardant le test reviendrait "
+        "à régler sur le test. Frontière complète : reports/frontiere_alpha.md."
+    )
+    alpha = st.slider(
+        "α : poids de la probabilité de réussite (1 = ML seul, 0 = comité seul)",
+        0.0, 1.0, 0.5, 0.05,
+    )  # fmt: skip
     cols = st.columns(5)
     weights = {c: cols[i].slider(c, 0, 5, 1, key=f"w_{c}") for i, c in enumerate(CRITERIA)}
     if sum(weights.values()) == 0:
         st.error("Mettre au moins un poids non nul.")
         st.stop()
     frac = st.select_slider(
-        "Budget (part du montant total des projets)",
+        "Budget (part du montant de chaque cohorte annuelle)",
         options=[0.10, 0.25, 0.50],
         value=0.25,
         format_func=lambda f: f"{f:.0%}",
     )
-    table["score"] = weighted_score(table, weights)
-    budget = frac * table.amount_at_approval_usd.sum()
-    x = select_portfolio(
-        table.score, table.amount_at_approval_usd, table.country, budget, 0.25, objective="p"
+    pool["score"] = combined_score(pool, alpha, weights)
+    pool["note_comite"] = committee_score(pool, weights)
+    chosen = select(pool, pool.score, frac).sort_values("score", ascending=False)
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Projets choisis", f"{len(chosen)} / {len(pool)}")
+    c2.metric(
+        "Réussite attendue (ML)",
+        f"{chosen.p_success.mean():.1%}",
+        f"{100 * (chosen.p_success.mean() - pool.p_success.mean()):+.1f} pts vs ensemble",
     )
-    chosen = table[x].sort_values("score", ascending=False)
-    c1, c2, c3 = st.columns(3)
-    c1.metric("Projets choisis", f"{len(chosen)} / {len(table)}")
-    c2.metric("Score moyen (0–1)", f"{chosen.score.mean():.2f}")
-    c3.metric("Budget utilisé", f"{chosen.amount_at_approval_usd.sum() / 1e6:,.0f} M USD")
+    c3.metric("Note moyenne du comité (0–1)", f"{chosen.note_comite.mean():.2f}")
+    c4.metric("Budget utilisé", f"{chosen.cost.sum() / 1e6:,.0f} M USD")
+    st.subheader("Profil du portefeuille sur les 5 critères (notes sur 10)")
+    prof = pd.DataFrame(
+        {
+            "portefeuille": chosen[list(CRITERIA)].mean(),
+            "tous les projets": pool[list(CRITERIA)].mean(),
+        }
+    )
+    st.bar_chart(prof, stack=False)
     st.caption(
-        "Score = moyenne pondérée des 5 notes / 10. Sac à dos OR-Tools : maximise la somme des "
-        "scores sous budget, au plus 25 % du budget par pays."
+        "score = α × p_succès + (1 − α) × moyenne pondérée des notes / 10. Sac à dos OR-Tools "
+        "(objectif figé Σ score × montant), une sélection par cohorte annuelle, au plus 25 % du "
+        "budget par pays. La réussite attendue est la moyenne des probabilités du ML, pas l'issue."
     )
     show = chosen[
-        [
-            "key",
-            "country",
-            "global_practice",
-            "amount_at_approval_usd",
-            "score",
-            *CRITERIA,
-            "outcome",
-        ]
+        ["key", "country", "global_practice", "cost", "p_success", "score", *CRITERIA, "outcome"]
     ].rename(
-        columns={"amount_at_approval_usd": "montant (USD)", "outcome": "note IEG (a posteriori)"}
-    )
+        columns={"cost": "montant (USD)", "p_success": "p réussite (ML)",
+                 "outcome": "note IEG (a posteriori)"}
+    )  # fmt: skip
     st.dataframe(show, use_container_width=True, hide_index=True)
 
 else:

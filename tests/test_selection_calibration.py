@@ -113,3 +113,47 @@ def test_weighted_score_bounds_and_weights():
     assert weighted_score(df2, {"risk": 1})[0] == 1.0  # seul le critère pondéré compte
     with pytest.raises(ValueError):
         weighted_score(df, {c: 0 for c in CRITERIA})
+
+
+def _fake_pool(n=40, seed=0):
+    import numpy as np
+    import pandas as pd
+
+    from investagents.schemas.committee import CRITERIA
+
+    rng = np.random.default_rng(seed)
+    df = pd.DataFrame({c: rng.integers(2, 9, n) for c in CRITERIA})
+    return df.assign(
+        key=[f"K{i}" for i in range(n)],
+        p_success=rng.uniform(0.5, 0.95, n),
+        cost=rng.uniform(1e6, 1e8, n),
+        country=rng.choice(list("ABCDEFGH"), n),
+        approval_fy=rng.choice([2009, 2010], n),
+        success=rng.integers(0, 2, n),
+    )
+
+
+def test_combined_score_extremes():
+    import pytest
+
+    from investagents.selection.frontier import combined_score, committee_score
+
+    df = _fake_pool()
+    assert (combined_score(df, 1.0) == df.p_success).all()  # α = 1 : ML seul
+    assert (combined_score(df, 0.0) == committee_score(df)).all()  # α = 0 : comité seul
+    mid = combined_score(df, 0.5)
+    assert ((mid >= 0) & (mid <= 1)).all()
+    with pytest.raises(ValueError):
+        combined_score(df, 1.5)
+
+
+def test_frontier_select_respects_cohort_budget_and_country_cap():
+    from investagents.selection.frontier import combined_score, select
+
+    df = _fake_pool()
+    chosen = select(df, combined_score(df, 0.5), budget=0.25)
+    for fy, c in df.groupby("approval_fy"):
+        ch = chosen[chosen.approval_fy == fy]
+        budget = 0.25 * c.cost.sum()
+        assert ch.cost.sum() <= budget + 1e3 * len(ch)  # arrondi au millier de USD
+        assert (ch.groupby("country").cost.sum() <= 0.25 * budget + 1e3 * len(ch)).all()
