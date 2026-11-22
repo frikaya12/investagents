@@ -33,3 +33,6 @@ data/processed/*
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# --- Journaux Kaggle volumineux (re-téléchargeables) ---
+experiments/blocC/kaggle_run*/ollama_*.log

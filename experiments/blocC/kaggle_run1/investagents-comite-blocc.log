@@ -1,0 +1,674 @@
+[{"stream_name":"stderr","time":11.719362696,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":11.719426472,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":11.719433842,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":11.719437826,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":12.41673572,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":12.41676143,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":12.416771917,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":12.416775177,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":14.218508374,"data":"Sun Nov 22 00:00:46 2026       \n"}
+,{"stream_name":"stdout","time":14.21855927,"data":"+-----------------------------------------------------------------------------------------+\n"}
+,{"stream_name":"stdout","time":14.218567282,"data":"| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |\n"}
+,{"stream_name":"stdout","time":14.218571161,"data":"+-----------------------------------------+------------------------+----------------------+\n"}
+,{"stream_name":"stdout","time":14.218574778,"data":"| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n"}
+,{"stream_name":"stdout","time":14.218578683,"data":"| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n"}
+,{"stream_name":"stdout","time":14.218582916,"data":"|                                         |                        |               MIG M. |\n"}
+,{"stream_name":"stdout","time":14.218586237,"data":"|=========================================+========================+======================|\n"}
+,{"stream_name":"stdout","time":14.218589857,"data":"|   0  Tesla T4                       Off |   00000000:00:04.0 Off |                    0 |\n"}
+,{"stream_name":"stdout","time":14.218593027,"data":"| N/A   53C    P8             10W /   70W |       0MiB /  15360MiB |      0%      Default |\n"}
+,{"stream_name":"stdout","time":14.218596338,"data":"|                                         |                        |                  N/A |\n"}
+,{"stream_name":"stdout","time":14.218599787,"data":"+-----------------------------------------+------------------------+----------------------+\n"}
+,{"stream_name":"stdout","time":14.218603103,"data":"|   1  Tesla T4                       Off |   00000000:00:05.0 Off |                    0 |\n"}
+,{"stream_name":"stdout","time":14.218606761,"data":"| N/A   48C    P8              9W /   70W |       0MiB /  15360MiB |      0%      Default |\n"}
+,{"stream_name":"stdout","time":14.218610488,"data":"|                                         |                        |                  N/A |\n"}
+,{"stream_name":"stdout","time":14.218613821,"data":"+-----------------------------------------+------------------------+----------------------+\n"}
+,{"stream_name":"stdout","time":14.218617442,"data":"\n"}
+,{"stream_name":"stdout","time":14.218621092,"data":"+-----------------------------------------------------------------------------------------+\n"}
+,{"stream_name":"stdout","time":14.218624773,"data":"| Processes:                                                                              |\n"}
+,{"stream_name":"stdout","time":14.21864071,"data":"|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n"}
+,{"stream_name":"stdout","time":14.218645373,"data":"|        ID   ID                                                               Usage      |\n"}
+,{"stream_name":"stdout","time":14.218648662,"data":"|=========================================================================================|\n"}
+,{"stream_name":"stdout","time":14.218652243,"data":"|  No running processes found                                                             |\n"}
+,{"stream_name":"stdout","time":14.218657493,"data":"+-----------------------------------------------------------------------------------------+\n"}
+,{"stream_name":"stdout","time":14.218661112,"data":"\n"}
+,{"stream_name":"stdout","time":18.950582979,"data":"W: Skipping acquire of configured file 'main/source/Sources' as repository 'https://r2u.stat.illinois.edu/ubuntu noble InRelease' does not seem to provide it (sources.list entry misspelt?)\r\n"}
+,{"stream_name":"stdout","time":156.758928472,"data":"\u003e\u003e\u003e NVIDIA GPU installed.\r\n"}
+,{"stream_name":"stdout","time":156.758960471,"data":"\u003e\u003e\u003e The Ollama API is now available at 127.0.0.1:11434.\r\n"}
+,{"stream_name":"stdout","time":156.758965964,"data":"\u003e\u003e\u003e Install complete. Run \"ollama\" from the command line.\r\n"}
+,{"stream_name":"stdout","time":161.889593256,"data":"\u001b]11;?\u001b\\\u001b[6nWarning: could not connect to a running Ollama instance\r\n"}
+,{"stream_name":"stdout","time":161.889655401,"data":"Warning: client version is 0.40.17\r\n"}
+,{"stream_name":"stdout","time":168.673968232,"data":"serveurs : ['http://127.0.0.1:11434/api/chat', 'http://127.0.0.1:11435/api/chat']\n"}
+,{"stream_name":"stdout","time":207.114297834,"data":"writing manifest \u001b[K\r\n"}
+,{"stream_name":"stdout","time":207.114336235,"data":"success \u001b[K\u001b[?25h\u001b[?2026l\r\n"}
+,{"stream_name":"stdout","time":320.200641346,"data":"http://127.0.0.1:11434/api/chat 200 OK! Is there anythin 113 s\n"}
+,{"stream_name":"stdout","time":324.13912419,"data":"http://127.0.0.1:11435/api/chat 200 OK! Is there anythin 4 s\n"}
+,{"stream_name":"stdout","time":324.139159144,"data":"index, memory.used [MiB]\r\n"}
+,{"stream_name":"stdout","time":324.139163673,"data":"0, 4663 MiB\r\n"}
+,{"stream_name":"stdout","time":324.139167092,"data":"1, 4663 MiB\r\n"}
+,{"stream_name":"stdout","time":330.263513919,"data":"données : /kaggle/input/datasets/frikaya/investagents-blocc ['investagents_code', 'projects.jsonl']\n"}
+,{"stream_name":"stdout","time":331.086698453,"data":"code : /kaggle/input/datasets/frikaya/investagents-blocc/investagents_code\n"}
+,{"stream_name":"stdout","time":336.881546229,"data":"code OK ; installation : 5.4 min\n"}
+,{"stream_name":"stdout","time":339.28492346,"data":"Projets : 600, déjà faits : 0\r\n"}
+,{"stream_name":"stdout","time":418.318413363,"data":"[2026-11-22 00:07:31] C0002 (test) 79.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":429.892878398,"data":"[2026-11-22 00:07:42] C0001 (valid) 90.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":500.278402889,"data":"[2026-11-22 00:08:53] C0003 (valid) 81.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":529.855312349,"data":"[2026-11-22 00:09:22] C0004 (test) 100.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":585.021606731,"data":"[2026-11-22 00:10:17] C0005 (valid) 84.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":615.606030588,"data":"[2026-11-22 00:10:48] C0006 (test) 85.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":670.607601658,"data":"[2026-11-22 00:11:43] C0007 (valid) 85.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":698.103888182,"data":"[2026-11-22 00:12:11] C0008 (test) 82.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":755.698752091,"data":"[2026-11-22 00:13:08] C0009 (valid) 85.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":785.819947203,"data":"[2026-11-22 00:13:38] C0010 (test) 87.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":785.819976062,"data":"ESSAI 10 projets : médiane 85 s/projet, min 79, max 100 ; 2 serveurs en parallèle → débit ≈ 84 projets/h\r\n"}
+,{"stream_name":"stdout","time":867.88571191,"data":"Reconnaissance : 50 projets\r\n"}
+,{"stream_name":"stdout","time":949.702627602,"data":"[2026-11-22 00:16:22] C0011 (valid) 81.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":959.945029238,"data":"[2026-11-22 00:16:32] C0012 (test) 92.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1031.79600435,"data":"[2026-11-22 00:17:44] C0013 (valid) 82.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1049.558072991,"data":"[2026-11-22 00:18:02] C0014 (test) 89.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1121.078031859,"data":"[2026-11-22 00:19:14] C0015 (valid) 89.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1143.357740057,"data":"[2026-11-22 00:19:36] C0016 (test) 93.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1200.420559717,"data":"[2026-11-22 00:20:33] C0017 (valid) 79.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1238.49667559,"data":"[2026-11-22 00:21:11] C0018 (test) 95.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1289.460161498,"data":"[2026-11-22 00:22:02] C0019 (valid) 89.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1320.316621798,"data":"[2026-11-22 00:22:33] C0020 (test) 81.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1381.384963961,"data":"[2026-11-22 00:23:34] C0021 (valid) 91.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1407.442212201,"data":"[2026-11-22 00:24:00] C0022 (test) 87.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1462.239453992,"data":"[2026-11-22 00:24:55] C0023 (valid) 80.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1499.250045228,"data":"[2026-11-22 00:25:32] C0024 (test) 91.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1553.272175111,"data":"[2026-11-22 00:26:26] C0025 (valid) 91.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1586.183265587,"data":"[2026-11-22 00:26:59] C0026 (test) 87.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1648.044994653,"data":"[2026-11-22 00:28:00] C0027 (valid) 94.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1679.774621919,"data":"[2026-11-22 00:28:32] C0028 (test) 93.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1732.270892186,"data":"[2026-11-22 00:29:25] C0029 (valid) 84.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1790.232674034,"data":"[2026-11-22 00:30:23] C0030 (test) 110.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1817.414315836,"data":"[2026-11-22 00:30:50] C0031 (valid) 85.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1880.427017965,"data":"[2026-11-22 00:31:53] C0032 (test) 90.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1901.698924056,"data":"[2026-11-22 00:32:14] C0033 (valid) 84.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":1974.190841906,"data":"[2026-11-22 00:33:27] C0034 (test) 93.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2050.297619644,"data":"[2026-11-22 00:34:43] C0035 (valid) 148.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2070.48378584,"data":"[2026-11-22 00:35:03] C0036 (test) 96.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2134.574504523,"data":"[2026-11-22 00:36:07] C0037 (valid) 84.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2164.188215843,"data":"[2026-11-22 00:36:37] C0038 (test) 93.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2220.928304593,"data":"[2026-11-22 00:37:33] C0039 (valid) 86.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2253.973571181,"data":"[2026-11-22 00:38:06] C0040 (test) 89.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2304.345383176,"data":"[2026-11-22 00:38:57] C0041 (valid) 83.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2342.096641829,"data":"[2026-11-22 00:39:35] C0042 (test) 88.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2405.97674978,"data":"[2026-11-22 00:40:38] C0043 (valid) 101.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2429.662605952,"data":"[2026-11-22 00:41:02] C0044 (test) 87.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2496.822444484,"data":"[2026-11-22 00:42:09] C0045 (valid) 90.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2528.302276788,"data":"[2026-11-22 00:42:41] C0046 (test) 98.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2587.099213032,"data":"[2026-11-22 00:43:40] C0047 (valid) 90.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2616.06617263,"data":"[2026-11-22 00:44:09] C0048 (test) 87.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2676.881632254,"data":"[2026-11-22 00:45:09] C0049 (valid) 89.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2701.335779886,"data":"[2026-11-22 00:45:34] C0050 (test) 85.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2760.964497428,"data":"[2026-11-22 00:46:33] C0051 (valid) 84.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2786.561634795,"data":"[2026-11-22 00:46:59] C0052 (test) 85.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2847.513167747,"data":"[2026-11-22 00:48:00] C0053 (valid) 86.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2871.643974972,"data":"[2026-11-22 00:48:24] C0054 (test) 85.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2929.370604718,"data":"[2026-11-22 00:49:22] C0055 (valid) 81.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":2958.140520286,"data":"[2026-11-22 00:49:51] C0056 (test) 86.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3014.398829648,"data":"[2026-11-22 00:50:47] C0057 (valid) 85.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3051.101710176,"data":"[2026-11-22 00:51:24] C0058 (test) 93.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3097.366100235,"data":"[2026-11-22 00:52:10] C0059 (valid) 83.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3139.164799017,"data":"[2026-11-22 00:52:52] C0060 (test) 88.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3183.644562561,"data":"[2026-11-22 00:53:36] C0061 (valid) 86.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3227.091974293,"data":"[2026-11-22 00:54:20] C0062 (test) 88.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3268.221643614,"data":"[2026-11-22 00:55:01] C0063 (valid) 84.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3316.799363305,"data":"[2026-11-22 00:55:49] C0064 (test) 89.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3358.557561928,"data":"[2026-11-22 00:56:31] C0065 (valid) 90.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3410.634253344,"data":"[2026-11-22 00:57:23] C0066 (test) 93.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3439.168343786,"data":"[2026-11-22 00:57:52] C0067 (valid) 80.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3504.51203527,"data":"[2026-11-22 00:58:57] C0068 (test) 93.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3532.163924061,"data":"[2026-11-22 00:59:25] C0069 (valid) 93.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3608.064896654,"data":"[2026-11-22 01:00:40] C0070 (test) 103.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3612.064220441,"data":"[2026-11-22 01:00:45] C0071 (valid) 79.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3692.5388026,"data":"[2026-11-22 01:02:05] C0072 (test) 84.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3698.669114109,"data":"[2026-11-22 01:02:11] C0073 (valid) 86.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3774.360958027,"data":"[2026-11-22 01:03:27] C0074 (test) 81.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3784.374400964,"data":"[2026-11-22 01:03:37] C0075 (valid) 85.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3863.122339016,"data":"[2026-11-22 01:04:56] C0077 (valid) 78.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3867.67927691,"data":"[2026-11-22 01:05:00] C0076 (test) 93.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3947.736001792,"data":"[2026-11-22 01:06:20] C0078 (test) 84.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":3962.988405663,"data":"[2026-11-22 01:06:35] C0079 (valid) 95.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4032.87726111,"data":"[2026-11-22 01:07:45] C0080 (test) 85.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4050.612621038,"data":"[2026-11-22 01:08:03] C0081 (valid) 87.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4124.67604389,"data":"[2026-11-22 01:09:17] C0082 (test) 91.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4142.189643426,"data":"[2026-11-22 01:09:35] C0083 (valid) 91.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4209.659846645,"data":"[2026-11-22 01:10:42] C0084 (test) 84.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4233.533584478,"data":"[2026-11-22 01:11:06] C0085 (valid) 91.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4296.791617626,"data":"[2026-11-22 01:12:09] C0086 (test) 87.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4327.162666579,"data":"[2026-11-22 01:12:40] C0087 (valid) 93.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4388.55508993,"data":"[2026-11-22 01:13:41] C0088 (test) 91.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4424.124322945,"data":"[2026-11-22 01:14:17] C0089 (valid) 96.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4485.131288309,"data":"[2026-11-22 01:15:18] C0090 (test) 96.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4516.604213885,"data":"[2026-11-22 01:15:49] C0091 (valid) 92.5 s juge=ok citations=0.9 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4574.984511181,"data":"[2026-11-22 01:16:47] C0092 (test) 89.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4606.094680322,"data":"[2026-11-22 01:17:19] C0093 (valid) 89.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4658.812080202,"data":"[2026-11-22 01:18:11] C0094 (test) 83.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4696.232780554,"data":"[2026-11-22 01:18:49] C0095 (valid) 90.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4758.662679135,"data":"[2026-11-22 01:19:51] C0096 (test) 99.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4795.513260699,"data":"[2026-11-22 01:20:28] C0097 (valid) 99.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4852.141689816,"data":"[2026-11-22 01:21:25] C0098 (test) 93.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4889.107348749,"data":"[2026-11-22 01:22:02] C0099 (valid) 93.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4940.971549884,"data":"[2026-11-22 01:22:53] C0100 (test) 88.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":4984.66016828,"data":"[2026-11-22 01:23:37] C0101 (valid) 95.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5031.227569068,"data":"[2026-11-22 01:24:24] C0102 (test) 90.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5086.454442541,"data":"[2026-11-22 01:25:19] C0103 (valid) 101.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5121.768666647,"data":"[2026-11-22 01:25:54] C0104 (test) 90.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5179.100328936,"data":"[2026-11-22 01:26:52] C0105 (valid) 92.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5207.581043072,"data":"[2026-11-22 01:27:20] C0106 (test) 85.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5281.007287814,"data":"[2026-11-22 01:28:33] C0107 (valid) 101.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5295.31957141,"data":"[2026-11-22 01:28:48] C0108 (test) 87.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5365.685685782,"data":"[2026-11-22 01:29:58] C0109 (valid) 84.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5376.710913719,"data":"[2026-11-22 01:30:09] C0110 (test) 81.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5457.518584414,"data":"[2026-11-22 01:31:30] C0112 (test) 80.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5462.474498985,"data":"[2026-11-22 01:31:35] C0111 (valid) 96.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5542.802006936,"data":"[2026-11-22 01:32:55] C0113 (valid) 85.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5549.205616413,"data":"[2026-11-22 01:33:02] C0114 (test) 86.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5623.786464495,"data":"[2026-11-22 01:34:16] C0115 (valid) 81.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5636.540060176,"data":"[2026-11-22 01:34:29] C0116 (test) 87.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5701.7724068,"data":"[2026-11-22 01:35:34] C0117 (valid) 78.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5723.213401958,"data":"[2026-11-22 01:35:56] C0118 (test) 86.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5788.420483991,"data":"[2026-11-22 01:37:01] C0119 (valid) 86.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5805.074476014,"data":"[2026-11-22 01:37:18] C0120 (test) 81.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5874.045087442,"data":"[2026-11-22 01:38:26] C0121 (valid) 85.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5897.76362228,"data":"[2026-11-22 01:38:50] C0122 (test) 92.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5953.658618066,"data":"[2026-11-22 01:39:46] C0123 (valid) 79.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":5989.698720185,"data":"[2026-11-22 01:40:22] C0124 (test) 91.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6049.118620605,"data":"[2026-11-22 01:41:22] C0125 (valid) 95.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6077.860553554,"data":"[2026-11-22 01:41:50] C0126 (test) 88.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6136.951020766,"data":"[2026-11-22 01:42:49] C0127 (valid) 87.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6171.010981842,"data":"[2026-11-22 01:43:23] C0128 (test) 93.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6235.893950289,"data":"[2026-11-22 01:44:28] C0129 (valid) 98.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6271.696781388,"data":"[2026-11-22 01:45:04] C0130 (test) 100.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6318.902558824,"data":"[2026-11-22 01:45:51] C0131 (valid) 83.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6362.757203858,"data":"[2026-11-22 01:46:35] C0132 (test) 91.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6415.207277189,"data":"[2026-11-22 01:47:28] C0133 (valid) 96.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6452.108586404,"data":"[2026-11-22 01:48:05] C0134 (test) 89.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6504.617013285,"data":"[2026-11-22 01:48:57] C0135 (valid) 89.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6542.983114002,"data":"[2026-11-22 01:49:35] C0136 (test) 90.9 s juge=ok citations=0.9 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6600.548005671,"data":"[2026-11-22 01:50:33] C0137 (valid) 95.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6629.853353825,"data":"[2026-11-22 01:51:02] C0138 (test) 86.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6682.92613828,"data":"[2026-11-22 01:51:55] C0139 (valid) 82.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6722.959336166,"data":"[2026-11-22 01:52:35] C0140 (test) 93.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6772.912580261,"data":"[2026-11-22 01:53:25] C0141 (valid) 90.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6823.042245733,"data":"[2026-11-22 01:54:15] C0142 (test) 100.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6862.674516359,"data":"[2026-11-22 01:54:55] C0143 (valid) 89.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6909.889225526,"data":"[2026-11-22 01:55:42] C0144 (test) 86.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":6948.366731107,"data":"[2026-11-22 01:56:21] C0145 (valid) 85.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7010.860122143,"data":"[2026-11-22 01:57:23] C0146 (test) 100.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7035.287169134,"data":"[2026-11-22 01:57:48] C0147 (valid) 86.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7098.654631919,"data":"[2026-11-22 01:58:51] C0148 (test) 87.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7126.420719827,"data":"[2026-11-22 01:59:19] C0149 (valid) 91.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7183.161180862,"data":"[2026-11-22 02:00:16] C0150 (test) 84.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7209.78738338,"data":"[2026-11-22 02:00:42] C0151 (valid) 83.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7278.130894188,"data":"[2026-11-22 02:01:51] C0152 (test) 95.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7294.846085718,"data":"[2026-11-22 02:02:07] C0153 (valid) 85.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7365.405849679,"data":"[2026-11-22 02:03:18] C0154 (test) 87.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7383.829046226,"data":"[2026-11-22 02:03:36] C0155 (valid) 89.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7459.166646167,"data":"[2026-11-22 02:04:52] C0156 (test) 93.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7465.204679531,"data":"[2026-11-22 02:04:58] C0157 (valid) 81.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7548.698133972,"data":"[2026-11-22 02:06:21] C0158 (test) 89.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7560.413235454,"data":"[2026-11-22 02:06:33] C0159 (valid) 95.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7640.548381234,"data":"[2026-11-22 02:07:53] C0160 (test) 91.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7646.682588105,"data":"[2026-11-22 02:07:59] C0161 (valid) 86.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7728.469572142,"data":"[2026-11-22 02:09:21] C0162 (test) 87.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7738.569490994,"data":"[2026-11-22 02:09:31] C0163 (valid) 91.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7818.210851006,"data":"[2026-11-22 02:10:51] C0164 (test) 89.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7833.097848197,"data":"[2026-11-22 02:11:06] C0165 (valid) 94.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7901.801703958,"data":"[2026-11-22 02:12:14] C0166 (test) 83.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7920.841833777,"data":"[2026-11-22 02:12:33] C0167 (valid) 87.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":7986.978057338,"data":"[2026-11-22 02:13:39] C0168 (test) 85.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8013.974494097,"data":"[2026-11-22 02:14:06] C0169 (valid) 93.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8088.791646101,"data":"[2026-11-22 02:15:21] C0170 (test) 101.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8095.990607407,"data":"[2026-11-22 02:15:28] C0171 (valid) 82.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8179.457470852,"data":"[2026-11-22 02:16:52] C0172 (test) 90.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8185.453674638,"data":"[2026-11-22 02:16:58] C0173 (valid) 89.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8277.285340162,"data":"[2026-11-22 02:18:30] C0175 (valid) 91.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8286.715285706,"data":"[2026-11-22 02:18:39] C0174 (test) 107.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8371.725009244,"data":"[2026-11-22 02:20:04] C0176 (test) 94.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8379.23537521,"data":"[2026-11-22 02:20:12] C0177 (valid) 92.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8456.345517576,"data":"[2026-11-22 02:21:29] C0178 (test) 84.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8475.504632786,"data":"[2026-11-22 02:21:48] C0179 (valid) 96.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8536.819618679,"data":"[2026-11-22 02:22:49] C0180 (test) 80.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8574.049042974,"data":"[2026-11-22 02:23:27] C0181 (valid) 98.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8619.777101556,"data":"[2026-11-22 02:24:12] C0182 (test) 83.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8669.926108682,"data":"[2026-11-22 02:25:02] C0183 (valid) 95.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8709.12971873,"data":"[2026-11-22 02:25:42] C0184 (test) 89.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8767.361719015,"data":"[2026-11-22 02:26:40] C0185 (valid) 97.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8792.539973745,"data":"[2026-11-22 02:27:05] C0186 (test) 83.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8853.982015963,"data":"[2026-11-22 02:28:06] C0187 (valid) 86.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8876.634486272,"data":"[2026-11-22 02:28:29] C0188 (test) 84.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8938.813681644,"data":"[2026-11-22 02:29:31] C0189 (valid) 84.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":8960.21245226,"data":"[2026-11-22 02:29:53] C0190 (test) 83.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9026.233605177,"data":"[2026-11-22 02:30:59] C0191 (valid) 87.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9049.903758511,"data":"[2026-11-22 02:31:22] C0192 (test) 89.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9115.885263946,"data":"[2026-11-22 02:32:28] C0193 (valid) 89.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9141.704612978,"data":"[2026-11-22 02:32:54] C0194 (test) 91.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9212.57528709,"data":"[2026-11-22 02:34:05] C0195 (valid) 96.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9231.394026538,"data":"[2026-11-22 02:34:24] C0196 (test) 89.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9297.496682231,"data":"[2026-11-22 02:35:30] C0197 (valid) 84.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9317.106557169,"data":"[2026-11-22 02:35:50] C0198 (test) 85.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9383.955046359,"data":"[2026-11-22 02:36:56] C0199 (valid) 86.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9406.251176961,"data":"[2026-11-22 02:37:19] C0200 (test) 89.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9472.672558234,"data":"[2026-11-22 02:38:25] C0201 (valid) 88.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9508.578178536,"data":"[2026-11-22 02:39:01] C0202 (test) 102.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9560.395564095,"data":"[2026-11-22 02:39:53] C0203 (valid) 87.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9593.264858997,"data":"[2026-11-22 02:40:26] C0204 (test) 84.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9653.347180252,"data":"[2026-11-22 02:41:26] C0205 (valid) 92.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9682.838949989,"data":"[2026-11-22 02:41:55] C0206 (test) 89.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9746.964302145,"data":"[2026-11-22 02:42:59] C0207 (valid) 93.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9772.685523244,"data":"[2026-11-22 02:43:25] C0208 (test) 89.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9838.119714633,"data":"[2026-11-22 02:44:31] C0209 (valid) 91.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9865.860327294,"data":"[2026-11-22 02:44:58] C0210 (test) 93.2 s juge=ok citations=0.9 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9929.424692676,"data":"[2026-11-22 02:46:02] C0211 (valid) 91.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":9961.472380265,"data":"[2026-11-22 02:46:34] C0212 (test) 95.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10016.748512397,"data":"[2026-11-22 02:47:29] C0213 (valid) 87.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10052.453718921,"data":"[2026-11-22 02:48:05] C0214 (test) 90.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10104.726663421,"data":"[2026-11-22 02:48:57] C0215 (valid) 88.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10151.840445403,"data":"[2026-11-22 02:49:44] C0216 (test) 99.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10197.351068866,"data":"[2026-11-22 02:50:30] C0217 (valid) 92.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10237.164830253,"data":"[2026-11-22 02:51:10] C0218 (test) 85.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10284.27858106,"data":"[2026-11-22 02:51:57] C0219 (valid) 86.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10318.595675623,"data":"[2026-11-22 02:52:31] C0220 (test) 81.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10389.427696614,"data":"[2026-11-22 02:53:42] C0221 (valid) 105.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10450.290261038,"data":"[2026-11-22 02:54:43] C0222 (test) 131.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10480.835434764,"data":"[2026-11-22 02:55:13] C0223 (valid) 91.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10546.141065501,"data":"[2026-11-22 02:56:19] C0224 (test) 95.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10567.074772211,"data":"[2026-11-22 02:56:39] C0225 (valid) 86.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10631.602111579,"data":"[2026-11-22 02:57:44] C0226 (test) 85.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10662.894191984,"data":"[2026-11-22 02:58:15] C0227 (valid) 95.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10729.315702785,"data":"[2026-11-22 02:59:22] C0228 (test) 97.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10754.171437183,"data":"[2026-11-22 02:59:47] C0229 (valid) 91.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10817.223848405,"data":"[2026-11-22 03:00:50] C0230 (test) 87.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10845.38949875,"data":"[2026-11-22 03:01:18] C0231 (valid) 91.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10894.145684147,"data":"[2026-11-22 03:02:07] C0232 (test) 76.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10938.086511764,"data":"[2026-11-22 03:02:51] C0233 (valid) 92.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":10985.010151394,"data":"[2026-11-22 03:03:37] C0234 (test) 90.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11031.310852471,"data":"[2026-11-22 03:04:24] C0235 (valid) 93.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11066.340784601,"data":"[2026-11-22 03:04:59] C0236 (test) 81.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11125.677663489,"data":"[2026-11-22 03:05:58] C0237 (valid) 94.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11149.316931984,"data":"[2026-11-22 03:06:22] C0238 (test) 83.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11217.431679494,"data":"[2026-11-22 03:07:30] C0239 (valid) 91.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11228.613442363,"data":"[2026-11-22 03:07:41] C0240 (test) 79.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11310.610239105,"data":"[2026-11-22 03:09:03] C0241 (valid) 93.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11318.582190502,"data":"[2026-11-22 03:09:11] C0242 (test) 89.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11392.865329056,"data":"[2026-11-22 03:10:25] C0243 (valid) 82.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11402.875610087,"data":"[2026-11-22 03:10:35] C0244 (test) 84.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11483.468631562,"data":"[2026-11-22 03:11:56] C0245 (valid) 90.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11495.715666851,"data":"[2026-11-22 03:12:08] C0246 (test) 92.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11568.322985954,"data":"[2026-11-22 03:13:21] C0247 (valid) 84.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11588.154879193,"data":"[2026-11-22 03:13:41] C0248 (test) 92.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11658.498076113,"data":"[2026-11-22 03:14:51] C0249 (valid) 90.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11674.974883784,"data":"[2026-11-22 03:15:07] C0250 (test) 86.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11744.291016372,"data":"[2026-11-22 03:16:17] C0251 (valid) 85.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11761.599511795,"data":"[2026-11-22 03:16:34] C0252 (test) 86.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11829.845830999,"data":"[2026-11-22 03:17:42] C0253 (valid) 85.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11850.926914698,"data":"[2026-11-22 03:18:03] C0254 (test) 89.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11912.393592539,"data":"[2026-11-22 03:19:05] C0255 (valid) 82.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":11937.558445219,"data":"[2026-11-22 03:19:30] C0256 (test) 86.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12000.602549937,"data":"[2026-11-22 03:20:33] C0257 (valid) 88.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12024.235126012,"data":"[2026-11-22 03:20:57] C0258 (test) 86.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12096.206035842,"data":"[2026-11-22 03:22:09] C0259 (valid) 95.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12110.364809286,"data":"[2026-11-22 03:22:23] C0260 (test) 86.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12187.417042673,"data":"[2026-11-22 03:23:40] C0261 (valid) 91.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12204.116282568,"data":"[2026-11-22 03:23:57] C0262 (test) 93.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12281.759000764,"data":"[2026-11-22 03:25:14] C0263 (valid) 94.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12289.723671697,"data":"[2026-11-22 03:25:22] C0264 (test) 85.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12365.316136143,"data":"[2026-11-22 03:26:38] C0266 (test) 75.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12378.856507709,"data":"[2026-11-22 03:26:51] C0265 (valid) 97.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12445.704947942,"data":"[2026-11-22 03:27:58] C0267 (valid) 80.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12469.227096251,"data":"[2026-11-22 03:28:22] C0268 (test) 90.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12533.520719107,"data":"[2026-11-22 03:29:26] C0269 (valid) 87.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12564.59711301,"data":"[2026-11-22 03:29:57] C0270 (test) 95.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12621.219446826,"data":"[2026-11-22 03:30:54] C0271 (valid) 87.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12648.782006862,"data":"[2026-11-22 03:31:21] C0272 (test) 84.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12713.868649475,"data":"[2026-11-22 03:32:26] C0273 (valid) 92.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12734.493667511,"data":"[2026-11-22 03:32:47] C0274 (test) 85.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12800.852228865,"data":"[2026-11-22 03:33:53] C0275 (valid) 87.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12821.17871314,"data":"[2026-11-22 03:34:14] C0276 (test) 86.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12886.934750382,"data":"[2026-11-22 03:35:19] C0277 (valid) 86.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12923.258771565,"data":"[2026-11-22 03:35:56] C0278 (test) 102.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":12971.202354879,"data":"[2026-11-22 03:36:44] C0279 (valid) 84.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13013.670784252,"data":"[2026-11-22 03:37:26] C0280 (test) 90.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13058.449024609,"data":"[2026-11-22 03:38:11] C0281 (valid) 87.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13099.394879628,"data":"[2026-11-22 03:38:52] C0282 (test) 85.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13148.29071504,"data":"[2026-11-22 03:39:41] C0283 (valid) 89.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13184.13735453,"data":"[2026-11-22 03:40:17] C0284 (test) 84.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13240.657290384,"data":"[2026-11-22 03:41:13] C0285 (valid) 92.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13276.321731916,"data":"[2026-11-22 03:41:49] C0286 (test) 92.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13331.112208584,"data":"[2026-11-22 03:42:44] C0287 (valid) 90.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13365.91073092,"data":"[2026-11-22 03:43:18] C0288 (test) 89.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13412.516426745,"data":"[2026-11-22 03:44:05] C0289 (valid) 81.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13461.949065909,"data":"[2026-11-22 03:44:54] C0290 (test) 96.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13496.68460289,"data":"[2026-11-22 03:45:29] C0291 (valid) 84.1 s juge=ok citations=0.8 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13554.989355675,"data":"[2026-11-22 03:46:27] C0292 (test) 93.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13580.206056915,"data":"[2026-11-22 03:46:53] C0293 (valid) 83.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13641.335396496,"data":"[2026-11-22 03:47:54] C0294 (test) 86.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13666.821725114,"data":"[2026-11-22 03:48:19] C0295 (valid) 86.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13738.24434079,"data":"[2026-11-22 03:49:31] C0296 (test) 96.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13763.254084853,"data":"[2026-11-22 03:49:56] C0297 (valid) 96.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13837.221543049,"data":"[2026-11-22 03:51:10] C0298 (test) 98.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13845.328475721,"data":"[2026-11-22 03:51:18] C0299 (valid) 82.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13927.231852869,"data":"[2026-11-22 03:52:40] C0300 (test) 90.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":13931.217309696,"data":"[2026-11-22 03:52:44] C0301 (valid) 85.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14014.998196168,"data":"[2026-11-22 03:54:07] C0302 (test) 87.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14016.800058336,"data":"[2026-11-22 03:54:09] C0303 (valid) 85.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14103.200875641,"data":"[2026-11-22 03:55:36] C0304 (test) 88.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14103.678661931,"data":"[2026-11-22 03:55:36] C0305 (valid) 86.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14191.389207841,"data":"[2026-11-22 03:57:04] C0306 (test) 88.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14196.557822365,"data":"[2026-11-22 03:57:09] C0307 (valid) 92.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14275.067478016,"data":"[2026-11-22 03:58:28] C0308 (test) 83.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14285.026681572,"data":"[2026-11-22 03:58:37] C0309 (valid) 88.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14359.42209227,"data":"[2026-11-22 03:59:52] C0310 (test) 84.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14370.653093145,"data":"[2026-11-22 04:00:03] C0311 (valid) 85.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14447.65183067,"data":"[2026-11-22 04:01:20] C0312 (test) 88.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14447.894247729,"data":"[2026-11-22 04:01:20] C0313 (valid) 77.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14542.339850674,"data":"[2026-11-22 04:02:55] C0315 (valid) 94.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14570.765997294,"data":"[2026-11-22 04:03:23] C0314 (test) 123.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14634.007195383,"data":"[2026-11-22 04:04:26] C0316 (test) 91.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14658.950562836,"data":"[2026-11-22 04:04:51] C0317 (valid) 88.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14725.352278367,"data":"[2026-11-22 04:05:58] C0318 (test) 91.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14750.980376314,"data":"[2026-11-22 04:06:23] C0319 (valid) 92.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14817.606580945,"data":"[2026-11-22 04:07:30] C0320 (test) 92.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14844.126794094,"data":"[2026-11-22 04:07:57] C0321 (valid) 93.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14906.278866931,"data":"[2026-11-22 04:08:59] C0322 (test) 88.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14936.990398841,"data":"[2026-11-22 04:09:29] C0323 (valid) 92.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":14998.902451345,"data":"[2026-11-22 04:10:31] C0324 (test) 92.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15023.37985201,"data":"[2026-11-22 04:10:56] C0325 (valid) 86.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15088.233105869,"data":"[2026-11-22 04:12:01] C0326 (test) 89.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15122.2876467,"data":"[2026-11-22 04:12:35] C0327 (valid) 98.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15173.589662165,"data":"[2026-11-22 04:13:26] C0328 (test) 85.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15209.869313544,"data":"[2026-11-22 04:14:02] C0329 (valid) 87.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15266.154148035,"data":"[2026-11-22 04:14:59] C0330 (test) 92.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15304.850090716,"data":"[2026-11-22 04:15:37] C0331 (valid) 95.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15356.044458278,"data":"[2026-11-22 04:16:28] C0332 (test) 89.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15393.359027853,"data":"[2026-11-22 04:17:06] C0333 (valid) 88.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15446.177157277,"data":"[2026-11-22 04:17:59] C0334 (test) 90.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15485.095106136,"data":"[2026-11-22 04:18:37] C0335 (valid) 91.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15540.240685618,"data":"[2026-11-22 04:19:33] C0336 (test) 94.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15573.078521697,"data":"[2026-11-22 04:20:06] C0337 (valid) 88.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15628.566502375,"data":"[2026-11-22 04:21:01] C0338 (test) 88.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15663.851706157,"data":"[2026-11-22 04:21:36] C0339 (valid) 90.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15709.179596022,"data":"[2026-11-22 04:22:22] C0340 (test) 80.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15750.603431693,"data":"[2026-11-22 04:23:03] C0341 (valid) 86.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15799.047896568,"data":"[2026-11-22 04:23:51] C0342 (test) 89.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15841.339261625,"data":"[2026-11-22 04:24:34] C0343 (valid) 90.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15899.311037374,"data":"[2026-11-22 04:25:32] C0344 (test) 100.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15935.868716407,"data":"[2026-11-22 04:26:08] C0345 (valid) 94.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":15989.119182079,"data":"[2026-11-22 04:27:02] C0346 (test) 89.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16032.110601463,"data":"[2026-11-22 04:27:45] C0347 (valid) 96.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16073.602867339,"data":"[2026-11-22 04:28:26] C0348 (test) 84.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16125.998106787,"data":"[2026-11-22 04:29:18] C0349 (valid) 93.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16156.688155181,"data":"[2026-11-22 04:29:49] C0350 (test) 83.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16216.109088156,"data":"[2026-11-22 04:30:49] C0351 (valid) 90.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16250.931899783,"data":"[2026-11-22 04:31:23] C0352 (test) 94.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16312.578186747,"data":"[2026-11-22 04:32:25] C0353 (valid) 96.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16335.944486856,"data":"[2026-11-22 04:32:48] C0354 (test) 85.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16399.900017364,"data":"[2026-11-22 04:33:52] C0355 (valid) 87.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16427.222518388,"data":"[2026-11-22 04:34:20] C0356 (test) 91.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16499.690167764,"data":"[2026-11-22 04:35:32] C0357 (valid) 99.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16506.928889638,"data":"[2026-11-22 04:35:39] C0358 (test) 79.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16595.446762851,"data":"[2026-11-22 04:37:08] C0360 (test) 88.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16604.525610128,"data":"[2026-11-22 04:37:17] C0359 (valid) 104.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16690.210651695,"data":"[2026-11-22 04:38:43] C0361 (valid) 94.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16693.038632321,"data":"[2026-11-22 04:38:45] C0362 (test) 88.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16776.604650177,"data":"[2026-11-22 04:40:09] C0363 (valid) 86.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16788.742855137,"data":"[2026-11-22 04:40:21] C0364 (test) 95.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16864.358708235,"data":"[2026-11-22 04:41:37] C0365 (valid) 87.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16889.438570445,"data":"[2026-11-22 04:42:02] C0366 (test) 100.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16951.300832406,"data":"[2026-11-22 04:43:04] C0367 (valid) 87.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":16975.412175297,"data":"[2026-11-22 04:43:28] C0368 (test) 86.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17037.819181704,"data":"[2026-11-22 04:44:30] C0369 (valid) 86.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17062.090978237,"data":"[2026-11-22 04:44:55] C0370 (test) 86.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17126.233241991,"data":"[2026-11-22 04:45:59] C0371 (valid) 88.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17163.11550831,"data":"[2026-11-22 04:46:36] C0372 (test) 101.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17203.631717995,"data":"[2026-11-22 04:47:16] C0373 (valid) 77.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17259.525645198,"data":"[2026-11-22 04:48:12] C0374 (test) 96.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17288.562680905,"data":"[2026-11-22 04:48:41] C0375 (valid) 84.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17345.989242286,"data":"[2026-11-22 04:49:38] C0376 (test) 86.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17372.366894482,"data":"[2026-11-22 04:50:05] C0377 (valid) 83.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17436.936948311,"data":"[2026-11-22 04:51:09] C0378 (test) 91.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17459.416186522,"data":"[2026-11-22 04:51:32] C0379 (valid) 87.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17525.534888972,"data":"[2026-11-22 04:52:38] C0380 (test) 88.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17554.637421113,"data":"[2026-11-22 04:53:07] C0381 (valid) 95.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17614.678413049,"data":"[2026-11-22 04:54:07] C0382 (test) 89.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17638.704133583,"data":"[2026-11-22 04:54:31] C0383 (valid) 84.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17703.768025289,"data":"[2026-11-22 04:55:36] C0384 (test) 89.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17727.027930782,"data":"[2026-11-22 04:55:59] C0385 (valid) 88.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17786.278735834,"data":"[2026-11-22 04:56:59] C0386 (test) 82.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17824.059670979,"data":"[2026-11-22 04:57:36] C0387 (valid) 97.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17871.776614064,"data":"[2026-11-22 04:58:24] C0388 (test) 85.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17905.409433104,"data":"[2026-11-22 04:58:58] C0389 (valid) 81.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17969.031391545,"data":"[2026-11-22 05:00:01] C0390 (test) 97.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":17991.933233965,"data":"[2026-11-22 05:00:24] C0391 (valid) 86.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18066.690230998,"data":"[2026-11-22 05:01:39] C0392 (test) 97.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18078.312447613,"data":"[2026-11-22 05:01:51] C0393 (valid) 86.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18161.3153297,"data":"[2026-11-22 05:03:14] C0395 (valid) 83.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18163.366285845,"data":"[2026-11-22 05:03:16] C0394 (test) 96.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18250.819321063,"data":"[2026-11-22 05:04:43] C0396 (test) 89.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18263.886677423,"data":"[2026-11-22 05:04:56] C0397 (valid) 100.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18344.669362958,"data":"[2026-11-22 05:06:17] C0398 (test) 93.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18366.058036127,"data":"[2026-11-22 05:06:38] C0399 (valid) 102.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18428.575025752,"data":"[2026-11-22 05:07:41] C0400 (test) 84.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18460.750282504,"data":"[2026-11-22 05:08:13] C0401 (valid) 94.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18513.113561937,"data":"[2026-11-22 05:09:06] C0402 (test) 84.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18567.617764523,"data":"[2026-11-22 05:10:00] C0403 (valid) 106.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18595.334635941,"data":"[2026-11-22 05:10:28] C0404 (test) 82.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18662.365298501,"data":"[2026-11-22 05:11:35] C0405 (valid) 94.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18686.438142702,"data":"[2026-11-22 05:11:59] C0406 (test) 91.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18750.707115728,"data":"[2026-11-22 05:13:03] C0407 (valid) 88.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18775.240231089,"data":"[2026-11-22 05:13:28] C0408 (test) 88.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18844.680027239,"data":"[2026-11-22 05:14:37] C0409 (valid) 94.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18865.930457123,"data":"[2026-11-22 05:14:58] C0410 (test) 90.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18934.300627383,"data":"[2026-11-22 05:16:07] C0411 (valid) 89.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":18958.477594054,"data":"[2026-11-22 05:16:31] C0412 (test) 92.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19022.888044232,"data":"[2026-11-22 05:17:35] C0413 (valid) 88.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19048.330880097,"data":"[2026-11-22 05:18:01] C0414 (test) 89.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19113.314860005,"data":"[2026-11-22 05:19:06] C0415 (valid) 90.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19135.796051761,"data":"[2026-11-22 05:19:28] C0416 (test) 87.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19201.97201471,"data":"[2026-11-22 05:20:34] C0417 (valid) 88.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19221.605698069,"data":"[2026-11-22 05:20:54] C0418 (test) 85.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19290.484694537,"data":"[2026-11-22 05:22:03] C0419 (valid) 88.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19313.596956474,"data":"[2026-11-22 05:22:26] C0420 (test) 92.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19384.571818107,"data":"[2026-11-22 05:23:37] C0421 (valid) 94.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19397.494566554,"data":"[2026-11-22 05:23:50] C0422 (test) 83.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19473.459380809,"data":"[2026-11-22 05:25:06] C0423 (valid) 88.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19479.889420505,"data":"[2026-11-22 05:25:12] C0424 (test) 82.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19559.59710814,"data":"[2026-11-22 05:26:32] C0425 (valid) 86.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19573.547946184,"data":"[2026-11-22 05:26:46] C0426 (test) 93.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19651.865320644,"data":"[2026-11-22 05:28:04] C0427 (valid) 92.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19656.083780674,"data":"[2026-11-22 05:28:09] C0428 (test) 82.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19740.841177647,"data":"[2026-11-22 05:29:33] C0430 (test) 84.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19750.005141107,"data":"[2026-11-22 05:29:42] C0429 (valid) 98.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19831.012840086,"data":"[2026-11-22 05:31:03] C0431 (valid) 90.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19848.383624158,"data":"[2026-11-22 05:31:21] C0432 (test) 98.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19918.736806595,"data":"[2026-11-22 05:32:31] C0433 (valid) 87.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":19937.772612492,"data":"[2026-11-22 05:32:50] C0434 (test) 89.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20003.253643642,"data":"[2026-11-22 05:33:56] C0435 (valid) 84.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20028.710854753,"data":"[2026-11-22 05:34:21] C0436 (test) 90.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20089.260888773,"data":"[2026-11-22 05:35:22] C0437 (valid) 86.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20125.974598183,"data":"[2026-11-22 05:35:58] C0438 (test) 97.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20182.866622423,"data":"[2026-11-22 05:36:55] C0439 (valid) 93.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20210.919976471,"data":"[2026-11-22 05:37:23] C0440 (test) 85.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20270.864925985,"data":"[2026-11-22 05:38:23] C0441 (valid) 88.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20299.30930307,"data":"[2026-11-22 05:38:52] C0442 (test) 88.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20356.752984111,"data":"[2026-11-22 05:39:49] C0443 (valid) 85.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20393.149753812,"data":"[2026-11-22 05:40:26] C0444 (test) 93.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20442.767738384,"data":"[2026-11-22 05:41:15] C0445 (valid) 86.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20480.725358012,"data":"[2026-11-22 05:41:53] C0446 (test) 87.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20532.861852487,"data":"[2026-11-22 05:42:45] C0447 (valid) 90.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20590.689551907,"data":"[2026-11-22 05:43:43] C0448 (test) 109.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20627.114563124,"data":"[2026-11-22 05:44:20] C0449 (valid) 94.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20677.885423749,"data":"[2026-11-22 05:45:10] C0450 (test) 87.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20724.058600999,"data":"[2026-11-22 05:45:56] C0451 (valid) 96.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20774.521115701,"data":"[2026-11-22 05:46:47] C0452 (test) 96.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20809.639587528,"data":"[2026-11-22 05:47:22] C0453 (valid) 85.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20880.107443006,"data":"[2026-11-22 05:48:33] C0454 (test) 105.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20895.134080222,"data":"[2026-11-22 05:48:48] C0455 (valid) 85.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20976.51045868,"data":"[2026-11-22 05:50:09] C0456 (test) 96.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":20980.830568436,"data":"[2026-11-22 05:50:13] C0457 (valid) 85.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21059.484662209,"data":"[2026-11-22 05:51:32] C0459 (valid) 78.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21069.255604654,"data":"[2026-11-22 05:51:42] C0458 (test) 92.8 s juge=ok citations=0.8 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21144.974721657,"data":"[2026-11-22 05:52:57] C0460 (test) 85.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21156.566618485,"data":"[2026-11-22 05:53:09] C0461 (valid) 87.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21226.443349377,"data":"[2026-11-22 05:54:19] C0462 (test) 81.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21244.773025993,"data":"[2026-11-22 05:54:37] C0463 (valid) 88.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21311.649187133,"data":"[2026-11-22 05:55:44] C0464 (test) 85.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21331.520156119,"data":"[2026-11-22 05:56:04] C0465 (valid) 86.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21392.016784088,"data":"[2026-11-22 05:57:04] C0466 (test) 80.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21420.997880873,"data":"[2026-11-22 05:57:33] C0467 (valid) 89.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21473.711642735,"data":"[2026-11-22 05:58:26] C0468 (test) 81.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21517.473769177,"data":"[2026-11-22 05:59:10] C0469 (valid) 96.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21561.69626172,"data":"[2026-11-22 05:59:54] C0470 (test) 88.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21613.770719598,"data":"[2026-11-22 06:00:46] C0471 (valid) 96.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21646.216820839,"data":"[2026-11-22 06:01:19] C0472 (test) 84.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21706.28967248,"data":"[2026-11-22 06:02:19] C0473 (valid) 92.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21732.897984653,"data":"[2026-11-22 06:02:45] C0474 (test) 86.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21793.367905239,"data":"[2026-11-22 06:03:46] C0475 (valid) 87.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21823.007129881,"data":"[2026-11-22 06:04:15] C0476 (test) 90.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21880.792586431,"data":"[2026-11-22 06:05:13] C0477 (valid) 87.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21912.646377613,"data":"[2026-11-22 06:05:45] C0478 (test) 89.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21966.076251759,"data":"[2026-11-22 06:06:39] C0479 (valid) 85.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":21996.313645003,"data":"[2026-11-22 06:07:09] C0480 (test) 83.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22061.910577741,"data":"[2026-11-22 06:08:14] C0481 (valid) 95.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22085.908337952,"data":"[2026-11-22 06:08:38] C0482 (test) 89.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22150.82967729,"data":"[2026-11-22 06:09:43] C0483 (valid) 88.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22173.58396097,"data":"[2026-11-22 06:10:06] C0484 (test) 87.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22235.413597052,"data":"[2026-11-22 06:11:08] C0485 (valid) 84.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22266.038874304,"data":"[2026-11-22 06:11:38] C0486 (test) 92.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22323.132201624,"data":"[2026-11-22 06:12:36] C0487 (valid) 87.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22353.875248391,"data":"[2026-11-22 06:13:06] C0488 (test) 87.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22413.795333786,"data":"[2026-11-22 06:14:06] C0489 (valid) 90.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22444.628895419,"data":"[2026-11-22 06:14:37] C0490 (test) 90.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22498.96267318,"data":"[2026-11-22 06:15:31] C0491 (valid) 85.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22537.012922932,"data":"[2026-11-22 06:16:09] C0492 (test) 92.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22583.71790561,"data":"[2026-11-22 06:16:56] C0493 (valid) 84.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22623.606044353,"data":"[2026-11-22 06:17:36] C0494 (test) 86.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22672.842414067,"data":"[2026-11-22 06:18:25] C0495 (valid) 89.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22721.106821004,"data":"[2026-11-22 06:19:14] C0496 (test) 97.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22768.032992589,"data":"[2026-11-22 06:20:00] C0497 (valid) 95.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22806.636262535,"data":"[2026-11-22 06:20:39] C0498 (test) 85.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22851.781806203,"data":"[2026-11-22 06:21:24] C0499 (valid) 83.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22889.115634625,"data":"[2026-11-22 06:22:02] C0500 (test) 82.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22938.729613467,"data":"[2026-11-22 06:22:51] C0501 (valid) 86.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":22976.665216729,"data":"[2026-11-22 06:23:29] C0502 (test) 87.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23032.466741811,"data":"[2026-11-22 06:24:25] C0503 (valid) 93.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23057.046456719,"data":"[2026-11-22 06:24:50] C0504 (test) 80.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23125.996276483,"data":"[2026-11-22 06:25:58] C0505 (valid) 93.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23146.802866523,"data":"[2026-11-22 06:26:19] C0506 (test) 89.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23211.571160965,"data":"[2026-11-22 06:27:24] C0507 (valid) 85.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23230.629007505,"data":"[2026-11-22 06:27:43] C0508 (test) 83.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23294.497140798,"data":"[2026-11-22 06:28:47] C0509 (valid) 82.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23329.532457656,"data":"[2026-11-22 06:29:22] C0510 (test) 98.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23384.443354103,"data":"[2026-11-22 06:30:17] C0511 (valid) 89.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23420.055595015,"data":"[2026-11-22 06:30:52] C0512 (test) 90.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23479.940639648,"data":"[2026-11-22 06:31:52] C0513 (valid) 95.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23513.532147852,"data":"[2026-11-22 06:32:26] C0514 (test) 93.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23572.49063237,"data":"[2026-11-22 06:33:25] C0515 (valid) 92.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23599.184728931,"data":"[2026-11-22 06:33:52] C0516 (test) 85.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23656.538663198,"data":"[2026-11-22 06:34:49] C0517 (valid) 84.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23682.443553222,"data":"[2026-11-22 06:35:15] C0518 (test) 83.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23742.008403712,"data":"[2026-11-22 06:36:14] C0519 (valid) 85.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23769.600650602,"data":"[2026-11-22 06:36:42] C0520 (test) 87.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23828.337096725,"data":"[2026-11-22 06:37:41] C0521 (valid) 86.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23846.715179136,"data":"[2026-11-22 06:37:59] C0522 (test) 77.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23922.924307425,"data":"[2026-11-22 06:39:15] C0523 (valid) 94.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":23937.525041179,"data":"[2026-11-22 06:39:30] C0524 (test) 90.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24007.320667933,"data":"[2026-11-22 06:40:40] C0525 (valid) 84.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24021.656006187,"data":"[2026-11-22 06:40:54] C0526 (test) 84.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24103.226715141,"data":"[2026-11-22 06:42:16] C0527 (valid) 95.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24107.670674046,"data":"[2026-11-22 06:42:20] C0528 (test) 86.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24200.51597746,"data":"[2026-11-22 06:43:53] C0530 (test) 92.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24202.56269482,"data":"[2026-11-22 06:43:55] C0529 (valid) 99.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24283.534770044,"data":"[2026-11-22 06:45:16] C0531 (valid) 83.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24297.435903607,"data":"[2026-11-22 06:45:30] C0532 (test) 94.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24364.841684469,"data":"[2026-11-22 06:46:37] C0533 (valid) 81.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24381.762947563,"data":"[2026-11-22 06:46:54] C0534 (test) 84.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24468.455795235,"data":"[2026-11-22 06:48:21] C0535 (valid) 103.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24476.182317472,"data":"[2026-11-22 06:48:29] C0536 (test) 94.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24560.116670051,"data":"[2026-11-22 06:49:53] C0537 (valid) 91.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24578.162661365,"data":"[2026-11-22 06:50:11] C0538 (test) 102.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24656.500811657,"data":"[2026-11-22 06:51:29] C0539 (valid) 96.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24670.61775942,"data":"[2026-11-22 06:51:43] C0540 (test) 92.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24739.651962137,"data":"[2026-11-22 06:52:52] C0541 (valid) 83.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24765.329072478,"data":"[2026-11-22 06:53:18] C0542 (test) 94.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24841.460606082,"data":"[2026-11-22 06:54:34] C0543 (valid) 101.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24864.908576225,"data":"[2026-11-22 06:54:57] C0544 (test) 99.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24922.627491118,"data":"[2026-11-22 06:55:55] C0545 (valid) 81.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":24955.528384266,"data":"[2026-11-22 06:56:28] C0546 (test) 90.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25010.252805803,"data":"[2026-11-22 06:57:23] C0547 (valid) 87.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25046.531845418,"data":"[2026-11-22 06:57:59] C0548 (test) 90.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25102.664657116,"data":"[2026-11-22 06:58:55] C0549 (valid) 92.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25138.178032921,"data":"[2026-11-22 06:59:31] C0550 (test) 91.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25183.533648839,"data":"[2026-11-22 07:00:16] C0551 (valid) 80.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25221.288915496,"data":"[2026-11-22 07:00:54] C0552 (test) 83.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25275.752902117,"data":"[2026-11-22 07:01:48] C0553 (valid) 92.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25308.592945677,"data":"[2026-11-22 07:02:21] C0554 (test) 87.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25367.117256759,"data":"[2026-11-22 07:03:20] C0555 (valid) 91.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25395.808321492,"data":"[2026-11-22 07:03:48] C0556 (test) 87.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25449.886890654,"data":"[2026-11-22 07:04:42] C0557 (valid) 82.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25487.794068875,"data":"[2026-11-22 07:05:20] C0558 (test) 91.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25534.619299251,"data":"[2026-11-22 07:06:07] C0559 (valid) 84.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25583.033148568,"data":"[2026-11-22 07:06:55] C0560 (test) 95.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25622.080814885,"data":"[2026-11-22 07:07:35] C0561 (valid) 87.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25678.121056714,"data":"[2026-11-22 07:08:31] C0562 (test) 95.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25714.825705022,"data":"[2026-11-22 07:09:07] C0563 (valid) 92.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25779.991352863,"data":"[2026-11-22 07:10:12] C0564 (test) 101.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25802.27100888,"data":"[2026-11-22 07:10:35] C0565 (valid) 87.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25872.595387114,"data":"[2026-11-22 07:11:45] C0566 (test) 92.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25891.521154654,"data":"[2026-11-22 07:12:04] C0567 (valid) 89.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25958.35887573,"data":"[2026-11-22 07:13:11] C0568 (test) 85.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":25977.798882047,"data":"[2026-11-22 07:13:30] C0569 (valid) 86.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26055.329900571,"data":"[2026-11-22 07:14:48] C0571 (valid) 77.5 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26119.229343167,"data":"[2026-11-22 07:15:52] C0570 (test) 160.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26148.362127317,"data":"[2026-11-22 07:16:21] C0572 (test) 93.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26212.938591865,"data":"[2026-11-22 07:17:25] C0573 (valid) 93.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26245.694587701,"data":"[2026-11-22 07:17:58] C0574 (test) 97.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26307.190387909,"data":"[2026-11-22 07:19:00] C0575 (valid) 94.3 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26332.66968752,"data":"[2026-11-22 07:19:25] C0576 (test) 87.0 s juge=ok citations=0.9 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26397.272709318,"data":"[2026-11-22 07:20:30] C0577 (valid) 90.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26421.3704633,"data":"[2026-11-22 07:20:54] C0578 (test) 88.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26484.332665654,"data":"[2026-11-22 07:21:57] C0579 (valid) 87.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26509.381110793,"data":"[2026-11-22 07:22:22] C0580 (test) 88.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26571.014769221,"data":"[2026-11-22 07:23:23] C0581 (valid) 86.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26598.455731486,"data":"[2026-11-22 07:23:51] C0582 (test) 89.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26655.136117034,"data":"[2026-11-22 07:24:48] C0583 (valid) 84.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26688.47965344,"data":"[2026-11-22 07:25:21] C0584 (test) 90.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26740.685420835,"data":"[2026-11-22 07:26:13] C0585 (valid) 85.6 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26777.515389874,"data":"[2026-11-22 07:26:50] C0586 (test) 89.0 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26836.804500864,"data":"[2026-11-22 07:27:49] C0587 (valid) 96.1 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26868.877595349,"data":"[2026-11-22 07:28:21] C0588 (test) 91.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26932.666923413,"data":"[2026-11-22 07:29:25] C0589 (valid) 95.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":26953.393584693,"data":"[2026-11-22 07:29:46] C0590 (test) 84.6 s juge=ok citations=0.9 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":27022.854608881,"data":"[2026-11-22 07:30:55] C0591 (valid) 90.2 s juge=ok citations=0.9 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":27043.295412856,"data":"[2026-11-22 07:31:16] C0592 (test) 89.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":27100.523512768,"data":"[2026-11-22 07:32:13] C0593 (valid) 77.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":27133.228226674,"data":"[2026-11-22 07:32:46] C0594 (test) 89.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":27189.304369858,"data":"[2026-11-22 07:33:42] C0595 (valid) 88.8 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":27217.352666479,"data":"[2026-11-22 07:34:10] C0596 (test) 84.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":27274.150490702,"data":"[2026-11-22 07:35:07] C0597 (valid) 84.9 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":27301.042654752,"data":"[2026-11-22 07:35:33] C0598 (test) 83.7 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":27372.576585635,"data":"[2026-11-22 07:36:45] C0599 (valid) 98.4 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":27387.314899281,"data":"[2026-11-22 07:37:00] C0600 (test) 86.2 s juge=ok citations=1.0 erreurs=0\r\n"}
+,{"stream_name":"stdout","time":27387.314959716,"data":"FIN : 600/600 projets, arrêt pour le temps = False\r\n"}
+,{"stream_name":"stdout","time":27387.584442231,"data":"{\n"}
+,{"stream_name":"stdout","time":27387.584489046,"data":"  \"n_done\": 600,\n"}
+,{"stream_name":"stdout","time":27387.584495126,"data":"  \"n_total\": 600,\n"}
+,{"stream_name":"stdout","time":27387.584501267,"data":"  \"n_with_errors\": 0,\n"}
+,{"stream_name":"stdout","time":27387.584507253,"data":"  \"median_seconds_per_project\": 89.0,\n"}
+,{"stream_name":"stdout","time":27387.584513009,"data":"  \"mean_seconds_per_project\": 89.80983333333333,\n"}
+,{"stream_name":"stdout","time":27387.5845186,"data":"  \"elapsed_hours\": 7.51,\n"}
+,{"stream_name":"stdout","time":27387.584524293,"data":"  \"n_servers\": 2,\n"}
+,{"stream_name":"stdout","time":27387.584529985,"data":"  \"stopped_for_time\": false,\n"}
+,{"stream_name":"stdout","time":27387.584536138,"data":"  \"updated_at\": \"2026-11-22 07:37:00\"\n"}
+,{"stream_name":"stdout","time":27387.584541991,"data":"}\n"}
+,{"stream_name":"stderr","time":27393.282067535,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":27393.282099915,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":27393.537600974,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":27393.537635695,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":27394.44757868,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":27394.603362078,"data":"[NbConvertApp] Writing 66306 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":27397.17228154,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":27397.769647159,"data":"[NbConvertApp] Writing 342861 bytes to __results__.html\n"}
+]

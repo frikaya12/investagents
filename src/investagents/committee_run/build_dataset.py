@@ -100,7 +100,8 @@ def main() -> None:
     sample["n_sentences"] = n_sent
     cols = ["key", "order", "split", "project_id", "y_fail", "outcome", "approval_fy",
             "project_name", "doc_id", "n_sentences"]  # fmt: skip
-    extra = [c for c in ("country", "wb_region", "global_practice") if c in sample]
+    extra = [c for c in ("country", "wb_region", "global_practice", "amount_at_approval_usd")
+             if c in sample]
     sample[cols + extra].to_csv(SAMPLE_CSV, index=False)
 
     # code du comité (paquet investagents réduit), extrait et importé sur Kaggle

@@ -1,0 +1,11 @@
+{
+  "n_done": 600,
+  "n_total": 600,
+  "n_with_errors": 0,
+  "median_seconds_per_project": 89.0,
+  "mean_seconds_per_project": 89.80983333333333,
+  "elapsed_hours": 7.51,
+  "n_servers": 2,
+  "stopped_for_time": false,
+  "updated_at": "2026-11-22 07:37:00"
+}
