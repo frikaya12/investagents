@@ -3,7 +3,7 @@
 Comité d'agents IA pour l'évaluation multicritère et la sélection de projets d'investissement.
 Les agents lisent les dossiers d'évaluation **ex ante** de projets financés par la Banque mondiale ;
 la vérité terrain est la note de résultat de l'IEG. Spécification :
-`docs/Cahier_des_charges_v3_InvestAgents.pdf`. Projet d'école, budget LLM : 0 € (modèle local).
+cahier des charges de l'école (non publié). Projet d'école, budget LLM : 0 € (modèle local).
 
 **État : système de bout en bout ; coffre-fort évalué (M1 au niveau du hasard) ; bloc D (agents extracteurs) évalué.** Données → ML (M0, M1, M1-texte) → calibration →
 sélection sous budget → comité d'agents complet (600 projets notés sur GPU Kaggle gratuit) →

@@ -38,3 +38,6 @@ desktop.ini
 experiments/blocC/kaggle_run*/ollama_*.log
 experiments/blocD/kaggle_*/ollama_*.log
 experiments/blocD/kaggle_*/*.log
+
+# document de l'école, non publié (copie locale seulement)
+docs/Cahier_des_charges_v3_InvestAgents.pdf

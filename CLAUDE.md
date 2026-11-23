@@ -13,7 +13,7 @@ le portefeuille à financer sous budget. L'humain valide à 3 moments.
 variables structurées ou qu'un LLM en un seul prompt ? Ses notes apportent-elles une information en plus ?
 La vérité terrain est la note de résultat IEG (satisfaisant MS/S/HS contre non satisfaisant MU/U/HU).
 
-La spécification complète est dans `docs/Cahier_des_charges_v3_InvestAgents.pdf`. **Lis-la avant toute tâche.**
+La spécification complète est dans `docs/Cahier_des_charges_v3_InvestAgents.pdf` (copie locale, non versionnée). **Lis-la avant toute tâche.**
 Les dépôts GitHub utiles sont listés dans `docs/references_github.md`.
 
 ## Règles non négociables
