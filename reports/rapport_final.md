@@ -1,4 +1,4 @@
-# InvestAgents : rapport final (v1.0)
+# InvestAgents : rapport final
 
 *Sujet n°10 : « IA agentique pour la décision d'investissement multicritère : évaluation et
 sélection de projets d'investissement ».*
@@ -6,86 +6,139 @@ sélection de projets d'investissement ».*
 Chaque chiffre de ce rapport vient d'un script du dépôt. Le rapport détaillé est indiqué entre
 parenthèses. Les IC à 95 % sont obtenus par bootstrap (2 000 tirages). Classe positive des AUC :
 projet **non satisfaisant** (MU/U/HU selon l'IEG). Split temporel sur l'exercice d'approbation :
-entraînement ≤ 2007, validation 2008–2011, test 2012–2017.
+entraînement ≤ 2007, validation 2008–2011, test 2012–2017. Le coffre-fort (projets évalués par
+l'IEG en 2025 ou après) a été évalué une seule fois, à la fin. Tous les réglages ont été faits sur la
+validation. Aucun choix (α, poids, modèle) n'a été fait en regardant le test.
 
-**État du coffre-fort** (projets évalués par l'IEG en 2025 ou après) : protocole figé
-(`experiments/vault/protocol.json`) ; textes en cours de téléchargement. Le chiffre du coffre-fort sera
-ajouté dès qu'il aura été calculé, une seule fois (`reports/coffre_fort.md`).
+## Réponse courte
 
-## Question de recherche, réponse courte
+- **Évaluation.** Le ML prédit l'échec un peu mieux que le hasard sur le test 2012–2017 (M1-texte :
+  AUC-PR 0,297 contre 0,216). Sur le coffre-fort, en revanche, M1 tombe au niveau du hasard. Les
+  agents ne font **pas** mieux : leurs notes (M3, M4) et leurs sorties intermédiaires (M7)
+  n'apportent pas d'information prédictive démontrée.
+- **Multicritère.** Les agents apportent un **profil sur 5 critères** que le ML n'a pas. Mêlé à la
+  probabilité de réussite (frontière α), ce profil donne des portefeuilles mieux notés par le
+  comité. Au test, la perte de réussite n'est pas mesurable, mais elle l'est sur la validation.
+- **Sélection.** Le sac à dos sous budget bat le hasard au test grâce aux probabilités du ML, pas
+  grâce à la taille des projets.
+- **Agentique.** Le comité est fiable : 600/600 projets, 99,8 % des citations retrouvées mot pour mot,
+  0/50 projet reconnu. Il **explique** chaque projet avec des arguments sourcés. C'est son apport
+  réel ; ce n'est pas un meilleur classement.
 
-Le comité d'agents (Qwen2.5 7B : débat Pour / Contre → critique → raffinement → Juge à grille ancrée)
-**ne prédit pas mieux l'échec** qu'un modèle de texte simple (TF-IDF + régression logistique), et ses
-5 notes n'ajoutent **pas d'information prédictive** mesurable. C'est un résultat négatif, mesuré une
-seule fois sur le test. En revanche, le ML (variables structurées et texte) bat le taux de base, et
-la sélection sous budget qui l'utilise bat le hasard.
+## Métriques finales
 
-## Métriques finales (test 2012–2017, chaque modèle évalué une fois après gel sur la validation)
-
-| # | Métrique | Valeur [IC 95 %] | Référence | Source |
-| --- | --- | --- | --- | --- |
-| 1 | Projets exploitables (dossier ex ante en texte, daté avant l'approbation) | 8 260 | seuil 300 | faisabilite.md |
-| 2 | M1 (gradient boosting, variables ex ante), AUC-PR, test complet (n = 1 294) | 0,247 [0,216 ; 0,286] | M0 0,217 | phase2_resultats.md |
-| 3 | M1 − M0, AUC-PR (apparié) | +0,030 [0,009 ; 0,060] | 0 | phase2_resultats.md |
-| 4 | M1-texte figé (entraîné ≤ 2007, Platt sur la validation), AUC-PR, test avec texte (n = 755) | 0,297 [0,245 ; 0,369] | M1 0,259 ; M0 0,216 | blocB_resultats.md |
-| 5 | M1-texte, AUC-ROC (n = 755) | 0,598 [0,546 ; 0,647] | 0,5 | blocB_resultats.md |
-| 6 | M1-texte − M1, AUC-PR (apparié) | +0,039 [0,003 ; 0,082] | 0 | blocB_resultats.md |
-| 7 | M1-texte, ECE avant → après recalibration ; Brier | 0,045 → 0,023 ; 0,1662 | M0 0,173 | blocB_resultats.md |
-| 8 | Texte masqué (sections, pays masqués) − M1-texte, AUC-PR | −0,045 [−0,094 ; −0,003] | 0 | blocB_resultats.md |
-| 9 | Portefeuille (Σ p × coût, ≤ 25 % par pays), 25 % du budget : part de projets satisfaisants | 85,3 % [79,3 ; 90,7] | hasard 77,2 % (p = 0,001) | blocB_resultats.md |
-| 10 | Idem à 50 % du budget ; part du budget allant à des projets satisfaisants | 83,9 % (p = 0,001) ; 85,7 % (p = 0,050) | hasard 77,7 % ; 82,1 % | blocB_resultats.md |
-| 11 | Contrôle : même sélection avec M0 (taille seule), 25 % du budget | 76,4 % (p = 0,64) | hasard 77,2 % | blocB_resultats.md |
-| 12 | Comité : projets notés, erreurs, temps par projet | 600 / 600, 0 erreur, médiane 89 s (T4), 0 € | — | blocC_comite.md |
-| 13 | Citations vérifiées mot pour mot dans le texte source | 5 986 / 6 000 = 99,8 % | — | blocC_comite.md |
-| 14 | Test de reconnaissance : projet « reconnu » ; note IEG proposée | 0 / 50 ; 0 / 50 | — | blocC_comite.md |
-| 15 | Dispersion des notes du Juge (écart-type par critère) ; part des notes ≥ 9 | 0,65 à 1,26 ; ≤ 0,5 % | Juge 3B sans ancres : 10/10 fréquent | blocC_comite.md |
-| 16 | M3 (régression logistique sur les 5 notes), AUC-PR, test (n = 300) | 0,200 [0,152 ; 0,272] | M0 0,213 | blocC_m3_m4.md |
-| 17 | M4 (texte + 5 notes), AUC-PR, test (n = 300) | 0,263 [0,193 ; 0,361] | texte seul 0,294 [0,214 ; 0,396] | blocC_m3_m4.md |
-| 18 | M4 − texte : AUC-PR ; Brier | −0,031 [−0,088 ; 0,029] ; +0,007 [0,000 ; 0,015] | 0 | blocC_m3_m4.md |
-| 19 | M3 − M0, AUC-PR | −0,013 [−0,037 ; 0,046] | 0 | blocC_m3_m4.md |
+| # | Partie | Métrique | Valeur [IC 95 %] | Référence | Source |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Données | Projets exploitables (dossier ex ante en texte, daté avant l'approbation) | 8 260 | seuil 300 | faisabilite.md |
+| 2 | Évaluation ML | M1, AUC-PR, test (n = 1 294) | 0,247 [0,216 ; 0,286] | M0 0,217 | phase2_resultats.md |
+| 3 | Évaluation ML | M1-texte figé, AUC-PR, test avec texte (n = 755) | 0,297 [0,245 ; 0,369] | M1 0,259 ; M0 0,216 | blocB_resultats.md |
+| 4 | Évaluation ML | M1-texte − M1, AUC-PR (apparié) | +0,039 [0,003 ; 0,082] | 0 | blocB_resultats.md |
+| 5 | Évaluation ML | **Coffre-fort : M1, AUC-PR / AUC-ROC (n = 700)** | 0,172 [0,144 ; 0,211] / 0,509 [0,457 ; 0,562] | M0 0,176 / 0,5 | coffre_fort.md |
+| 6 | Évaluation ML | Coffre-fort : M1-texte − M1, AUC-PR (78 projets, descriptif) | +0,122 [0,002 ; 0,298] | 0 | coffre_fort.md |
+| 7 | Évaluation agents | M3 (5 notes du Juge), AUC-PR, test (n = 300) | 0,200 [0,152 ; 0,272] | M0 0,213 | blocC_m3_m4.md |
+| 8 | Évaluation agents | M4 − texte, AUC-PR | −0,031 [−0,088 ; 0,029] | 0 | blocC_m3_m4.md |
+| 9 | Évaluation agents | M7 (texte + verdicts du critique, réécritures, TF-IDF des arguments Contre) − texte, AUC-PR | +0,027 [−0,059 ; 0,112] | 0 | blocC_m7.md |
+| 10 | Multicritère | Frontière α, test, 25 % du budget : projets réussis α = 1 / 0,5 / 0 | 79,8 % / 83,5 % / 78,6 % (IC ± 8 pts) | hasard 76,7 % | frontiere_alpha.md |
+| 11 | Multicritère | Idem, note d'impact moyenne du portefeuille (sur 10) α = 1 → 0 | 6,65 → 7,41 | hasard 6,49 | frontiere_alpha.md |
+| 12 | Sélection | Portefeuille figé (Σ p × coût), 25 % du budget, test : projets satisfaisants | 85,3 % [79,3 ; 90,7] | hasard 77,2 % (p = 0,001) | blocB_resultats.md |
+| 13 | Sélection | Contrôle M0 (taille seule), 25 % du budget | 76,4 % (p = 0,64) | hasard 77,2 % | blocB_resultats.md |
+| 14 | Agentique | Projets notés, erreurs, temps médian | 600 / 600, 0, 89 s (T4), 0 € | — | blocC_comite.md |
+| 15 | Agentique | Citations retrouvées mot pour mot dans le texte source | 5 986 / 6 000 = 99,8 % | — | blocC_comite.md |
+| 16 | Agentique | Reconnaissance : projet « reconnu » ; note IEG proposée | 0 / 50 ; 0 / 50 | — | blocC_comite.md |
+| 17 | Agentique | Dispersion des notes (écart-type) ; notes ≥ 9 | 0,65 à 1,26 ; ≤ 0,5 % | — | blocC_comite.md |
+| 18 | Agentique | Bloc D (extracteurs de facteurs) : pilote, M6 − texte, backtest | en cours | — | blocD_pilote.md, blocD_m6.md |
 
 ## 1. Évaluation (ML + agents)
 
-- **ML.** Les variables ex ante portent un signal faible mais réel (lignes 2–3). Le pays et la région
-  comptent le plus. Le texte du dossier d'évaluation ajoute de l'information (ligne 6). Masquer les
-  noms de pays coûte environ 0,01 d'AUC-PR sur la validation : le signal du texte ne se réduit donc
-  pas à l'identité du pays.
-- **Agents.** Les notes du comité ne prédisent pas l'échec : AUC-ROC de 0,42 à 0,53 par critère sur la
-  validation, et M3 au niveau du hasard sur le test. Ajoutées au texte, elles dégradent un peu les
-  probabilités (M4, ligne 18).
-- **Ce que les agents apportent ici : rien de mesurable en prédiction.**
+**ML.**
+- M1 (gradient boosting sur variables ex ante) bat le taux de base au test, de peu (ligne 2). La
+  région compte le plus.
+- Le texte du dossier ajoute de l'information (lignes 3–4). Masquer les noms de pays coûte environ
+  0,01 d'AUC-PR sur la validation : le signal du texte ne vient pas surtout de l'identité du pays.
+- **Coffre-fort (données neuves) : M1 ne prédit plus rien** (ligne 5), y compris pour les projets
+  approuvés ≤ 2017. Raisons possibles :
+  - la dérive du taux d'échec (17,6 % contre 28 % à l'entraînement) ;
+  - des projets plus récents que l'entraînement ;
+  - un test 2012–2017 consulté pendant la phase 2.
+- M1-texte n'a pu être mesuré que sur 78 projets du coffre (le serveur de documents a refusé les
+  téléchargements, protocole amendé avant lecture). Il y fait mieux que M1 en AUC-PR (ligne 6),
+  mais son AUC-ROC est compatible avec le hasard (0,543 [0,376 ; 0,724]) et il n'y a que 12 échecs :
+  c'est descriptif.
 
-## 2. Multicritère
+**Agents.**
+- Les 5 notes du Juge ne prédisent pas l'échec : AUC-ROC de 0,42 à 0,53 par critère sur la
+  validation, et M3 au niveau du hasard sur le test (ligne 7). Ajoutées au texte, elles dégradent
+  un peu les probabilités (ligne 8).
+- Les sorties intermédiaires du débat (M7, ligne 9) donnent un écart positif au test, mais
+  l'intervalle contient zéro et la validation annonçait l'inverse (0,345 contre 0,366 pour le texte
+  seul).
 
-- Le Juge note 5 critères (pertinence, efficience économique, faisabilité, risque, impact et
-  durabilité) sur une grille à ancres (exemples de 2, 5 et 8 par critère). Avec les ancres, le Juge
-  ne donne presque plus 9 ou 10 (ligne 15). Les critères sont peu corrélés entre eux (corrélation
-  moyenne 0,21) : ils mesurent des choses différentes.
-- La démo propose une **sélection multicritère** : le décideur choisit le poids de chaque critère. Ces
-  notes servent à classer selon ses préférences, **pas à prédire l'échec** (AUC sur la validation
-  ≈ 0,5).
+**Ce que les agents apportent ici : aucun gain prédictif démontré.**
+
+## 2. Multicritère (5 critères + frontière α)
+
+- Le Juge note 5 critères inspirés des critères OCDE-CAD : pertinence, efficience économique,
+  faisabilité, risque, impact et durabilité. Il note sur une grille à ancres (exemples de 2, 5
+  et 8 par critère). Avec les ancres, il ne donne presque plus 9 ou 10 (ligne 17). Les critères
+  sont peu corrélés entre eux (0,21 en moyenne) : ils mesurent des choses différentes.
+- **Frontière α** : score = α × probabilité de réussite (ML) + (1 − α) × moyenne des 5 notes / 10.
+  Les α sont fixés à l'avance, avec le même sac à dos et 25 % du budget.
+  - De α = 1 à α = 0, la note d'impact du portefeuille monte de +0,75 point au test (+1,15 en
+    validation). L'efficience et la faisabilité montent de +0,6 à +0,9 ; la pertinence ne bouge
+    presque pas.
+  - **Coût en réussite.** En validation : −13 points de projets réussis, le comité seul revenant
+    au niveau du hasard. Au test : écarts dans le bruit (lignes 10–11).
+  - Le gain en notes est mesuré avec les notes qui servent à choisir. Il est donc vrai par
+    construction : il dit que le portefeuille suit mieux le jugement du comité, pas que les projets
+    auront plus d'impact.
+- **Aucun α n'est recommandé à partir du test.** Le choix de α est un choix du décideur (arbitrage
+  réussite / critères). La démo permet de le faire sur les projets de la validation.
+- **Ce que les agents apportent : une dimension de décision en plus** (le profil sur 5 critères),
+  qui n'est pas validée par l'issue.
 
 ## 3. Sélection (sac à dos, backtest contre le hasard)
 
-- Sac à dos exact OR-Tools CP-SAT, au plus 25 % du budget par pays, une sélection par cohorte annuelle.
-  L'objectif Σ p × coût a été choisi sur la validation ; l'objectif initial Σ p ne battait pas le
-  hasard.
-- Sur le test, le portefeuille bat le hasard à 25 % et à 50 % du budget (lignes 9–10). Avec M0, il ne
-  le bat pas (ligne 11) : le gain vient des probabilités du modèle, pas de la taille des projets.
+- Sac à dos exact OR-Tools CP-SAT, au plus 25 % du budget par pays, une sélection par cohorte
+  annuelle. L'objectif Σ p × coût a été choisi sur la validation ; l'objectif initial Σ p ne battait
+  pas le hasard.
+- Au test, le portefeuille bat le hasard à 25 % et à 50 % du budget (ligne 12). Avec M0, il ne le
+  bat pas (ligne 13) : le gain vient des probabilités du ML.
+- **Ce que les agents apportent à la sélection :** avec α < 1, ils déplacent le portefeuille vers
+  des projets mieux notés sur les critères, sans gain de réussite. Le bloc D (facteurs extraits)
+  teste s'ils peuvent améliorer les probabilités elles-mêmes (en cours).
 
 ## 4. Agentique
 
-- **Architecture.** Graphe LangGraph : extraction des phrases clés numérotées → débat Pour / Contre
-  par critère, avec citations par numéros de phrases → critique (fort / faible / non étayé) →
-  raffinement (1 tour) → Juge à grille ancrée → vérification des citations en Python. Les sorties
-  sont des JSON validés par Pydantic. Prompts adaptés de DIALECTIC (MIT).
-- **Fiabilité.** 600 projets sans erreur, 99,8 % des citations retrouvées mot pour mot. Le critique
-  juge 49 % des arguments faibles et 0,7 % non étayés ; 41 % des arguments sont réécrits au
-  raffinement.
-- **Anti-fuite.** Documents datés strictement avant l'approbation ; noms et identifiants masqués ;
-  pas d'accès web. Test de reconnaissance : 0/50 projets reconnus, 0/50 notes IEG proposées.
-- **Ce que les agents apportent : une analyse lisible et sourcée** de chaque dossier (arguments
-  cités, profil sur 5 critères), **pas un meilleur classement**.
+- **Architecture (bloc C).** Graphe LangGraph :
+  1. extraction des phrases clés numérotées ;
+  2. débat Pour / Contre par critère, avec citations par numéros de phrases ;
+  3. critique (fort / faible / non étayé) ;
+  4. raffinement (1 tour) ;
+  5. Juge à grille ancrée ;
+  6. vérification des citations en Python.
+
+  Les sorties sont des JSON validés par Pydantic. Prompts adaptés de DIALECTIC (MIT). Le modèle est
+  Qwen2.5 7B, sur 2 GPU T4 gratuits de Kaggle.
+- **Fiabilité.**
+  - 600 projets sans erreur, avec 99,8 % des citations retrouvées mot pour mot (lignes 14–15).
+  - Le critique juge 49 % des arguments faibles et 0,7 % non étayés ; 41 % des arguments sont
+    réécrits au raffinement.
+- **Anti-fuite.**
+  - Documents datés strictement avant l'approbation ; noms et identifiants masqués ; pas d'accès
+    web.
+  - Test de reconnaissance (ligne 16) : 0/50 projets reconnus et 0/50 notes IEG proposées. Un seul
+    nom approché (« FMR 2 »), reconstitué à partir des sigles du texte.
+- **Agents extracteurs (bloc D, en cours).** Grille figée de 19 facteurs de risque factuels :
+  composantes, agences, cofinanceurs, catégorie environnementale, note de risque, réforme à
+  adopter, phase 2, fragilité, etc.
+  - Un seul appel par dossier sur des phrases présélectionnées en Python, avec citations par
+    numéros et « non trouvé » autorisé. Les nombres sont comptés en Python.
+  - Pilote sur 30 projets avec des critères fixés à l'avance, puis M6 = M1-texte + facteurs.
+- **Démo.** La fiche projet montre la probabilité de réussite (ML), les arguments Pour / Contre avec
+  leurs phrases citées, le verdict du critique et les 5 notes justifiées. La page multicritère a un
+  curseur α et les poids des critères.
+- **Ce que les agents apportent : l'explication.** Chaque note est justifiée par des arguments
+  sourcés et vérifiables. C'est ce que le ML ne fait pas.
 
 ## Limites
 
@@ -94,14 +147,14 @@ la sélection sous budget qui l'utilise bat le hasard.
    relancé (décision d'Aya).
 2. **Un seul passage du comité**, avec un modèle 7B quantifié et 1 tour de raffinement. Ablations,
    stabilité sur 3 passages et M2 (prompt unique) non faits, faute de quota gratuit.
-3. M4 est un empilement logistique, pas un gradient boosting : avec 300 projets d'apprentissage, un
-   gradient boosting sur-apprendrait.
-4. **Le test 2012–2017 a été consulté pendant la phase 2.** Les chiffres de test sont donc
-   indicatifs ; le chiffre neuf est celui du coffre-fort.
-5. Les indicateurs pays (WDI, WGI) sont les valeurs révisées actuelles, pas celles connues à
+3. M4 et M7 sont des régressions logistiques apprises sur les 300 projets de validation. Le test du
+   comité (300 projets) a servi deux fois (M3/M4, puis M7).
+4. **Le test 2012–2017 a été consulté pendant la phase 2** ; le coffre-fort montre que les
+   chiffres de test étaient optimistes pour M1.
+5. **Coffre-fort.** M1-texte n'a pu être mesuré que sur 78 projets (refus 403 du serveur), donc de
+   façon descriptive. Les agents n'ont pas été évalués sur le coffre.
+6. Les indicateurs pays (WDI, WGI) sont les valeurs révisées actuelles, pas celles connues à
    l'époque.
-6. Les IC du comité sont larges (n = 300, 64 échecs) : un petit apport (moins de 0,05 d'AUC-PR) ne
-   peut pas être exclu.
 
 ## Attributions
 

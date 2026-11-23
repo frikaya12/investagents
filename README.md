@@ -5,7 +5,7 @@ Les agents lisent les dossiers d'évaluation **ex ante** de projets financés pa
 la vérité terrain est la note de résultat de l'IEG. Spécification :
 `docs/Cahier_des_charges_v3_InvestAgents.pdf`. Projet d'école, budget LLM : 0 € (modèle local).
 
-**État : v1.0, système de bout en bout.** Données → ML (M0, M1, M1-texte) → calibration →
+**État : v1.0+, système de bout en bout ; coffre-fort évalué (M1 au niveau du hasard) ; bloc D en cours.** Données → ML (M0, M1, M1-texte) → calibration →
 sélection sous budget → comité d'agents complet (600 projets notés sur GPU Kaggle gratuit) →
 M3 / M4 → démo Streamlit. **Résultats et limites : [`reports/rapport_final.md`](reports/rapport_final.md).**
 
