@@ -2,10 +2,12 @@
 
 Page « Portefeuille » : choix du budget (en % du montant demandé par cohorte) -> portefeuille
 proposé par le sac à dos (OR-Tools) avec les probabilités calibrées de M1-texte, et métriques du
-backtest. Page « Projets analysés » : arguments, 5 notes du Juge et citations vérifiées.
+backtest. Page « Sélection multicritère » : curseur α entre probabilité de réussite (ML) et notes
+du comité, poids des 5 critères. Page « Fiche projet » : probabilité de réussite, arguments Pour /
+Contre avec phrases citées, 5 notes du Juge (et facteurs du bloc D quand ils existent).
 
 Lancer : `uv run streamlit run src/investagents/app/streamlit_app.py`
-Lit uniquement des résultats déjà calculés (experiments/mvp/) : aucun appel à un LLM.
+Lit uniquement des résultats déjà calculés (experiments/) : aucun appel à un LLM.
 """
 
 from __future__ import annotations
@@ -30,7 +32,7 @@ st.caption(
 )
 
 page = st.sidebar.radio(
-    "Page", ["Portefeuille", "Sélection multicritère (comité)", "Projets analysés"]
+    "Page", ["Portefeuille", "Sélection multicritère (comité)", "Fiche projet"]
 )
 
 
@@ -235,35 +237,53 @@ elif page == "Sélection multicritère (comité)":
     st.dataframe(show, use_container_width=True, hide_index=True)
 
 else:
-    st.header("Projets analysés par le comité (qwen2.5:3b, local)")
-    files = sorted((MVP / "committee").glob("*.json"))
-    if not files:
-        st.warning("Lancer d'abord : uv run python -m investagents.agents.run_pilot")
+    from investagents.app.project_sheet import load_all, sheet
+    from investagents.schemas.committee import CRITERIA
+
+    st.header("Fiche projet : ML + agents")
+    if not (ROOT / "experiments/blocC/kaggle_run1/results.jsonl").exists():
+        st.warning("Résultats du comité absents : voir kaggle/blocC/README.md")
         st.stop()
-    data = {f.stem: json.loads(f.read_text(encoding="utf-8")) for f in files}
-    label = st.selectbox(
-        "Projet", list(data), format_func=lambda k: f"{data[k]['masked_id']} ({k})"
+    recs, meta = load_all()
+    split = st.radio("Période", ["valid", "test"], horizontal=True,
+                     format_func=lambda s: {"valid": "validation 2008–2011",
+                                            "test": "test 2012–2017"}[s])  # fmt: skip
+    sub = meta[meta.split == split]
+    key = st.selectbox(
+        "Projet (clé masquée)",
+        sub.key.tolist(),
+        format_func=lambda k: f"{k} — {sub.set_index('key').loc[k, 'country']}, "
+        f"{sub.set_index('key').loc[k, 'global_practice']}",
     )
-    d = data[label]
+    s = sheet(recs[key], sub[sub.key == key].iloc[0])
+    mean_note = pd.Series([x["score"] for x in s["scores"]]).mean()
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Temps d'analyse", f"{d['seconds_total'] / 60:.1f} min")
-    c2.metric("Citations valides", f"{d['citation_valid_rate']:.0%}")
-    c3.metric("Secteur", d["global_practice"] or "—")
-    c4.metric("Note IEG réelle", d["outcome_ieg"])
-    if d["errors"]:
-        st.error("Sortie invalide signalée : " + " ; ".join(d["errors"]))
-    if d.get("judge"):
-        scores = pd.DataFrame(d["judge"]["scores"]).set_index("criterion")
-        st.subheader("Notes du Juge (0 à 10)")
-        st.bar_chart(scores["score"])
-        st.table(scores)
-    if d.get("debate"):
-        st.subheader("Arguments et citations")
-        args = pd.DataFrame(d["debate"]["arguments"])
-        args["phrases citées"] = [" / ".join(c["cited_text"]) for c in d["citations"]]
-        args["citation valide"] = ["oui" if c["valid"] else "NON" for c in d["citations"]]
-        st.dataframe(args, use_container_width=True)
-    with st.expander("Texte donné aux agents (sections clés, identifiants masqués)"):
-        for k, v in d["sections"].items():
-            st.markdown(f"**{k}**")
-            st.write(v)
+    c1.metric("Probabilité de réussite (ML)", f"{s['p_success']:.0%}")
+    c2.metric("Note moyenne du comité", f"{mean_note:.1f} / 10")
+    c3.metric("Montant", f"{(s['amount_usd'] or 0) / 1e6:,.0f} M USD")
+    c4.metric("Secteur", s["sector"] or "—")
+    st.caption(
+        "La probabilité vient du ML (M1-texte calibré). Les notes et arguments viennent du comité "
+        "(Qwen2.5 7B) : ils expliquent et classent selon les critères ; ils ne prédisent pas "
+        "l'échec."
+    )
+    scores = pd.DataFrame(s["scores"]).set_index("criterion")
+    st.subheader("Notes du Juge sur les 5 critères (0 à 10)")
+    st.bar_chart(scores["score"])
+    st.subheader("Arguments Pour et Contre, avec les phrases citées du dossier")
+    for c in CRITERIA:
+        st.markdown(f"**{c}** — note {scores.loc[c, 'score']} : {scores.loc[c, 'justification']}")
+        cols = st.columns(2)
+        for col, stance in zip(cols, ("pro", "contra"), strict=True):
+            for a in [x for x in s["arguments"] if x["criterion"] == c and x["stance"] == stance]:
+                label = "Pour" if stance == "pro" else "Contre"
+                verdict = a["critic_verdict"] or "—"
+                col.markdown(f"*{label}* (critique : {verdict}) — {a['claim']}")
+                flag = "" if a["citation_valid"] else " (NON vérifiée)"
+                for t in a["cited"]:
+                    col.caption(f"« {t[:400]} »{flag}")
+    if s["factors"]:
+        st.subheader("Facteurs de risque extraits (bloc D)")
+        st.dataframe(pd.DataFrame(s["factors"]).T[["status", "value", "sentence_ids"]])
+    with st.expander("Note IEG réelle (a posteriori, jamais vue par les agents)"):
+        st.write(s["outcome"])
