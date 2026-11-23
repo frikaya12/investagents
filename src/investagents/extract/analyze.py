@@ -26,6 +26,24 @@ CRIT_CITATIONS = 0.95
 CRIT_SECONDS = 40.0
 CRIT_FOUND_RATE = 0.30
 CRIT_N_FACTORS = 10
+# Passage complet comparé au pilote (seuils fixés AVANT de voir le passage complet) :
+MAX_ERROR_RATE = 0.02
+MAX_NOT_FOUND_SHIFT = 0.25  # écart absolu de part « non trouvé » par facteur (pilote : n = 30)
+
+
+def compare(summary: dict, table: pd.DataFrame, pilot_table: pd.DataFrame) -> dict:
+    """« Nettement pire que le pilote » si l'un des seuils est franchi."""
+    m = table.merge(pilot_table, on="factor", suffixes=("", "_pilot"))
+    m["shift"] = (m.found_rate - m.found_rate_pilot).abs()
+    worse = {
+        "error_rate>2%": summary["n_errors"] / max(summary["n_projects"], 1) > MAX_ERROR_RATE,
+        "citations<95%": not summary["criteria"]["citations>=95%"],
+        "median>40s": not summary["criteria"]["median<=40s"],
+        "<10 factors >30%": not summary["criteria"][">=10 factors found in >30%"],
+        "factors shifted >25 pts": m.loc[m["shift"] > MAX_NOT_FOUND_SHIFT, "factor"].tolist(),
+    }
+    return {"much_worse": any(bool(v) for v in worse.values()), "checks": worse,
+            "shift_by_factor": dict(zip(m.factor, m["shift"].round(3), strict=True))}  # fmt: skip
 
 
 def summarize(results: list[dict]) -> tuple[dict, pd.DataFrame]:
@@ -75,6 +93,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run", required=True)
     parser.add_argument("--report", default="reports/blocD_pilote.md")
+    parser.add_argument("--pilot", default=None, help="dossier du pilote, pour comparer")
     args = parser.parse_args()
     results = load_jsonl(Path(args.run) / "results.jsonl")
     results = list({r["key"]: r for r in results}.values())
