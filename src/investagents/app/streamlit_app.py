@@ -13,19 +13,23 @@ Lit uniquement des résultats déjà calculés (experiments/) : aucun appel à u
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import pandas as pd
 import streamlit as st
 
-from investagents.selection.knapsack import select_portfolio
-
 ROOT = Path(__file__).resolve().parents[3]
+if str(ROOT / "src") not in sys.path:  # Streamlit Cloud : le paquet n'est pas installé
+    sys.path.insert(0, str(ROOT / "src"))
+
+from investagents.selection.knapsack import select_portfolio  # noqa: E402
+
 MVP = ROOT / "experiments" / "mvp"
 BLOC_A = ROOT / "experiments" / "blocA"
 
 st.set_page_config(page_title="InvestAgents — démo", layout="wide")
-st.title("InvestAgents — démo MVP")
+st.title("InvestAgents — démo")
 st.caption(
     "Projets Banque mondiale approuvés en 2012–2017 (jeu de test). Données IEG © Banque "
     "mondiale, CC BY 4.0. Démo pédagogique, pas un conseil d'investissement."

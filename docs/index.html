@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InvestAgents — IA agentique pour la sélection de projets d'investissement</title>
+<meta name="description" content="Comité d'agents IA et modèles ML sur 8 260 dossiers ex ante de la Banque mondiale : ce que les agents apportent vraiment, chiffres à l'appui.">
+<style>
+  :root {
+    color-scheme: light;
+    --surface-0: #f4f3f0;
+    --surface-1: #fcfcfb;
+    --border: #e2e1dc;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #7a7974;
+    --series-1: #2a78d6;
+    --grid: #e7e6e1;
+    --ref: #7a7974;
+    --accent-soft: #e8f0fb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --surface-0: #121211;
+      --surface-1: #1a1a19;
+      --border: #2e2e2c;
+      --text-primary: #f0efec;
+      --text-secondary: #c3c2b7;
+      --text-muted: #9a998f;
+      --series-1: #3987e5;
+      --grid: #2a2a28;
+      --ref: #9a998f;
+      --accent-soft: #1d2a3b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--surface-0); color: var(--text-primary);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 8px; }
+  h2 { font-size: 1.35rem; margin: 48px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 20px 0 6px; }
+  p, li { color: var(--text-secondary); }
+  .kicker { color: var(--text-muted); font-size: .9rem; margin: 0 0 6px; }
+  .message { background: var(--surface-1); border: 1px solid var(--border); border-left: 4px solid var(--series-1);
+             border-radius: 8px; padding: 16px 20px; font-size: 1.12rem; color: var(--text-primary); margin: 20px 0; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 20px 0; }
+  .tile { background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .tile .v { font-size: 1.8rem; font-weight: 650; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+  .tile .l { color: var(--text-secondary); font-size: .92rem; }
+  .tile .r { color: var(--text-muted); font-size: .82rem; margin-top: 4px; }
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 12px 0; }
+  .pipeline { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0; }
+  .step { background: var(--surface-1); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; font-size: .9rem; color: var(--text-primary); }
+  .arrow { color: var(--text-muted); }
+  table { border-collapse: collapse; width: 100%; font-size: .92rem; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+  th { color: var(--text-primary); font-weight: 600; }
+  td.n { text-align: right; }
+  .verdict { font-weight: 600; color: var(--text-primary); }
+  #chart { width: 100%; position: relative; }
+  #chart svg { display: block; width: 100%; height: auto; }
+  .tip { position: absolute; pointer-events: none; background: var(--surface-1); border: 1px solid var(--border);
+         border-radius: 6px; padding: 8px 10px; font-size: .85rem; color: var(--text-primary);
+         box-shadow: 0 4px 14px rgba(0,0,0,.12); opacity: 0; transition: opacity .1s; max-width: 280px; }
+  .tip .t { color: var(--text-secondary); }
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: .85rem; color: var(--text-secondary); margin: 6px 0 0; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  details { margin-top: 10px; }
+  summary { cursor: pointer; color: var(--text-secondary); }
+  a { color: var(--series-1); }
+  .links { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+  .btn { display: inline-block; padding: 9px 14px; border-radius: 6px; border: 1px solid var(--border);
+         background: var(--surface-1); color: var(--text-primary); text-decoration: none; font-weight: 600; }
+  .btn.primary { background: var(--series-1); border-color: var(--series-1); color: #fff; }
+  footer { margin-top: 56px; font-size: .85rem; color: var(--text-muted); }
+  footer p { color: var(--text-muted); }
+</style>
+</head>
+<body>
+<main>
+  <p class="kicker">Projet d'école · Machine Learning · sujet n°10</p>
+  <h1>InvestAgents : IA agentique pour la décision d'investissement multicritère</h1>
+  <p>Un comité d'agents IA lit les dossiers d'évaluation <strong>ex ante</strong> de vrais projets
+  financés par la Banque mondiale, débat de chaque projet critère par critère, extrait des facteurs
+  de risque, puis un optimiseur choisit le portefeuille à financer sous budget. La vérité terrain
+  est la note de résultat de l'IEG (évaluation indépendante, a posteriori).</p>
+
+  <div class="message">Le ML prédit faiblement ; les agents justifient chaque décision avec des
+  sources vérifiées et extraient des facteurs de risque lisibles et prédictifs, mais n'ajoutent rien
+  au texte complet.</div>
+
+  <div class="links">
+    <a class="btn primary" id="demo-link" href="#">Essayer la démo</a>
+    <a class="btn" id="repo-link" href="#">Code source</a>
+    <a class="btn" id="report-link" href="#">Rapport final</a>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><div class="v">0,297</div><div class="l">AUC-PR de M1-texte au test (prédire l'échec)</div><div class="r">hasard : 0,216 · IC 95 % [0,245 ; 0,369]</div></div>
+    <div class="tile"><div class="v">99,8 %</div><div class="l">citations des agents retrouvées mot pour mot dans le dossier</div><div class="r">5 986 / 6 000, comité sur 600 projets</div></div>
+    <div class="tile"><div class="v">85,3 %</div><div class="l">projets réussis dans le portefeuille choisi (25 % du budget)</div><div class="r">hasard : 77,2 % (p = 0,001) · ±5 pts selon le pool</div></div>
+    <div class="tile"><div class="v">0,509</div><div class="l">AUC-ROC de M1 sur le coffre-fort (données neuves)</div><div class="r">0,5 = hasard : le signal ne se transfère pas</div></div>
+  </div>
+
+  <h2>La question</h2>
+  <p>Le comité d'agents classe-t-il les projets mieux qu'un modèle de ML sur des variables chiffrées
+  ou sur le texte brut du dossier ? Ses sorties apportent-elles une information en plus ? Pour y
+  répondre honnêtement : split temporel (entraînement ≤ 2007, validation 2008–2011, test 2012–2017),
+  tous les réglages sur la validation, chaque test calculé une seule fois, et un
+  <em>coffre-fort</em> de projets évalués en 2025 ou après, ouvert une seule fois à la fin.</p>
+
+  <h2>Le système</h2>
+  <div class="pipeline">
+    <span class="step">Dossier ex ante (daté avant l'approbation, noms masqués)</span><span class="arrow">→</span>
+    <span class="step">Débat Pour / Contre par critère, citations numérotées</span><span class="arrow">→</span>
+    <span class="step">Critique</span><span class="arrow">→</span>
+    <span class="step">Raffinement</span><span class="arrow">→</span>
+    <span class="step">Juge : 5 notes (grille à ancres)</span><span class="arrow">→</span>
+    <span class="step">Vérification des citations (Python)</span>
+  </div>
+  <div class="pipeline">
+    <span class="step">Agents extracteurs : 19 facteurs de risque factuels cités</span><span class="arrow">+</span>
+    <span class="step">ML : gradient boosting, TF-IDF + régression logistique, calibration</span><span class="arrow">→</span>
+    <span class="step">Sac à dos OR-Tools sous budget, ≤ 25 % par pays</span>
+  </div>
+  <p>Modèle de langage : Qwen2.5 7B (local, via Ollama) sur les GPU gratuits de Kaggle. Coût LLM : 0 €.
+  Aucun chiffre ne vient du LLM : comptes et vérifications en Python. Le texte des documents est
+  traité comme une donnée, jamais comme une instruction.</p>
+
+  <h2>Résultats : prédire l'échec d'un projet</h2>
+  <p>AUC-PR au test (classe positive = projet non satisfaisant), avec intervalle de confiance à 95 %
+  (bootstrap). Le trait vertical gris de chaque ligne est le taux de base de son échantillon : un
+  modèle utile est à droite de ce trait.</p>
+  <div class="card">
+    <div id="chart" role="img" aria-label="AUC-PR au test de sept modèles avec intervalles de confiance à 95 %"></div>
+    <div class="legend">
+      <span><svg width="22" height="10" aria-hidden="true"><line x1="1" y1="5" x2="21" y2="5" stroke="var(--series-1)" stroke-width="2"/><circle cx="11" cy="5" r="4" fill="var(--series-1)"/></svg>AUC-PR et IC 95 %</span>
+      <span><svg width="10" height="14" aria-hidden="true"><line x1="5" y1="1" x2="5" y2="13" stroke="var(--ref)" stroke-width="2" stroke-dasharray="3 2"/></svg>taux de base (hasard)</span>
+    </div>
+    <details>
+      <summary>Voir le tableau</summary>
+      <table id="chart-table">
+        <thead><tr><th>Modèle</th><th>Entrées</th><th class="n">n test</th><th class="n">AUC-PR</th><th class="n">IC 95 %</th><th class="n">Taux de base</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </details>
+  </div>
+
+  <h3>Ce que les écarts appariés disent</h3>
+  <table>
+    <thead><tr><th>Comparaison (mêmes projets)</th><th class="n">Écart d'AUC-PR [IC 95 %]</th><th>Lecture</th></tr></thead>
+    <tbody>
+      <tr><td>M1-texte − M1</td><td class="n">+0,039 [0,003 ; 0,082]</td><td>le texte du dossier aide un peu</td></tr>
+      <tr><td>M3 (notes du Juge) − M0</td><td class="n">−0,013 [−0,037 ; 0,046]</td><td>les notes ne prédisent pas</td></tr>
+      <tr><td>M4 (texte + notes) − texte</td><td class="n">−0,031 [−0,088 ; 0,029]</td><td>pas d'apport</td></tr>
+      <tr><td>M7 (texte + sorties du débat) − texte</td><td class="n">+0,027 [−0,059 ; 0,112]</td><td>pas de preuve d'apport</td></tr>
+      <tr><td>M5 (facteurs extraits seuls) − M0</td><td class="n">+0,027 [0,003 ; 0,070]</td><td class="verdict">signal faible mais réel</td></tr>
+      <tr><td>M6 (texte + facteurs) − texte</td><td class="n">+0,003 [−0,039 ; 0,043]</td><td>redondant avec le texte</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Ce que les agents apportent, partie par partie</h2>
+  <div class="card"><h3>Évaluation</h3><p>Les agents juges ne prédisent pas mieux que le texte brut. Les agents extracteurs produisent
+  des facteurs lisibles (réinstallation de populations, cofinanceurs, catégorie environnementale,
+  capacité de l'agence…) qui prédisent seuls un peu mieux que le hasard, sans rien ajouter au texte
+  complet.</p></div>
+  <div class="card"><h3>Multicritère</h3><p>Le Juge note 5 critères (pertinence, efficience économique, faisabilité, risque, impact et
+  durabilité). Mêler ces notes à la probabilité de réussite (score = α × ML + (1 − α) × comité) donne
+  des portefeuilles mieux notés sur les critères ; au test, la perte de réussite n'est pas mesurable,
+  en validation elle l'est. Le choix de α revient au décideur ; aucun α n'est recommandé à partir du
+  test.</p></div>
+  <div class="card"><h3>Sélection</h3><p>Le portefeuille sous budget bat le hasard grâce aux probabilités du ML (avec des probabilités
+  constantes, il ne le bat pas). Les écarts de quelques points entre modèles ne sont pas
+  interprétables : retirer 16 projets du pool déplace le résultat d'environ 5 points.</p></div>
+  <div class="card"><h3>Agentique</h3><p>600 projets débattus sans erreur, 1 582 dossiers lus par les extracteurs, 99,8 % et 97,6 % de
+  citations valides, 0 projet reconnu sur 50 au test de mémorisation. L'apport réel des agents :
+  <strong>chaque note et chaque facteur est justifié par des phrases du dossier, vérifiables</strong>.</p></div>
+
+  <h2>Le coffre-fort : la leçon des données neuves</h2>
+  <p>Sur 700 projets évalués en 2025 ou après, jamais vus, M1 tombe au niveau du hasard (AUC-ROC
+  0,509 [0,457 ; 0,562]). Le serveur de documents ayant refusé presque tous les téléchargements, le
+  protocole a été amendé <em>avant</em> lecture : M1-texte n'a été mesuré que sur 78 projets, de façon
+  descriptive et non concluante ; les agents n'ont pas pu y être évalués. Les chiffres du test
+  2012–2017 étaient donc optimistes.</p>
+
+  <h2>Limites</h2>
+  <ul>
+    <li>Signal faible : prédire l'issue d'un projet à partir de son dossier ex ante reste très difficile.</li>
+    <li>Un seul passage du comité, avec un modèle 7B ; pas d'ablations ni de mesure de stabilité (quota gratuit).</li>
+    <li>Masquage incomplet (sigles des projets, une grande ville par document) ; aucune mémorisation détectée.</li>
+    <li>Exactitude des facteurs extraits mesurée sur le pilote seulement (14/15 et 13/13 sur deux facteurs vérifiables).</li>
+    <li>Backtest instable (±5 points selon le pool) ; test 2012–2017 consulté pendant la phase 2.</li>
+  </ul>
+
+  <footer>
+    <p>Données : IEG World Bank Project Performance Ratings, relevés IDA/IBRD, WGI, extraits de
+    documents de la Banque mondiale — © Banque mondiale, CC BY 4.0. GeoNames (CC BY 4.0). Débat
+    adapté de DIALECTIC (MIT). Modèle : Qwen2.5-7B-Instruct. Code sous licence MIT, écrit avec
+    l'aide de Claude Code et relu par l'autrice. Démo pédagogique, pas un conseil d'investissement.</p>
+  </footer>
+</main>
+
+<div class="tip" id="tip"></div>
+<script>
+// Liens : à renseigner après création du dépôt GitHub et déploiement Streamlit Cloud.
+const LINKS = {
+  repo: "https://github.com/frikaya12/investagents",
+  demo: "",  // URL Streamlit Cloud, à ajouter après déploiement
+};
+document.getElementById("repo-link").href = LINKS.repo;
+document.getElementById("report-link").href = LINKS.repo + "/blob/main/reports/rapport_final.md";
+const demo = document.getElementById("demo-link");
+if (LINKS.demo) { demo.href = LINKS.demo; } else { demo.textContent = "Démo : bientôt en ligne"; demo.removeAttribute("href"); }
+
+// Chiffres : reports/blocB_resultats.md, blocC_m3_m4.md, blocC_m7.md, blocD_m6.md (test, une fois).
+const DATA = [
+  { m: "M1", d: "variables chiffrées ex ante", n: 755, v: 0.259, lo: 0.213, hi: 0.320, base: 0.216 },
+  { m: "M1-texte", d: "TF-IDF du dossier complet", n: 755, v: 0.297, lo: 0.245, hi: 0.369, base: 0.216 },
+  { m: "M3", d: "5 notes du Juge", n: 300, v: 0.200, lo: 0.152, hi: 0.272, base: 0.213 },
+  { m: "M4", d: "texte + 5 notes", n: 300, v: 0.263, lo: 0.193, hi: 0.361, base: 0.213 },
+  { m: "M7", d: "texte + sorties du débat", n: 300, v: 0.321, lo: 0.236, hi: 0.427, base: 0.213 },
+  { m: "M5", d: "19 facteurs extraits seuls", n: 729, v: 0.241, lo: 0.204, hi: 0.293, base: 0.214 },
+  { m: "M6", d: "texte + facteurs", n: 729, v: 0.300, lo: 0.248, hi: 0.369, base: 0.214 },
+];
+const fmt = x => x.toFixed(3).replace(".", ",");
+
+const tbody = document.querySelector("#chart-table tbody");
+DATA.forEach(r => {
+  const tr = document.createElement("tr");
+  tr.innerHTML = `<td>${r.m}</td><td>${r.d}</td><td class="n">${r.n}</td><td class="n">${fmt(r.v)}</td>` +
+    `<td class="n">[${fmt(r.lo)} ; ${fmt(r.hi)}]</td><td class="n">${fmt(r.base)}</td>`;
+  tbody.appendChild(tr);
+});
+
+function draw() {
+  const box = document.getElementById("chart");
+  const W = Math.max(box.clientWidth, 320), rowH = 40, top = 10, bottom = 34;
+  const left = W < 560 ? 92 : 210, right = 16;
+  const H = top + bottom + rowH * DATA.length;
+  const x0 = 0.10, x1 = 0.45;
+  const sx = v => left + (v - x0) / (x1 - x0) * (W - left - right);
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const el = (tag, attrs, parent = svg) => { const e = document.createElementNS(ns, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
+  for (let t = 0.10; t <= 0.4501; t += 0.05) {
+    el("line", { x1: sx(t), x2: sx(t), y1: top, y2: H - bottom, stroke: "var(--grid)", "stroke-width": 1 });
+    const lab = el("text", { x: sx(t), y: H - bottom + 18, "text-anchor": "middle", fill: "var(--text-muted)", "font-size": 12 });
+    lab.textContent = fmt(t).slice(0, 4);
+  }
+  const ax = el("text", { x: left + (W - left - right) / 2, y: H - 4, "text-anchor": "middle", fill: "var(--text-secondary)", "font-size": 12 });
+  ax.textContent = "AUC-PR au test (plus haut = mieux)";
+  const tip = document.getElementById("tip");
+  DATA.forEach((r, i) => {
+    const y = top + rowH * i + rowH / 2;
+    const name = el("text", { x: 8, y: y - (W < 560 ? 0 : 2), fill: "var(--text-primary)", "font-size": 13, "font-weight": 600, "dominant-baseline": "middle" });
+    name.textContent = r.m;
+    if (W >= 560) {
+      const d = el("text", { x: 8, y: y + 13, fill: "var(--text-muted)", "font-size": 11, "dominant-baseline": "middle" });
+      d.textContent = r.d;
+    }
+    el("line", { x1: sx(r.base), x2: sx(r.base), y1: y - 12, y2: y + 12, stroke: "var(--ref)", "stroke-width": 2, "stroke-dasharray": "3 2" });
+    el("line", { x1: sx(r.lo), x2: sx(r.hi), y1: y, y2: y, stroke: "var(--series-1)", "stroke-width": 2, "stroke-linecap": "round" });
+    el("circle", { cx: sx(r.v), cy: y, r: 5, fill: "var(--series-1)", stroke: "var(--surface-1)", "stroke-width": 2 });
+    const hit = el("rect", { x: 0, y: y - rowH / 2, width: W, height: rowH, fill: "transparent" });
+    hit.addEventListener("mousemove", ev => {
+      tip.innerHTML = `<strong>${r.m}</strong> <span class="t">— ${r.d}</span><br>AUC-PR ${fmt(r.v)} ` +
+        `[${fmt(r.lo)} ; ${fmt(r.hi)}]<br><span class="t">taux de base ${fmt(r.base)} · n = ${r.n}</span>`;
+      tip.style.opacity = 1;
+      tip.style.left = Math.min(ev.pageX + 14, window.innerWidth - 300) + "px";
+      tip.style.top = (ev.pageY + 14) + "px";
+    });
+    hit.addEventListener("mouseleave", () => { tip.style.opacity = 0; });
+  });
+  box.replaceChildren(svg);
+}
+draw();
+window.addEventListener("resize", draw);
+</script>
+</body>
+</html>

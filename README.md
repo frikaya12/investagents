@@ -29,6 +29,18 @@ uv run streamlit run src/investagents/app/streamlit_app.py
 
 La démo lit des résultats déjà calculés (`experiments/`) ; elle n'appelle aucun LLM.
 
+## Site vitrine et démo en ligne
+
+- **Vitrine** : `docs/index.html`, une page statique sans dépendance, publiée par GitHub Pages
+  (Settings → Pages → Deploy from a branch → `main`, dossier `/docs`).
+- **Démo** : Streamlit Community Cloud. New app → ce dépôt, branche `main`, fichier principal
+  `src/investagents/app/streamlit_app.py`, Python 3.12. Les dépendances de la démo seule sont dans
+  `src/investagents/app/requirements.txt` (pas de spaCy, d'embeddings ni de LLM).
+  À vérifier au premier déploiement : que Streamlit Cloud prend bien ce fichier (dossier du point
+  d'entrée) plutôt que `uv.lock` / `pyproject.toml` à la racine.
+- Après le déploiement, renseigner l'adresse de la démo dans `docs/index.html` (constante
+  `LINKS.demo`).
+
 ## Tout recalculer
 
 ```bash
