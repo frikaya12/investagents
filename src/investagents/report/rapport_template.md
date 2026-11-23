@@ -198,7 +198,7 @@ enchaîne le choix sur la validation puis l'évaluation unique, sans retour en a
 > ne prédisent pas l'échec.
 
 **En technique.** Graphe [[LangGraph]], sorties JSON validées par Pydantic, prompts adaptés de
-DIALECTIC (licence MIT), [[LLM]] Qwen2.5 7B sur 2 GPU T4 gratuits (Kaggle), 0 €.
+DIALECTIC (licence MIT), [[LLM]] Qwen2.5 7B via Ollama, sur 2 GPU T4 gratuits (Kaggle), 0 €, aucune API payante.
 
 @@fig:comite@@
 

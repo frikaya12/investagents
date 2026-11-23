@@ -179,3 +179,28 @@ def test_factors_named_in_report_are_the_top_weights():
                   "catégorie environnementale A",
                   "capacité faible"):  # fmt: skip
         assert words in text
+
+
+def test_resume_prof_is_up_to_date_and_honest():
+    """Résumé pour le prof : généré depuis les JSON, résultats négatifs présents, LLM exact."""
+    from investagents.report.build import RESUME_OUT, RESUME_TEMPLATE, render_resume
+
+    m = load()
+    assert RESUME_OUT.read_text(encoding="utf-8") == render_resume(m), "relancer le build"
+    keys = template_keys(RESUME_TEMPLATE.read_text(encoding="utf-8"))
+    assert keys <= set(m.txt)
+    text = RESUME_OUT.read_text(encoding="utf-8")
+    v = j("experiments/vault/results.json")["all"]["models"]["M1"]["ci"]["auc_roc"]
+    assert fr_ci(v) in text  # coffre-fort à 0,509, non atténué
+    for word in ("Négatif", "Fragile", "Qwen2.5 7B via Ollama"):
+        assert word in text
+
+
+def test_no_paid_llm_mentioned():
+    """Le rapport, le résumé, la vitrine et la démo ne mentionnent ni Gemini ni une API payante."""
+    paths = [MD, HTML, ROOT / "docs" / "resume_prof.md", ROOT / "docs" / "index.html",
+             *sorted((ROOT / "src" / "investagents" / "app").rglob("*.py"))]  # fmt: skip
+    for p in paths:
+        low = p.read_text(encoding="utf-8").lower()
+        for bad in ("gemini", "openai", "gpt-4", "api payante utilisée"):
+            assert bad not in low, f"{bad} dans {p.name}"

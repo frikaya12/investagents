@@ -29,6 +29,8 @@ from investagents.report.figures import FIGURES
 from investagents.report.metrics import ROOT, Metrics, load
 
 TEMPLATE = Path(__file__).with_name("rapport_template.md")
+RESUME_TEMPLATE = Path(__file__).with_name("resume_template.md")
+RESUME_OUT = ROOT / "docs" / "resume_prof.md"
 MD_OUT = ROOT / "reports" / "rapport_final.md"
 FIG_DIR = ROOT / "reports" / "figures"
 HTML_OUT = ROOT / "docs" / "rapport.html"
@@ -120,6 +122,13 @@ def _sommaire_md(heads: list[tuple[str, str]]) -> str:
     lines = ['<a id="sommaire"></a>', "**Sommaire**", ""]
     lines += [f"- [{t}](#{a})" for a, t in heads]
     return "\n".join(lines) + "\n"
+
+
+def render_resume(m: Metrics) -> str:
+    """Résumé de présentation pour le prof (docs/resume_prof.md, aussi affiché dans la démo)."""
+    header = ("<!-- Fichier généré par `uv run python -m investagents.report.build` depuis "
+              "src/investagents/report/resume_template.md : ne pas modifier à la main. -->\n")
+    return header + fill(RESUME_TEMPLATE.read_text(encoding="utf-8"), m)
 
 
 def render_md(m: Metrics) -> tuple[str, dict[str, str]]:
@@ -251,6 +260,7 @@ def main() -> None:
     MD_OUT.write_text(md, encoding="utf-8")
     HTML_OUT.write_text(render_html(m), encoding="utf-8")
     SHOWCASE.write_text(update_showcase(m), encoding="utf-8")
+    RESUME_OUT.write_text(render_resume(m), encoding="utf-8")
     print(f"écrit : {MD_OUT.relative_to(ROOT)}, {HTML_OUT.relative_to(ROOT)}, {len(svgs)} figures")
     if not args.no_pdf:
         render_pdf(HTML_OUT, PDF_OUT)
