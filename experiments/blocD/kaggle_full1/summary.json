@@ -1,0 +1,47 @@
+{
+  "n_projects": 1582,
+  "n_ok": 1582,
+  "n_errors": 0,
+  "citation_valid_rate": 0.9760264535684762,
+  "keyword_rate": 0.9787361072839166,
+  "median_seconds": 28.2,
+  "p90_seconds": 31.0,
+  "n_factors_found_over_30pct": 19,
+  "criteria": {
+    "citations>=95%": true,
+    "median<=40s": true,
+    ">=10 factors found in >30%": true
+  },
+  "pilot_ok": true,
+  "comparison_to_pilot": {
+    "much_worse": false,
+    "checks": {
+      "error_rate>2%": false,
+      "citations<95%": false,
+      "median>40s": false,
+      "<10 factors >30%": false,
+      "factors shifted >25 pts": []
+    },
+    "shift_by_factor": {
+      "components": 0.027,
+      "implementing_agencies": 0.092,
+      "cofinanciers": 0.026,
+      "first_operation": 0.162,
+      "follow_on_phase": 0.035,
+      "reform_to_adopt": 0.091,
+      "env_category": 0.003,
+      "overall_risk_rating": 0.086,
+      "fiduciary_risk": 0.01,
+      "baseline_values": 0.019,
+      "lessons_problems": 0.165,
+      "fragility_conflict": 0.021,
+      "weak_capacity": 0.07,
+      "counterpart_funding": 0.01,
+      "resettlement": 0.009,
+      "decentralized_implementation": 0.079,
+      "pilot_innovative": 0.07,
+      "political_risk": 0.083,
+      "economic_return_reported": 0.014
+    }
+  }
+}

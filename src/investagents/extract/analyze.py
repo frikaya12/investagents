@@ -119,6 +119,19 @@ def main() -> None:
         kw = f"{r.keyword_rate:.0%}" if r.keyword_rate is not None else "—"
         lines.append(f"| {r.factor} | {r.kind} | {r.found_rate:.0%} | {r.inconsistent} | {iv} | "
                      f"{kw} | {r.values} |")  # fmt: skip
+    if args.pilot:
+        p_res = load_jsonl(Path(args.pilot) / "results.jsonl")
+        _, p_table = summarize(list({r["key"]: r for r in p_res}.values()))
+        cmp = compare(summary, table, p_table)
+        summary["comparison_to_pilot"] = cmp
+        lines += [
+            "",
+            f"**Nettement pire que le pilote : {'OUI' if cmp['much_worse'] else 'non'}** — "
+            f"{cmp['checks']}",
+            "",
+            "Écart absolu de part « trouvé » avec le pilote, par facteur : "
+            + ", ".join(f"{k} {v:.0%}" for k, v in cmp["shift_by_factor"].items()),
+        ]
     Path(args.report).write_text("\n".join(lines) + "\n", encoding="utf-8")
     Path(args.run, "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     print("\n".join(lines))
