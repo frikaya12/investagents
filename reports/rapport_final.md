@@ -12,18 +12,23 @@ validation. Aucun choix (α, poids, modèle) n'a été fait en regardant le test
 
 ## Réponse courte
 
-- **Évaluation.** Le ML prédit l'échec un peu mieux que le hasard sur le test 2012–2017 (M1-texte :
-  AUC-PR 0,297 contre 0,216). Sur le coffre-fort, en revanche, M1 tombe au niveau du hasard. Les
-  agents ne font **pas** mieux : leurs notes (M3, M4) et leurs sorties intermédiaires (M7)
-  n'apportent pas d'information prédictive démontrée.
+- **Évaluation.** Sur le test 2012–2017, le ML prédit l'échec un peu mieux que le hasard (M1-texte :
+  AUC-PR 0,297 contre 0,216).
+  - **Sur le coffre-fort (projets récents, données neuves), M1 tombe au niveau du hasard.**
+    M1-texte n'y est pas concluant (78 projets seulement).
+  - Agents juges (notes M3/M4, sorties du débat M7) : pas d'information prédictive démontrée.
+  - **Agents extracteurs (bloc D)** : leurs facteurs factuels portent seuls un signal faible
+    mais réel (M5 − M0 significatif), mais rien de plus que le texte (M6 − M1-texte ≈ 0). Ils
+    n'ont pas pu être évalués sur le coffre, faute de textes.
 - **Multicritère.** Les agents apportent un **profil sur 5 critères** que le ML n'a pas. Mêlé à la
   probabilité de réussite (frontière α), ce profil donne des portefeuilles mieux notés par le
   comité. Au test, la perte de réussite n'est pas mesurable, mais elle l'est sur la validation.
 - **Sélection.** Le sac à dos sous budget bat le hasard au test grâce aux probabilités du ML, pas
   grâce à la taille des projets.
 - **Agentique.** Le comité est fiable : 600/600 projets, 99,8 % des citations retrouvées mot pour mot,
-  0/50 projet reconnu. Il **explique** chaque projet avec des arguments sourcés. C'est son apport
-  réel ; ce n'est pas un meilleur classement.
+  0/50 projet reconnu. Il **explique** chaque projet avec des arguments sourcés. Les extracteurs
+  (1 582 dossiers, 97,6 % de citations valides) transforment le dossier en facteurs lisibles. C'est
+  leur apport réel ; ce n'est pas un meilleur classement que le texte seul.
 
 ## Métriques finales
 
@@ -46,7 +51,10 @@ validation. Aucun choix (α, poids, modèle) n'a été fait en regardant le test
 | 15 | Agentique | Citations retrouvées mot pour mot dans le texte source | 5 986 / 6 000 = 99,8 % | — | blocC_comite.md |
 | 16 | Agentique | Reconnaissance : projet « reconnu » ; note IEG proposée | 0 / 50 ; 0 / 50 | — | blocC_comite.md |
 | 17 | Agentique | Dispersion des notes (écart-type) ; notes ≥ 9 | 0,65 à 1,26 ; ≤ 0,5 % | — | blocC_comite.md |
-| 18 | Agentique | Bloc D (extracteurs de facteurs) : pilote, M6 − texte, backtest | en cours | — | blocD_pilote.md, blocD_m6.md |
+| 18 | Agentique | Bloc D : passage complet (1 582 dossiers), erreurs, citations valides, temps médian | 0 erreur ; 97,6 % ; 28 s | pilote 99,8 % | blocD_passage_complet.md |
+| 19 | Évaluation agents | M5 (19 facteurs extraits, seuls) − M0, AUC-PR / AUC-ROC, test (n = 729) | +0,027 [0,003 ; 0,070] / +0,066 [0,017 ; 0,114] | 0 | blocD_m6.md |
+| 20 | Évaluation agents | M6 (texte + facteurs) − M1-texte, AUC-PR | +0,003 [−0,039 ; 0,043] | 0 | blocD_m6.md |
+| 21 | Sélection | Backtest 25 % du budget, test : M6 / M1-texte | 86,1 % (p < 0,001) / 80,5 % (p = 0,12) | hasard 77,7 % | blocD_m6.md |
 
 ## 1. Évaluation (ML + agents)
 
@@ -72,8 +80,18 @@ validation. Aucun choix (α, poids, modèle) n'a été fait en regardant le test
 - Les sorties intermédiaires du débat (M7, ligne 9) donnent un écart positif au test, mais
   l'intervalle contient zéro et la validation annonçait l'inverse (0,345 contre 0,366 pour le texte
   seul).
+- **Agents extracteurs (bloc D)** : 19 facteurs factuels lus dans le dossier, avec citations.
+  - Seuls (M5), ils battent le taux de base (ligne 19), avec une AUC-ROC de 0,566, du même
+    ordre que M1 sur les variables structurées.
+  - Ajoutés au texte (M6), ils n'apportent rien (ligne 20) : ils sont lus dans le même document
+    que celui qu'utilise M1-texte.
+  - Associés à plus d'échecs : réinstallation de populations, nombre de cofinanceurs, deuxième
+    phase, catégorie environnementale A, capacité faible de l'agence.
 
-**Ce que les agents apportent ici : aucun gain prédictif démontré.**
+**Ce que les agents apportent ici :**
+- les agents juges, aucun gain prédictif démontré ;
+- les agents extracteurs, des variables lisibles et sourcées qui portent un signal faible, mais
+  redondant avec le texte.
 
 ## 2. Multicritère (5 critères + frontière α)
 
@@ -103,9 +121,15 @@ validation. Aucun choix (α, poids, modèle) n'a été fait en regardant le test
   pas le hasard.
 - Au test, le portefeuille bat le hasard à 25 % et à 50 % du budget (ligne 12). Avec M0, il ne le
   bat pas (ligne 13) : le gain vient des probabilités du ML.
+- **Bloc D** : avec les probabilités de M6, le portefeuille fait 86,1 % de projets réussis, contre
+  80,5 % avec M1-texte et 77,7 % au hasard (ligne 21). **Cet écart n'établit pas que les facteurs
+  sélectionnent mieux**, pour trois raisons :
+  - l'écart n'est pas testé et les IC se recouvrent ;
+  - M6 ne prédit pas mieux que M1-texte (ligne 20) ;
+  - le backtest est instable : retirer 16 projets du pool fait passer M1-texte de 85,3 % à
+    80,5 %.
 - **Ce que les agents apportent à la sélection :** avec α < 1, ils déplacent le portefeuille vers
-  des projets mieux notés sur les critères, sans gain de réussite. Le bloc D (facteurs extraits)
-  teste s'ils peuvent améliorer les probabilités elles-mêmes (en cours).
+  des projets mieux notés sur les critères, sans gain de réussite démontré.
 
 ## 4. Agentique
 
@@ -128,12 +152,17 @@ validation. Aucun choix (α, poids, modèle) n'a été fait en regardant le test
     web.
   - Test de reconnaissance (ligne 16) : 0/50 projets reconnus et 0/50 notes IEG proposées. Un seul
     nom approché (« FMR 2 »), reconstitué à partir des sigles du texte.
-- **Agents extracteurs (bloc D, en cours).** Grille figée de 19 facteurs de risque factuels :
-  composantes, agences, cofinanceurs, catégorie environnementale, note de risque, réforme à
-  adopter, phase 2, fragilité, etc.
-  - Un seul appel par dossier sur des phrases présélectionnées en Python, avec citations par
-    numéros et « non trouvé » autorisé. Les nombres sont comptés en Python.
-  - Pilote sur 30 projets avec des critères fixés à l'avance, puis M6 = M1-texte + facteurs.
+- **Agents extracteurs (bloc D).** Grille figée de 19 facteurs de risque factuels : composantes,
+  agences, cofinanceurs, catégorie environnementale, note de risque, réforme à adopter, phase 2,
+  fragilité, etc.
+  - Un seul appel par dossier sur des phrases présélectionnées en Python dans le dossier complet,
+    avec citations par numéros et « non trouvé » autorisé. Les nombres sont comptés en Python.
+  - Pilote sur 30 projets, avec des critères fixés à l'avance : citations 99,8 %, 27 s,
+    19/19 facteurs.
+  - Passage complet sur 1 582 dossiers : 0 erreur, citations 97,6 %, pas nettement pire que le
+    pilote selon des seuils fixés avant.
+  - Exactitude vérifiable sur le pilote : 14/15 (catégorie environnementale) et 13/13 (note de
+    risque). first_operation (1/3 juste) a été exclu avant le réglage.
 - **Démo.** La fiche projet montre la probabilité de réussite (ML), les arguments Pour / Contre avec
   leurs phrases citées, le verdict du critique et les 5 notes justifiées. La page multicritère a un
   curseur α et les poids des critères.
@@ -151,9 +180,17 @@ validation. Aucun choix (α, poids, modèle) n'a été fait en regardant le test
    comité (300 projets) a servi deux fois (M3/M4, puis M7).
 4. **Le test 2012–2017 a été consulté pendant la phase 2** ; le coffre-fort montre que les
    chiffres de test étaient optimistes pour M1.
-5. **Coffre-fort.** M1-texte n'a pu être mesuré que sur 78 projets (refus 403 du serveur), donc de
-   façon descriptive. Les agents n'ont pas été évalués sur le coffre.
-6. Les indicateurs pays (WDI, WGI) sont les valeurs révisées actuelles, pas celles connues à
+5. **Coffre-fort.**
+   - M1 y est au niveau du hasard sur les projets récents.
+   - M1-texte n'a pu être mesuré que sur 78 projets (refus 403 du serveur), de façon
+     descriptive et non concluante.
+   - Les agents (blocs C et D) n'ont pas été évalués sur le coffre, faute de textes.
+6. **Bloc D.**
+   - Exactitude des facteurs mesurée sur le pilote seulement.
+   - Pas de facteurs pour l'entraînement ≤ 2007 (quota Kaggle) : M5/M6 sont appris sur
+     853 projets.
+   - Le backtest est sensible à la composition du pool (±5 points).
+7. Les indicateurs pays (WDI, WGI) sont les valeurs révisées actuelles, pas celles connues à
    l'époque.
 
 ## Attributions

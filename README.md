@@ -5,7 +5,7 @@ Les agents lisent les dossiers d'évaluation **ex ante** de projets financés pa
 la vérité terrain est la note de résultat de l'IEG. Spécification :
 `docs/Cahier_des_charges_v3_InvestAgents.pdf`. Projet d'école, budget LLM : 0 € (modèle local).
 
-**État : v1.0+, système de bout en bout ; coffre-fort évalué (M1 au niveau du hasard) ; bloc D en cours.** Données → ML (M0, M1, M1-texte) → calibration →
+**État : système de bout en bout ; coffre-fort évalué (M1 au niveau du hasard) ; bloc D (agents extracteurs) évalué.** Données → ML (M0, M1, M1-texte) → calibration →
 sélection sous budget → comité d'agents complet (600 projets notés sur GPU Kaggle gratuit) →
 M3 / M4 → démo Streamlit. **Résultats et limites : [`reports/rapport_final.md`](reports/rapport_final.md).**
 
@@ -15,6 +15,10 @@ En bref (test 2012–2017, évalué une fois après gel sur la validation) :
 - Portefeuille sous budget (25 %) : 85,3 % de projets satisfaisants contre 77,2 % au hasard (p = 0,001).
 - Comité d'agents : 99,8 % des citations vérifiées et 0/50 projet reconnu, mais des notes **non
   prédictives** (M3 au niveau du hasard ; M4 − texte = −0,031 [−0,088 ; 0,029]). Résultat négatif.
+- Agents extracteurs (bloc D, 19 facteurs factuels cités) : seuls, signal faible mais réel (M5 − M0 =
+  +0,027 [0,003 ; 0,070] en AUC-PR) ; en plus du texte, rien (M6 − M1-texte = +0,003 [−0,039 ; 0,043]).
+- Coffre-fort (données neuves, évaluées une fois) : M1 au niveau du hasard (AUC-ROC 0,509) ; M1-texte
+  non concluant (78 projets seulement, refus 403 du serveur de documents).
 
 ## Lancer la démo
 
@@ -60,6 +64,11 @@ Voir [`kaggle/blocC/README.md`](kaggle/blocC/README.md) : préparation du jeu
 | `reports/blocB_resultats.md` | Variantes de texte, masquage des pays, backtest, contrôle M0 / M1 |
 | `reports/blocC_comite.md` | Comité : fonctionnement, citations, dispersion, reconnaissance |
 | `reports/blocC_m3_m4.md` | M3 / M4 : apport des notes du comité (négatif) |
+| `reports/blocC_m7.md` | M7 : sorties intermédiaires du débat (pas de preuve d'apport) |
+| `reports/frontiere_alpha.md` | Frontière α : probabilité de réussite (ML) + notes du comité |
+| `reports/blocD_pilote.md`, `reports/blocD_passage_complet.md` | Agents extracteurs : pilote, contrôle du passage complet |
+| `reports/blocD_m6.md` | M5 / M6 : apport des facteurs extraits, backtest |
+| `reports/coffre_fort.md` | Évaluation finale unique sur le coffre-fort (amendement documenté) |
 
 ## Limites principales
 
