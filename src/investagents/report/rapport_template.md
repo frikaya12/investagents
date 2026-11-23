@@ -334,6 +334,30 @@ validation, cela coûte des projets réussis, au test l'effet n'est pas mesurabl
 | 19 | Extracteurs : dossiers, erreurs, citations valides | {{d_full_n}}, {{d_full_err}}, {{d_full_cit}} | pilote {{d_pilot_cit}} | L'extraction tient à l'échelle. |
 | 20 | Backtest bloc D, 25 % du budget : M6 / M1-texte | {{bt_m6}} ({{bt_m6_p}}) / {{bt_text}} ({{bt_text_p}}) | hasard {{bt_random}} | À ne pas interpréter : instabilité de ± 5 points (limite 3). |
 
+**AUC-ROC au test, IC à 95 %** (0,5 = hasard, quel que soit le taux d'échec). Chaque modèle est
+mesuré sur son propre échantillon de test : on compare d'abord à 0,5, puis au texte seul sur le
+même échantillon.
+
+| Modèle | Échantillon de test | AUC-ROC [IC 95 %] | IC entièrement au-dessus de 0,5 ? |
+| --- | --- | --- | --- |
+| M0 · taux de base | test complet (n = {{n_test}}) | {{roc_m0}} | — (hasard par construction) |
+| M1 · gradient boosting | test complet (n = {{n_test}}) | {{roc_m1}} | {{roc_m1_above}} |
+| M1 · gradient boosting | projets avec texte (n = {{n_test_text}}) | {{roc_m1_text_subset}} | {{roc_m1_text_subset_above}} |
+| M1-texte · TF-IDF | projets avec texte (n = {{n_test_text}}) | {{roc_m1t}} | {{roc_m1t_above}} |
+| Texte seul (référence du comité) | test du comité (n = {{c_n_test}}) | {{roc_c_texte}} | {{roc_c_texte_above}} |
+| M3 · 5 notes du Juge | test du comité (n = {{c_n_test}}) | {{roc_m3}} | {{roc_m3_above}} |
+| M4 · texte + notes | test du comité (n = {{c_n_test}}) | {{roc_m4}} | {{roc_m4_above}} |
+| M7 · texte + débat | test du comité (n = {{c_n_test}}) | {{roc_m7}} | {{roc_m7_above}} |
+| Texte seul (référence du bloc D) | test du bloc D (n = {{d_n_test}}) | {{roc_d_texte}} | {{roc_d_texte_above}} |
+| M5 · 19 facteurs | test du bloc D (n = {{d_n_test}}) | {{roc_m5}} | {{roc_m5_above}} |
+| M6 · texte + facteurs | test du bloc D (n = {{d_n_test}}) | {{roc_m6}} | {{roc_m6_above}} |
+| M1 · coffre-fort | projets évalués en 2025+ (n = {{vault_n}}) | {{roc_vault_m1}} | {{roc_vault_m1_above}} |
+
+*Lecture : les AUC-ROC restent modestes (au mieux {{roc_max}}). M3 est sous 0,5 et son IC
+contient 0,5 : les notes du Juge ne classent pas mieux que le hasard. Le texte seul du comité a un
+IC qui touche 0,5, faute de projets ({{c_n_test}}). Sur le coffre-fort, M1 tombe à 0,5. Ce tableau ne dit
+pas si un modèle bat un autre : pour cela, voir les écarts appariés.*
+
 @@fig:auc@@
 
 *Ce qu'il faut retenir : tous les modèles sont proches de leur taux de base ; seul le texte du

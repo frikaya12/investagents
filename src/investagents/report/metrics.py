@@ -369,6 +369,29 @@ def load() -> Metrics:  # noqa: PLR0915 (une longue liste de lectures, volontair
     m.put("d_cv_text", num(d6f["cv_auc_pr_text_alone"]), d6f["cv_auc_pr_text_alone"], D6F)
     m.put("d_C", num(d6f["models"]["m5"]["C"]), d6f["models"]["m5"]["C"], D6F)
 
+    # --- tableau AUC-ROC au test (IC 95 %), avec « IC entièrement au-dessus de 0,5 ? » calculé ---
+    bc_m, d6_m = bc["models"], d6["models"]
+    roc = {
+        "roc_m0": (tf["M0"]["auc_roc"], P2),
+        "roc_m1": (tf["M1"]["auc_roc"], P2),
+        "roc_m1_text_subset": (mod["m1"]["auc_roc"], BB),
+        "roc_m1t": (mod["m1_text"]["auc_roc"], BB),
+        "roc_c_texte": (bc_m["texte"]["ci"]["auc_roc"], BC),
+        "roc_m3": (bc_m["m3"]["ci"]["auc_roc"], BC),
+        "roc_m4": (bc_m["m4"]["ci"]["auc_roc"], BC),
+        "roc_m7": (m7["models"]["m7"]["ci"]["auc_roc"], M7),
+        "roc_d_texte": (d6_m["texte"]["ci"]["auc_roc"], D6),
+        "roc_m5": (d6_m["m5"]["ci"]["auc_roc"], D6),
+        "roc_m6": (d6_m["m6"]["ci"]["auc_roc"], D6),
+        "roc_vault_m1": (v["models"]["M1"]["ci"]["auc_roc"], V),
+    }
+    for key, (d, src) in roc.items():
+        m.put(key, ci(d), d, src)
+        if key != "roc_m0":
+            m.put(key + "_above", "oui" if d["ci_low"] > 0.5 else "non", d["ci_low"] > 0.5, src)
+    best = max(d["value"] for d, _ in roc.values())
+    m.put("roc_max", num(best, 2), best, "tableau AUC-ROC ci-dessus")
+
     # écart entre les deux backtests de M1-texte (instabilité)
     m.put("bt_pool_gap", integer(by_budget[0.25]["n_pool"] - bt["hasard"]["n_pool"]),
           by_budget[0.25]["n_pool"] - bt["hasard"]["n_pool"], BB + " ; " + D6)  # fmt: skip

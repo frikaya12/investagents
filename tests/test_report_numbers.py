@@ -91,6 +91,14 @@ def _expected_numbers() -> list[str]:
         fr_ci(bb["diffs"]["chosen - m1"]["auc_pr"], signed=True),
         fr_ci(p2["test_full"]["M1"]["auc_pr"]),
         fr_ci(bc["models"]["m3"]["ci"]["auc_pr"]),
+        fr_ci(bc["models"]["m3"]["ci"]["auc_roc"]),
+        fr_ci(bc["models"]["m4"]["ci"]["auc_roc"]),
+        fr_ci(m7["models"]["m7"]["ci"]["auc_roc"]),
+        fr_ci(d6["models"]["m5"]["ci"]["auc_roc"]),
+        fr_ci(d6["models"]["m6"]["ci"]["auc_roc"]),
+        fr_ci(bb["models"]["m1_text"]["auc_roc"]),
+        fr_ci(p2["test_full"]["M1"]["auc_roc"]),
+        fr_ci(p2["test_full"]["M0"]["auc_roc"]),
         fr_ci(bc["diffs"]["m4 - texte"]["auc_pr"], signed=True),
         fr_ci(m7["diff_m7_texte"]["auc_pr"], signed=True),
         fr_ci(d6["diffs"]["m6 - texte"]["auc_pr"], signed=True),
@@ -226,3 +234,19 @@ def test_identical_citation_limit_everywhere():
     for p in (MD, ROOT / "docs" / "resume_prof.md"):
         assert expected in " ".join(p.read_text(encoding="utf-8").split()), p.name
     assert "un sur quatre" not in MD.read_text(encoding="utf-8")
+
+
+def test_roc_table_in_report_and_resume():
+    """Tableau AUC-ROC (IC 95 %) : M0, M1, M1-texte, M3, M4, M5, M6, M7 lus dans les JSON."""
+    p2 = j("experiments/phase2/results.json")["test_full"]
+    bb = j("experiments/blocB/results.json")["models"]
+    bc = j("experiments/blocC/models_results.json")["models"]
+    m7 = j("experiments/blocC/m7_results.json")["models"]
+    d6 = j("experiments/blocD/m6_results.json")["models"]
+    rows = [p2["M0"]["auc_roc"], p2["M1"]["auc_roc"], bb["m1_text"]["auc_roc"],
+            bc["m3"]["ci"]["auc_roc"], bc["m4"]["ci"]["auc_roc"], m7["m7"]["ci"]["auc_roc"],
+            d6["m5"]["ci"]["auc_roc"], d6["m6"]["ci"]["auc_roc"]]  # fmt: skip
+    for path in (MD, HTML, ROOT / "docs" / "resume_prof.md"):
+        content = path.read_text(encoding="utf-8")
+        for d in rows:
+            assert fr_ci(d) in content, f"{fr_ci(d)} absent de {path.name}"

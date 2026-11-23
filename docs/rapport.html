@@ -604,6 +604,97 @@ référence à battre et ce qu'elle prouve vraiment.</p>
 </tr>
 </tbody>
 </table>
+<p><strong>AUC-ROC au test, IC à 95 %</strong> (0,5 = hasard, quel que soit le taux d'échec). Chaque modèle est
+mesuré sur son propre échantillon de test : on compare d'abord à 0,5, puis au texte seul sur le
+même échantillon.</p>
+<table>
+<thead>
+<tr>
+<th>Modèle</th>
+<th>Échantillon de test</th>
+<th>AUC-ROC [IC 95 %]</th>
+<th>IC entièrement au-dessus de 0,5 ?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M0 · taux de base</td>
+<td>test complet (n = 1 294)</td>
+<td>0,500 [0,500 ; 0,500]</td>
+<td>— (hasard par construction)</td>
+</tr>
+<tr>
+<td>M1 · gradient boosting</td>
+<td>test complet (n = 1 294)</td>
+<td>0,567 [0,529 ; 0,603]</td>
+<td>oui</td>
+</tr>
+<tr>
+<td>M1 · gradient boosting</td>
+<td>projets avec texte (n = 755)</td>
+<td>0,573 [0,523 ; 0,621]</td>
+<td>oui</td>
+</tr>
+<tr>
+<td>M1-texte · TF-IDF</td>
+<td>projets avec texte (n = 755)</td>
+<td>0,598 [0,546 ; 0,647]</td>
+<td>oui</td>
+</tr>
+<tr>
+<td>Texte seul (référence du comité)</td>
+<td>test du comité (n = 300)</td>
+<td>0,569 [0,487 ; 0,651]</td>
+<td>non</td>
+</tr>
+<tr>
+<td>M3 · 5 notes du Juge</td>
+<td>test du comité (n = 300)</td>
+<td>0,472 [0,397 ; 0,549]</td>
+<td>non</td>
+</tr>
+<tr>
+<td>M4 · texte + notes</td>
+<td>test du comité (n = 300)</td>
+<td>0,544 [0,460 ; 0,625]</td>
+<td>non</td>
+</tr>
+<tr>
+<td>M7 · texte + débat</td>
+<td>test du comité (n = 300)</td>
+<td>0,601 [0,518 ; 0,686]</td>
+<td>oui</td>
+</tr>
+<tr>
+<td>Texte seul (référence du bloc D)</td>
+<td>test du bloc D (n = 729)</td>
+<td>0,604 [0,553 ; 0,653]</td>
+<td>oui</td>
+</tr>
+<tr>
+<td>M5 · 19 facteurs</td>
+<td>test du bloc D (n = 729)</td>
+<td>0,566 [0,517 ; 0,614]</td>
+<td>oui</td>
+</tr>
+<tr>
+<td>M6 · texte + facteurs</td>
+<td>test du bloc D (n = 729)</td>
+<td>0,601 [0,554 ; 0,649]</td>
+<td>oui</td>
+</tr>
+<tr>
+<td>M1 · coffre-fort</td>
+<td>projets évalués en 2025+ (n = 700)</td>
+<td>0,509 [0,457 ; 0,562]</td>
+<td>non</td>
+</tr>
+</tbody>
+</table>
+<p><em>Lecture : les AUC-ROC restent modestes (au mieux 0,60). M3 est sous 0,5 et son IC
+contient 0,5 : les notes du Juge ne classent pas mieux que le hasard. Le texte seul du comité a un
+IC qui touche 0,5, faute de projets (300). Sur le coffre-fort, M1 tombe à 0,5. Ce tableau ne dit
+pas si un modèle bat un autre : pour cela, voir les écarts appariés.</em></p>
 <figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 362" width="760" height="362" role="img" aria-label="AUC-PR des modèles au test, avec IC 95 % et taux de base" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"><title>AUC-PR des modèles au test, avec IC 95 % et taux de base</title><rect width="760" height="362" fill="#fcfcfb"/><line x1="250.0" x2="250.0" y1="32" y2="312" stroke="#e7e6e1"/><text x="250.0" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,10</text><line x1="319.4" x2="319.4" y1="32" y2="312" stroke="#e7e6e1"/><text x="319.4" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,15</text><line x1="388.9" x2="388.9" y1="32" y2="312" stroke="#e7e6e1"/><text x="388.9" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,20</text><line x1="458.3" x2="458.3" y1="32" y2="312" stroke="#e7e6e1"/><text x="458.3" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,25</text><line x1="527.7" x2="527.7" y1="32" y2="312" stroke="#e7e6e1"/><text x="527.7" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,30</text><line x1="597.1" x2="597.1" y1="32" y2="312" stroke="#e7e6e1"/><text x="597.1" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,35</text><line x1="666.6" x2="666.6" y1="32" y2="312" stroke="#e7e6e1"/><text x="666.6" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,40</text><line x1="736.0" x2="736.0" y1="32" y2="312" stroke="#e7e6e1"/><text x="736.0" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,45</text><text x="493.0" y="346.0" font-size="12" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">AUC-PR (classe « échec »), IC 95 %</text><circle cx="250" cy="16" r="5" fill="#2a78d6"/><text x="264.0" y="16.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" dominant-baseline="middle">AUC-PR du modèle</text><rect x="388" y="16" width="3" height="12" transform="translate(-1,-6)" fill="#7a7974"/><text x="402.0" y="16.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" dominant-baseline="middle">taux de base (hasard)</text><text x="8.0" y="51.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M1 · variables chiffrées ex ante</text><text x="8.0" y="65.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">test, projets avec texte · n = 755</text><line x1="407.2" x2="555.3" y1="57.0" y2="57.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="409.4" y="49.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,216</title></rect><circle cx="470.4" cy="57.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M1 · variables chiffrées ex ante : 0,259 [0,213 ; 0,320], taux de base 0,216</title></circle><text x="8.0" y="85.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M1-texte · TF-IDF du dossier complet</text><text x="8.0" y="99.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">test, projets avec texte · n = 755</text><line x1="452.0" x2="622.9" y1="91.0" y2="91.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="409.4" y="83.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,216</title></rect><circle cx="524.2" cy="91.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M1-texte · TF-IDF du dossier complet : 0,297 [0,245 ; 0,369], taux de base 0,216</title></circle><text x="8.0" y="119.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M3 · 5 notes du Juge</text><text x="8.0" y="133.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">test du comité · n = 300</text><line x1="322.5" x2="488.8" y1="125.0" y2="125.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="405.9" y="117.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,213</title></rect><circle cx="388.9" cy="125.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M3 · 5 notes du Juge : 0,200 [0,152 ; 0,272], taux de base 0,213</title></circle><text x="8.0" y="153.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M4 · texte + 5 notes du Juge</text><text x="8.0" y="167.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">test du comité · n = 300</text><line x1="378.7" x2="612.0" y1="159.0" y2="159.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="405.9" y="151.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,213</title></rect><circle cx="475.9" cy="159.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M4 · texte + 5 notes du Juge : 0,263 [0,193 ; 0,361], taux de base 0,213</title></circle><text x="8.0" y="187.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M7 · texte + sorties du débat</text><text x="8.0" y="201.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">test du comité · n = 300</text><line x1="438.7" x2="704.4" y1="193.0" y2="193.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="405.9" y="185.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,213</title></rect><circle cx="556.2" cy="193.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M7 · texte + sorties du débat : 0,321 [0,236 ; 0,427], taux de base 0,213</title></circle><text x="8.0" y="221.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M5 · 19 facteurs extraits seuls</text><text x="8.0" y="235.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">test du bloc D · n = 729</text><line x1="394.3" x2="517.7" y1="227.0" y2="227.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="406.8" y="219.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,214</title></rect><circle cx="446.4" cy="227.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M5 · 19 facteurs extraits seuls : 0,241 [0,204 ; 0,293], taux de base 0,214</title></circle><text x="8.0" y="255.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M6 · texte + facteurs extraits</text><text x="8.0" y="269.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">test du bloc D · n = 729</text><line x1="454.9" x2="623.3" y1="261.0" y2="261.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="406.8" y="253.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,214</title></rect><circle cx="527.9" cy="261.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M6 · texte + facteurs extraits : 0,300 [0,248 ; 0,369], taux de base 0,214</title></circle><text x="8.0" y="289.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M1 · coffre-fort · projets évalués en 2025+</text><text x="8.0" y="303.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">données neuves · n = 700</text><line x1="310.4" x2="404.8" y1="295.0" y2="295.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="353.6" y="287.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,176</title></rect><circle cx="350.1" cy="295.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M1 · coffre-fort · projets évalués en 2025+ : 0,172 [0,144 ; 0,211], taux de base 0,176</title></circle></svg></figure>
 <p><em>Ce qu'il faut retenir : tous les modèles sont proches de leur taux de base ; seul le texte du
 dossier (M1-texte, et M6 qui le contient) s'en écarte nettement, et M1 retombe au taux de base sur

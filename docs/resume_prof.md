@@ -32,6 +32,30 @@ frontière α entre probabilité de réussite et notes du comité.
 | Fragilité du backtest | même modèle : 85,3 % (bloc B) contre 80,5 % (bloc D), 16 projets d'écart | Fragile | ± 5 points selon le pool : un écart de cette taille entre modèles ne veut rien dire. |
 | Frontière α | test : 79,8 % (α = 1), 83,5 % (α = 0,5), 78,6 % (α = 0) ; impact 6,65 → 7,41 ; validation −13,0 points | Arbitrage | Plus de poids au comité : portefeuille mieux noté, mais coût en réussite en validation. |
 
+**AUC-ROC au test, IC à 95 %** (0,5 = hasard, quel que soit le taux d'échec). Chaque modèle est
+mesuré sur son propre échantillon de test : on compare d'abord à 0,5, puis au texte seul sur le
+même échantillon.
+
+| Modèle | Échantillon de test | AUC-ROC [IC 95 %] | IC entièrement au-dessus de 0,5 ? |
+| --- | --- | --- | --- |
+| M0 · taux de base | test complet (n = 1 294) | 0,500 [0,500 ; 0,500] | — (hasard par construction) |
+| M1 · gradient boosting | test complet (n = 1 294) | 0,567 [0,529 ; 0,603] | oui |
+| M1 · gradient boosting | projets avec texte (n = 755) | 0,573 [0,523 ; 0,621] | oui |
+| M1-texte · TF-IDF | projets avec texte (n = 755) | 0,598 [0,546 ; 0,647] | oui |
+| Texte seul (référence du comité) | test du comité (n = 300) | 0,569 [0,487 ; 0,651] | non |
+| M3 · 5 notes du Juge | test du comité (n = 300) | 0,472 [0,397 ; 0,549] | non |
+| M4 · texte + notes | test du comité (n = 300) | 0,544 [0,460 ; 0,625] | non |
+| M7 · texte + débat | test du comité (n = 300) | 0,601 [0,518 ; 0,686] | oui |
+| Texte seul (référence du bloc D) | test du bloc D (n = 729) | 0,604 [0,553 ; 0,653] | oui |
+| M5 · 19 facteurs | test du bloc D (n = 729) | 0,566 [0,517 ; 0,614] | oui |
+| M6 · texte + facteurs | test du bloc D (n = 729) | 0,601 [0,554 ; 0,649] | oui |
+| M1 · coffre-fort | projets évalués en 2025+ (n = 700) | 0,509 [0,457 ; 0,562] | non |
+
+*Lecture : les AUC-ROC restent modestes (au mieux 0,60). M3 est sous 0,5 et son IC
+contient 0,5 : les notes du Juge ne classent pas mieux que le hasard. Le texte seul du comité a un
+IC qui touche 0,5, faute de projets (300). Sur le coffre-fort, M1 tombe à 0,5. Ce tableau ne dit
+pas si un modèle bat un autre : pour cela, voir les écarts appariés.*
+
 **Conclusion.** Le ML prédit faiblement ; les agents justifient chaque décision avec des sources
 vérifiées et extraient des facteurs de risque lisibles et prédictifs, mais n'ajoutent rien au texte
 complet.
