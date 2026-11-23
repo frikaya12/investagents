@@ -95,7 +95,11 @@ def test_m6_factor_row_uses_only_verified_answers():
     out["env_category"] = {"status": "found", "value": "A", "sentence_ids": [99999]}  # invalide
     out["weak_capacity"] = {"status": "found", "value": "yes", "sentence_ids": [sid]}
     row = factor_row(verify(ExtractionOutput.model_validate(out).model_dump(), cand))
-    assert row["components"] == 3 and row["components_found"] == 1
+    import math
+
+    assert row["components"] == math.log1p(3) and row["components_missing"] == 0
     assert row["overall_risk_rating"] == 3
-    assert row["env_A"] == 0 and row["env_category_found"] == 0  # citation invalide ignorée
+    assert row["env_A"] == 0 and row["env_category_missing"] == 1  # citation invalide ignorée
     assert row["weak_capacity"] == 1 and row["resettlement"] == 0
+    assert row["resettlement_missing"] == 1
+    assert "first_operation" not in row and "first_operation_missing" not in row  # exclu

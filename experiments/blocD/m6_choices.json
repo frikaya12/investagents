@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-23",
+  "basis": "pilote de 30 projets (validation), sans regarder l'issue",
+  "excluded_factors": [
+    "first_operation"
+  ],
+  "excluded_reason": "first_operation : 1 « yes » juste sur 3 à la relecture du pilote",
+  "coding": "valeur + indicateur « non trouvé » par facteur ; oui/non 0/1 ; risques rang 0–3 ; catégorie environnementale indicatrices A/B/C/FI ; listes log(1 + min(n, 10))",
+  "models": {
+    "M5": "facteurs seuls",
+    "M6": "logit M1-texte + facteurs"
+  },
+  "tuning": "C ∈ [0.003, 0.01, 0.03, 0.1, 0.3, 1.0, 3.0], VC 5 plis sur la validation, critère AUC-PR",
+  "calibration": "Platt sur prédictions hors pli de la validation ; jamais le test",
+  "backtest": "objectif figé p_cost, budget 25%, ≤ 25 % par pays, par cohorte"
+}
