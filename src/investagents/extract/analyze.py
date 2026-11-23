@@ -62,12 +62,12 @@ def summarize(results: list[dict]) -> tuple[dict, pd.DataFrame]:
         "p90_seconds": float(seconds.quantile(0.9)) if len(seconds) else None,
         "n_factors_found_over_30pct": n_good,
         "criteria": {
-            "citations>=95%": cit >= CRIT_CITATIONS,
-            "median<=40s": bool(len(seconds)) and seconds.median() <= CRIT_SECONDS,
-            ">=10 factors found in >30%": n_good >= CRIT_N_FACTORS,
+            "citations>=95%": bool(cit >= CRIT_CITATIONS),
+            "median<=40s": bool(len(seconds) and seconds.median() <= CRIT_SECONDS),
+            ">=10 factors found in >30%": bool(n_good >= CRIT_N_FACTORS),
         },
     }  # fmt: skip
-    summary["pilot_ok"] = all(summary["criteria"].values()) and summary["n_errors"] == 0
+    summary["pilot_ok"] = bool(all(summary["criteria"].values()) and summary["n_errors"] == 0)
     return summary, table
 
 

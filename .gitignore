@@ -36,3 +36,4 @@ desktop.ini
 
 # --- Journaux Kaggle volumineux (re-téléchargeables) ---
 experiments/blocC/kaggle_run*/ollama_*.log
+experiments/blocD/kaggle_*/ollama_*.log
