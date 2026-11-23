@@ -1,0 +1,14 @@
+# Thème de la démo InvestAgents : sobre, une seule couleur principale (le bleu de la vitrine).
+[theme]
+base = "light"
+primaryColor = "#2a78d6"
+backgroundColor = "#fcfcfb"
+secondaryBackgroundColor = "#f1f0ec"
+textColor = "#0b0b0b"
+font = "sans serif"
+
+[server]
+headless = true
+
+[browser]
+gatherUsageStats = false

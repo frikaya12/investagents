@@ -50,8 +50,8 @@ def load_factors(project_id: str) -> dict | None:
     return None
 
 
-def sheet(rec: dict, row: pd.Series) -> dict:
-    """Contenu de la fiche d'un projet."""
+def sheet(rec: dict, row: pd.Series, factors_lookup=load_factors) -> dict:
+    """Contenu de la fiche d'un projet (`factors_lookup` : project_id -> facteurs, ou None)."""
     cites = {(c["criterion"], c["stance"]): c for c in rec.get("citations", [])}
     verdicts = {}
     initial = rec["initial_debate"]["arguments"]
@@ -80,7 +80,7 @@ def sheet(rec: dict, row: pd.Series) -> dict:
         "p_success": float(row["p_success"]),
         "scores": rec["judge"]["scores"],
         "arguments": args,
-        "factors": load_factors(row["project_id"]),
+        "factors": factors_lookup(row["project_id"]),
         "outcome": row.get("outcome"),
     }
 

@@ -22,8 +22,6 @@ import subprocess
 from html import escape
 from pathlib import Path
 
-from markdown_it import MarkdownIt
-
 from investagents.report import glossary
 from investagents.report.figures import FIGURES
 from investagents.report.metrics import ROOT, Metrics, load
@@ -124,6 +122,18 @@ def _sommaire_md(heads: list[tuple[str, str]]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def section_markdown(n: int, m: Metrics) -> str:
+    """Section n du rapport (sans son titre), chiffres remplis, liens du glossaire en texte simple.
+
+    Sert à la démo : ses pages « Limites » et « Les agents » reprennent le texte du rapport.
+    """
+    src = TEMPLATE.read_text(encoding="utf-8")
+    parts = re.split(r"^## (\d+)\. .+$", src, flags=re.M)
+    body = dict(zip(parts[1::2], parts[2::2], strict=True))[str(n)]
+    body = LINK_RE.sub(lambda g: (g.group(2) or g.group(1)).strip(), body)
+    return fill(body, m).strip()
+
+
 def render_resume(m: Metrics) -> str:
     """Résumé de présentation pour le prof (docs/resume_prof.md, aussi affiché dans la démo)."""
     header = ("<!-- Fichier généré par `uv run python -m investagents.report.build` depuis "
@@ -166,6 +176,8 @@ def render_html(m: Metrics) -> str:
                      text)  # fmt: skip
     text = FIG_RE.sub(lambda g: f"<figure>{FIGURES[g.group(1)](m)}</figure>", text)
     text = text.replace("@@glossary@@", "GLOSSARY_PLACEHOLDER")
+    from markdown_it import MarkdownIt  # import ici : la démo importe ce module sans markdown-it
+
     md = MarkdownIt("commonmark", {"html": True, "typographer": False}).enable("table")
     body = md.render(text).replace("<p>GLOSSARY_PLACEHOLDER</p>", _glossary_html(m, linked))
     first_h2 = body.index('<h2 id="s-0">')
