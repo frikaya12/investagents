@@ -106,15 +106,6 @@ def test_predictions() -> pd.DataFrame:
     return pd.read_parquet(EXP / "blocB/test_predictions.parquet")
 
 
-@st.cache_data
 def identical_citation_share() -> float:
-    """Part des paires Pour / Contre (même critère, même projet) qui citent les mêmes phrases."""
-    recs, _ = committee()
-    n = same = 0
-    for r in recs.values():
-        args = r["debate"]["arguments"]
-        ids = {(a["criterion"], a["stance"]): a.get("sentence_ids") for a in args}
-        for c in {k[0] for k in ids}:
-            n += 1
-            same += ids.get((c, "pro")) == ids.get((c, "contra"))
-    return same / n
+    """Part des paires Pour / Contre qui citent les mêmes phrases (lue par report/metrics.py)."""
+    return float(metrics().raw["ident_cit_pct"])

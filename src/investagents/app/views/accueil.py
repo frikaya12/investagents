@@ -10,8 +10,9 @@ t, r = m.txt, m.raw
 
 st.title("Des agents d'IA peuvent-ils aider à choisir les projets à financer ?")
 ui.intro(
-    "La Banque mondiale finance des milliers de projets de développement ; environ un sur quatre "
-    "est jugé en échec une fois terminé. Nous avons fait lire à des agents d'IA les "
+    f"La Banque mondiale finance des milliers de projets de développement ; {t['fail_census']} "
+    "des projets de notre recensement sont jugés en échec une fois terminés. Nous avons fait "
+    "lire à des agents d'IA les "
     "dossiers écrits "
     "<b>avant</b> le financement, puis vérifié leurs avis sur les vrais résultats."
 )
@@ -24,7 +25,9 @@ c1.metric(
     border=True,
 )
 c1.caption(f"contre {t['pf25_random']} pour un portefeuille tiré au hasard ({t['pf25_p']}), "
-           "même budget (25 %), test 2012–2017.")  # fmt: skip
+           "même budget (25 %), test 2012–2017. **Fragile :** "
+           f"{t['bt_text']} sur un pool voisin ({t['bt_pool_gap']} projets de moins), même "
+           "modèle.")  # fmt: skip
 c2.metric(
     "Le texte du dossier prédit l'échec… un peu",
     num(r["m1t_aucpr"]["value"]),

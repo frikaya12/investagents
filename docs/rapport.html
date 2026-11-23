@@ -95,8 +95,8 @@ chiffre n'est tapé à la main, et un test automatique vérifie que chaque chiff
 de résultats.</em></p>
 <div class="sommaire" id="sommaire"><strong>Sommaire</strong><ol start="0"><li><a href="#s-0">Résumé en une page</a></li><li><a href="#s-1">Contexte et question de recherche</a></li><li><a href="#s-2">Données</a></li><li><a href="#s-3">Anti-fuite</a></li><li><a href="#s-4">Protocole d&#x27;évaluation</a></li><li><a href="#s-5">Modèles ML</a></li><li><a href="#s-6">Agents juges (bloc C)</a></li><li><a href="#s-7">Agents extracteurs (bloc D)</a></li><li><a href="#s-8">Décision multicritère et sélection</a></li><li><a href="#s-9">Métriques finales</a></li><li><a href="#s-10">Ce que les agents apportent / n&#x27;apportent pas</a></li><li><a href="#s-11">Limites</a></li><li><a href="#s-12">Reproductibilité</a></li><li><a href="#s-13">Attributions et usage de l&#x27;IA</a></li><li><a href="#s-14">Glossaire</a></li></ol></div><h2 id="s-0">0. Résumé en une page</h2>
 <blockquote>
-<p><strong>En simple.</strong> La Banque mondiale finance des milliers de projets ; environ un sur quatre est jugé
-en échec une fois terminé. Nous avons demandé à des agents d'IA de lire le dossier écrit <em>avant</em>
+<p><strong>En simple.</strong> La Banque mondiale finance des milliers de projets ; 26,8 % des projets de notre
+recensement sont jugés en échec une fois terminés. Nous avons demandé à des agents d'IA de lire le dossier écrit <em>avant</em>
 le financement, de débattre du projet et de le noter, puis à un optimiseur de choisir quels
 projets financer avec un budget limité. Nous avons comparé tout cela à des modèles de machine
 learning classiques, sur des projets que personne n'avait regardés.</p>
@@ -680,6 +680,10 @@ gratuit. Le test du comité (300 projets) a servi deux fois (M3/M4, puis M7).</l
 <li><strong>Bloc D.</strong> Exactitude des facteurs mesurée sur le pilote seulement ; pas de facteurs pour
 l'entraînement ≤ 2007 : M5/M6 sont appris sur 853 projets.</li>
 <li><strong>Indicateurs pays.</strong> Les WDI sont les valeurs révisées actuelles, pas celles connues à l'époque.</li>
+<li><strong>Citations exactes, débat parfois creux.</strong> Dans 5 % des paires
+(158 sur 3 000), l'avocat Pour et l'avocat Contre citent exactement
+les mêmes phrases. Une citation vérifiée prouve que la phrase existe, pas que l'argument est
+pertinent.</li>
 </ol>
 <h2 id="s-12">12. Reproductibilité</h2>
 <blockquote>

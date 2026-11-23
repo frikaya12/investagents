@@ -115,3 +115,20 @@ def test_calibration_ece_matches_results():
     d = pd.read_parquet(root / "experiments/blocB/test_predictions.parquet")
     bb = json.loads((root / "experiments/blocB/results.json").read_text(encoding="utf-8"))
     assert abs(ece(d.y_fail, d.p_fail_m1_text) - bb["models"]["m1_text"]["ece_after"]) < 1e-12
+
+
+def test_home_shows_fragility_and_real_failure_rate():
+    t = load().txt
+    at = run_page("accueil")
+    captions = " ".join(c.value for c in at.caption)
+    assert "Fragile" in captions and t["bt_text"] in captions  # 80,5 % sur un pool voisin
+    texts = " ".join(md.value for md in at.markdown)
+    assert t["fail_census"] in texts and "un sur quatre" not in texts
+
+
+def test_limits_page_shows_identical_citations():
+    t = load().txt
+    at = run_page("limites")
+    texts = " ".join(md.value for md in at.markdown)
+    expected = f"({t['ident_cit_n']} sur {t['ident_cit_total']})"
+    assert " ".join(expected.split()) in " ".join(texts.split())

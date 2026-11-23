@@ -204,3 +204,25 @@ def test_no_paid_llm_mentioned():
         low = p.read_text(encoding="utf-8").lower()
         for bad in ("gemini", "openai", "gpt-4", "api payante utilisée"):
             assert bad not in low, f"{bad} dans {p.name}"
+
+
+def test_identical_citation_limit_everywhere():
+    """La limite « mêmes phrases citées » est dans le rapport et le résumé, chiffre lu dans les
+    sorties du comité (recompté ici indépendamment)."""
+    recs = {}
+    for line in (ROOT / "experiments/blocC/kaggle_run1/results.jsonl").open(encoding="utf-8"):
+        if line.strip():
+            r = json.loads(line)
+            recs[r["key"]] = r
+    same = total = 0
+    for r in recs.values():
+        if r.get("judge") and r.get("debate"):
+            args = r["debate"]["arguments"]
+            for c in {a["criterion"] for a in args}:
+                ids = [a.get("sentence_ids") for a in args if a["criterion"] == c]
+                total += 1
+                same += len(ids) == 2 and ids[0] == ids[1]
+    expected = f"({same} sur {total:,})".replace(",", " ")  # espaces normalisées par split()
+    for p in (MD, ROOT / "docs" / "resume_prof.md"):
+        assert expected in " ".join(p.read_text(encoding="utf-8").split()), p.name
+    assert "un sur quatre" not in MD.read_text(encoding="utf-8")

@@ -23,6 +23,7 @@ frontière α entre probabilité de réussite et notes du comité.
 | M3 · notes du Juge | AUC-PR 0,200 [0,152 ; 0,272] contre 0,213 | Négatif | Les notes des juges ne prédisent pas l'échec. |
 | M4 · texte + notes | écart avec le texte −0,031 [−0,088 ; 0,029] | Négatif | Ajouter les notes au texte n'apporte rien. |
 | M7 · texte + débat | écart avec le texte +0,027 [−0,059 ; 0,112] | Non démontré | Zéro est dans l'intervalle ; la validation annonçait l'inverse. |
+| Comité · qualité du débat | Pour et Contre citent les mêmes phrases dans 5 % des paires (158 sur 3 000) | Limite | Une citation exacte ne garantit pas un argument pertinent. |
 | Extraction · fiabilité | 1 582 dossiers, 0 erreur ; citations valides 97,6 % | Bon | L'extracteur lit les dossiers à l'échelle avec des citations vérifiées. |
 | M5 · 19 facteurs | écart avec M0 +0,027 [0,003 ; 0,070] | Faible mais réel | Les facteurs extraits portent un vrai signal, petit. |
 | M6 · texte + facteurs | écart avec le texte +0,003 [−0,039 ; 0,043] | Négatif | Ce signal est déjà dans le texte complet. |

@@ -12,8 +12,8 @@ de résultats.*
 
 ## 0. Résumé en une page
 
-> **En simple.** La Banque mondiale finance des milliers de projets ; environ un sur quatre est jugé
-> en échec une fois terminé. Nous avons demandé à des agents d'IA de lire le dossier écrit *avant*
+> **En simple.** La Banque mondiale finance des milliers de projets ; {{fail_census}} des projets de notre
+> recensement sont jugés en échec une fois terminés. Nous avons demandé à des agents d'IA de lire le dossier écrit *avant*
 > le financement, de débattre du projet et de le noter, puis à un optimiseur de choisir quels
 > projets financer avec un budget limité. Nous avons comparé tout cela à des modèles de machine
 > learning classiques, sur des projets que personne n'avait regardés.
@@ -391,6 +391,10 @@ apport des agents *en plus du texte* ne l'est (M4, M6 et M7 ont un intervalle qu
 7. **Bloc D.** Exactitude des facteurs mesurée sur le pilote seulement ; pas de facteurs pour
    l'entraînement ≤ 2007 : M5/M6 sont appris sur {{d_n_valid}} projets.
 8. **Indicateurs pays.** Les WDI sont les valeurs révisées actuelles, pas celles connues à l'époque.
+9. **Citations exactes, débat parfois creux.** Dans {{ident_cit_pct}} des paires
+   ({{ident_cit_n}} sur {{ident_cit_total}}), l'avocat Pour et l'avocat Contre citent exactement
+   les mêmes phrases. Une citation vérifiée prouve que la phrase existe, pas que l'argument est
+   pertinent.
 
 ## 12. Reproductibilité
 

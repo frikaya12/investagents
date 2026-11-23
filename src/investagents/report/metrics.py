@@ -117,6 +117,33 @@ DM = "experiments/blocD/mapping_check.json"
 V = "experiments/vault/results.json"
 
 
+RUN_C = "experiments/blocC/kaggle_run1/results.jsonl"
+
+
+def _identical_citation_pairs() -> tuple[int, int]:
+    """Paires Pour / Contre (même projet, même critère) qui citent exactement les mêmes phrases.
+
+    Lu dans les sorties brutes du comité ; dernière version par projet et projets jugés
+    seulement, comme committee_run/analyze.py.
+    """
+    recs = {}
+    with (ROOT / RUN_C).open(encoding="utf-8") as fh:
+        for line in fh:
+            if line.strip():
+                r = json.loads(line)
+                recs[r["key"]] = r
+    same = total = 0
+    for r in recs.values():
+        if not (r.get("judge") and r.get("debate")):
+            continue
+        ids = {(a["criterion"], a["stance"]): a.get("sentence_ids")
+               for a in r["debate"]["arguments"]}  # fmt: skip
+        for c in {k[0] for k in ids}:
+            total += 1
+            same += ids.get((c, "pro")) == ids.get((c, "contra"))
+    return same, total
+
+
 @lru_cache(maxsize=1)
 def load() -> Metrics:  # noqa: PLR0915 (une longue liste de lectures, volontairement à plat)
     m = Metrics()
@@ -125,6 +152,8 @@ def load() -> Metrics:  # noqa: PLR0915 (une longue liste de lectures, volontair
     feas = "reports/faisabilite.md"
     m.put("n_exploitable", _from_report(feas, "8 260"), 8260, feas)
     m.put("n_fail_exploitable", _from_report(feas, "2 210"), 2210, feas)
+    share = m.raw["n_fail_exploitable"] / m.raw["n_exploitable"]
+    m.put("fail_census", pct(share), share, feas)  # échecs / projets exploitables
     p2 = _json(P2)
     for s in ("train", "valid", "test"):
         c = p2["counts"][s]
@@ -245,6 +274,10 @@ def load() -> Metrics:  # noqa: PLR0915 (une longue liste de lectures, volontair
     m.put("judge_valid_auc_range", f"{num(min(auc.values()), 2)} à {num(max(auc.values()), 2)}",
           auc, COM)  # fmt: skip
     m.raw["score_mean"] = com["score_mean"]
+    same, total = _identical_citation_pairs()
+    m.put("ident_cit_pct", pct(same / total, 0), same / total, RUN_C)
+    m.put("ident_cit_n", integer(same), same, RUN_C)
+    m.put("ident_cit_total", integer(total), total, RUN_C)
 
     bc = _json(BC)
     m.put("c_n_test", integer(bc["n_test"]), bc["n_test"], BC)
