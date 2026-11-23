@@ -72,7 +72,10 @@ Voir [`kaggle/blocC/README.md`](kaggle/blocC/README.md) : préparation du jeu
 
 ## Limites principales
 
-Voir `reports/rapport_final.md`. Masquage incomplet (sigles des projets, une grande ville par
+Voir `reports/rapport_final.md`. **Backtest instable (±5 points selon le pool)** : même modèle
+(M1-texte), même objectif, même budget, 85,3 % de projets réussis au bloc B contre 80,5 % au bloc D,
+pour seulement 16 projets de différence ; un écart de backtest de moins de ~5 points entre deux
+modèles n'est pas interprétable. Masquage incomplet (sigles des projets, une grande ville par
 document), un seul passage du comité 7B, test 2012–2017 déjà consulté en phase 2 (le chiffre neuf
 viendra du coffre-fort), indicateurs pays révisés.
 

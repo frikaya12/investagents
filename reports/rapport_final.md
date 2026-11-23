@@ -189,8 +189,15 @@ validation. Aucun choix (α, poids, modèle) n'a été fait en regardant le test
    - Exactitude des facteurs mesurée sur le pilote seulement.
    - Pas de facteurs pour l'entraînement ≤ 2007 (quota Kaggle) : M5/M6 sont appris sur
      853 projets.
-   - Le backtest est sensible à la composition du pool (±5 points).
-7. Les indicateurs pays (WDI, WGI) sont les valeurs révisées actuelles, pas celles connues à
+7. **Instabilité du backtest de portefeuille (±5 points selon le pool).** Même modèle (M1-texte), même
+   objectif figé, même budget (25 %) : 85,3 % de projets réussis au bloc B, 80,5 % au bloc D. La
+   seule différence est le retrait de 16 projets sans date d'approbation connue (728 contre 712
+   projets) ; la calibration n'y est pour rien (vérifié). Avec un budget découpé par cohorte
+   annuelle, quelques projets de plus ou de moins changent le portefeuille. Les écarts de backtest
+   inférieurs à environ 5 points entre deux modèles (par exemple M6 86,1 % contre M1-texte
+   80,5 %) ne doivent donc pas être interprétés. Seule la comparaison au hasard sur le même pool
+   (mêmes tirages) est fiable.
+8. Les indicateurs pays (WDI, WGI) sont les valeurs révisées actuelles, pas celles connues à
    l'époque.
 
 ## Attributions
