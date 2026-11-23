@@ -36,6 +36,7 @@ RUN = Path("experiments/blocC/kaggle_run1")
 SAMPLE = Path("experiments/blocC/sample.csv")
 REPORT = Path("reports/blocC_comite.md")
 SCORES = Path("experiments/blocC/scores.parquet")
+SUMMARY = Path("experiments/blocC/committee_summary.json")  # chiffres repris par le rapport final
 
 
 def full_text_check(results: list[dict], sample: pd.DataFrame) -> tuple[int, int]:
@@ -215,6 +216,33 @@ def main() -> None:
         "comptent (M3, M4 avec IC) seront réglés sur la validation, puis test une seule fois.",
     ]
     REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    summary = {
+        "n_judged": int(len(judged)), "n_sample": int(len(sample)),
+        "n_valid": int((judged.split == "valid").sum()),
+        "n_test": int((judged.split == "test").sum()),
+        "n_projects_with_errors": int((df.n_errors > 0).sum()),
+        "median_seconds": float(df.seconds.median()), "elapsed_hours": float(prog["elapsed_hours"]),
+        "citation_ids_valid_mean": float(df.citation_valid_rate.mean()),
+        "quotes_found": int(ok), "quotes_total": int(total),
+        "score_mean": {c: float(judged[c].mean()) for c in CRITERIA},
+        "score_std": {c: float(judged[c].std()) for c in CRITERIA},
+        "share_ge9": {c: float((judged[c] >= 9).mean()) for c in CRITERIA},
+        "mean_corr_between_criteria": float(off.mean()),
+        "critic": {"strong": int(df.crit_strong.sum()), "weak": int(df.crit_weak.sum()),
+                   "unsupported": int(df.crit_unsupported.sum()),
+                   "total": int(df.n_critiques.sum())},
+        "share_args_rewritten": float(df.share_args_changed.mean()),
+        "valid_auc_roc_by_criterion": {c: float(roc_auc_score(va.y_fail, 10 - va[c]))
+                                       for c in CRITERIA},
+    }  # fmt: skip
+    if len(rt):
+        summary["recognition"] = {
+            "n": int(len(rt)), "recognized": int(rt.recognized.sum()),
+            "ieg_rating_proposed": int(rt.outcome_known.sum()),
+            "country_ok": float(rt.country_ok.mean()),
+            "name_similarity_ge_08": int((rt.name_similarity >= 0.8).sum()),
+        }  # fmt: skip
+    SUMMARY.write_text(json.dumps(summary, indent=2), encoding="utf-8")
     print("\n".join(lines))
 
 

@@ -1,0 +1,55 @@
+{
+  "n_judged": 600,
+  "n_sample": 600,
+  "n_valid": 300,
+  "n_test": 300,
+  "n_projects_with_errors": 0,
+  "median_seconds": 89.0,
+  "elapsed_hours": 7.51,
+  "citation_ids_valid_mean": 0.9983333333333333,
+  "quotes_found": 5986,
+  "quotes_total": 6000,
+  "score_mean": {
+    "relevance": 7.788333333333333,
+    "economic_efficiency": 6.51,
+    "feasibility": 6.465,
+    "risk": 7.535,
+    "impact_sustainability": 6.5183333333333335
+  },
+  "score_std": {
+    "relevance": 0.6461886891036017,
+    "economic_efficiency": 1.257989492247189,
+    "feasibility": 1.2129414846047295,
+    "risk": 0.8756252237996899,
+    "impact_sustainability": 1.2050244930859777
+  },
+  "share_ge9": {
+    "relevance": 0.0,
+    "economic_efficiency": 0.0,
+    "feasibility": 0.0,
+    "risk": 0.005,
+    "impact_sustainability": 0.0
+  },
+  "mean_corr_between_criteria": 0.21301054436329822,
+  "critic": {
+    "strong": 3029,
+    "weak": 2926,
+    "unsupported": 40,
+    "total": 5995
+  },
+  "share_args_rewritten": 0.4135,
+  "valid_auc_roc_by_criterion": {
+    "relevance": 0.4945486815415822,
+    "economic_efficiency": 0.49610167342799194,
+    "feasibility": 0.5337538032454361,
+    "risk": 0.5174315415821501,
+    "impact_sustainability": 0.4167723123732251
+  },
+  "recognition": {
+    "n": 50,
+    "recognized": 0,
+    "ieg_rating_proposed": 0,
+    "country_ok": 0.86,
+    "name_similarity_ge_08": 1
+  }
+}

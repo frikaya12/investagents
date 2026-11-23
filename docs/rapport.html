@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InvestAgents : rapport final</title>
+<meta name="description" content="Rapport final du projet InvestAgents : agents d'IA et machine
+learning pour évaluer et sélectionner des projets de la Banque mondiale.">
+<!-- Fichier généré par `uv run python -m investagents.report.build` (ne pas modifier). -->
+<style>:root { --blue:#2a78d6; --blue-soft:#e8f0fb; --ink:#0b0b0b; --ink2:#52514e; --muted:#7a7974;
+  --line:#e2e1dc; --bg:#f4f3f0; --card:#fcfcfb; --orange:#eb6834; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.6;
+  font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+.layout { display:grid; grid-template-columns:270px minmax(0,1fr); max-width:1240px; margin:0 auto; }
+nav.toc { position:sticky; top:0; align-self:start; height:100vh; overflow:auto; padding:28px 18px;
+  border-right:1px solid var(--line); font-size:14px; }
+nav.toc .brand { font-weight:700; font-size:16px; margin-bottom:4px; }
+nav.toc .sub { color:var(--muted); font-size:12.5px; margin-bottom:18px; }
+nav.toc a { display:block; color:var(--ink2); text-decoration:none; padding:5px 8px; border-radius:6px; }
+nav.toc a:hover, nav.toc a.active { background:var(--blue-soft); color:var(--ink); }
+nav.toc .links { margin-top:18px; padding-top:14px; border-top:1px solid var(--line); }
+main { padding:40px 56px 80px; max-width:900px; }
+main > p:first-of-type { margin-top:0; }
+h1 { font-size:34px; line-height:1.2; margin:0 0 14px; letter-spacing:-0.01em; }
+h2 { font-size:25px; margin:56px 0 14px; padding-top:12px; border-top:1px solid var(--line);
+  scroll-margin-top:16px; }
+h3 { font-size:18px; margin:26px 0 8px; }
+a { color:var(--blue); }
+a.gl { color:inherit; text-decoration:underline dotted var(--blue); text-underline-offset:3px;
+  text-decoration-thickness:2px; }
+a.gl:hover { color:var(--blue); }
+blockquote { margin:18px 0; padding:14px 18px; background:var(--blue-soft); border-left:4px solid var(--blue);
+  border-radius:0 10px 10px 0; }
+blockquote p { margin:0; }
+code { background:#ecebe6; padding:1px 5px; border-radius:4px; font-size:0.9em; }
+pre { background:#1d1d1b; color:#f0efec; padding:16px; border-radius:10px; overflow:auto; font-size:13px; }
+pre code { background:none; color:inherit; padding:0; }
+table { border-collapse:collapse; width:100%; margin:16px 0; font-size:14px; background:var(--card); }
+th, td { border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top; }
+th { background:#efeee9; }
+figure { margin:22px 0 6px; padding:14px; background:var(--card); border:1px solid var(--line);
+  border-radius:12px; overflow-x:auto; }
+figure svg { max-width:100%; height:auto; display:block; }
+figure + p em, figure + p { color:var(--ink2); }
+.sommaire { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 22px; }
+.sommaire ol { margin:6px 0 0; padding-left:20px; columns:2; column-gap:28px; }
+.sommaire li { break-inside:avoid; }
+.glossary { display:grid; gap:14px; }
+.term { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 18px;
+  scroll-margin-top:16px; }
+.term:target { outline:3px solid var(--blue); }
+.term h3 { margin:0 0 6px; }
+.term dl { margin:0; display:grid; grid-template-columns:150px 1fr; gap:4px 14px; font-size:15px; }
+.term dt { color:var(--muted); font-weight:600; }
+.term dd { margin:0; }
+.term .back { font-size:13.5px; text-decoration:none; }
+.flash { animation:flash 1.6s ease-out; }
+@keyframes flash { from { background:#ffe9a8; } to { background:transparent; } }
+@media (max-width:900px) { .layout { display:block; } nav.toc { display:none; } main { padding:24px 18px; }
+  .sommaire ol { columns:1; } .term dl { grid-template-columns:1fr; } }
+@media print {
+  @page { size:A4; margin:16mm 15mm; }
+  body { background:#fff; font-size:10.5pt; }
+  .layout { display:block; } nav.toc { display:none; }
+  main { padding:0; max-width:none; }
+  h2 { break-before:auto; break-after:avoid; border-top:none; margin-top:18pt; }
+  h2#s-9, h2#s-14 { break-before:page; }
+  figure, blockquote, table, .term, pre { break-inside:avoid; }
+  pre { white-space:pre-wrap; font-size:8.5pt; }
+  table { font-size:8.8pt; }
+  a { color:inherit; }
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc" aria-label="Sommaire">
+<div class="brand">InvestAgents</div>
+<div class="sub">Rapport final · sujet n°10</div>
+<a href="#s-0">0. Résumé en une page</a><a href="#s-1">1. Contexte et question de recherche</a><a href="#s-2">2. Données</a><a href="#s-3">3. Anti-fuite</a><a href="#s-4">4. Protocole d&#x27;évaluation</a><a href="#s-5">5. Modèles ML</a><a href="#s-6">6. Agents juges (bloc C)</a><a href="#s-7">7. Agents extracteurs (bloc D)</a><a href="#s-8">8. Décision multicritère et sélection</a><a href="#s-9">9. Métriques finales</a><a href="#s-10">10. Ce que les agents apportent / n&#x27;apportent pas</a><a href="#s-11">11. Limites</a><a href="#s-12">12. Reproductibilité</a><a href="#s-13">13. Attributions et usage de l&#x27;IA</a><a href="#s-14">14. Glossaire</a>
+<div class="links"><a href="index.html">← Vitrine du projet</a>
+<a href="https://github.com/frikaya12/investagents">Code sur GitHub</a></div>
+</nav>
+<main>
+<h1>InvestAgents : rapport final</h1>
+<p><em>Projet de Machine Learning, sujet n°10 : « IA agentique pour la décision d'investissement
+multicritère : évaluation et sélection de projets d'investissement ». Auteure : Aya (élève
+ingénieure, data science / IA). Novembre 2026.</em></p>
+<p><em>Ce document existe en trois versions identiques : <code>reports/rapport_final.md</code>, <code>docs/rapport.html</code>
+(avec sommaire et glossaire cliquables) et <code>reports/rapport_final.pdf</code>. Les trois sont générées par
+<code>uv run python -m investagents.report.build</code> à partir des fichiers de résultats du dépôt : aucun
+chiffre n'est tapé à la main, et un test automatique vérifie que chaque chiffre correspond aux JSON
+de résultats.</em></p>
+<div class="sommaire" id="sommaire"><strong>Sommaire</strong><ol start="0"><li><a href="#s-0">Résumé en une page</a></li><li><a href="#s-1">Contexte et question de recherche</a></li><li><a href="#s-2">Données</a></li><li><a href="#s-3">Anti-fuite</a></li><li><a href="#s-4">Protocole d&#x27;évaluation</a></li><li><a href="#s-5">Modèles ML</a></li><li><a href="#s-6">Agents juges (bloc C)</a></li><li><a href="#s-7">Agents extracteurs (bloc D)</a></li><li><a href="#s-8">Décision multicritère et sélection</a></li><li><a href="#s-9">Métriques finales</a></li><li><a href="#s-10">Ce que les agents apportent / n&#x27;apportent pas</a></li><li><a href="#s-11">Limites</a></li><li><a href="#s-12">Reproductibilité</a></li><li><a href="#s-13">Attributions et usage de l&#x27;IA</a></li><li><a href="#s-14">Glossaire</a></li></ol></div><h2 id="s-0">0. Résumé en une page</h2>
+<blockquote>
+<p><strong>En simple.</strong> La Banque mondiale finance des milliers de projets ; environ un sur quatre est jugé
+en échec une fois terminé. Nous avons demandé à des agents d'IA de lire le dossier écrit <em>avant</em>
+le financement, de débattre du projet et de le noter, puis à un optimiseur de choisir quels
+projets financer avec un budget limité. Nous avons comparé tout cela à des modèles de machine
+learning classiques, sur des projets que personne n'avait regardés.</p>
+</blockquote>
+<p><strong>La question.</strong> Un comité d'agents d'IA qui lit les dossiers d'évaluation classe-t-il les projets
+mieux qu'un modèle de machine learning classique ? Ses notes apportent-elles une information en
+plus ?</p>
+<p><strong>La méthode en 5 lignes.</strong></p>
+<ol>
+<li>8 260 vrais projets de la Banque mondiale, avec la note finale de l'<a class="gl" id="ref-g-ieg" href="#g-ieg">IEG</a>
+(succès ou échec) comme vérité terrain.</li>
+<li>Des règles anti-fuite strictes : seuls des documents datés <em>avant</em> l'approbation, noms masqués,
+<a class="gl" id="ref-g-decoupage-temporel" href="#g-decoupage-temporel">découpage temporel</a> (on apprend sur le passé, on teste sur l'avenir).</li>
+<li>Des modèles de référence : <a class="gl" id="ref-g-gradient-boosting" href="#g-gradient-boosting">gradient boosting</a> sur des variables chiffrées, et
+<a class="gl" id="ref-g-tf-idf" href="#g-tf-idf">TF-IDF</a> + <a class="gl" id="ref-g-regression-logistique" href="#g-regression-logistique">régression logistique</a> sur le texte du dossier.</li>
+<li>Deux familles d'<a class="gl" id="ref-g-agent" href="#g-agent">agents</a> : des <em>juges</em> (débat Pour / Contre, critique, Juge sur 5
+critères) et des <em>extracteurs</em> (19 facteurs de risque factuels avec citations).</li>
+<li>Un optimiseur (<a class="gl" id="ref-g-sac-a-dos-cp-sat" href="#g-sac-a-dos-cp-sat">sac à dos (CP-SAT)</a>) qui choisit un portefeuille sous budget, testé contre
+des portefeuilles tirés au hasard.</li>
+</ol>
+<p><strong>Les 5 résultats clés.</strong></p>
+<ol>
+<li><strong>Le ML prédit l'échec, mais faiblement.</strong> Le meilleur modèle (texte du dossier) obtient une
+<a class="gl" id="ref-g-auc-pr" href="#g-auc-pr">AUC-PR</a> de 0,297 [0,245 ; 0,369] au test, contre 0,216 pour le hasard. Sur des données
+neuves (le <a class="gl" id="ref-g-coffre-fort" href="#g-coffre-fort">coffre-fort</a>), le modèle à variables chiffrées tombe au niveau du hasard.</li>
+<li><strong>Les agents juges n'ajoutent pas d'information prédictive.</strong> Leurs 5 notes ne prédisent pas
+l'échec (0,200 [0,152 ; 0,272] contre un taux de base de 0,213).</li>
+<li><strong>Les agents extracteurs produisent des facteurs lisibles et un peu prédictifs</strong>
+(écart avec le hasard : +0,027 [0,003 ; 0,070]), mais n'apportent rien de plus que le texte complet
+(+0,003 [−0,039 ; 0,043]).</li>
+<li><strong>Les agents justifient chaque décision avec des sources vérifiées</strong> :
+99,8 % des citations retrouvées mot pour mot, 0 / 50 projet reconnu
+de mémoire.</li>
+<li><strong>La sélection sous budget bat le hasard</strong> au test (85,3 % de projets réussis contre
+77,2 %, p ≤ 0,001), grâce aux probabilités du ML et non à la taille des projets.</li>
+</ol>
+<p><strong>Conclusion.</strong> <em>Le ML prédit faiblement ; les agents justifient chaque décision avec des sources
+vérifiées et extraient des facteurs de risque lisibles et prédictifs, mais n'ajoutent rien au texte
+complet.</em> Le résultat principal est donc <strong>négatif</strong> pour la question de recherche, et
+<strong>positif</strong> pour l'explication des décisions.</p>
+<h2 id="s-1">1. Contexte et question de recherche</h2>
+<blockquote>
+<p><strong>En simple.</strong> Choisir des projets à financer, c'est décider sous incertitude, avec plusieurs
+critères et un budget. Le sujet demande si des agents d'IA peuvent aider à <em>évaluer</em> les projets
+puis à les <em>sélectionner</em>. Nous avons pris de vrais projets dont on connaît la fin pour pouvoir
+vérifier.</p>
+</blockquote>
+<p><strong>En technique.</strong> Le sujet se décompose mot par mot :</p>
+<table>
+<thead>
+<tr>
+<th>Mot de l'énoncé</th>
+<th>Ce que nous avons construit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IA agentique</strong></td>
+<td>Un comité de <a class="gl" id="ref-g-llm" href="#g-llm">LLM</a> à rôles (avocat Pour, avocat Contre, critique, Juge) orchestré par <a class="gl" id="ref-g-langgraph" href="#g-langgraph">LangGraph</a>, et des agents extracteurs de facteurs (sections 6 et 7).</td>
+</tr>
+<tr>
+<td><strong>Décision d'investissement</strong></td>
+<td>Choisir quels projets financer sous un budget fixé (section 8).</td>
+</tr>
+<tr>
+<td><strong>Multicritère</strong></td>
+<td>5 critères inspirés des <a class="gl" id="ref-g-criteres-ocde-cad" href="#g-criteres-ocde-cad">critères OCDE-CAD</a> : pertinence, efficience économique, faisabilité, risque, impact et durabilité ; combinés avec la probabilité de réussite par la <a class="gl" id="ref-g-frontiere" href="#g-frontiere">frontière α</a> (section 8).</td>
+</tr>
+<tr>
+<td><strong>Évaluation</strong></td>
+<td>Prédire, avant l'approbation, si un projet sera en échec selon l'IEG (sections 5 à 7).</td>
+</tr>
+<tr>
+<td><strong>Sélection</strong></td>
+<td>Sac à dos exact sous budget avec plafond par pays, comparé au hasard (section 8).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Question de recherche.</strong> Le comité d'agents classe-t-il les projets mieux qu'un gradient boosting
+sur variables structurées ou qu'un modèle de texte simple ? Ses notes apportent-elles une
+information en plus ? Vérité terrain : la note de résultat de l'IEG, binarisée en <em>succès</em>
+(HS, S, MS) contre <em>échec</em> (MU, U, HU).</p>
+<figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 120" width="760" height="120" role="img" aria-label="Pipeline InvestAgents" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"><title>Pipeline InvestAgents</title><rect width="760" height="120" fill="#fcfcfb"/><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#52514e"/></marker></defs><rect x="10" y="30" width="124" height="56" rx="8" fill="#e8f0fb" stroke="#2a78d6" stroke-width="1.5"/><text x="72.0" y="50.0" font-size="12.5" fill="#0b0b0b" text-anchor="middle" font-weight="600" dominant-baseline="middle">Données</text><text x="72.0" y="68.0" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">IEG + dossiers ex ante</text><rect x="162" y="30" width="124" height="56" rx="8" fill="#e8f0fb" stroke="#2a78d6" stroke-width="1.5"/><text x="224.0" y="50.0" font-size="12.5" fill="#0b0b0b" text-anchor="middle" font-weight="600" dominant-baseline="middle">Anti-fuite</text><text x="224.0" y="68.0" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">dates, masquage</text><line x1="136" y1="58" x2="159" y2="58" stroke="#52514e" stroke-width="1.5" marker-end="url(#arr)"/><rect x="314" y="30" width="124" height="56" rx="8" fill="#e8f0fb" stroke="#2a78d6" stroke-width="1.5"/><text x="376.0" y="50.0" font-size="12.5" fill="#0b0b0b" text-anchor="middle" font-weight="600" dominant-baseline="middle">ML</text><text x="376.0" y="68.0" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">M1, M1-texte</text><line x1="288" y1="58" x2="311" y2="58" stroke="#52514e" stroke-width="1.5" marker-end="url(#arr)"/><rect x="466" y="30" width="124" height="56" rx="8" fill="#e8f0fb" stroke="#2a78d6" stroke-width="1.5"/><text x="528.0" y="50.0" font-size="12.5" fill="#0b0b0b" text-anchor="middle" font-weight="600" dominant-baseline="middle">Agents</text><text x="528.0" y="68.0" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">juges + extracteurs</text><line x1="440" y1="58" x2="463" y2="58" stroke="#52514e" stroke-width="1.5" marker-end="url(#arr)"/><rect x="618" y="30" width="124" height="56" rx="8" fill="#e8f0fb" stroke="#2a78d6" stroke-width="1.5"/><text x="680.0" y="50.0" font-size="12.5" fill="#0b0b0b" text-anchor="middle" font-weight="600" dominant-baseline="middle">Sélection</text><text x="680.0" y="68.0" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">sac à dos, budget</text><line x1="592" y1="58" x2="615" y2="58" stroke="#52514e" stroke-width="1.5" marker-end="url(#arr)"/><text x="380.0" y="108.0" font-size="11.5" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">Vérité terrain : note IEG (échec = MU/U/HU) · 8 260 projets avec dossier exploitable</text></svg></figure>
+<p><em>Ce qu'il faut retenir : chaque étape alimente la suivante, et la vérité terrain (la note IEG)
+n'est jamais montrée aux agents ni aux modèles avant l'évaluation.</em></p>
+<h2 id="s-2">2. Données</h2>
+<blockquote>
+<p><strong>En simple.</strong> Pour chaque projet, nous avons la note finale de l'évaluateur indépendant de la
+Banque mondiale, et le dossier écrit avant le financement. Nous cherchons à prédire les échecs,
+qui sont minoritaires.</p>
+</blockquote>
+<p><strong>En technique.</strong></p>
+<ul>
+<li><strong>Notes IEG</strong> (licence CC BY 4.0) : note de résultat de chaque projet évalué. Cible
+<code>failure = 1</code> si MU, U ou HU (classe minoritaire).</li>
+<li><strong>Dossiers ex ante</strong> (<a class="gl" id="ref-g-pad" href="#g-pad">PAD</a> ou <em>Staff Appraisal Report</em>) : World Bank Documents &amp; Reports API,
+en anglais, texte d'au moins 10 000 caractères, daté strictement avant l'approbation.</li>
+<li><strong>Recensement (phase 1)</strong> : 8 260 projets notés ont un dossier exploitable
+(seuil go / no-go : 300), dont 2 210 en échec.</li>
+<li><strong>Variables structurées</strong> (pour M1) : région, pratique et secteur, type d'instrument et
+d'accord, exercice d'approbation, montant à l'approbation (relevés IDA/IBRD, jamais le montant
+actuel), indicateurs pays (WDI). 11 541 projets notés
+avec ces variables : 9 004 pour l'entraînement, 1 243 pour la validation, 1 294
+pour le test.</li>
+<li><strong>Avec texte</strong> (pour M1-texte) : 5 810 / 869 / 755.</li>
+<li><strong>Dérive</strong> : le taux d'échec baisse avec le temps, 28 % à l'entraînement, 23 %
+en validation, 22 % au test, 17,6 % sur le coffre-fort. C'est un
+<a class="gl" id="ref-g-decalage-de-domaine" href="#g-decalage-de-domaine">décalage de domaine</a>, corrigé par recalibration sur la validation.</li>
+</ul>
+<h2 id="s-3">3. Anti-fuite</h2>
+<blockquote>
+<p><strong>En simple.</strong> Un modèle qui « voit l'avenir » a des scores trop beaux et inutiles. Nous avons
+donc interdit tout document écrit après l'approbation, masqué les noms des projets, et vérifié que
+le LLM ne reconnaissait pas les projets de mémoire.</p>
+</blockquote>
+<p><strong>En technique.</strong> La <a class="gl" id="ref-g-fuite-de-donnees" href="#g-fuite-de-donnees">fuite de données</a> est la première menace d'un tel projet. Quatre barrières :</p>
+<ol>
+<li><strong>Dates.</strong> Seuls les documents datés <em>strictement avant</em> l'approbation (filtre unique
+<code>src/investagents/data/leakage.py</code>, couvert par des tests). Jamais d'ICR, d'ICRR ou de PPAR
+(rapports de fin de projet). La tolérance de 31 jours n'existe que comme test de sensibilité.</li>
+<li><strong>Colonnes interdites.</strong> Les variables IEG post-projet sont refusées par
+<code>assert_no_forbidden</code> (<code>src/investagents/ml/features.py</code>) : <code>quality_at_entry</code>,
+<code>bank_performance</code>, <code>quality_of_supervision</code>, <code>me_quality</code>, <code>final_closing_fy</code> et toute colonne
+<code>evaluation_*</code>. Un test échoue si l'une d'elles entre dans les variables.</li>
+<li><strong>Masquage.</strong> Noms et identifiants de projets masqués côté agents ; noms de pays et de lieux
+masqués (spaCy + listes GeoNames) dans le texte montré aux agents. Pas d'accès au web pour les
+agents. Le texte des documents est traité comme une donnée, jamais comme une instruction.</li>
+<li><strong><a class="gl" id="ref-g-test-de-reconnaissance" href="#g-test-de-reconnaissance">Test de reconnaissance</a>.</strong> Sur 50 dossiers masqués, on
+demande au LLM s'il reconnaît le projet : 0 / 50 projet reconnu, 0 / 50
+note IEG proposée.</li>
+</ol>
+<h2 id="s-4">4. Protocole d&#x27;évaluation</h2>
+<blockquote>
+<p><strong>En simple.</strong> On règle les modèles sur une période, on les note une seule fois sur une période
+plus récente, et un dernier paquet de projets reste sous clé jusqu'à la fin. Chaque règle a été
+enregistrée dans git <em>avant</em> de voir les résultats : les identifiants de commits en sont la preuve.</p>
+</blockquote>
+<p><strong>En technique.</strong></p>
+<ul>
+<li><strong><a class="gl" id="ref-g-decoupage-temporel-1" href="#g-decoupage-temporel">Découpage temporel</a></strong> sur l'exercice d'approbation : entraînement
+≤ 2007, validation 2008–2011, test 2012–2017.</li>
+<li><strong>Validation pour régler</strong> : tous les hyperparamètres, l'objectif de sélection et les choix de
+codage sont faits sur la validation, souvent par <a class="gl" id="ref-g-validation-croisee" href="#g-validation-croisee">validation croisée</a>.</li>
+<li><strong>Test une seule fois</strong> : chaque modèle est figé (fichier <code>*_frozen.json</code> commité), puis évalué
+une fois sur le test, avec <a class="gl" id="ref-g-intervalle-de-confiance-bootstrap" href="#g-intervalle-de-confiance-bootstrap">IC bootstrap</a> à 95 % et
+<a class="gl" id="ref-g-ecart-apparie" href="#g-ecart-apparie">écarts appariés</a>.</li>
+<li><strong>Coffre-fort</strong> : projets évalués par l'IEG en exercice ≥ 2025, ouverts une seule fois à la fin.</li>
+</ul>
+<p><strong>Preuves dans l'historique git</strong> (règle commitée → résultat commité) :</p>
+<table>
+<thead>
+<tr>
+<th>Étape</th>
+<th>Règle figée avant le résultat</th>
+<th>Résultat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filtre anti-fuite</td>
+<td><code>7ac3f95</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Split temporel et coffre-fort</td>
+<td><code>ab4fd2d</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>M1 et M1-texte (phase 2)</td>
+<td><code>c8974e6</code>, <code>9fbad94</code></td>
+<td><code>cc0cac1</code></td>
+</tr>
+<tr>
+<td>Objectif de sélection</td>
+<td><code>eb73040</code> (choisi sur la validation)</td>
+<td><code>eb73040</code> (test une fois)</td>
+</tr>
+<tr>
+<td>M1-texte du bloc B</td>
+<td><code>fe7a113</code></td>
+<td><code>fe7a113</code></td>
+</tr>
+<tr>
+<td>M3 / M4 (notes du Juge)</td>
+<td><code>3e5f2de</code></td>
+<td><code>024d6b5</code></td>
+</tr>
+<tr>
+<td>Coffre-fort</td>
+<td><code>ab9150e</code>, amendement <code>a572980</code></td>
+<td><code>ead4cbe</code></td>
+</tr>
+<tr>
+<td>Grille des 19 facteurs</td>
+<td><code>ddd4cb1</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Pilote du bloc D</td>
+<td>critères dans <code>d990604</code></td>
+<td><code>2864354</code></td>
+</tr>
+<tr>
+<td>M5 / M6</td>
+<td><code>3bf9e25</code> (codage), <code>106c3f0</code> (seuils), <code>a3ccb07</code> (réglage)</td>
+<td><code>43180e4</code></td>
+</tr>
+</tbody>
+</table>
+<p>Deux lignes ont la règle et le résultat dans le même commit (objectif, bloc B) : le script
+enchaîne le choix sur la validation puis l'évaluation unique, sans retour en arrière possible.</p>
+<h2 id="s-5">5. Modèles ML</h2>
+<blockquote>
+<p><strong>En simple.</strong> M0 répond toujours « taux moyen d'échec » : c'est le plancher. M1 utilise des
+chiffres sur le projet et le pays. M1-texte lit les mots du dossier. Une petite correction finale
+rend leurs probabilités honnêtes.</p>
+</blockquote>
+<p><strong>En technique.</strong></p>
+<ul>
+<li><strong>M0</strong> : prédit le <a class="gl" id="ref-g-taux-de-base" href="#g-taux-de-base">taux de base</a> pour tous les projets (AUC-PR = taux de base).</li>
+<li><strong>M1</strong> : <a class="gl" id="ref-g-gradient-boosting-1" href="#g-gradient-boosting">gradient boosting</a> (<code>HistGradientBoostingClassifier</code>) sur variables structurées ex
+ante (jeu <code>base+wdi</code>). AUC-PR 0,307 en validation ; au test,
+0,247 [0,216 ; 0,286] contre 0,217 pour M0 ; écart apparié +0,030 [0,009 ; 0,060] ;
+<a class="gl" id="ref-g-test-de-permutation" href="#g-test-de-permutation">test de permutation</a> : p = 0,015. <a class="gl" id="ref-g-auc-roc" href="#g-auc-roc">AUC-ROC</a> 0,567 [0,529 ; 0,603].</li>
+<li><strong>M1-texte</strong> : <a class="gl" id="ref-g-tf-idf-1" href="#g-tf-idf">TF-IDF</a> du dossier complet + <a class="gl" id="ref-g-regression-logistique-1" href="#g-regression-logistique">régression logistique</a> (C = 1, réglé sur la
+validation, AUC-PR 0,355). Au test (projets avec texte, n = 755) :
+0,297 [0,245 ; 0,369] contre 0,259 [0,213 ; 0,320] pour M1 sur les mêmes projets et 0,216
+pour le hasard. Écart M1-texte − M1 : +0,039 [0,003 ; 0,082]. Fort
+<a class="gl" id="ref-g-sur-apprentissage" href="#g-sur-apprentissage">sur-apprentissage</a> (AUC-PR 0,870 à l'entraînement), contenu par la
+régularisation.</li>
+<li><strong>Le pays revient par le texte.</strong> Les mots les plus influents sont souvent des noms de pays. Sur
+la validation, masquer les lieux ne coûte qu'environ 0,01 d'AUC-PR : l'essentiel du signal ne
+vient pas de l'identité du pays.</li>
+<li><strong><a class="gl" id="ref-g-calibration-de-platt" href="#g-calibration-de-platt">Calibration de Platt</a></strong> apprise sur la validation seulement :
+<a class="gl" id="ref-g-ece" href="#g-ece">ECE</a> 0,045 → 0,023, <a class="gl" id="ref-g-brier" href="#g-brier">Brier</a> 0,168 → 0,166. Elle
+corrige la dérive avant la sélection sous budget.</li>
+</ul>
+<h2 id="s-6">6. Agents juges (bloc C)</h2>
+<blockquote>
+<p><strong>En simple.</strong> Pour chaque projet, deux agents plaident Pour et Contre sur 5 critères en citant
+des phrases du dossier ; un critique juge leurs arguments ; ils se corrigent ; un Juge note.
+Python vérifie que chaque phrase citée existe. Le comité est fiable et transparent, mais ses notes
+ne prédisent pas l'échec.</p>
+</blockquote>
+<p><strong>En technique.</strong> Graphe <a class="gl" id="ref-g-langgraph-1" href="#g-langgraph">LangGraph</a>, sorties JSON validées par Pydantic, prompts adaptés de
+DIALECTIC (licence MIT), <a class="gl" id="ref-g-llm-1" href="#g-llm">LLM</a> Qwen2.5 7B sur 2 GPU T4 gratuits (Kaggle), 0 €.</p>
+<figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 250" width="760" height="250" role="img" aria-label="Architecture du comité d&#x27;agents juges" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"><title>Architecture du comité d&#x27;agents juges</title><rect width="760" height="250" fill="#fcfcfb"/><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#52514e"/></marker></defs><rect x="10" y="20" width="150" height="56" rx="8" fill="#e8f0fb" stroke="#2a78d6" stroke-width="1.5"/><text x="85.0" y="40.0" font-size="12.5" fill="#0b0b0b" text-anchor="middle" font-weight="600" dominant-baseline="middle">Dossier ex ante</text><text x="85.0" y="58.0" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">masqué, daté avant</text><rect x="200" y="20" width="150" height="56" rx="8" fill="#e8f0fb" stroke="#2a78d6" stroke-width="1.5"/><text x="275.0" y="40.0" font-size="12.5" fill="#0b0b0b" text-anchor="middle" font-weight="600" dominant-baseline="middle">Phrases clés</text><text x="275.0" y="58.0" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">numérotées [S1]…[Sn]</text><rect x="390" y="10" width="170" height="36" rx="8" fill="#e8f0fb" stroke="#2a78d6" stroke-width="1.5"/><text x="475.0" y="28.0" font-size="12.5" fill="#0b0b0b" text-anchor="middle" font-weight="600" dominant-baseline="middle">Avocat Pour</text><rect x="390" y="54" width="170" height="36" rx="8" fill="#fdeee7" stroke="#eb6834" stroke-width="1.5"/><text x="475.0" y="72.0" font-size="12.5" fill="#0b0b0b" text-anchor="middle" font-weight="600" dominant-baseline="middle">Avocat Contre</text><rect x="600" y="20" width="150" height="56" rx="8" fill="#e8f0fb" stroke="#2a78d6" stroke-width="1.5"/><text x="675.0" y="40.0" font-size="12.5" fill="#0b0b0b" text-anchor="middle" font-weight="600" dominant-baseline="middle">Critique</text><text x="675.0" y="58.0" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">fort / faible / non étayé</text><rect x="600" y="130" width="150" height="56" rx="8" fill="#e8f0fb" stroke="#2a78d6" stroke-width="1.5"/><text x="675.0" y="150.0" font-size="12.5" fill="#0b0b0b" text-anchor="middle" font-weight="600" dominant-baseline="middle">Raffinement</text><text x="675.0" y="168.0" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">1 tour de réécriture</text><rect x="390" y="130" width="170" height="56" rx="8" fill="#e8f0fb" stroke="#2a78d6" stroke-width="1.5"/><text x="475.0" y="150.0" font-size="12.5" fill="#0b0b0b" text-anchor="middle" font-weight="600" dominant-baseline="middle">Juge</text><text x="475.0" y="168.0" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">5 critères, grille à ancres</text><rect x="200" y="130" width="150" height="56" rx="8" fill="#eef7f2" stroke="#1baf7a" stroke-width="1.5"/><text x="275.0" y="150.0" font-size="12.5" fill="#0b0b0b" text-anchor="middle" font-weight="600" dominant-baseline="middle">Vérification</text><text x="275.0" y="168.0" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">citations en Python</text><rect x="10" y="130" width="150" height="56" rx="8" fill="#e8f0fb" stroke="#2a78d6" stroke-width="1.5"/><text x="85.0" y="150.0" font-size="12.5" fill="#0b0b0b" text-anchor="middle" font-weight="600" dominant-baseline="middle">Notes + arguments</text><text x="85.0" y="168.0" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">sourcés, JSON validé</text><line x1="160" y1="48" x2="197" y2="48" stroke="#52514e" stroke-width="1.5" marker-end="url(#arr)"/><line x1="350" y1="40" x2="387" y2="28" stroke="#52514e" stroke-width="1.5" marker-end="url(#arr)"/><line x1="350" y1="56" x2="387" y2="72" stroke="#52514e" stroke-width="1.5" marker-end="url(#arr)"/><line x1="560" y1="28" x2="597" y2="40" stroke="#52514e" stroke-width="1.5" marker-end="url(#arr)"/><line x1="560" y1="72" x2="597" y2="58" stroke="#52514e" stroke-width="1.5" marker-end="url(#arr)"/><line x1="675" y1="76" x2="675" y2="127" stroke="#52514e" stroke-width="1.5" marker-end="url(#arr)"/><line x1="600" y1="158" x2="563" y2="158" stroke="#52514e" stroke-width="1.5" marker-end="url(#arr)"/><line x1="390" y1="158" x2="353" y2="158" stroke="#52514e" stroke-width="1.5" marker-end="url(#arr)"/><line x1="200" y1="158" x2="163" y2="158" stroke="#52514e" stroke-width="1.5" marker-end="url(#arr)"/><text x="380.0" y="222.0" font-size="11.5" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">Pour chacun des 5 critères : pertinence, efficience économique, faisabilité, risque, impact et durabilité</text></svg></figure>
+<p><em>Ce qu'il faut retenir : chaque note du Juge s'appuie sur des arguments qui citent le dossier par
+numéros de phrases, et Python vérifie les citations ; aucun chiffre ne vient du LLM.</em></p>
+<ul>
+<li><strong>Fiabilité.</strong> 600 / 600 projets notés (300 de validation, 300 de test),
+0 erreur, 89 s par projet. <a class="gl" id="ref-g-citation-verifiee" href="#g-citation-verifiee">Citations vérifiées</a> :
+5 986 / 6 000 retrouvées mot pour mot (99,8 %).</li>
+<li><strong>Débat utile.</strong> Le critique juge 49 % des arguments faibles et 0,7 %
+non étayés ; 41 % des arguments sont réécrits au raffinement.</li>
+<li><strong>Notes dispersées.</strong> Grille à ancres (exemples de notes 2, 5 et 8 par critère) : écart-type de
+0,65 à 1,26 selon le critère, au plus 0,5 % de notes ≥ 9. Corrélation
+moyenne entre critères : 0,21 (les critères mesurent des choses différentes).</li>
+<li><strong>M3</strong> (régression logistique sur les 5 notes, réglée sur la validation) : AUC-PR
+0,200 [0,152 ; 0,272] au test, taux de base 0,213 ; écart M3 − M0 : −0,013 [−0,037 ; 0,046]. Sur la
+validation, l'AUC-ROC de chaque critère va de 0,42 à 0,53.</li>
+<li><strong>M4</strong> (texte + 5 notes) : écart M4 − texte −0,031 [−0,088 ; 0,029].</li>
+<li><strong>M7</strong> (texte + verdicts du critique + réécritures + TF-IDF des arguments Contre) : écart
+M7 − texte +0,027 [−0,059 ; 0,112] ; la validation croisée annonçait l'inverse (0,345 contre
+0,366 pour le texte seul).</li>
+</ul>
+<h2 id="s-7">7. Agents extracteurs (bloc D)</h2>
+<blockquote>
+<p><strong>En simple.</strong> Un autre agent lit le dossier et répond à 19 questions factuelles (combien de
+composantes ? une réinstallation de populations est-elle prévue ? l'agence a-t-elle une capacité
+faible ?), chaque réponse avec une citation, « non trouvé » étant permis. Ces facteurs prédisent
+un peu l'échec, mais pas mieux que le texte complet.</p>
+</blockquote>
+<p><strong>En technique.</strong></p>
+<ul>
+<li><strong>Grille figée</strong> (commit <code>ddd4cb1</code>, empreinte SHA-256 testée) de 19 facteurs : composantes,
+agences d'exécution, cofinanceurs, première opération, deuxième phase, réforme à adopter,
+catégorie environnementale, note de risque globale, risque fiduciaire, valeurs de référence,
+leçons d'un projet en difficulté, fragilité / conflit, capacité faible, fonds de contrepartie,
+réinstallation, exécution décentralisée, projet pilote, risque politique, rentabilité
+économique chiffrée.</li>
+<li><strong>Un appel par dossier</strong> sur des phrases présélectionnées en Python dans le dossier complet ;
+citations par numéros ; les nombres sont comptés en Python.</li>
+<li><strong>Pilote</strong> (30 projets, critères fixés avant) : citations valides 99,8 %,
+27 s par projet, 19 / 19 facteurs trouvés dans plus de 30 % des dossiers.</li>
+<li><strong>Contrôle d'exactitude</strong> (pilote, facteurs vérifiables à la main) : catégorie
+environnementale 14 / 15, note de risque 13 / 13. « Première opération » (1 juste
+sur 3) a été exclue avant tout réglage.</li>
+<li><strong>Passage complet</strong> : 1 582 dossiers, 0 erreur, citations valides
+97,6 %, 28 s par projet ; « nettement pire que le pilote » selon des seuils fixés
+avant : non. Table clé → projet vérifiée : 1 582 / 1 582 correspondances
+exactes.</li>
+<li><strong>M5</strong> (19 facteurs seuls) et <strong>M6</strong> (logit de M1-texte + facteurs) : régressions logistiques
+réglées par validation croisée sur 853 projets de validation (C = 0,003). Validation
+croisée : M5 0,248, M6 0,327, texte seul 0,337.</li>
+<li><strong>Test</strong> (n = 729, taux de base 0,214) : M1-texte 0,297 [0,247 ; 0,372], M5
+0,241 [0,204 ; 0,293], M6 0,300 [0,248 ; 0,369]. Écarts appariés : <strong>M5 − M0 = +0,027 [0,003 ; 0,070]</strong> (AUC-ROC
++0,066 [0,017 ; 0,114]) ; <strong>M6 − M1-texte = +0,003 [−0,039 ; 0,043]</strong>.</li>
+</ul>
+<figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 552" width="760" height="552" role="img" aria-label="Poids des facteurs extraits dans M5" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"><title>Poids des facteurs extraits dans M5</title><rect width="760" height="552" fill="#fcfcfb"/><line x1="339.1" x2="339.1" y1="32" y2="502" stroke="#e7e6e1"/><text x="339.1" y="516.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">−0,06</text><line x1="396.0" x2="396.0" y1="32" y2="502" stroke="#e7e6e1"/><text x="396.0" y="516.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">−0,04</text><line x1="453.0" x2="453.0" y1="32" y2="502" stroke="#e7e6e1"/><text x="453.0" y="516.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">−0,02</text><line x1="510.0" x2="510.0" y1="32" y2="502" stroke="#e7e6e1"/><text x="510.0" y="516.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,00</text><line x1="567.0" x2="567.0" y1="32" y2="502" stroke="#e7e6e1"/><text x="567.0" y="516.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">+0,02</text><line x1="624.0" x2="624.0" y1="32" y2="502" stroke="#e7e6e1"/><text x="624.0" y="516.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">+0,04</text><line x1="680.9" x2="680.9" y1="32" y2="502" stroke="#e7e6e1"/><text x="680.9" y="516.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">+0,06</text><text x="510.0" y="536.0" font-size="12" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">Poids dans M5 (variables standardisées, forte régularisation)</text><rect x="300" y="16" width="12" height="10" transform="translate(-6,-5)" fill="#eb6834"/><text x="314.0" y="16.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" dominant-baseline="middle">associé à plus d&#x27;échecs</text><rect x="487" y="16" width="12" height="10" transform="translate(-6,-5)" fill="#2a78d6"/><text x="501.0" y="16.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" dominant-baseline="middle">associé à moins d&#x27;échecs</text><text x="292.0" y="51.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Réinstallation de populations</text><rect x="510.0" y="44.0" width="117.7" height="14" rx="2" fill="#eb6834"><title>Réinstallation de populations : +0,0413</title></rect><text x="292.0" y="73.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Nombre de cofinanceurs</text><rect x="510.0" y="66.0" width="114.5" height="14" rx="2" fill="#eb6834"><title>Nombre de cofinanceurs : +0,0402</title></rect><text x="292.0" y="95.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Deuxième phase / suite d&#x27;un projet</text><rect x="510.0" y="88.0" width="94.0" height="14" rx="2" fill="#eb6834"><title>Deuxième phase / suite d&#x27;un projet : +0,0330</title></rect><text x="292.0" y="117.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Catégorie environnementale A</text><rect x="510.0" y="110.0" width="80.3" height="14" rx="2" fill="#eb6834"><title>Catégorie environnementale A : +0,0282</title></rect><text x="292.0" y="139.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Capacité faible de l&#x27;agence</text><rect x="510.0" y="132.0" width="79.8" height="14" rx="2" fill="#eb6834"><title>Capacité faible de l&#x27;agence : +0,0280</title></rect><text x="292.0" y="161.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Catégorie environnementale C</text><rect x="510.0" y="154.0" width="61.5" height="14" rx="2" fill="#eb6834"><title>Catégorie environnementale C : +0,0216</title></rect><text x="292.0" y="183.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Valeurs de référence des indicateurs</text><rect x="510.0" y="176.0" width="59.0" height="14" rx="2" fill="#eb6834"><title>Valeurs de référence des indicateurs : +0,0207</title></rect><text x="292.0" y="205.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Projet pilote / innovant</text><rect x="510.0" y="198.0" width="54.4" height="14" rx="2" fill="#eb6834"><title>Projet pilote / innovant : +0,0191</title></rect><text x="292.0" y="227.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Risque politique cité</text><rect x="510.0" y="220.0" width="46.4" height="14" rx="2" fill="#eb6834"><title>Risque politique cité : +0,0163</title></rect><text x="292.0" y="249.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Réforme encore à adopter</text><rect x="510.0" y="242.0" width="37.3" height="14" rx="2" fill="#eb6834"><title>Réforme encore à adopter : +0,0131</title></rect><text x="292.0" y="271.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Fragilité / conflit</text><rect x="510.0" y="264.0" width="35.9" height="14" rx="2" fill="#eb6834"><title>Fragilité / conflit : +0,0126</title></rect><text x="292.0" y="293.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Nombre d&#x27;agences d&#x27;exécution</text><rect x="510.0" y="286.0" width="18.2" height="14" rx="2" fill="#eb6834"><title>Nombre d&#x27;agences d&#x27;exécution : +0,0064</title></rect><text x="292.0" y="315.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Fonds de contrepartie requis</text><rect x="510.0" y="308.0" width="4.8" height="14" rx="2" fill="#eb6834"><title>Fonds de contrepartie requis : +0,0017</title></rect><text x="292.0" y="337.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Rentabilité économique chiffrée</text><rect x="510.0" y="330.0" width="3.4" height="14" rx="2" fill="#eb6834"><title>Rentabilité économique chiffrée : +0,0012</title></rect><text x="292.0" y="359.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Note de risque globale</text><rect x="502.3" y="352.0" width="7.7" height="14" rx="2" fill="#2a78d6"><title>Note de risque globale : −0,0027</title></rect><text x="292.0" y="381.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Risque fiduciaire</text><rect x="500.3" y="374.0" width="9.7" height="14" rx="2" fill="#2a78d6"><title>Risque fiduciaire : −0,0034</title></rect><text x="292.0" y="403.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Nombre de composantes</text><rect x="499.7" y="396.0" width="10.3" height="14" rx="2" fill="#2a78d6"><title>Nombre de composantes : −0,0036</title></rect><text x="292.0" y="425.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Leçons : projet antérieur en difficulté</text><rect x="487.2" y="418.0" width="22.8" height="14" rx="2" fill="#2a78d6"><title>Leçons : projet antérieur en difficulté : −0,0080</title></rect><text x="292.0" y="447.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Exécution décentralisée</text><rect x="486.4" y="440.0" width="23.6" height="14" rx="2" fill="#2a78d6"><title>Exécution décentralisée : −0,0083</title></rect><text x="292.0" y="469.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Catégorie FI (intermédiaire financier)</text><rect x="461.9" y="462.0" width="48.1" height="14" rx="2" fill="#2a78d6"><title>Catégorie FI (intermédiaire financier) : −0,0169</title></rect><text x="292.0" y="491.0" font-size="11.5" fill="#0b0b0b" text-anchor="end" font-weight="400" dominant-baseline="middle">Catégorie environnementale B</text><rect x="327.4" y="484.0" width="182.6" height="14" rx="2" fill="#2a78d6"><title>Catégorie environnementale B : −0,0641</title></rect><line x1="510.0" x2="510.0" y1="32" y2="502" stroke="#52514e"/></svg></figure>
+<p><em>Ce qu'il faut retenir : les facteurs associés à plus d'échecs sont la réinstallation de
+populations, le nombre de cofinanceurs, une deuxième phase, la catégorie environnementale A et une
+agence à capacité faible ; les poids sont petits (forte régularisation) et se lisent comme des
+tendances, pas comme des effets causaux.</em></p>
+<h2 id="s-8">8. Décision multicritère et sélection</h2>
+<blockquote>
+<p><strong>En simple.</strong> Avec un budget limité, on choisit le panier de projets qui maximise les chances de
+réussite pondérées par leur coût. On peut aussi donner du poids aux notes du comité : un curseur
+α règle l'équilibre entre « chances de réussite » et « qualité selon le comité ».</p>
+</blockquote>
+<p><strong>En technique.</strong></p>
+<ul>
+<li><strong><a class="gl" id="ref-g-sac-a-dos-cp-sat-1" href="#g-sac-a-dos-cp-sat">Sac à dos</a></strong> exact (OR-Tools CP-SAT), une sélection par cohorte annuelle,
+au plus 25 % du budget par pays. <strong>Objectif figé : maximiser Σ p × coût</strong>, choisi sur la
+validation. L'objectif initial Σ p ne battait pas le hasard (76,0 % de projets
+réussis à 25 % du budget, p = 0,698).</li>
+<li><strong>Backtest au test</strong> (pool de 728 projets, 25 % du budget, 150 projets choisis) :
+85,3 % [79,3 ; 90,7] de projets réussis, contre 77,2 % en moyenne pour des portefeuilles tirés au
+hasard (p ≤ 0,001). À 50 % du budget : 83,9 % (p ≤ 0,001).</li>
+<li><strong>Contrôle M0</strong> (taille des projets seule, même objectif) : 76,4 % (p = 0,641). Le gain
+vient donc des probabilités du ML.</li>
+<li><strong>Bloc D</strong> (pool de 712 projets) : M6 86,1 % (p ≤ 0,001), M1-texte 80,5 %
+(p = 0,115), hasard 77,7 %. Cet écart M6 / M1-texte n'est pas interprétable (limite 3).</li>
+</ul>
+<figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 254" width="760" height="254" role="img" aria-label="Backtest du portefeuille contre les tirages au hasard" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"><title>Backtest du portefeuille contre les tirages au hasard</title><rect width="760" height="254" fill="#fcfcfb"/><line x1="250.0" x2="250.0" y1="36" y2="204" stroke="#e7e6e1"/><text x="250.0" y="218.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">65 %</text><line x1="331.0" x2="331.0" y1="36" y2="204" stroke="#e7e6e1"/><text x="331.0" y="218.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">70 %</text><line x1="412.0" x2="412.0" y1="36" y2="204" stroke="#e7e6e1"/><text x="412.0" y="218.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">75 %</text><line x1="493.0" x2="493.0" y1="36" y2="204" stroke="#e7e6e1"/><text x="493.0" y="218.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">80 %</text><line x1="574.0" x2="574.0" y1="36" y2="204" stroke="#e7e6e1"/><text x="574.0" y="218.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">85 %</text><line x1="655.0" x2="655.0" y1="36" y2="204" stroke="#e7e6e1"/><text x="655.0" y="218.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">90 %</text><line x1="736.0" x2="736.0" y1="36" y2="204" stroke="#e7e6e1"/><text x="736.0" y="218.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">95 %</text><text x="493.0" y="238.0" font-size="12" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">Part de projets réussis du portefeuille (25 % du budget)</text><circle cx="210" cy="16" r="5" fill="#2a78d6"/><text x="224.0" y="16.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" dominant-baseline="middle">portefeuille (IC 95 %)</text><rect x="390" y="16" width="12" height="10" transform="translate(-6,-5)" fill="#e2e1dc"/><text x="404.0" y="16.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" dominant-baseline="middle">95 % des portefeuilles tirés au hasard</text><line x1="682" x2="682" y1="16" transform="translate(0,-6)" y2="16" stroke="#7a7974" stroke-width="3"/><text x="696.0" y="16.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" dominant-baseline="middle"></text><text x="8.0" y="58.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">Bloc B · M1-texte</text><text x="8.0" y="72.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">pool de 728 projets</text><rect x="372.6" y="55.0" width="154.2" height="18" rx="3" fill="#e2e1dc"><title>hasard : 95 % des tirages entre 72,6 % et 82,1 %</title></rect><rect x="446.9" y="53.0" width="3" height="22" fill="#7a7974"><title>hasard, moyenne 77,2 %</title></rect><line x1="482.2" x2="665.8" y1="64.0" y2="64.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><circle cx="579.4" cy="64.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>Bloc B · M1-texte : 85,3 % [79,3 % ; 90,7 %]</title></circle><text x="8.0" y="98.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">Bloc B · contrôle M0</text><text x="8.0" y="112.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">taille des projets seule</text><rect x="372.6" y="95.0" width="154.2" height="18" rx="3" fill="#e2e1dc"><title>hasard : 95 % des tirages entre 72,6 % et 82,1 %</title></rect><rect x="446.9" y="93.0" width="3" height="22" fill="#7a7974"><title>hasard, moyenne 77,2 %</title></rect><circle cx="434.7" cy="104.0" r="5.5" fill="#fcfcfb" stroke="#7a7974" stroke-width="2"><title>Bloc B · contrôle M0 : 76,4 %</title></circle><text x="8.0" y="138.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">Bloc D · M6</text><text x="8.0" y="152.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">pool de 712 projets</text><rect x="453.9" y="133.0" width="3" height="22" fill="#7a7974"><title>hasard, moyenne 77,7 %</title></rect><line x1="502.0" x2="673.0" y1="144.0" y2="144.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><circle cx="592.0" cy="144.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>Bloc D · M6 : 86,1 % [80,6 % ; 91,1 %]</title></circle><text x="8.0" y="178.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">Bloc D · M1-texte</text><text x="8.0" y="192.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">pool de 712 projets</text><rect x="453.9" y="173.0" width="3" height="22" fill="#7a7974"><title>hasard, moyenne 77,7 %</title></rect><line x1="393.0" x2="599.6" y1="184.0" y2="184.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><circle cx="501.7" cy="184.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>Bloc D · M1-texte : 80,5 % [73,8 % ; 86,6 %]</title></circle></svg></figure>
+<p><em>Ce qu'il faut retenir : le portefeuille M1-texte sort de la zone des 95 % de portefeuilles tirés
+au hasard (72,6 % à 82,1 %), le contrôle M0 y reste ; l'écart entre M6 et M1-texte au bloc D
+est du même ordre que l'instabilité du backtest.</em></p>
+<ul>
+<li><strong><a class="gl" id="ref-g-frontiere-1" href="#g-frontiere">Frontière α</a></strong> : score = α × probabilité de réussite + (1 − α) × moyenne des 5
+notes / 10 ; α ∈ {1 ; 0,75 ; 0,5 ; 0,25 ; 0} fixés à l'avance ; ~300 projets notés par période.
+<ul>
+<li>De α = 1 à α = 0, la note d'impact du portefeuille augmente de +0,75 point au
+test (+1,15 en validation).</li>
+<li>Coût en réussite : −13,0 points en validation (91,5 % → 78,6 %) ; au test,
+écarts dans le bruit : 79,8 % (α = 1), 83,5 % (α = 0,5), 78,6 % (α = 0), hasard
+76,7 %.</li>
+<li>Le gain en notes est vrai par construction (les notes servent à choisir) : il dit que le
+portefeuille suit mieux le jugement du comité, pas que les projets auront plus d'impact.</li>
+<li><strong>Aucun α n'est recommandé à partir du test.</strong> Le choix de α revient au décideur ; la démo le
+permet sur les projets de validation.</li>
+</ul>
+</li>
+</ul>
+<figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" width="760" height="380" role="img" aria-label="Frontière α : réussite contre note d&#x27;impact" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"><title>Frontière α : réussite contre note d&#x27;impact</title><rect width="760" height="380" fill="#fcfcfb"/><line x1="70.0" x2="70.0" y1="30" y2="320" stroke="#e7e6e1"/><text x="70.0" y="334.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">6,2</text><line x1="150.0" x2="150.0" y1="30" y2="320" stroke="#e7e6e1"/><text x="150.0" y="334.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">6,4</text><line x1="230.0" x2="230.0" y1="30" y2="320" stroke="#e7e6e1"/><text x="230.0" y="334.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">6,6</text><line x1="310.0" x2="310.0" y1="30" y2="320" stroke="#e7e6e1"/><text x="310.0" y="334.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">6,8</text><line x1="390.0" x2="390.0" y1="30" y2="320" stroke="#e7e6e1"/><text x="390.0" y="334.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">7,0</text><line x1="470.0" x2="470.0" y1="30" y2="320" stroke="#e7e6e1"/><text x="470.0" y="334.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">7,2</text><line x1="550.0" x2="550.0" y1="30" y2="320" stroke="#e7e6e1"/><text x="550.0" y="334.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">7,4</text><line x1="630.0" x2="630.0" y1="30" y2="320" stroke="#e7e6e1"/><text x="630.0" y="334.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">7,6</text><line x1="70" x2="630" y1="320.0" y2="320.0" stroke="#e7e6e1"/><text x="62.0" y="320.0" font-size="11" fill="#7a7974" text-anchor="end" font-weight="400" dominant-baseline="middle">70 %</text><line x1="70" x2="630" y1="262.0" y2="262.0" stroke="#e7e6e1"/><text x="62.0" y="262.0" font-size="11" fill="#7a7974" text-anchor="end" font-weight="400" dominant-baseline="middle">75 %</text><line x1="70" x2="630" y1="204.0" y2="204.0" stroke="#e7e6e1"/><text x="62.0" y="204.0" font-size="11" fill="#7a7974" text-anchor="end" font-weight="400" dominant-baseline="middle">80 %</text><line x1="70" x2="630" y1="146.0" y2="146.0" stroke="#e7e6e1"/><text x="62.0" y="146.0" font-size="11" fill="#7a7974" text-anchor="end" font-weight="400" dominant-baseline="middle">85 %</text><line x1="70" x2="630" y1="88.0" y2="88.0" stroke="#e7e6e1"/><text x="62.0" y="88.0" font-size="11" fill="#7a7974" text-anchor="end" font-weight="400" dominant-baseline="middle">90 %</text><line x1="70" x2="630" y1="30.0" y2="30.0" stroke="#e7e6e1"/><text x="62.0" y="30.0" font-size="11" fill="#7a7974" text-anchor="end" font-weight="400" dominant-baseline="middle">95 %</text><text x="350.0" y="362.0" font-size="12" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">Note moyenne « impact et durabilité » du portefeuille (Juge, sur 10)</text><text x="70.0" y="12.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" dominant-baseline="middle">Part de projets réussis (issue IEG)</text><polyline points="130.8,70.0 287.3,144.4 424.1,170.0 604.6,226.6 590.0,220.6" fill="none" stroke="#2a78d6" stroke-width="2"/><circle cx="130.8" cy="70.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>validation, α = 1,00 : 91,5 % de réussite, impact 6,35</title></circle><text x="137.8" y="60.0" font-size="10" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">α=1</text><circle cx="287.3" cy="144.4" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>validation, α = 0,75 : 85,1 % de réussite, impact 6,74</title></circle><text x="294.3" y="134.4" font-size="10" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">α=0,75</text><circle cx="424.1" cy="170.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>validation, α = 0,50 : 82,9 % de réussite, impact 7,09</title></circle><text x="431.1" y="160.0" font-size="10" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">α=0,5</text><circle cx="604.6" cy="226.6" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>validation, α = 0,25 : 78,0 % de réussite, impact 7,54</title></circle><text x="611.6" y="216.6" font-size="10" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">α=0,25</text><circle cx="590.0" cy="220.6" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>validation, α = 0,00 : 78,6 % de réussite, impact 7,50</title></circle><text x="597.0" y="210.6" font-size="10" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">α=0</text><path d="M182.63797064414592,234.28293718399178L192.63797064414592,244.28293718399178M182.63797064414592,244.28293718399178L192.63797064414592,234.28293718399178" stroke="#2a78d6" stroke-width="2"><title>hasard (validation) : 77,0 %, impact 6,49</title></path><text x="640.0" y="70.0" font-size="12" fill="#2a78d6" text-anchor="start" font-weight="600" dominant-baseline="middle">● validation</text><polyline points="251.9,206.8 331.6,180.5 451.2,163.1 524.8,211.6 553.3,220.6" fill="none" stroke="#eb6834" stroke-width="2"/><circle cx="251.9" cy="206.8" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"><title>test, α = 1,00 : 79,8 % de réussite, impact 6,65</title></circle><text x="244.9" y="219.8" font-size="10" fill="#7a7974" text-anchor="end" font-weight="400" dominant-baseline="middle">α=1</text><circle cx="331.6" cy="180.5" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"><title>test, α = 0,75 : 82,0 % de réussite, impact 6,85</title></circle><text x="324.6" y="193.5" font-size="10" fill="#7a7974" text-anchor="end" font-weight="400" dominant-baseline="middle">α=0,75</text><circle cx="451.2" cy="163.1" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"><title>test, α = 0,50 : 83,5 % de réussite, impact 7,15</title></circle><text x="444.2" y="176.1" font-size="10" fill="#7a7974" text-anchor="end" font-weight="400" dominant-baseline="middle">α=0,5</text><circle cx="524.8" cy="211.6" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"><title>test, α = 0,25 : 79,3 % de réussite, impact 7,34</title></circle><text x="517.8" y="224.6" font-size="10" fill="#7a7974" text-anchor="end" font-weight="400" dominant-baseline="middle">α=0,25</text><circle cx="553.3" cy="220.6" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"><title>test, α = 0,00 : 78,6 % de réussite, impact 7,41</title></circle><text x="546.3" y="233.6" font-size="10" fill="#7a7974" text-anchor="end" font-weight="400" dominant-baseline="middle">α=0</text><path d="M181.31540216250545,237.13725256077524L191.31540216250545,247.13725256077524M181.31540216250545,247.13725256077524L191.31540216250545,237.13725256077524" stroke="#eb6834" stroke-width="2"><title>hasard (test) : 76,7 %, impact 6,49</title></path><text x="640.0" y="206.8" font-size="12" fill="#eb6834" text-anchor="start" font-weight="600" dominant-baseline="middle">● test</text><text x="640.0" y="310.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" dominant-baseline="middle">× hasard</text></svg></figure>
+<p><em>Ce qu'il faut retenir : donner du poids au comité augmente la note d'impact du portefeuille ; en
+validation, cela coûte des projets réussis, au test l'effet n'est pas mesurable.</em></p>
+<h2 id="s-9">9. Métriques finales</h2>
+<blockquote>
+<p><strong>En simple.</strong> Toutes les mesures du projet, chacune avec sa fourchette d'incertitude, la
+référence à battre et ce qu'elle prouve vraiment.</p>
+</blockquote>
+<p><strong>En technique.</strong> IC à 95 % par bootstrap (2 000 tirages). AUC sur la classe « échec ».</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Métrique</th>
+<th>Valeur [IC 95 %]</th>
+<th>Référence</th>
+<th>Ce que ça prouve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Projets exploitables (dossier ex ante daté avant l'approbation)</td>
+<td>8 260</td>
+<td>seuil 300</td>
+<td>Le projet est faisable sur de vraies données.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>M1, AUC-PR, test (n = 1 294)</td>
+<td>0,247 [0,216 ; 0,286]</td>
+<td>M0 0,217</td>
+<td>Les variables chiffrées prédisent un peu (+0,030 [0,009 ; 0,060]).</td>
+</tr>
+<tr>
+<td>3</td>
+<td>M1-texte, AUC-PR, test (n = 755)</td>
+<td>0,297 [0,245 ; 0,369]</td>
+<td>M1 0,259 [0,213 ; 0,320] ; M0 0,216</td>
+<td>Le texte du dossier est le meilleur signal…</td>
+</tr>
+<tr>
+<td>4</td>
+<td>M1-texte − M1, AUC-PR (apparié)</td>
+<td>+0,039 [0,003 ; 0,082]</td>
+<td>0</td>
+<td>… et apporte plus que les variables chiffrées.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Coffre-fort : M1, AUC-PR (n = 700)</td>
+<td>0,172 [0,144 ; 0,211]</td>
+<td>M0 0,176</td>
+<td>Sur données neuves, M1 ne prédit plus (−0,004 [−0,019 ; 0,021]).</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Coffre-fort : M1-texte − M1 (n = 78, descriptif)</td>
+<td>+0,122 [0,002 ; 0,298]</td>
+<td>0</td>
+<td>Non concluant : 12 échecs seulement.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>M3 (5 notes du Juge), AUC-PR, test (n = 300)</td>
+<td>0,200 [0,152 ; 0,272]</td>
+<td>M0 0,213</td>
+<td>Les notes du Juge ne prédisent pas l'échec.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>M4 − texte, AUC-PR</td>
+<td>−0,031 [−0,088 ; 0,029]</td>
+<td>0</td>
+<td>Les notes n'ajoutent rien au texte.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>M7 − texte, AUC-PR</td>
+<td>+0,027 [−0,059 ; 0,112]</td>
+<td>0</td>
+<td>Le débat n'ajoute rien de démontré au texte.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>M5 (19 facteurs) − M0, AUC-PR, test (n = 729)</td>
+<td>+0,027 [0,003 ; 0,070]</td>
+<td>0</td>
+<td>Les facteurs extraits portent un signal réel, faible.</td>
+</tr>
+<tr>
+<td>11</td>
+<td>M6 (texte + facteurs) − M1-texte, AUC-PR</td>
+<td>+0,003 [−0,039 ; 0,043]</td>
+<td>0</td>
+<td>Ce signal est déjà dans le texte complet.</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Portefeuille figé (Σ p × coût), 25 % du budget : projets réussis</td>
+<td>85,3 % [79,3 ; 90,7]</td>
+<td>hasard 77,2 % (p ≤ 0,001)</td>
+<td>La sélection sous budget bat le hasard.</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Contrôle M0 (taille seule), 25 % du budget</td>
+<td>76,4 %</td>
+<td>hasard 77,2 % (p = 0,641)</td>
+<td>Le gain vient des probabilités, pas de la taille.</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Frontière α, test : projets réussis α = 1 / 0,5 / 0</td>
+<td>79,8 % / 83,5 % / 78,6 %</td>
+<td>hasard 76,7 %</td>
+<td>Pas de coût en réussite mesurable au test.</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Frontière α, test : note d'impact α = 1 → 0</td>
+<td>6,65 → 7,41</td>
+<td>hasard 6,49</td>
+<td>Le portefeuille suit mieux le comité (vrai par construction).</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Comité : projets notés, erreurs, temps médian</td>
+<td>600 / 600, 0, 89 s</td>
+<td>—</td>
+<td>Le comité fonctionne à l'échelle, à coût nul.</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Citations retrouvées mot pour mot</td>
+<td>5 986 / 6 000 (99,8 %)</td>
+<td>—</td>
+<td>Les arguments sont sourcés et vérifiables.</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Test de reconnaissance : reconnu ; note IEG proposée</td>
+<td>0 / 50 ; 0 / 50</td>
+<td>—</td>
+<td>Pas de mémorisation détectée.</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Extracteurs : dossiers, erreurs, citations valides</td>
+<td>1 582, 0, 97,6 %</td>
+<td>pilote 99,8 %</td>
+<td>L'extraction tient à l'échelle.</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Backtest bloc D, 25 % du budget : M6 / M1-texte</td>
+<td>86,1 % (p ≤ 0,001) / 80,5 % (p = 0,115)</td>
+<td>hasard 77,7 %</td>
+<td>À ne pas interpréter : instabilité de ± 5 points (limite 3).</td>
+</tr>
+</tbody>
+</table>
+<figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 362" width="760" height="362" role="img" aria-label="AUC-PR des modèles au test, avec IC 95 % et taux de base" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"><title>AUC-PR des modèles au test, avec IC 95 % et taux de base</title><rect width="760" height="362" fill="#fcfcfb"/><line x1="250.0" x2="250.0" y1="32" y2="312" stroke="#e7e6e1"/><text x="250.0" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,10</text><line x1="319.4" x2="319.4" y1="32" y2="312" stroke="#e7e6e1"/><text x="319.4" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,15</text><line x1="388.9" x2="388.9" y1="32" y2="312" stroke="#e7e6e1"/><text x="388.9" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,20</text><line x1="458.3" x2="458.3" y1="32" y2="312" stroke="#e7e6e1"/><text x="458.3" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,25</text><line x1="527.7" x2="527.7" y1="32" y2="312" stroke="#e7e6e1"/><text x="527.7" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,30</text><line x1="597.1" x2="597.1" y1="32" y2="312" stroke="#e7e6e1"/><text x="597.1" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,35</text><line x1="666.6" x2="666.6" y1="32" y2="312" stroke="#e7e6e1"/><text x="666.6" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,40</text><line x1="736.0" x2="736.0" y1="32" y2="312" stroke="#e7e6e1"/><text x="736.0" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,45</text><text x="493.0" y="346.0" font-size="12" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">AUC-PR (classe « échec »), IC 95 %</text><circle cx="250" cy="16" r="5" fill="#2a78d6"/><text x="264.0" y="16.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" dominant-baseline="middle">AUC-PR du modèle</text><rect x="388" y="16" width="3" height="12" transform="translate(-1,-6)" fill="#7a7974"/><text x="402.0" y="16.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" dominant-baseline="middle">taux de base (hasard)</text><text x="8.0" y="51.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M1 · variables chiffrées ex ante</text><text x="8.0" y="65.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">test, projets avec texte · n = 755</text><line x1="407.2" x2="555.3" y1="57.0" y2="57.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="409.4" y="49.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,216</title></rect><circle cx="470.4" cy="57.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M1 · variables chiffrées ex ante : 0,259 [0,213 ; 0,320], taux de base 0,216</title></circle><text x="8.0" y="85.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M1-texte · TF-IDF du dossier complet</text><text x="8.0" y="99.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">test, projets avec texte · n = 755</text><line x1="452.0" x2="622.9" y1="91.0" y2="91.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="409.4" y="83.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,216</title></rect><circle cx="524.2" cy="91.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M1-texte · TF-IDF du dossier complet : 0,297 [0,245 ; 0,369], taux de base 0,216</title></circle><text x="8.0" y="119.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M3 · 5 notes du Juge</text><text x="8.0" y="133.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">test du comité · n = 300</text><line x1="322.5" x2="488.8" y1="125.0" y2="125.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="405.9" y="117.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,213</title></rect><circle cx="388.9" cy="125.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M3 · 5 notes du Juge : 0,200 [0,152 ; 0,272], taux de base 0,213</title></circle><text x="8.0" y="153.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M4 · texte + 5 notes du Juge</text><text x="8.0" y="167.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">test du comité · n = 300</text><line x1="378.7" x2="612.0" y1="159.0" y2="159.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="405.9" y="151.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,213</title></rect><circle cx="475.9" cy="159.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M4 · texte + 5 notes du Juge : 0,263 [0,193 ; 0,361], taux de base 0,213</title></circle><text x="8.0" y="187.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M7 · texte + sorties du débat</text><text x="8.0" y="201.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">test du comité · n = 300</text><line x1="438.7" x2="704.4" y1="193.0" y2="193.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="405.9" y="185.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,213</title></rect><circle cx="556.2" cy="193.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M7 · texte + sorties du débat : 0,321 [0,236 ; 0,427], taux de base 0,213</title></circle><text x="8.0" y="221.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M5 · 19 facteurs extraits seuls</text><text x="8.0" y="235.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">test du bloc D · n = 729</text><line x1="394.3" x2="517.7" y1="227.0" y2="227.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="406.8" y="219.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,214</title></rect><circle cx="446.4" cy="227.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M5 · 19 facteurs extraits seuls : 0,241 [0,204 ; 0,293], taux de base 0,214</title></circle><text x="8.0" y="255.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M6 · texte + facteurs extraits</text><text x="8.0" y="269.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">test du bloc D · n = 729</text><line x1="454.9" x2="623.3" y1="261.0" y2="261.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="406.8" y="253.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,214</title></rect><circle cx="527.9" cy="261.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M6 · texte + facteurs extraits : 0,300 [0,248 ; 0,369], taux de base 0,214</title></circle><text x="8.0" y="289.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M1 · coffre-fort · projets évalués en 2025+</text><text x="8.0" y="303.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">données neuves · n = 700</text><line x1="310.4" x2="404.8" y1="295.0" y2="295.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><rect x="353.6" y="287.0" width="3" height="16" fill="#7a7974"><title>taux de base 0,176</title></rect><circle cx="350.1" cy="295.0" r="5.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>M1 · coffre-fort · projets évalués en 2025+ : 0,172 [0,144 ; 0,211], taux de base 0,176</title></circle></svg></figure>
+<p><em>Ce qu'il faut retenir : tous les modèles sont proches de leur taux de base ; seul le texte du
+dossier (M1-texte, et M6 qui le contient) s'en écarte nettement, et M1 retombe au taux de base sur
+le coffre-fort.</em></p>
+<figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 362" width="760" height="362" role="img" aria-label="Écarts appariés d&#x27;AUC-PR (forest plot)" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"><title>Écarts appariés d&#x27;AUC-PR (forest plot)</title><rect width="760" height="362" fill="#fcfcfb"/><line x1="330.0" x2="330.0" y1="32" y2="312" stroke="#e7e6e1"/><text x="330.0" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">−0,10</text><line x1="411.2" x2="411.2" y1="32" y2="312" stroke="#e7e6e1"/><text x="411.2" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">−0,05</text><line x1="492.4" x2="492.4" y1="32" y2="312" stroke="#e7e6e1"/><text x="492.4" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">0,00</text><line x1="573.6" x2="573.6" y1="32" y2="312" stroke="#e7e6e1"/><text x="573.6" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">+0,05</text><line x1="654.8" x2="654.8" y1="32" y2="312" stroke="#e7e6e1"/><text x="654.8" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">+0,10</text><line x1="736.0" x2="736.0" y1="32" y2="312" stroke="#e7e6e1"/><text x="736.0" y="326.0" font-size="11" fill="#7a7974" text-anchor="middle" font-weight="400" dominant-baseline="middle">+0,15</text><text x="533.0" y="346.0" font-size="12" fill="#52514e" text-anchor="middle" font-weight="400" dominant-baseline="middle">Écart apparié d&#x27;AUC-PR, IC 95 %</text><line x1="492.4" x2="492.4" y1="32" y2="312" stroke="#52514e" stroke-width="1.5"/><circle cx="12" cy="16" r="5" fill="#2a78d6"/><text x="26.0" y="16.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" dominant-baseline="middle">IC entièrement au-dessus de 0 : apport démontré</text><circle cx="367" cy="16" r="5" fill="#fcfcfb" stroke="#7a7974" stroke-width="2"/><text x="381.0" y="16.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" dominant-baseline="middle">IC contient 0 : non démontré</text><text x="8.0" y="51.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M1 − M0</text><text x="8.0" y="65.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">les variables structurées battent-elles le hasard ?</text><line x1="506.8" x2="589.5" y1="57.0" y2="57.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><circle cx="540.7" cy="57.0" r="5.5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"><title>M1 − M0 : +0,030 [0,009 ; 0,060]</title></circle><text x="8.0" y="85.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M1-texte − M1</text><text x="8.0" y="99.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">le texte apporte-t-il plus que les variables ?</text><line x1="496.5" x2="626.2" y1="91.0" y2="91.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><circle cx="555.3" cy="91.0" r="5.5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"><title>M1-texte − M1 : +0,039 [0,003 ; 0,082]</title></circle><text x="8.0" y="119.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M3 − M0</text><text x="8.0" y="133.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">les notes du Juge prédisent-elles ?</text><line x1="432.5" x2="567.1" y1="125.0" y2="125.0" stroke="#7a7974" stroke-width="2" stroke-linecap="round"/><circle cx="470.8" cy="125.0" r="5.5" fill="#fcfcfb" stroke="#7a7974" stroke-width="2"><title>M3 − M0 : −0,013 [−0,037 ; 0,046]</title></circle><text x="8.0" y="153.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M4 − texte</text><text x="8.0" y="167.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">les notes ajoutent-elles au texte ?</text><line x1="349.4" x2="539.7" y1="159.0" y2="159.0" stroke="#7a7974" stroke-width="2" stroke-linecap="round"/><circle cx="442.1" cy="159.0" r="5.5" fill="#fcfcfb" stroke="#7a7974" stroke-width="2"><title>M4 − texte : −0,031 [−0,088 ; 0,029]</title></circle><text x="8.0" y="187.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M7 − texte</text><text x="8.0" y="201.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">le débat ajoute-t-il au texte ?</text><line x1="397.0" x2="673.7" y1="193.0" y2="193.0" stroke="#7a7974" stroke-width="2" stroke-linecap="round"/><circle cx="536.0" cy="193.0" r="5.5" fill="#fcfcfb" stroke="#7a7974" stroke-width="2"><title>M7 − texte : +0,027 [−0,059 ; 0,112]</title></circle><text x="8.0" y="221.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M5 − M0</text><text x="8.0" y="235.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">les facteurs extraits prédisent-ils ?</text><line x1="498.0" x2="605.4" y1="227.0" y2="227.0" stroke="#2a78d6" stroke-width="2" stroke-linecap="round"/><circle cx="537.0" cy="227.0" r="5.5" fill="#2a78d6" stroke="#2a78d6" stroke-width="2"><title>M5 − M0 : +0,027 [0,003 ; 0,070]</title></circle><text x="8.0" y="255.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">M6 − texte</text><text x="8.0" y="269.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">les facteurs ajoutent-ils au texte ?</text><line x1="429.1" x2="561.7" y1="261.0" y2="261.0" stroke="#7a7974" stroke-width="2" stroke-linecap="round"/><circle cx="497.8" cy="261.0" r="5.5" fill="#fcfcfb" stroke="#7a7974" stroke-width="2"><title>M6 − texte : +0,003 [−0,039 ; 0,043]</title></circle><text x="8.0" y="289.0" font-size="12.5" fill="#0b0b0b" text-anchor="start" font-weight="600" dominant-baseline="middle">Coffre : M1 − M0</text><text x="8.0" y="303.0" font-size="11" fill="#7a7974" text-anchor="start" font-weight="400" dominant-baseline="middle">M1 tient-il sur des données neuves ?</text><line x1="460.9" x2="527.3" y1="295.0" y2="295.0" stroke="#7a7974" stroke-width="2" stroke-linecap="round"/><circle cx="486.6" cy="295.0" r="5.5" fill="#fcfcfb" stroke="#7a7974" stroke-width="2"><title>Coffre : M1 − M0 : −0,004 [−0,019 ; 0,021]</title></circle></svg></figure>
+<p><em>Ce qu'il faut retenir : trois apports sont démontrés (M1 − M0, M1-texte − M1, M5 − M0) ; aucun
+apport des agents <em>en plus du texte</em> ne l'est (M4, M6 et M7 ont un intervalle qui contient zéro).</em></p>
+<h2 id="s-10">10. Ce que les agents apportent / n&#x27;apportent pas</h2>
+<blockquote>
+<p><strong>En simple.</strong> Les agents ne rendent pas la prédiction meilleure, mais ils rendent chaque décision
+explicable, vérifiable et discutable.</p>
+</blockquote>
+<p><strong>En technique.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Partie</th>
+<th>Ce que les agents apportent</th>
+<th>Ce qu'ils n'apportent pas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Évaluation</td>
+<td>Des facteurs de risque lisibles, sourcés, au signal réel (M5 − M0 = +0,027 [0,003 ; 0,070]).</td>
+<td>Aucune information prédictive en plus du texte complet (M4, M6, M7 : IC contenant 0). Les notes du Juge ne prédisent pas l'échec.</td>
+</tr>
+<tr>
+<td>Multicritère</td>
+<td>Un profil sur 5 critères que le ML n'a pas ; une frontière α pour arbitrer.</td>
+<td>Ces notes ne sont pas validées par l'issue IEG.</td>
+</tr>
+<tr>
+<td>Sélection</td>
+<td>Avec α &lt; 1, des portefeuilles mieux notés sur les critères.</td>
+<td>Aucun gain de réussite démontré.</td>
+</tr>
+<tr>
+<td>Agentique</td>
+<td>Des arguments Pour / Contre sourcés (99,8 % de citations exactes), un critique, des facteurs vérifiés, un test de reconnaissance négatif.</td>
+<td>Pas de vérification de la justesse de chaque argument au-delà de la citation.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="s-11">11. Limites</h2>
+<blockquote>
+<p><strong>En simple.</strong> Le signal est faible, certaines vérifications n'ont pu être faites qu'une fois ou
+sur peu de projets, et quelques choix techniques ont des défauts connus. Les voici tous.</p>
+</blockquote>
+<p><strong>En technique.</strong></p>
+<ol>
+<li><strong>Signal faible.</strong> Les meilleurs modèles restent proches du taux de base ; les AUC-ROC sont
+autour de 0,6. Le ML ne « prédit » pas l'échec d'un projet donné : il le classe un peu mieux que
+le hasard en moyenne.</li>
+<li><strong>Test consulté en phase 2.</strong> Le test 2012–2017 a été regardé pendant la mise au point de M1 :
+le retrait de la variable « pays » a été décidé après avoir vu le test. M1 et M1-texte ont
+ensuite été figés et le test n'a plus servi à aucun choix. Le coffre-fort, lui, n'a jamais été
+regardé avant la fin : il montre que les chiffres de test de M1 étaient optimistes.</li>
+<li><strong>Instabilité du backtest (± 5 points selon le pool).</strong> Même modèle (M1-texte), même objectif,
+même budget : 85,3 % au bloc B, 80,5 % au bloc D ; seule différence : le retrait
+de 16 projets sans date d'approbation connue. Les écarts de backtest de l'ordre de
+5 points entre deux modèles ne doivent pas être interprétés ; seule la comparaison au hasard sur
+le même pool est fiable.</li>
+<li><strong>Coffre-fort incomplet.</strong> Le serveur de documents a refusé les téléchargements (403) : M1-texte
+n'a été mesuré que sur 78 projets (12 échecs), de façon
+descriptive (protocole amendé et commité avant lecture). Les agents n'ont pas été évalués sur le
+coffre-fort.</li>
+<li><strong>Masquage des sigles.</strong> Le masquage laisse les sigles et certaines variantes du nom du projet,
+et environ une grande ville par document. Le test de reconnaissance est négatif, mais le
+masquage n'est pas parfait.</li>
+<li><strong>Un seul passage du LLM.</strong> Un modèle 7B quantifié, un passage, un tour de raffinement :
+stabilité sur plusieurs passages, ablations et prompt unique (M2) non faits, faute de quota
+gratuit. Le test du comité (300 projets) a servi deux fois (M3/M4, puis M7).</li>
+<li><strong>Bloc D.</strong> Exactitude des facteurs mesurée sur le pilote seulement ; pas de facteurs pour
+l'entraînement ≤ 2007 : M5/M6 sont appris sur 853 projets.</li>
+<li><strong>Indicateurs pays.</strong> Les WDI sont les valeurs révisées actuelles, pas celles connues à l'époque.</li>
+</ol>
+<h2 id="s-12">12. Reproductibilité</h2>
+<blockquote>
+<p><strong>En simple.</strong> Tout le projet se relance avec quelques commandes ; les résultats de chaque étape
+sont dans le dépôt.</p>
+</blockquote>
+<p><strong>En technique.</strong> Python 3.12, <code>uv</code>. Chaque étape écrit ses résultats dans <code>experiments/</code> et son
+rapport dans <code>reports/</code>.</p>
+<pre><code class="language-bash">uv sync                                                    # installer
+uv run pytest &amp;&amp; uv run ruff check .                       # tests (hors réseau) et lint
+uv run python -m investagents.data.ieg                     # notes IEG
+uv run python -m investagents.data.projects_api            # dates d'approbation
+uv run python -m investagents.data.amounts                 # montants à l'approbation
+uv run python -m investagents.data.country_indicators      # indicateurs pays
+uv run python -m investagents.data.corpus                  # textes des dossiers (long)
+uv run python -m investagents.ml.run_phase2 --stage select      # M1, M1-texte (validation)
+uv run python -m investagents.ml.run_phase2 --stage evaluate    # test, une fois
+uv run python -m investagents.ml.run_blocB --stage select|evaluate
+uv run python -m investagents.selection.choose_objective --stage select|evaluate|control
+uv run python -m investagents.committee_run.build_dataset  # comité : jeu pour Kaggle
+uv run python -m investagents.committee_run.analyze        # après le passage Kaggle
+uv run python -m investagents.ml.run_blocC_models --stage select|evaluate   # M3 / M4
+uv run python -m investagents.ml.run_m7 --stage select|evaluate
+uv run python -m investagents.selection.frontier --stage valid|test
+uv run python -m investagents.extract.build_dataset        # extracteurs : jeu pour Kaggle
+uv run python -m investagents.extract.analyze --run experiments/blocD/kaggle_full1
+uv run python -m investagents.ml.run_m6 --stage choices|select|evaluate
+uv run python -m investagents.ml.run_vault --stage evaluate
+uv run python -m investagents.report.build                 # ce rapport (md, html, pdf)
+uv run streamlit run src/investagents/app/streamlit_app.py # démo
+</code></pre>
+<p>Les passages LLM tournent sur Kaggle (GPU T4 gratuits) : voir <code>kaggle/blocC/</code> et <code>kaggle/blocD/</code>.</p>
+<h2 id="s-13">13. Attributions et usage de l&#x27;IA</h2>
+<blockquote>
+<p><strong>En simple.</strong> Nous avons utilisé des données publiques, un projet open source et des modèles
+d'IA ; chacun est cité avec sa licence.</p>
+</blockquote>
+<p><strong>En technique.</strong></p>
+<ul>
+<li><strong>Données</strong> : notes IEG, relevés IDA/IBRD, WDI — © Banque mondiale, licence CC BY 4.0 (World Bank
+Projects API, Documents &amp; Reports API, Indicators API).</li>
+<li><strong>GeoNames</strong> (via geonamescache) : CC BY 4.0, pour le masquage des lieux.</li>
+<li><strong>DIALECTIC</strong> (github.com/pantageepapa/DIALECTIC), licence MIT : structure du débat et prompts
+adaptés, avec attribution dans <code>src/investagents/debate/</code>.</li>
+<li><strong>Qwen2.5-7B-Instruct</strong> (Alibaba, licence Apache 2.0), exécuté avec Ollama sur les GPU gratuits de
+Kaggle : c'est le LLM des agents.</li>
+<li><strong>Claude Code</strong> (Anthropic) : assistant de programmation pour écrire le code, les tests et les
+rapports ; chaque étape a été relue et validée par Aya, et chaque chiffre vient de l'exécution du
+code.</li>
+<li>Code du projet : licence MIT.</li>
+</ul>
+<h2 id="s-14">14. Glossaire</h2>
+<div class="glossary">
+<section class="term" id="g-agent"><h3>agent</h3><dl><dt>En simple</dt><dd>Un LLM à qui on donne un rôle précis (avocat Pour, avocat Contre, critique, juge) et des règles.</dd><dt>En technique</dt><dd>Nœud d&#x27;un graphe de calcul qui appelle un LLM avec un rôle, un schéma de sortie et un état partagé.</dd><dt>Dans notre projet</dt><dd>Le comité : Pour, Contre, critique, raffinement, Juge ; puis l&#x27;extracteur de facteurs.</dd></dl><a class="back" href="#ref-g-agent" data-term="g-agent">↩ retour au texte</a></section>
+<section class="term" id="g-auc-pr"><h3>AUC-PR</h3><dl><dt>En simple</dt><dd>Note qui dit si, parmi les projets que le modèle signale comme risqués, beaucoup sont vraiment en échec. Le hasard vaut le taux de base, pas 0,5.</dd><dt>En technique</dt><dd>Aire sous la courbe précision-rappel (average precision), calculée sur la classe minoritaire « échec ». Métrique principale du projet, car les échecs sont rares.</dd><dt>Dans notre projet</dt><dd>M1-texte : 0,297 [0,245 ; 0,369] au test, contre un taux de base de 0,216.</dd></dl><a class="back" href="#ref-g-auc-pr" data-term="g-auc-pr">↩ retour au texte</a></section>
+<section class="term" id="g-auc-roc"><h3>AUC-ROC</h3><dl><dt>En simple</dt><dd>Note de 0 à 1 qui dit si le modèle range les projets en échec avant les projets réussis. 0,5 = hasard, 1 = parfait.</dd><dt>En technique</dt><dd>Aire sous la courbe ROC : probabilité qu&#x27;un projet en échec tiré au hasard reçoive un score plus élevé qu&#x27;un projet réussi tiré au hasard. Insensible au taux de base.</dd><dt>Dans notre projet</dt><dd>Sur le coffre-fort, M1 obtient 0,509 [0,457 ; 0,562] : l&#x27;intervalle contient 0,5, donc on ne distingue pas M1 du hasard.</dd></dl><a class="back" href="#ref-g-auc-roc" data-term="g-auc-roc">↩ retour au texte</a></section>
+<section class="term" id="g-brier"><h3>Brier</h3><dl><dt>En simple</dt><dd>Erreur moyenne des probabilités annoncées. Plus c&#x27;est bas, mieux c&#x27;est.</dd><dt>En technique</dt><dd>Moyenne de (p − y)² ; mesure à la fois le classement et la calibration.</dd><dt>Dans notre projet</dt><dd>M1-texte : Brier 0,168 avant calibration, 0,166 après.</dd></dl><a class="back" href="#ref-g-brier" data-term="g-brier">↩ retour au texte</a></section>
+<section class="term" id="g-calibration-de-platt"><h3>calibration de Platt</h3><dl><dt>En simple</dt><dd>Une petite correction qui rend les probabilités du modèle honnêtes, sans changer l&#x27;ordre des projets.</dd><dt>En technique</dt><dd>Régression logistique à une variable (le score du modèle) apprise sur la validation seulement ; elle corrige aussi la dérive du taux d&#x27;échec.</dd><dt>Dans notre projet</dt><dd>Recalibrée sur 2008–2011 avant la sélection sous budget, jamais sur le test.</dd></dl><a class="back" href="#ref-g-calibration-de-platt" data-term="g-calibration-de-platt">↩ retour au texte</a></section>
+<section class="term" id="g-citation-verifiee"><h3>citation vérifiée</h3><dl><dt>En simple</dt><dd>Chaque argument doit citer une phrase du dossier, et on vérifie par programme que cette phrase existe.</dd><dt>En technique</dt><dd>Citations par numéros de phrases [S12] ; contrôle en Python que le numéro existe et que la phrase se retrouve mot pour mot dans le texte source.</dd><dt>Dans notre projet</dt><dd>5 986 / 6 000 citations retrouvées (99,8 %).</dd></dl><a class="back" href="#ref-g-citation-verifiee" data-term="g-citation-verifiee">↩ retour au texte</a></section>
+<section class="term" id="g-coffre-fort"><h3>coffre-fort</h3><dl><dt>En simple</dt><dd>Un paquet de projets mis sous clé dès le début et ouvert une seule fois, à la fin.</dd><dt>En technique</dt><dd>Projets évalués par l&#x27;IEG en exercice ≥ 2025, exclus de tout entraînement, réglage et lecture ; protocole commité avant ouverture.</dd><dt>Dans notre projet</dt><dd>700 projets ; M1 y tombe au niveau du hasard : 0,172 [0,144 ; 0,211] pour un taux de base de 0,176.</dd></dl><a class="back" href="#ref-g-coffre-fort" data-term="g-coffre-fort">↩ retour au texte</a></section>
+<section class="term" id="g-criteres-ocde-cad"><h3>critères OCDE-CAD</h3><dl><dt>En simple</dt><dd>Une grille internationale pour juger un projet de développement.</dd><dt>En technique</dt><dd>Critères d&#x27;évaluation du Comité d&#x27;aide au développement de l&#x27;OCDE : pertinence, efficience, efficacité, impact, durabilité (et cohérence).</dd><dt>Dans notre projet</dt><dd>Le Juge note 5 critères inspirés de cette grille, de 0 à 10.</dd></dl><a class="back" href="#ref-g-criteres-ocde-cad" data-term="g-criteres-ocde-cad">↩ retour au texte</a></section>
+<section class="term" id="g-decalage-de-domaine"><h3>décalage de domaine</h3><dl><dt>En simple</dt><dd>Les données de demain ne ressemblent pas tout à fait à celles d&#x27;hier, et le modèle perd en qualité.</dd><dt>En technique</dt><dd>Changement de la distribution des variables ou de la cible entre apprentissage et usage (ici, le taux d&#x27;échec baisse avec le temps).</dd><dt>Dans notre projet</dt><dd>Taux d&#x27;échec 28 % (≤ 2007) contre 17,6 % sur le coffre-fort.</dd></dl><a class="back" href="#ref-g-decalage-de-domaine" data-term="g-decalage-de-domaine">↩ retour au texte</a></section>
+<section class="term" id="g-decoupage-temporel"><h3>découpage temporel</h3><dl><dt>En simple</dt><dd>On apprend sur le passé et on teste sur l&#x27;avenir, comme dans la vraie vie.</dd><dt>En technique</dt><dd>Split par exercice d&#x27;approbation, sans mélange : entraînement ≤ 2007, validation 2008–2011, test 2012–2017.</dd><dt>Dans notre projet</dt><dd>9 004 projets d&#x27;entraînement, 1 243 de validation, 1 294 de test.</dd></dl><a class="back" href="#ref-g-decoupage-temporel" data-term="g-decoupage-temporel">↩ retour au texte</a></section>
+<section class="term" id="g-ece"><h3>ECE</h3><dl><dt>En simple</dt><dd>Écart moyen entre la probabilité annoncée et la fréquence réelle. Si le modèle dit « 20 % », il faut environ 20 % d&#x27;échecs.</dd><dt>En technique</dt><dd>Expected Calibration Error : moyenne pondérée, par tranche de probabilité, de |fréquence observée − probabilité moyenne|.</dd><dt>Dans notre projet</dt><dd>M1-texte : ECE 0,045 avant la calibration de Platt, 0,023 après.</dd></dl><a class="back" href="#ref-g-ece" data-term="g-ece">↩ retour au texte</a></section>
+<section class="term" id="g-embeddings"><h3>embeddings</h3><dl><dt>En simple</dt><dd>Une façon de résumer le sens d&#x27;un texte par une liste de nombres.</dd><dt>En technique</dt><dd>Vecteurs denses produits par un modèle de langue ; deux textes proches ont des vecteurs proches.</dd><dt>Dans notre projet</dt><dd>Variante MiniLM testée au bloc B sur la validation ; non retenue, moins bonne que le TF-IDF.</dd></dl><a class="back" href="#sommaire" data-term="g-embeddings">↩ retour au texte</a></section>
+<section class="term" id="g-frontiere"><h3>frontière α</h3><dl><dt>En simple</dt><dd>Un curseur qui dit combien on fait confiance au ML et combien au jugement du comité.</dd><dt>En technique</dt><dd>Score = α × probabilité de réussite + (1 − α) × moyenne pondérée des 5 notes / 10 ; α ∈ {1 ; 0,75 ; 0,5 ; 0,25 ; 0} fixés à l&#x27;avance.</dd><dt>Dans notre projet</dt><dd>Au test, de α = 1 à α = 0, la note d&#x27;impact du portefeuille passe de 6,65 à 7,41.</dd></dl><a class="back" href="#ref-g-frontiere" data-term="g-frontiere">↩ retour au texte</a></section>
+<section class="term" id="g-fuite-de-donnees"><h3>fuite de données</h3><dl><dt>En simple</dt><dd>Le modèle voit, sans le vouloir, une information qui n&#x27;existait pas au moment de la décision. Ses scores deviennent trop beaux.</dd><dt>En technique</dt><dd>Toute variable ou tout texte postérieur à l&#x27;instant de prédiction (ici, l&#x27;approbation du projet) ; aussi l&#x27;usage du test pour faire des choix.</dd><dt>Dans notre projet</dt><dd>Interdits : rapports de fin de projet (ICR, ICRR, PPAR), colonnes IEG post-projet, documents datés après l&#x27;approbation.</dd></dl><a class="back" href="#ref-g-fuite-de-donnees" data-term="g-fuite-de-donnees">↩ retour au texte</a></section>
+<section class="term" id="g-gradient-boosting"><h3>gradient boosting</h3><dl><dt>En simple</dt><dd>Beaucoup de petits arbres de décision qui corrigent chacun les erreurs des précédents.</dd><dt>En technique</dt><dd>HistGradientBoostingClassifier de scikit-learn : arbres ajoutés séquentiellement sur le gradient de la perte logistique.</dd><dt>Dans notre projet</dt><dd>M1 : variables structurées ex ante (région, secteur, montant, indicateurs pays).</dd></dl><a class="back" href="#ref-g-gradient-boosting" data-term="g-gradient-boosting">↩ retour au texte</a></section>
+<section class="term" id="g-ieg"><h3>IEG</h3><dl><dt>En simple</dt><dd>Le service d&#x27;évaluation indépendant de la Banque mondiale. Il note chaque projet après sa clôture.</dd><dt>En technique</dt><dd>Independent Evaluation Group ; note de résultat sur 6 niveaux (HS, S, MS, MU, U, HU).</dd><dt>Dans notre projet</dt><dd>Vérité terrain : échec = MU, U ou HU.</dd></dl><a class="back" href="#ref-g-ieg" data-term="g-ieg">↩ retour au texte</a></section>
+<section class="term" id="g-intervalle-de-confiance-bootstrap"><h3>intervalle de confiance bootstrap</h3><dl><dt>En simple</dt><dd>La fourchette dans laquelle le vrai score a de bonnes chances de se trouver, vu le nombre limité de projets.</dd><dt>En technique</dt><dd>IC à 95 % par percentiles sur 2 000 rééchantillonnages avec remise des projets du test.</dd><dt>Dans notre projet</dt><dd>M1 au test : 0,247 [0,216 ; 0,286].</dd></dl><a class="back" href="#ref-g-intervalle-de-confiance-bootstrap" data-term="g-intervalle-de-confiance-bootstrap">↩ retour au texte</a></section>
+<section class="term" id="g-langgraph"><h3>LangGraph</h3><dl><dt>En simple</dt><dd>La bibliothèque qui enchaîne les agents dans le bon ordre.</dd><dt>En technique</dt><dd>Bibliothèque de graphes d&#x27;état pour orchestrer des appels LLM (nœuds, arêtes, état typé).</dd><dt>Dans notre projet</dt><dd>Débat → critique → raffinement → Juge → vérification des citations.</dd></dl><a class="back" href="#ref-g-langgraph" data-term="g-langgraph">↩ retour au texte</a></section>
+<section class="term" id="g-llm"><h3>LLM</h3><dl><dt>En simple</dt><dd>Un grand modèle de langue : un programme qui lit et écrit du texte.</dd><dt>En technique</dt><dd>Large Language Model, réseau transformeur pré-entraîné ; ici Qwen2.5 7B, exécuté en local avec Ollama, sorties JSON validées par Pydantic.</dd><dt>Dans notre projet</dt><dd>Aucun chiffre ne vient du LLM : les nombres sont comptés et vérifiés en Python.</dd></dl><a class="back" href="#ref-g-llm" data-term="g-llm">↩ retour au texte</a></section>
+<section class="term" id="g-pad"><h3>PAD</h3><dl><dt>En simple</dt><dd>Le dossier d&#x27;évaluation écrit avant l&#x27;approbation du projet.</dd><dt>En technique</dt><dd>Project Appraisal Document (ou Staff Appraisal Report pour les anciens projets) : document ex ante lu par les agents.</dd><dt>Dans notre projet</dt><dd>8 260 projets ont un dossier en texte daté avant l&#x27;approbation.</dd></dl><a class="back" href="#ref-g-pad" data-term="g-pad">↩ retour au texte</a></section>
+<section class="term" id="g-regression-logistique"><h3>régression logistique</h3><dl><dt>En simple</dt><dd>Un modèle simple qui additionne des indices pondérés pour donner une probabilité.</dd><dt>En technique</dt><dd>Modèle linéaire sur le log-odds, régularisé (C), appris par maximum de vraisemblance.</dd><dt>Dans notre projet</dt><dd>M1-texte, M3, M5, M6, M7 sont des régressions logistiques.</dd></dl><a class="back" href="#ref-g-regression-logistique" data-term="g-regression-logistique">↩ retour au texte</a></section>
+<section class="term" id="g-sac-a-dos-cp-sat"><h3>sac à dos (CP-SAT)</h3><dl><dt>En simple</dt><dd>Choisir le meilleur panier de projets sans dépasser le budget.</dd><dt>En technique</dt><dd>Problème du sac à dos 0-1 résolu exactement par le solveur CP-SAT d&#x27;OR-Tools, avec un plafond par pays.</dd><dt>Dans notre projet</dt><dd>Objectif figé : maximiser Σ p × coût, 25 % du budget, au plus 25 % par pays.</dd></dl><a class="back" href="#ref-g-sac-a-dos-cp-sat" data-term="g-sac-a-dos-cp-sat">↩ retour au texte</a></section>
+<section class="term" id="g-sur-apprentissage"><h3>sur-apprentissage</h3><dl><dt>En simple</dt><dd>Le modèle apprend par cœur ses exemples et ne généralise pas.</dd><dt>En technique</dt><dd>Écart entre la performance sur les données d&#x27;apprentissage et sur des données neuves ; on le limite par régularisation et réglage sur la validation.</dd><dt>Dans notre projet</dt><dd>M1-texte : AUC-PR 0,870 sur l&#x27;entraînement, 0,355 sur la validation.</dd></dl><a class="back" href="#ref-g-sur-apprentissage" data-term="g-sur-apprentissage">↩ retour au texte</a></section>
+<section class="term" id="g-taux-de-base"><h3>taux de base</h3><dl><dt>En simple</dt><dd>La part de projets en échec dans l&#x27;échantillon. C&#x27;est le score d&#x27;un modèle qui ne sait rien (M0).</dd><dt>En technique</dt><dd>Prévalence de la classe positive ; valeur de l&#x27;AUC-PR d&#x27;un classement aléatoire.</dd><dt>Dans notre projet</dt><dd>28 % d&#x27;échecs à l&#x27;entraînement, 22 % au test, 17,6 % sur le coffre-fort : c&#x27;est la dérive.</dd></dl><a class="back" href="#ref-g-taux-de-base" data-term="g-taux-de-base">↩ retour au texte</a></section>
+<section class="term" id="g-test-de-permutation"><h3>test de permutation</h3><dl><dt>En simple</dt><dd>On mélange au hasard les issues des projets pour voir quel score on obtiendrait par pure chance.</dd><dt>En technique</dt><dd>Distribution nulle de la métrique obtenue en permutant les étiquettes (ou en tirant des portefeuilles au hasard sous le même budget) ; la valeur p est la part des tirages au moins aussi bons.</dd><dt>Dans notre projet</dt><dd>Portefeuille à 25 % du budget : 85,3 % de projets réussis, contre 77,2 % en moyenne au hasard (p ≤ 0,001).</dd></dl><a class="back" href="#ref-g-test-de-permutation" data-term="g-test-de-permutation">↩ retour au texte</a></section>
+<section class="term" id="g-test-de-reconnaissance"><h3>test de reconnaissance</h3><dl><dt>En simple</dt><dd>On demande au LLM s&#x27;il reconnaît le projet. S&#x27;il le reconnaît, il pourrait tricher avec sa mémoire.</dd><dt>En technique</dt><dd>Questions directes (nom, pays, année, note IEG) sur des dossiers masqués ; réponses comparées à la vérité en local.</dd><dt>Dans notre projet</dt><dd>0 / 50 projet reconnu, 0 / 50 note IEG proposée.</dd></dl><a class="back" href="#ref-g-test-de-reconnaissance" data-term="g-test-de-reconnaissance">↩ retour au texte</a></section>
+<section class="term" id="g-tf-idf"><h3>TF-IDF</h3><dl><dt>En simple</dt><dd>Une façon de transformer un texte en nombres en comptant les mots, en donnant plus de poids aux mots rares et parlants.</dd><dt>En technique</dt><dd>Term frequency × inverse document frequency : mots seuls, mots vides anglais retirés, tf sous-linéaire, au plus 50 000 mots, vecteurs normalisés (L2).</dd><dt>Dans notre projet</dt><dd>M1-texte = TF-IDF du dossier d&#x27;évaluation + régression logistique.</dd></dl><a class="back" href="#ref-g-tf-idf" data-term="g-tf-idf">↩ retour au texte</a></section>
+<section class="term" id="g-valeur-p"><h3>valeur p</h3><dl><dt>En simple</dt><dd>La probabilité d&#x27;obtenir un résultat au moins aussi bon par pure chance. Petite = difficile à expliquer par le hasard.</dd><dt>En technique</dt><dd>Part des tirages de la distribution nulle supérieurs ou égaux à la valeur observée.</dd><dt>Dans notre projet</dt><dd>M1 contre des étiquettes permutées : p = 0,015.</dd></dl><a class="back" href="#sommaire" data-term="g-valeur-p">↩ retour au texte</a></section>
+<section class="term" id="g-validation-croisee"><h3>validation croisée</h3><dl><dt>En simple</dt><dd>On découpe les données de réglage en morceaux, on apprend sur les uns et on vérifie sur l&#x27;autre, à tour de rôle.</dd><dt>En technique</dt><dd>K-fold stratifié sur la seule période de validation, pour choisir un hyperparamètre sans toucher au test.</dd><dt>Dans notre projet</dt><dd>M5/M6 réglés par validation croisée sur 853 projets de validation.</dd></dl><a class="back" href="#ref-g-validation-croisee" data-term="g-validation-croisee">↩ retour au texte</a></section>
+<section class="term" id="g-ecart-apparie"><h3>écart apparié</h3><dl><dt>En simple</dt><dd>La différence entre deux modèles mesurée sur exactement les mêmes projets, pour ne comparer que les modèles.</dd><dt>En technique</dt><dd>Différence de métrique recalculée sur chaque tirage bootstrap commun aux deux modèles ; si l&#x27;IC contient 0, l&#x27;écart n&#x27;est pas démontré.</dd><dt>Dans notre projet</dt><dd>M6 − M1-texte = +0,003 [−0,039 ; 0,043] : zéro est dans l&#x27;intervalle.</dd></dl><a class="back" href="#ref-g-ecart-apparie" data-term="g-ecart-apparie">↩ retour au texte</a></section>
+</div>
+
+</main>
+</div>
+<script>let lastRef = null;
+document.querySelectorAll("a.gl").forEach(a => a.addEventListener("click", () => { lastRef = a.id; }));
+document.querySelectorAll("a.back").forEach(a => a.addEventListener("click", e => {
+  if (lastRef && document.getElementById(lastRef).getAttribute("href") === "#" + a.dataset.term) {
+    e.preventDefault();
+    const el = document.getElementById(lastRef);
+    el.scrollIntoView({behavior: "smooth", block: "center"});
+    history.replaceState(null, "", "#" + lastRef);
+    el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+  }
+}));
+const links = [...document.querySelectorAll("nav.toc a[href^='#s-']")];
+const obs = new IntersectionObserver(es => es.forEach(en => {
+  if (en.isIntersecting) { links.forEach(l => l.classList.toggle("active",
+    l.getAttribute("href") === "#" + en.target.id)); }
+}), {rootMargin: "0px 0px -75% 0px"});
+document.querySelectorAll("main h2[id]").forEach(h => obs.observe(h));
+</script>
+</body>
+</html>
