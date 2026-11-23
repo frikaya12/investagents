@@ -9,6 +9,19 @@
   lit « the first project » (un projet précédent) comme « première opération ». Pilot_innovative et
   weak_capacity sont plausibles. La grille étant figée, elle n'est pas modifiée ; M6 dira si ces
   variables portent de l'information malgré ce bruit.
+- **Exactitude sur les facteurs vérifiables (30 projets du pilote).**
+  - Catégorie environnementale : je compare à une règle Python (expression régulière) sur les mêmes
+    phrases. La règle trouve une réponse dans 15 dossiers. L'agent est d'accord 13 fois. Les 2
+    désaccords ont été relus à la main. D00028 : l'agent a raison (FI) et la règle se trompe (elle
+    lit la catégorie A des sous-projets exclus). D00014 : l'agent se trompe (C déduit des
+    sous-projets ; la catégorie du projet n'est pas écrite). Bilan : **14 / 15 justes**.
+  - Note de risque globale : la règle trouve une réponse dans 13 dossiers ; l'agent est d'accord
+    **13 / 13**.
+  - Dans les autres dossiers, la règle ne trouve rien ; les réponses de l'agent n'y sont pas
+    vérifiées.
+  - Relecture manuelle : first_operation 1 « yes » juste sur 3 ; pilot_innovative 4 / 4
+    plausibles.
+
 - Plusieurs facteurs oui / non sont presque toujours « yes » quand ils sont trouvés
   (pilot_innovative 29/29, weak_capacity 19/19) : l'information tient alors surtout à « trouvé /
   non trouvé ».
