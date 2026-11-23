@@ -1,0 +1,255 @@
+{
+  "n_test": 729,
+  "test_failure_rate": 0.2139917695473251,
+  "models": {
+    "m0": {
+      "ci": null,
+      "metrics": null,
+      "brier": 0.16837994779077606,
+      "ece": 0.013440821308478013
+    },
+    "texte": {
+      "ci": {
+        "auc_pr": {
+          "value": 0.29682594761138464,
+          "ci_low": 0.24704251835196203,
+          "ci_high": 0.37167057557380145
+        },
+        "auc_roc": {
+          "value": 0.6035933234886114,
+          "ci_low": 0.5529171691034928,
+          "ci_high": 0.6526530040811543
+        },
+        "brier": {
+          "value": 0.1646871874471444,
+          "ci_low": 0.14761937821092225,
+          "ci_high": 0.18266429398122438
+        }
+      },
+      "metrics": {
+        "auc_pr": 0.29682594761138464,
+        "auc_roc": 0.6035933234886114,
+        "brier": 0.1646871874471444
+      },
+      "brier": 0.1646871874471444,
+      "ece": 0.023340693038704348
+    },
+    "m5": {
+      "ci": {
+        "auc_pr": {
+          "value": 0.2414313835692579,
+          "ci_low": 0.20392845014033056,
+          "ci_high": 0.2927720685697521
+        },
+        "auc_roc": {
+          "value": 0.5657135185930997,
+          "ci_low": 0.5170271959590904,
+          "ci_high": 0.613543540967722
+        },
+        "brier": {
+          "value": 0.16781713114428604,
+          "ci_low": 0.1525258932028699,
+          "ci_high": 0.18462636900123372
+        }
+      },
+      "metrics": {
+        "auc_pr": 0.2414313835692579,
+        "auc_roc": 0.5657135185930997,
+        "brier": 0.16781713114428604
+      },
+      "brier": 0.16781713114428604,
+      "ece": 0.011625466461426981
+    },
+    "m6": {
+      "ci": {
+        "auc_pr": {
+          "value": 0.3001439911722301,
+          "ci_low": 0.24758856390512324,
+          "ci_high": 0.3688084798516614
+        },
+        "auc_roc": {
+          "value": 0.6014565713518593,
+          "ci_low": 0.5538841417504327,
+          "ci_high": 0.6494670426711586
+        },
+        "brier": {
+          "value": 0.16440878988704172,
+          "ci_low": 0.14789224754723335,
+          "ci_high": 0.18145271975213834
+        }
+      },
+      "metrics": {
+        "auc_pr": 0.3001439911722301,
+        "auc_roc": 0.6014565713518593,
+        "brier": 0.16440878988704172
+      },
+      "brier": 0.16440878988704172,
+      "ece": 0.015203661246490219
+    }
+  },
+  "diffs": {
+    "m6 - texte": {
+      "auc_pr": {
+        "value": 0.003318043560845474,
+        "ci_low": -0.038981139969981406,
+        "ci_high": 0.04270146509912333
+      },
+      "auc_roc": {
+        "value": -0.002136752136752129,
+        "ci_low": -0.04142264591515531,
+        "ci_high": 0.03617471252131159
+      },
+      "brier": {
+        "value": -0.00027839756010267225,
+        "ci_low": -0.0037812336895850273,
+        "ci_high": 0.003180259209296246
+      }
+    },
+    "m5 - m0": {
+      "auc_pr": {
+        "value": 0.02743961402193279,
+        "ci_low": 0.0034580197642228895,
+        "ci_high": 0.06958154272696235
+      },
+      "auc_roc": {
+        "value": 0.0657135185930997,
+        "ci_low": 0.01702719595909036,
+        "ci_high": 0.11354354096772204
+      },
+      "brier": {
+        "value": -0.0005628166464900219,
+        "ci_low": -0.0010370856747372059,
+        "ci_high": -6.773026792125943e-05
+      }
+    }
+  },
+  "weights": {
+    "m5": {
+      "components_missing": -0.0165,
+      "components": -0.0036,
+      "implementing_agencies_missing": -0.0243,
+      "implementing_agencies": 0.0064,
+      "cofinanciers_missing": -0.0102,
+      "cofinanciers": 0.0402,
+      "follow_on_phase_missing": -0.0405,
+      "follow_on_phase": 0.033,
+      "reform_to_adopt_missing": 0.0063,
+      "reform_to_adopt": 0.0131,
+      "env_category_missing": 0.0367,
+      "env_A": 0.0282,
+      "env_B": -0.0641,
+      "env_C": 0.0216,
+      "env_FI": -0.0169,
+      "overall_risk_rating_missing": -0.0088,
+      "overall_risk_rating": -0.0027,
+      "fiduciary_risk_missing": 0.007,
+      "fiduciary_risk": -0.0034,
+      "baseline_values_missing": -0.0005,
+      "baseline_values": 0.0207,
+      "lessons_problems_missing": 0.0024,
+      "lessons_problems": -0.008,
+      "fragility_conflict_missing": -0.0116,
+      "fragility_conflict": 0.0126,
+      "weak_capacity_missing": -0.0222,
+      "weak_capacity": 0.028,
+      "counterpart_funding_missing": 0.0133,
+      "counterpart_funding": 0.0017,
+      "resettlement_missing": 0.0027,
+      "resettlement": 0.0413,
+      "decentralized_implementation_missing": 0.0031,
+      "decentralized_implementation": -0.0083,
+      "pilot_innovative_missing": -0.0152,
+      "pilot_innovative": 0.0191,
+      "political_risk_missing": -0.0273,
+      "political_risk": 0.0163,
+      "economic_return_reported_missing": 0.0035,
+      "economic_return_reported": 0.0012
+    },
+    "m6": {
+      "logit_text": 0.1592,
+      "components_missing": -0.0163,
+      "components": -0.0036,
+      "implementing_agencies_missing": -0.0237,
+      "implementing_agencies": 0.0048,
+      "cofinanciers_missing": -0.0055,
+      "cofinanciers": 0.0328,
+      "follow_on_phase_missing": -0.0375,
+      "follow_on_phase": 0.0315,
+      "reform_to_adopt_missing": 0.0061,
+      "reform_to_adopt": 0.0131,
+      "env_category_missing": 0.0418,
+      "env_A": 0.0304,
+      "env_B": -0.0705,
+      "env_C": 0.0212,
+      "env_FI": -0.015,
+      "overall_risk_rating_missing": -0.007,
+      "overall_risk_rating": -0.0097,
+      "fiduciary_risk_missing": 0.0103,
+      "fiduciary_risk": -0.0073,
+      "baseline_values_missing": -0.0031,
+      "baseline_values": 0.023,
+      "lessons_problems_missing": 0.0038,
+      "lessons_problems": -0.0089,
+      "fragility_conflict_missing": -0.0074,
+      "fragility_conflict": 0.0089,
+      "weak_capacity_missing": -0.0151,
+      "weak_capacity": 0.0212,
+      "counterpart_funding_missing": 0.015,
+      "counterpart_funding": 0.001,
+      "resettlement_missing": 0.0077,
+      "resettlement": 0.0394,
+      "decentralized_implementation_missing": 0.0017,
+      "decentralized_implementation": -0.0075,
+      "pilot_innovative_missing": -0.0156,
+      "pilot_innovative": 0.0196,
+      "political_risk_missing": -0.024,
+      "political_risk": 0.0126,
+      "economic_return_reported_missing": 0.0053,
+      "economic_return_reported": -0.0002
+    }
+  },
+  "backtest": [
+    {
+      "model": "m6",
+      "n_projects": 180,
+      "spent_usd": 25238820500.0,
+      "budget_share_satisfactory": 0.8527756081152842,
+      "count_share_satisfactory": 0.8611111111111112,
+      "budget_share_ci": [
+        0.7751812695435726,
+        0.9248970981061064
+      ],
+      "count_share_ci": [
+        0.8055555555555556,
+        0.9111111111111111
+      ],
+      "p_vs_random_count": 0.0,
+      "p_vs_random_budget": 0.085
+    },
+    {
+      "model": "texte",
+      "n_projects": 149,
+      "spent_usd": 25238999879.7,
+      "budget_share_satisfactory": 0.8115586979409054,
+      "count_share_satisfactory": 0.8053691275167785,
+      "budget_share_ci": [
+        0.715368229610244,
+        0.8989213049183247
+      ],
+      "count_share_ci": [
+        0.738255033557047,
+        0.8657718120805369
+      ],
+      "p_vs_random_count": 0.115,
+      "p_vs_random_budget": 0.412
+    },
+    {
+      "model": "hasard",
+      "n_projects": 223.525,
+      "spent_usd": 25229158209.2895,
+      "budget_share_satisfactory": 0.8032933180982313,
+      "count_share_satisfactory": 0.776814922754443,
+      "n_pool": 712
+    }
+  ]
+}
