@@ -162,8 +162,9 @@ def stage_select() -> None:
     ref = cross_val_predict(make(1.0), va[["logit_text"]], y, cv=cv(), method="predict_proba")
     out["cv_auc_pr_text_alone"] = float(average_precision_score(y, ref[:, 1]))
     FROZEN.write_text(json.dumps(out, indent=2), encoding="utf-8")
-    print(json.dumps({k: {kk: vv for kk, vv in v.items() if kk in ("C", "cv_auc_pr")}
-                      if k == "models" else v for k, v in out.items()}, indent=2))  # fmt: skip
+    for name, m in out["models"].items():
+        print(name, "C =", m["C"], "AUC-PR (VC) =", round(m["cv_auc_pr"], 3))
+    print("texte seul (VC) =", round(out["cv_auc_pr_text_alone"], 3))
 
 
 def fit_calibrated(va, te, cols, c):
