@@ -26,4 +26,10 @@ This license covers the code of this repository. Third-party material keeps its 
   src/investagents/debate/LICENSE_DIALECTIC.txt;
 - World Bank data (IEG ratings, IDA/IBRD statements, WGI) and excerpts of World Bank documents:
   © World Bank, CC BY 4.0 (see the Bank's terms of use);
-- GeoNames data (via geonamescache): CC BY 4.0.
+- GeoNames data (via geonamescache): CC BY 4.0;
+- mledoze/countries (github.com/mledoze/countries): Open Database License (ODbL) 1.0. The country
+  and nationality list experiments/blocE/country_terms.json is derived from it and is made
+  available under the ODbL 1.0;
+- language models used to produce the agents' outputs (not redistributed here): Qwen2.5-7B-Instruct
+  (Apache 2.0) for all reported runs; Qwen2.5-3B-Instruct (Qwen Research License) for local
+  development only.

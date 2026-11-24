@@ -41,3 +41,6 @@ experiments/blocD/kaggle_*/*.log
 
 # document de l'école, non publié (copie locale seulement)
 docs/Cahier_des_charges_v3_InvestAgents.pdf
+
+# --- Sauvegardes git (jamais dans le dépôt)
+*.bundle

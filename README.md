@@ -98,5 +98,8 @@ viendra du coffre-fort), indicateurs pays révisés.
 - Prompts et structure du comité adaptés de DIALECTIC (github.com/pantageepapa/DIALECTIC),
   licence MIT : `src/investagents/debate/LICENSE_DIALECTIC.txt`.
 - GeoNames (geonamescache) : CC BY 4.0.
-- Modèles : Qwen2.5-7B-Instruct (comité, Kaggle) et Qwen2.5-3B-Instruct (développement local), via Ollama.
+- mledoze/countries : licence ODbL 1.0 ; la liste dérivée `experiments/blocE/country_terms.json`
+  (bloc E) est diffusée sous la même licence.
+- Modèles (non redistribués) : Qwen2.5-7B-Instruct, licence Apache 2.0 (comité et extracteurs,
+  Kaggle) ; Qwen2.5-3B-Instruct, Qwen Research License (développement local seulement), via Ollama.
 - Code écrit avec l'aide de Claude Code (Anthropic), relu et validé par l'autrice.
