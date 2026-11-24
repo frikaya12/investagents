@@ -65,6 +65,68 @@ ui.takeaway("Sur des projets plus récents que tout l'apprentissage, le modèle 
             "ne prédit plus rien. Les chiffres du test 2012–2017 étaient donc optimistes : le "
             "signal est faible et fragile dans le temps.")  # fmt: skip
 
+# --- 2 bis. AUC-ROC (0,5 = hasard pour tous) ---
+st.subheader("L'autre mesure : AUC-ROC de chaque modèle (0,5 = hasard)")
+ROC_ROWS = [
+    ("M1 · test complet", "roc_m1"), ("M1 · projets avec texte", "roc_m1_text_subset"),
+    ("M1-texte", "roc_m1t"), ("Texte seul · test du comité", "roc_c_texte"),
+    ("M3 · notes du Juge", "roc_m3"), ("M4 · texte + notes", "roc_m4"),
+    ("M7 · texte + débat", "roc_m7"), ("Texte seul · test du bloc D", "roc_d_texte"),
+    ("M5 · 19 facteurs", "roc_m5"), ("M6 · texte + facteurs", "roc_m6"),
+    ("M1 · coffre-fort", "roc_vault_m1"),
+]  # fmt: skip
+roc = [(name, r[k]) for name, k in ROC_ROWS]
+above = [d["ci_low"] > 0.5 for _, d in roc]
+fig = go.Figure(go.Scatter(
+    x=[d["value"] for _, d in roc], y=[n for n, _ in roc], mode="markers", showlegend=False,
+    marker={"size": 12, "color": [ui.ORANGE if "coffre" in n else (ui.BLUE if a else "white")
+                                  for (n, _), a in zip(roc, above, strict=True)],
+            "line": {"width": 2, "color": [ui.BLUE if a else ui.GREY for a in above]}},
+    error_x={"type": "data", "symmetric": False,
+             "array": [d["ci_high"] - d["value"] for _, d in roc],
+             "arrayminus": [d["value"] - d["ci_low"] for _, d in roc], "color": ui.GREY,
+             "thickness": 2},
+    customdata=[[d["ci_low"], d["ci_high"]] for _, d in roc],
+    hovertemplate="%{y}<br>AUC-ROC %{x:.3f} [%{customdata[0]:.3f} ; %{customdata[1]:.3f}]"
+                  "<extra></extra>",
+))  # fmt: skip
+fig.add_vline(x=0.5, line={"color": ui.INK2, "width": 1.5},
+              annotation={"text": "hasard (0,5)", "font": {"color": ui.INK2}})  # fmt: skip
+fig.update_yaxes(autorange="reversed")
+fig.update_xaxes(title="AUC-ROC (IC 95 %) — point plein : intervalle au-dessus de 0,5",
+                 range=[0.35, 0.75], tickformat=".2f")  # fmt: skip
+ui.show(ui.layout(fig, height=430))
+yes = ", ".join(n for (n, _), a in zip(roc, above, strict=True) if a)
+no = ", ".join(n for (n, _), a in zip(roc, above, strict=True) if not a)
+ui.takeaway(f"Au mieux {t['roc_max']} : le classement reste modeste. Intervalle au-dessus du "
+            f"hasard : {yes}. Pas distinguable du hasard : {no}. Chaque modèle est mesuré sur son "
+            "propre échantillon : pour comparer deux modèles, voir les écarts appariés plus bas.")
+with st.expander("Voir le tableau des AUC-ROC"):
+    st.dataframe(pd.DataFrame([{"modèle": n, "AUC-ROC": round(d["value"], 3),
+                                "IC bas": round(d["ci_low"], 3),
+                                "IC haut": round(d["ci_high"], 3),
+                                "IC au-dessus de 0,5": "oui" if a else "non"}
+                               for (n, d), a in zip(roc, above, strict=True)]),
+                 hide_index=True, width="stretch")  # fmt: skip
+
+# --- 2 ter. Bloc E : sans les noms de pays ---
+st.subheader("Le texte prédit-il seulement parce qu'il nomme le pays ?")
+c1, c2, c3 = st.columns(3)
+c1.metric("M1-texte d'origine · AUC-PR", num(r["e_orig_aucpr"]["value"]),
+          help=ui.gloss("AUC-PR"), border=True)  # fmt: skip
+c1.caption(f"IC {t['e_orig_aucpr'].split(' ', 1)[1]}")
+c2.metric("Sans noms de pays ni adjectifs · AUC-PR", num(r["e_nc_aucpr"]["value"]),
+          help=ui.gloss("AUC-PR"), border=True)  # fmt: skip
+c2.caption(f"IC {t['e_nc_aucpr'].split(' ', 1)[1]} · même modèle, réentraîné sans ces mots")
+c3.metric("Écart apparié", num(r["e_diff_aucpr"]["value"], signed=True),
+          help=ui.gloss("écart apparié"), border=True)  # fmt: skip
+c3.caption(f"IC {t['e_diff_aucpr'].split(' ', 1)[1]} · {t['e_share_lost']} du gain perdu")
+ui.takeaway(f"Sans noms de pays : {num(r['e_nc_aucpr']['value'])} contre "
+            f"{num(r['e_orig_aucpr']['value'])}. Le signal vient {t['e_verdict']} (règle fixée "
+            "avant le calcul). Nuance : capitales, régions et institutions restent dans le texte ; "
+            "le modèle ne dépend pas des noms de pays, mais on ne peut pas dire qu'il ignore le "
+            "pays.")
+
 # --- 3. Écarts appariés ---
 st.subheader("Qu'est-ce qui apporte vraiment quelque chose ? Écarts appariés")
 d = chart_diffs(m)

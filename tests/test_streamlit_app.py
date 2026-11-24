@@ -132,3 +132,22 @@ def test_limits_page_shows_identical_citations():
     texts = " ".join(md.value for md in at.markdown)
     expected = f"({t['ident_cit_n']} sur {t['ident_cit_total']})"
     assert " ".join(expected.split()) in " ".join(texts.split())
+
+
+def test_results_page_shows_bloc_e_and_roc():
+    m = load()
+    at = run_page("resultats")
+    values = [mt.value for mt in at.metric]
+    assert num(m.raw["e_nc_aucpr"]["value"]) in values  # 0,295 sans noms de pays
+    assert num(m.raw["e_orig_aucpr"]["value"]) in values  # 0,297
+    assert m.txt["roc_max"] in " ".join(md.value for md in at.markdown)
+
+
+def test_limits_page_shows_limits_9_to_11():
+    t = load().txt
+    at = run_page("limites")
+    texts = " ".join(" ".join(md.value for md in at.markdown).split())
+    for words in ("débat parfois creux", "Information géographique résiduelle",
+                  "Variables de secteur et variables non utilisées"):  # fmt: skip
+        assert words in texts
+    assert " ".join(t["sec_missing_old"].split()) in texts

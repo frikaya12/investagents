@@ -119,6 +119,7 @@ V = "experiments/vault/results.json"
 
 RUN_C = "experiments/blocC/kaggle_run1/results.jsonl"
 BE = "experiments/blocE/results.json"
+SC = "experiments/data_checks/sectors.json"
 
 
 def _bloc_e(m: Metrics) -> None:
@@ -430,6 +431,25 @@ def load() -> Metrics:  # noqa: PLR0915 (une longue liste de lectures, volontair
     m.put("roc_max", num(best, 2), best, "tableau AUC-ROC ci-dessus")
 
     _bloc_e(m)
+
+    # --- contrôles des variables de secteur et champs API non utilisés (limite) ---
+    sc = _json(SC)
+    m.put("sec_n_old", integer(sc["n_le1995"]), sc["n_le1995"], SC)
+    m.put("sec_missing_old", pct(sc["sector_missing_le1995"], 0), sc["sector_missing_le1995"], SC)
+    m.put("sec_missing_new", pct(sc["sector_missing_after1995"], 0),
+          sc["sector_missing_after1995"], SC)  # fmt: skip
+    m.put("sec_labels_before", integer(sc["labels_2009_2013"]), sc["labels_2009_2013"], SC)
+    m.put("sec_labels_after", integer(sc["labels_2014_2017"]), sc["labels_2014_2017"], SC)
+    jump = sc["max_share_change_2013_2014"]
+    m.put("sec_max_jump", num(100 * jump, 1) + " point" + ("s" if jump >= 0.02 else ""),
+          jump, SC)  # fmt: skip
+    m.put("wgi_missing_train", pct(sc["wgi_missing_train"], 0), sc["wgi_missing_train"], SC)
+    api = sc["api_check"]
+    m.put("api_unused_fields", ", ".join(f"`{f}`" for f in api["unused_fields_present"]),
+          api["unused_fields_present"], SC)  # fmt: skip
+    m.put("api_project", api["project"], api["project"], SC)
+    m.put("api_prep_date", "non" if not api["has_preparation_start_date"] else "oui",
+          api["has_preparation_start_date"], SC)  # fmt: skip
 
     # écart entre les deux backtests de M1-texte (instabilité)
     m.put("bt_pool_gap", integer(by_budget[0.25]["n_pool"] - bt["hasard"]["n_pool"]),

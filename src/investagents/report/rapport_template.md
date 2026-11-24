@@ -459,6 +459,19 @@ apport des agents *en plus du texte* ne l'est (M4, M6 et M7 ont un intervalle qu
 10. **Information géographique résiduelle.** Retirer les noms de pays et adjectifs ne retire pas
     les capitales, régions, institutions ni monnaies (section 8) : le bloc E montre que le modèle
     ne dépend pas des noms de pays, pas qu'il ignore le pays.
+11. **Variables de secteur et variables non utilisées.** Le secteur manque pour
+    {{sec_missing_old}} des {{sec_n_old}} projets approuvés avant 1996 ({{sec_missing_new}}
+    ensuite) : pour le modèle, « secteur manquant » veut surtout dire « projet ancien » ; ce n'est
+    pas corrigé (importance du secteur dans M1 : nulle). Pas de rupture de nomenclature en 2014 :
+    l'IEG utilise les libellés actuels pour toutes les années ({{sec_labels_before}} libellés en
+    2009–2013, {{sec_labels_after}} en 2014–2017, seuls des secteurs très rares diffèrent ; plus
+    grand changement de part d'un secteur entre 2013 et 2014 : {{sec_max_jump}}) ; ce reclassement
+    rétroactif n'est pas documenté. Variables disponibles mais non utilisées dans M1 : la
+    catégorie environnementale et les secteurs de l'API Projects ({{api_unused_fields}}, vérifié
+    sur le projet {{api_project}}), qui pourraient avoir été modifiés après l'approbation ; la
+    durée de préparation n'est pas calculable (date de début dans l'API : {{api_prep_date}}).
+    Les indicateurs WGI ont été testés puis écartés : ils manquent pour {{wgi_missing_train}} des
+    projets d'entraînement.
 
 ## 13. Reproductibilité
 

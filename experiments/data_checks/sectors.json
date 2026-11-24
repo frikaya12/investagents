@@ -1,0 +1,29 @@
+{
+  "n_le1995": 5735,
+  "sector_missing_le1995": 0.7818657367044464,
+  "sector_missing_after1995": 0.0001722356183258698,
+  "labels_2009_2013": 17,
+  "labels_2014_2017": 16,
+  "labels_only_after_2014": [
+    "Infrastructure, PPP's & Guarantees"
+  ],
+  "labels_only_before_2014": [
+    "Fiscal Policy and Growth",
+    "Trade & Competitiveness"
+  ],
+  "max_share_change_2013_2014": 0.022386344042761082,
+  "max_share_change_sector": "Governance",
+  "wgi_missing_train": 0.741003998223012,
+  "api_check": {
+    "project": "P101171",
+    "n_fields": 51,
+    "unused_fields_present": [
+      "envassesmentcategorycode",
+      "sector1",
+      "sector2",
+      "sector3",
+      "sectorcode"
+    ],
+    "has_preparation_start_date": false
+  }
+}
