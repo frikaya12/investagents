@@ -104,6 +104,9 @@ with st.expander("Voir les projets choisis"):
                                       "p_success": "p réussite (ML)",
                                       **{c: CRITERIA_FR[c] for c in data.CRITERIA}}),
                  hide_index=True, width="stretch")  # fmt: skip
+st.caption("Avec α = 0 (comité seul, notes entières), plusieurs portefeuilles peuvent être ex "
+           "aequo : le solveur en choisit un, qui peut différer d'un projet selon la machine. "
+           "Pour les α de la frontière (1 ; 0,75 ; 0,5 ; 0,25), elle est unique (vérifié).")
 st.caption("score = α × p_réussite + (1 − α) × moyenne pondérée des notes / 10 ; sac à dos "
            "OR-Tools "
            "CP-SAT (objectif figé Σ score × montant), une sélection par cohorte annuelle, au plus "

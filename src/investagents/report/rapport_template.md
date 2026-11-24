@@ -472,6 +472,11 @@ apport des agents *en plus du texte* ne l'est (M4, M6 et M7 ont un intervalle qu
     durée de préparation n'est pas calculable (date de début dans l'API : {{api_prep_date}}).
     Les indicateurs WGI ont été testés puis écartés : ils manquent pour {{wgi_missing_train}} des
     projets d'entraînement.
+12. **Portefeuilles ex aequo à α = 0.** Avec le seul jugement du comité (notes entières),
+    plusieurs portefeuilles ont exactement la même valeur optimale ; le solveur en choisit un, et
+    ce choix peut changer selon la plateforme (calcul figé sous Windows ; sous Linux, un projet de
+    plus a été observé à α = 0). Pour les autres α de la frontière (1 ; 0,75 ; 0,5 ; 0,25), la
+    solution est unique (vérifié) et identique partout.
 
 ## 13. Reproductibilité
 
