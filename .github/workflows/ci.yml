@@ -17,4 +17,11 @@ jobs:
       - name: Lint (Ruff)
         run: uv run ruff check .
       - name: Tests (sans réseau)
-        run: uv run pytest
+        shell: bash
+        run: |
+          set -o pipefail
+          uv run pytest -rf 2>&1 | tee pytest.log
+      - name: Tests en échec (annotations lisibles sur la page de la CI)
+        if: failure()
+        shell: bash
+        run: grep -E '^(FAILED|ERROR) ' pytest.log | cut -c1-300 | sed 's/^/::error::/' || true
