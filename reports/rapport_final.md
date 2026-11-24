@@ -22,13 +22,14 @@ de résultats.*
 - [5. Modèles ML](#s-5)
 - [6. Agents juges (bloc C)](#s-6)
 - [7. Agents extracteurs (bloc D)](#s-7)
-- [8. Décision multicritère et sélection](#s-8)
-- [9. Métriques finales](#s-9)
-- [10. Ce que les agents apportent / n'apportent pas](#s-10)
-- [11. Limites](#s-11)
-- [12. Reproductibilité](#s-12)
-- [13. Attributions et usage de l'IA](#s-13)
-- [14. Glossaire](#s-14)
+- [8. Ce qui prédit vraiment l'échec : la part du pays (bloc E)](#s-8)
+- [9. Décision multicritère et sélection](#s-9)
+- [10. Métriques finales](#s-10)
+- [11. Ce que les agents apportent / n'apportent pas](#s-11)
+- [12. Limites](#s-12)
+- [13. Reproductibilité](#s-13)
+- [14. Attributions et usage de l'IA](#s-14)
+- [15. Glossaire](#s-15)
 
 <a id="s-0"></a>
 
@@ -92,10 +93,10 @@ complet.* Le résultat principal est donc **négatif** pour la question de reche
 | Mot de l'énoncé | Ce que nous avons construit |
 | --- | --- |
 | **IA agentique** | Un comité de <a id="ref-g-llm"></a>[LLM](#g-llm) à rôles (avocat Pour, avocat Contre, critique, Juge) orchestré par <a id="ref-g-langgraph"></a>[LangGraph](#g-langgraph), et des agents extracteurs de facteurs (sections 6 et 7). |
-| **Décision d'investissement** | Choisir quels projets financer sous un budget fixé (section 8). |
-| **Multicritère** | 5 critères inspirés des <a id="ref-g-criteres-ocde-cad"></a>[critères OCDE-CAD](#g-criteres-ocde-cad) : pertinence, efficience économique, faisabilité, risque, impact et durabilité ; combinés avec la probabilité de réussite par la <a id="ref-g-frontiere"></a>[frontière α](#g-frontiere) (section 8). |
-| **Évaluation** | Prédire, avant l'approbation, si un projet sera en échec selon l'IEG (sections 5 à 7). |
-| **Sélection** | Sac à dos exact sous budget avec plafond par pays, comparé au hasard (section 8). |
+| **Décision d'investissement** | Choisir quels projets financer sous un budget fixé (section 9). |
+| **Multicritère** | 5 critères inspirés des <a id="ref-g-criteres-ocde-cad"></a>[critères OCDE-CAD](#g-criteres-ocde-cad) : pertinence, efficience économique, faisabilité, risque, impact et durabilité ; combinés avec la probabilité de réussite par la <a id="ref-g-frontiere"></a>[frontière α](#g-frontiere) (section 9). |
+| **Évaluation** | Prédire, avant l'approbation, si un projet sera en échec selon l'IEG (sections 5 à 8). |
+| **Sélection** | Sac à dos exact sous budget avec plafond par pays, comparé au hasard (section 9). |
 
 **Question de recherche.** Le comité d'agents classe-t-il les projets mieux qu'un gradient boosting
 sur variables structurées ou qu'un modèle de texte simple ? Ses notes apportent-elles une
@@ -190,6 +191,7 @@ n'est jamais montrée aux agents ni aux modèles avant l'évaluation.*
 | Grille des 19 facteurs | `ddd4cb1` | — |
 | Pilote du bloc D | critères dans `d990604` | `2864354` |
 | M5 / M6 | `3bf9e25` (codage), `106c3f0` (seuils), `a3ccb07` (réglage) | `43180e4` |
+| Part du pays (bloc E) | `ef29775` (liste, modèle, règle de conclusion) | commit suivant |
 
 Deux lignes ont la règle et le résultat dans le même commit (objectif, bloc B) : le script
 enchaîne le choix sur la validation puis l'évaluation unique, sans retour en arrière possible.
@@ -299,7 +301,45 @@ tendances, pas comme des effets causaux.*
 
 <a id="s-8"></a>
 
-## 8. Décision multicritère et sélection
+## 8. Ce qui prédit vraiment l'échec : la part du pays (bloc E)
+
+> **En simple.** Les mots qui pèsent le plus dans le modèle de texte sont souvent des noms de
+> pays. Le modèle prédit-il l'échec parce qu'il reconnaît le pays ? Nous avons retiré tous les
+> noms de pays et adjectifs de nationalité des dossiers, réentraîné le même modèle, et mesuré une
+> seule fois : la performance ne bouge presque pas.
+
+**En technique.** Protocole commité avant tout résultat (`reports/blocE_pays_protocole.md`, commit
+`ef29775`) ; rapport complet : `reports/blocE_pays.md`.
+
+- Liste figée de noms de pays et d'adjectifs de nationalité (colonne pays + liste standard
+  mledoze/countries + anciens noms), construite sans regarder les poids du modèle ; régions
+  exclues par règle.
+- M1-texte identique (TF-IDF, C = 1, même Platt), réentraîné sur ≤ 2007 sans ces mots ; contrôle
+  de reproduction du modèle d'origine : écart 0 (identiques). Mesure unique sur les mêmes
+  755 projets du test.
+
+| Mesure | Valeur [IC 95 %] |
+| --- | --- |
+| M1-texte d'origine : AUC-PR / AUC-ROC | 0,297 [0,245 ; 0,370] / 0,598 [0,549 ; 0,648] |
+| Sans noms de pays ni adjectifs : AUC-PR / AUC-ROC | 0,295 [0,243 ; 0,367] / 0,600 [0,550 ; 0,649] |
+| Écart apparié (sans pays − d'origine) : AUC-PR / AUC-ROC | −0,003 [−0,011 ; 0,004] / +0,001 [−0,005 ; 0,007] |
+| Part du gain au-dessus du hasard perdue | 3 % |
+| Mots « pays » ou « adjectif de pays » parmi les 100 mots les plus lourds | 17 % |
+| Facteurs extraits dont l'effet seul exclut zéro (validation, 853 projets) | 0 sur 19 |
+
+- **Verdict selon la règle fixée à l'avance : le signal vient surtout du contenu du dossier.**
+- **Nuance.** Les noms de pays sont parmi les mots les plus lourds du modèle d'origine, mais le
+  modèle n'en dépend pas : d'autres mots portent l'information. Certains trahissent encore le pays
+  (« nairobi », « africa », « sofide », « rs ») : supprimer les noms ne supprime pas toute
+  l'information géographique.
+- **Ce qu'on peut dire :** le texte ne prédit pas l'échec seulement parce qu'il nomme le pays.
+  **Ce qu'on ne peut pas dire :** que le pays ne joue aucun rôle.
+- Les facteurs extraits, pris un par un sur la validation, ont des effets de quelques points avec
+  des intervalles larges ; c'est leur combinaison (M5) qui porte un signal faible.
+
+<a id="s-9"></a>
+
+## 9. Décision multicritère et sélection
 
 > **En simple.** Avec un budget limité, on choisit le panier de projets qui maximise les chances de
 > réussite pondérées par leur coût. On peut aussi donner du poids aux notes du comité : un curseur
@@ -342,9 +382,9 @@ est du même ordre que l'instabilité du backtest.*
 *Ce qu'il faut retenir : donner du poids au comité augmente la note d'impact du portefeuille ; en
 validation, cela coûte des projets réussis, au test l'effet n'est pas mesurable.*
 
-<a id="s-9"></a>
+<a id="s-10"></a>
 
-## 9. Métriques finales
+## 10. Métriques finales
 
 > **En simple.** Toutes les mesures du projet, chacune avec sa fourchette d'incertitude, la
 > référence à battre et ce qu'elle prouve vraiment.
@@ -409,9 +449,9 @@ le coffre-fort.*
 *Ce qu'il faut retenir : trois apports sont démontrés (M1 − M0, M1-texte − M1, M5 − M0) ; aucun
 apport des agents *en plus du texte* ne l'est (M4, M6 et M7 ont un intervalle qui contient zéro).*
 
-<a id="s-10"></a>
+<a id="s-11"></a>
 
-## 10. Ce que les agents apportent / n'apportent pas
+## 11. Ce que les agents apportent / n'apportent pas
 
 > **En simple.** Les agents ne rendent pas la prédiction meilleure, mais ils rendent chaque décision
 > explicable, vérifiable et discutable.
@@ -425,9 +465,9 @@ apport des agents *en plus du texte* ne l'est (M4, M6 et M7 ont un intervalle qu
 | Sélection | Avec α < 1, des portefeuilles mieux notés sur les critères. | Aucun gain de réussite démontré. |
 | Agentique | Des arguments Pour / Contre sourcés (99,8 % de citations exactes), un critique, des facteurs vérifiés, un test de reconnaissance négatif. | Pas de vérification de la justesse de chaque argument au-delà de la citation. |
 
-<a id="s-11"></a>
+<a id="s-12"></a>
 
-## 11. Limites
+## 12. Limites
 
 > **En simple.** Le signal est faible, certaines vérifications n'ont pu être faites qu'une fois ou
 > sur peu de projets, et quelques choix techniques ont des défauts connus. Les voici tous.
@@ -463,10 +503,13 @@ apport des agents *en plus du texte* ne l'est (M4, M6 et M7 ont un intervalle qu
    (158 sur 3 000), l'avocat Pour et l'avocat Contre citent exactement
    les mêmes phrases. Une citation vérifiée prouve que la phrase existe, pas que l'argument est
    pertinent.
+10. **Information géographique résiduelle.** Retirer les noms de pays et adjectifs ne retire pas
+    les capitales, régions, institutions ni monnaies (section 8) : le bloc E montre que le modèle
+    ne dépend pas des noms de pays, pas qu'il ignore le pays.
 
-<a id="s-12"></a>
+<a id="s-13"></a>
 
-## 12. Reproductibilité
+## 13. Reproductibilité
 
 > **En simple.** Tout le projet se relance avec quelques commandes ; les résultats de chaque étape
 > sont dans le dépôt.
@@ -495,15 +538,17 @@ uv run python -m investagents.extract.build_dataset        # extracteurs : jeu p
 uv run python -m investagents.extract.analyze --run experiments/blocD/kaggle_full1
 uv run python -m investagents.ml.run_m6 --stage choices|select|evaluate
 uv run python -m investagents.ml.run_vault --stage evaluate
+uv run python -m investagents.ml.country_terms             # bloc E : liste des pays
+uv run python -m investagents.ml.run_blocE --stage evaluate  # bloc E : une seule fois
 uv run python -m investagents.report.build                 # ce rapport (md, html, pdf)
 uv run streamlit run src/investagents/app/streamlit_app.py # démo
 ```
 
 Les passages LLM tournent sur Kaggle (GPU T4 gratuits) : voir `kaggle/blocC/` et `kaggle/blocD/`.
 
-<a id="s-13"></a>
+<a id="s-14"></a>
 
-## 13. Attributions et usage de l'IA
+## 14. Attributions et usage de l'IA
 
 > **En simple.** Nous avons utilisé des données publiques, un projet open source et des modèles
 > d'IA ; chacun est cité avec sa licence.
@@ -512,6 +557,7 @@ Les passages LLM tournent sur Kaggle (GPU T4 gratuits) : voir `kaggle/blocC/` et
 
 - **Données** : notes IEG, relevés IDA/IBRD, WDI — © Banque mondiale, licence CC BY 4.0 (World Bank
   Projects API, Documents & Reports API, Indicators API).
+- **mledoze/countries** (licence ODbL) : liste standard des noms de pays et adjectifs (bloc E).
 - **GeoNames** (via geonamescache) : CC BY 4.0, pour le masquage des lieux.
 - **DIALECTIC** (github.com/pantageepapa/DIALECTIC), licence MIT : structure du débat et prompts
   adaptés, avec attribution dans `src/investagents/debate/`.
@@ -522,9 +568,9 @@ Les passages LLM tournent sur Kaggle (GPU T4 gratuits) : voir `kaggle/blocC/` et
   code.
 - Code du projet : licence MIT.
 
-<a id="s-14"></a>
+<a id="s-15"></a>
 
-## 14. Glossaire
+## 15. Glossaire
 
 <a id="g-agent"></a>
 ### agent

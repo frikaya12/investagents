@@ -16,6 +16,7 @@ frontière α entre probabilité de réussite et notes du comité.
 | M0 · taux de base | AUC-PR {{m0_aucpr}} (test) | Référence | Le score du hasard, le plancher à battre. |
 | M1 · gradient boosting | AUC-PR {{m1_aucpr}} ; AUC-ROC {{m1_aucroc}} | Faible | Les variables chiffrées battent à peine le hasard ; seule la région compte. |
 | M1-texte · TF-IDF | AUC-PR {{m1t_aucpr}} contre {{base_test_text}} ; écart avec M1 {{m1t_minus_m1}} | Faible mais réel | Le meilleur modèle : le texte du dossier prédit un peu l'échec. |
+| Bloc E · part du pays | M1-texte sans noms de pays ni adjectifs : AUC-PR {{e_nc_aucpr}} contre {{e_orig_aucpr}} ; écart {{e_diff_aucpr}} | Contenu du dossier | Retirer les noms de pays ne change presque rien ; mais d'autres mots (capitales, régions) trahissent encore le pays. |
 | Coffre-fort · M1 | AUC-PR {{vault_m1_aucpr}} contre {{vault_m0_aucpr}} ; AUC-ROC {{vault_m1_aucroc}} | Négatif | Sur des projets neufs, M1 ne prédit plus rien : niveau du hasard. |
 | Coffre-fort · M1-texte | écart avec M1 {{vault_m1t_minus_m1}} ({{vault_text_n}} projets) | Non concluant | Trop peu de textes téléchargés (refus du serveur) pour conclure. |
 | Comité · fiabilité | {{com_judged}} projets, {{com_errors}} erreur ; citations exactes {{com_quotes_pct}} | Bon | Le comité tourne à l'échelle et cite vraiment le dossier. |

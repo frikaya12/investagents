@@ -118,6 +118,43 @@ V = "experiments/vault/results.json"
 
 
 RUN_C = "experiments/blocC/kaggle_run1/results.jsonl"
+BE = "experiments/blocE/results.json"
+
+
+def _bloc_e(m: Metrics) -> None:
+    """Bloc E (part du pays) : chiffres lus dans experiments/blocE/results.json."""
+    if not (ROOT / BE).exists():
+        return
+    e = _json(BE)
+    m.put("e_n_test", integer(e["n_test"]), e["n_test"], BE)
+    m.put("e_n_train", integer(e["n_train"]), e["n_train"], BE)
+    m.put("e_base", num(e["test_failure_rate"]), e["test_failure_rate"], BE)
+    for tag, key in (("orig", "original"), ("nc", "no_country")):
+        m.put(f"e_{tag}_aucpr", ci(e[key]["auc_pr"]), e[key]["auc_pr"], BE)
+        m.put(f"e_{tag}_aucroc", ci(e[key]["auc_roc"]), e[key]["auc_roc"], BE)
+    d = e["diff_no_country_minus_original"]
+    m.put("e_diff_aucpr", ci(d["auc_pr"], signed=True), d["auc_pr"], BE)
+    m.put("e_diff_aucroc", ci(d["auc_roc"], signed=True), d["auc_roc"], BE)
+    m.put("e_share_lost", pct(e["share_of_gain_lost"], 0), e["share_of_gain_lost"], BE)
+    m.put("e_verdict", e["verdict"], e["verdict"], BE)
+    rm = e["removed_test"]
+    m.put("e_expr_per_doc", num(rm["mean_expressions_per_doc"], 0), rm, BE)
+    m.put("e_chars_removed", pct(rm["share_chars_removed"], 2), rm["share_chars_removed"], BE)
+    w = e["words"]
+    for k in ("top100_country", "top100_adjective", "top20_failure_country_or_adj",
+              "top20_success_country_or_adj"):  # fmt: skip
+        m.put(f"e_{k}", integer(w[k]), w[k], BE)
+    share = (w["top100_country"] + w["top100_adjective"]) / 100
+    m.put("e_top100_share", pct(share, 0), share, BE)
+    m.put("e_n_valid_factors", integer(e["n_valid_factors"]), e["n_valid_factors"], BE)
+    m.raw["e_words"] = w
+    m.raw["e_factors"] = e["factors_valid"]
+    sig = sum(r["ci_low"] > 0 or r["ci_high"] < 0 for r in e["factors_valid"])
+    m.put("e_n_factors_sig", integer(sig), sig, BE)
+    m.put("e_n_factors", integer(len(e["factors_valid"])), len(e["factors_valid"]), BE)
+    rep = max(e["reproduction_max_abs_diff"].values())
+    m.put("e_repro", "0 (identiques)" if rep == 0 else f"{rep:.0e}".replace("e-", " × 10^-"),
+          rep, BE)  # fmt: skip
 
 
 def _identical_citation_pairs() -> tuple[int, int]:
@@ -391,6 +428,8 @@ def load() -> Metrics:  # noqa: PLR0915 (une longue liste de lectures, volontair
             m.put(key + "_above", "oui" if d["ci_low"] > 0.5 else "non", d["ci_low"] > 0.5, src)
     best = max(d["value"] for d, _ in roc.values())
     m.put("roc_max", num(best, 2), best, "tableau AUC-ROC ci-dessus")
+
+    _bloc_e(m)
 
     # écart entre les deux backtests de M1-texte (instabilité)
     m.put("bt_pool_gap", integer(by_budget[0.25]["n_pool"] - bt["hasard"]["n_pool"]),

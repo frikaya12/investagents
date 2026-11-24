@@ -66,4 +66,4 @@ ui.takeaway("Réinstallation de populations, nombreux cofinanceurs, deuxième ph
             "sont petits (forte régularisation) : ce sont des tendances, pas des causes.")
 
 st.subheader("Ce que les agents apportent, et ce qu'ils n'apportent pas")
-st.markdown(section_markdown(10, m).split("**En technique.**", 1)[1])
+st.markdown(section_markdown(11, m).split("**En technique.**", 1)[1])

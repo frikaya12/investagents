@@ -57,7 +57,7 @@ figure + p em, figure + p { color:var(--ink2); }
   .layout { display:block; } nav.toc { display:none; }
   main { padding:0; max-width:none; }
   h2 { break-before:auto; break-after:avoid; border-top:none; margin-top:18pt; }
-  h2#s-9, h2#s-14 { break-before:page; }
+  h2#s-10, h2#s-15 { break-before:page; }
   figure, blockquote, table, .term, pre { break-inside:avoid; }
   pre { white-space:pre-wrap; font-size:8.5pt; }
   table { font-size:8.8pt; }

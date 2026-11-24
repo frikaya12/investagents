@@ -1,0 +1,509 @@
+{
+  "terms_sha256": "1060058a662a09be80dac1c50e1668dad6234e932cfc21621d809041408d6333",
+  "reproduction_max_abs_diff": {
+    "valid": 0.0,
+    "test": 0.0
+  },
+  "n_train": 5810,
+  "n_valid_platt": 869,
+  "n_test": 755,
+  "test_failure_rate": 0.21589403973509932,
+  "removed_test": {
+    "mean_expressions_per_doc": 96.76688741721854,
+    "share_chars_removed": 0.005195867949187724
+  },
+  "original": {
+    "auc_pr": {
+      "value": 0.29749038321530574,
+      "ci_low": 0.2450214420257697,
+      "ci_high": 0.3704881328230844
+    },
+    "auc_roc": {
+      "value": 0.5983564085557951,
+      "ci_low": 0.5486481689314215,
+      "ci_high": 0.648462468831325
+    },
+    "brier": {
+      "value": 0.16617981880528054,
+      "ci_low": 0.14979359483288046,
+      "ci_high": 0.1832738151738423
+    }
+  },
+  "no_country": {
+    "auc_pr": {
+      "value": 0.29474727648035076,
+      "ci_low": 0.24294022479063374,
+      "ci_high": 0.36721000171047996
+    },
+    "auc_roc": {
+      "value": 0.5995170784281214,
+      "ci_low": 0.5504691759089297,
+      "ci_high": 0.6487311917923909
+    },
+    "brier": {
+      "value": 0.16611004995186943,
+      "ci_low": 0.14957492698890312,
+      "ci_high": 0.18320295482353322
+    }
+  },
+  "diff_no_country_minus_original": {
+    "auc_pr": {
+      "value": -0.002743106734954981,
+      "ci_low": -0.010725744188803812,
+      "ci_high": 0.004231630865694739
+    },
+    "auc_roc": {
+      "value": 0.0011606698723263253,
+      "ci_low": -0.005298028044850825,
+      "ci_high": 0.007488783493854888
+    },
+    "brier": {
+      "value": -6.976885341111738e-05,
+      "ci_low": -0.0006459440240369617,
+      "ci_high": 0.0005182032007953831
+    }
+  },
+  "share_of_gain_lost": 0.03361801053769525,
+  "verdict": "surtout du contenu du dossier",
+  "words": {
+    "toward_failure": [
+      {
+        "word": "subloans",
+        "coef": 0.910629121283574,
+        "label": ""
+      },
+      {
+        "word": "frameworks",
+        "coef": 0.8429261291055493,
+        "label": ""
+      },
+      {
+        "word": "zaire",
+        "coef": 0.8405437199259566,
+        "label": "pays"
+      },
+      {
+        "word": "subloan",
+        "coef": 0.8241404960336122,
+        "label": ""
+      },
+      {
+        "word": "algeria",
+        "coef": 0.759182182137394,
+        "label": "pays"
+      },
+      {
+        "word": "kenya",
+        "coef": 0.7349272237694788,
+        "label": "pays"
+      },
+      {
+        "word": "concession",
+        "coef": 0.7295462905637066,
+        "label": ""
+      },
+      {
+        "word": "tanzania",
+        "coef": 0.7268851788983193,
+        "label": "pays"
+      },
+      {
+        "word": "africa",
+        "coef": 0.7190736986312376,
+        "label": ""
+      },
+      {
+        "word": "contained",
+        "coef": 0.7128534456780152,
+        "label": ""
+      },
+      {
+        "word": "losses",
+        "coef": 0.7113028064914871,
+        "label": ""
+      },
+      {
+        "word": "sofide",
+        "coef": 0.706598311567507,
+        "label": ""
+      },
+      {
+        "word": "des",
+        "coef": 0.7002286362083436,
+        "label": ""
+      },
+      {
+        "word": "files",
+        "coef": 0.6820878057499797,
+        "label": ""
+      },
+      {
+        "word": "livestock",
+        "coef": 0.6691971397312643,
+        "label": ""
+      },
+      {
+        "word": "metering",
+        "coef": 0.6664589532943855,
+        "label": ""
+      },
+      {
+        "word": "nairobi",
+        "coef": 0.658107660117479,
+        "label": ""
+      },
+      {
+        "word": "smallholder",
+        "coef": 0.6563362199139984,
+        "label": ""
+      },
+      {
+        "word": "documented",
+        "coef": 0.6439657285018271,
+        "label": ""
+      },
+      {
+        "word": "forestry",
+        "coef": 0.6376425188398903,
+        "label": ""
+      }
+    ],
+    "toward_success": [
+      {
+        "word": "china",
+        "coef": -1.0740836865287033,
+        "label": "pays"
+      },
+      {
+        "word": "tax",
+        "coef": -0.8714067696178562,
+        "label": ""
+      },
+      {
+        "word": "thousands",
+        "coef": -0.8479872720697197,
+        "label": ""
+      },
+      {
+        "word": "thailand",
+        "coef": -0.8134271423186686,
+        "label": "pays"
+      },
+      {
+        "word": "rs",
+        "coef": -0.8013431340291415,
+        "label": ""
+      },
+      {
+        "word": "contracting",
+        "coef": -0.7832446459485596,
+        "label": ""
+      },
+      {
+        "word": "emergency",
+        "coef": -0.7754781747691212,
+        "label": ""
+      },
+      {
+        "word": "pages",
+        "coef": -0.7241205014571931,
+        "label": ""
+      },
+      {
+        "word": "korea",
+        "coef": -0.7074030612483103,
+        "label": "pays"
+      },
+      {
+        "word": "municipalities",
+        "coef": -0.7055100742721877,
+        "label": ""
+      },
+      {
+        "word": "beneficiary",
+        "coef": -0.6920322081118087,
+        "label": ""
+      },
+      {
+        "word": "armenia",
+        "coef": -0.6844720155546286,
+        "label": "pays"
+      },
+      {
+        "word": "traffic",
+        "coef": -0.6788657541261107,
+        "label": ""
+      },
+      {
+        "word": "commune",
+        "coef": -0.6505135106119236,
+        "label": ""
+      },
+      {
+        "word": "chile",
+        "coef": -0.6456085755041502,
+        "label": "pays"
+      },
+      {
+        "word": "alleviation",
+        "coef": -0.638523655231305,
+        "label": ""
+      },
+      {
+        "word": "vietnam",
+        "coef": -0.6300088342478883,
+        "label": "pays"
+      },
+      {
+        "word": "pavement",
+        "coef": -0.6271620871845967,
+        "label": ""
+      },
+      {
+        "word": "notes",
+        "coef": -0.6209987842612282,
+        "label": ""
+      },
+      {
+        "word": "communes",
+        "coef": -0.6195984374321171,
+        "label": ""
+      }
+    ],
+    "top100_country": 16,
+    "top100_adjective": 1,
+    "top20_failure_country_or_adj": 4,
+    "top20_success_country_or_adj": 6
+  },
+  "factors_valid": [
+    {
+      "factor": "follow_on_phase",
+      "kind": "yes_no",
+      "n_present": 508,
+      "fail_present": 0.25,
+      "fail_absent": 0.19420289855072465,
+      "effect": 0.055797101449275355,
+      "ci_low": -0.0005383151250124199,
+      "ci_high": 0.11445751291192326,
+      "median_threshold": null,
+      "m5_weight": 0.033
+    },
+    {
+      "factor": "env_category",
+      "kind": "category",
+      "n_present": 96,
+      "fail_present": 0.2708333333333333,
+      "fail_absent": 0.22192866578599735,
+      "effect": 0.04890466754733597,
+      "ci_low": -0.04414619804887943,
+      "ci_high": 0.14173108237344498,
+      "median_threshold": null,
+      "m5_weight": 0.0282
+    },
+    {
+      "factor": "pilot_innovative",
+      "kind": "yes_no",
+      "n_present": 751,
+      "fail_present": 0.23302263648468707,
+      "fail_absent": 0.18627450980392157,
+      "effect": 0.0467481266807655,
+      "ci_low": -0.031295059558304014,
+      "ci_high": 0.12518583231004624,
+      "median_threshold": null,
+      "m5_weight": 0.0191
+    },
+    {
+      "factor": "weak_capacity",
+      "kind": "yes_no",
+      "n_present": 547,
+      "fail_present": 0.24314442413162707,
+      "fail_absent": 0.19934640522875818,
+      "effect": 0.043798018902868885,
+      "ci_low": -0.01647816859543766,
+      "ci_high": 0.10128397667254342,
+      "median_threshold": null,
+      "m5_weight": 0.028
+    },
+    {
+      "factor": "resettlement",
+      "kind": "yes_no",
+      "n_present": 371,
+      "fail_present": 0.25067385444743934,
+      "fail_absent": 0.2095435684647303,
+      "effect": 0.04113028598270904,
+      "ci_low": -0.01592044676658957,
+      "ci_high": 0.09878986563170304,
+      "median_threshold": null,
+      "m5_weight": 0.0413
+    },
+    {
+      "factor": "political_risk",
+      "kind": "yes_no",
+      "n_present": 573,
+      "fail_present": 0.24083769633507854,
+      "fail_absent": 0.2,
+      "effect": 0.04083769633507853,
+      "ci_low": -0.016238675910558935,
+      "ci_high": 0.10006141845827546,
+      "median_threshold": null,
+      "m5_weight": 0.0163
+    },
+    {
+      "factor": "baseline_values",
+      "kind": "yes_no",
+      "n_present": 610,
+      "fail_present": 0.23770491803278687,
+      "fail_absent": 0.20164609053497942,
+      "effect": 0.03605882749780745,
+      "ci_low": -0.024486482891289033,
+      "ci_high": 0.09279229843462006,
+      "median_threshold": null,
+      "m5_weight": 0.0207
+    },
+    {
+      "factor": "cofinanciers",
+      "kind": "list",
+      "n_present": 251,
+      "fail_present": 0.250996015936255,
+      "fail_absent": 0.21760797342192692,
+      "effect": 0.03338804251432806,
+      "ci_low": -0.02996064861084182,
+      "ci_high": 0.09866535546398514,
+      "median_threshold": 2.0,
+      "m5_weight": 0.0402
+    },
+    {
+      "factor": "fragility_conflict",
+      "kind": "yes_no",
+      "n_present": 345,
+      "fail_present": 0.24347826086956523,
+      "fail_absent": 0.21653543307086615,
+      "effect": 0.02694282779869908,
+      "ci_low": -0.03343080501059225,
+      "ci_high": 0.08348827566891745,
+      "median_threshold": null,
+      "m5_weight": 0.0126
+    },
+    {
+      "factor": "reform_to_adopt",
+      "kind": "yes_no",
+      "n_present": 586,
+      "fail_present": 0.2354948805460751,
+      "fail_absent": 0.20973782771535582,
+      "effect": 0.025757052830719274,
+      "ci_low": -0.03323643225478258,
+      "ci_high": 0.08719503075291303,
+      "median_threshold": null,
+      "m5_weight": 0.0131
+    },
+    {
+      "factor": "lessons_problems",
+      "kind": "yes_no",
+      "n_present": 544,
+      "fail_present": 0.22794117647058823,
+      "fail_absent": 0.22653721682847897,
+      "effect": 0.0014039596421092648,
+      "ci_low": -0.05654126463754004,
+      "ci_high": 0.05836566176787838,
+      "median_threshold": null,
+      "m5_weight": -0.008
+    },
+    {
+      "factor": "components",
+      "kind": "list",
+      "n_present": 361,
+      "fail_present": 0.22714681440443213,
+      "fail_absent": 0.22764227642276422,
+      "effect": -0.0004954620183320879,
+      "ci_low": -0.057948161744008214,
+      "ci_high": 0.060222666554098116,
+      "median_threshold": 2.0,
+      "m5_weight": -0.0036
+    },
+    {
+      "factor": "economic_return_reported",
+      "kind": "yes_no",
+      "n_present": 552,
+      "fail_present": 0.22644927536231885,
+      "fail_absent": 0.2292358803986711,
+      "effect": -0.002786605036352252,
+      "ci_low": -0.06375824404399529,
+      "ci_high": 0.05799454000080765,
+      "median_threshold": null,
+      "m5_weight": 0.0012
+    },
+    {
+      "factor": "fiduciary_risk",
+      "kind": "category",
+      "n_present": 254,
+      "fail_present": 0.22440944881889763,
+      "fail_absent": 0.2287145242070117,
+      "effect": -0.00430507538811406,
+      "ci_low": -0.06336472985051447,
+      "ci_high": 0.058950443270651624,
+      "median_threshold": null,
+      "m5_weight": -0.0034
+    },
+    {
+      "factor": "decentralized_implementation",
+      "kind": "yes_no",
+      "n_present": 676,
+      "fail_present": 0.22633136094674555,
+      "fail_absent": 0.23163841807909605,
+      "effect": -0.005307057132350496,
+      "ci_low": -0.07591206614417362,
+      "ci_high": 0.06542310035571297,
+      "median_threshold": null,
+      "m5_weight": -0.0083
+    },
+    {
+      "factor": "counterpart_funding",
+      "kind": "yes_no",
+      "n_present": 441,
+      "fail_present": 0.2222222222222222,
+      "fail_absent": 0.23300970873786409,
+      "effect": -0.010787486515641875,
+      "ci_low": -0.06617962243681108,
+      "ci_high": 0.044948913818036645,
+      "median_threshold": null,
+      "m5_weight": 0.0017
+    },
+    {
+      "factor": "overall_risk_rating",
+      "kind": "category",
+      "n_present": 254,
+      "fail_present": 0.21653543307086615,
+      "fail_absent": 0.23205342237061768,
+      "effect": -0.015517989299751539,
+      "ci_low": -0.07874791196920634,
+      "ci_high": 0.04967693174830906,
+      "median_threshold": null,
+      "m5_weight": -0.0027
+    },
+    {
+      "factor": "first_operation",
+      "kind": "yes_no",
+      "n_present": 166,
+      "fail_present": 0.21084337349397592,
+      "fail_absent": 0.2314410480349345,
+      "effect": -0.020597674540958594,
+      "ci_low": -0.08583071448377858,
+      "ci_high": 0.051642532307779584,
+      "median_threshold": null,
+      "m5_weight": null
+    },
+    {
+      "factor": "implementing_agencies",
+      "kind": "list",
+      "n_present": 186,
+      "fail_present": 0.20430107526881722,
+      "fail_absent": 0.23388305847076463,
+      "effect": -0.02958198320194741,
+      "ci_low": -0.09657176892861952,
+      "ci_high": 0.04004205100127885,
+      "median_threshold": 2.0,
+      "m5_weight": 0.0064
+    }
+  ],
+  "n_valid_factors": 853
+}

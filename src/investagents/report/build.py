@@ -29,6 +29,8 @@ from investagents.report.metrics import ROOT, Metrics, load
 TEMPLATE = Path(__file__).with_name("rapport_template.md")
 RESUME_TEMPLATE = Path(__file__).with_name("resume_template.md")
 RESUME_OUT = ROOT / "docs" / "resume_prof.md"
+BLOC_E_TEMPLATE = Path(__file__).with_name("blocE_template.md")
+BLOC_E_OUT = ROOT / "reports" / "blocE_pays.md"
 MD_OUT = ROOT / "reports" / "rapport_final.md"
 FIG_DIR = ROOT / "reports" / "figures"
 HTML_OUT = ROOT / "docs" / "rapport.html"
@@ -44,6 +46,60 @@ FIG_RE = re.compile(r"^@@fig:([a-z]+)@@$", re.M)
 H2_RE = re.compile(r"^## (\d+)\. (.+)$", re.M)
 
 
+TABLE_RE = re.compile(r"^@@table:([a-z_]+)@@$", re.M)
+FACTOR_LABELS = {
+    "components": "Nombre de composantes (au-dessus de la médiane)",
+    "implementing_agencies": "Nombre d'agences d'exécution (au-dessus de la médiane)",
+    "cofinanciers": "Nombre de cofinanceurs (au-dessus de la médiane)",
+    "first_operation": "Première opération (exclu des modèles)",
+    "follow_on_phase": "Deuxième phase / suite d'un projet",
+    "reform_to_adopt": "Réforme encore à adopter",
+    "env_category": "Catégorie environnementale A",
+    "overall_risk_rating": "Risque global élevé ou substantiel",
+    "fiduciary_risk": "Risque fiduciaire élevé ou substantiel",
+    "baseline_values": "Valeurs de référence des indicateurs",
+    "lessons_problems": "Leçons : projet antérieur en difficulté",
+    "fragility_conflict": "Fragilité / conflit",
+    "weak_capacity": "Capacité faible de l'agence",
+    "counterpart_funding": "Fonds de contrepartie requis",
+    "resettlement": "Réinstallation de populations",
+    "decentralized_implementation": "Exécution décentralisée",
+    "pilot_innovative": "Projet pilote / innovant",
+    "political_risk": "Risque politique cité",
+    "economic_return_reported": "Rentabilité économique chiffrée",
+}
+
+
+def _table(name: str, m: Metrics) -> str:
+    """Tableaux du bloc E, écrits depuis experiments/blocE/results.json (via metrics)."""
+    from investagents.report.metrics import num, pct
+
+    if name in ("e_words_fail", "e_words_success"):
+        rows = m.raw["e_words"]["toward_failure" if name == "e_words_fail" else "toward_success"]
+        lines = ["| # | Mot | Poids | Pays ? |", "| ---: | --- | ---: | --- |"]
+        lines += [f"| {i} | {r['word']} | {num(r['coef'], 2, signed=True)} | "
+                  f"{r['label'] or '—'} |" for i, r in enumerate(rows, 1)]  # fmt: skip
+        return "\n".join(lines)
+    if name == "e_factors":
+        lines = ["| Facteur (présent) | Projets | Échec si présent | Échec si absent | "
+                 "Effet [IC 95 %] | Poids dans M5 |",
+                 "| --- | ---: | ---: | ---: | --- | ---: |"]  # fmt: skip
+        for r in m.raw["e_factors"]:
+            eff = {"value": 100 * r["effect"], "ci_low": 100 * r["ci_low"],
+                   "ci_high": 100 * r["ci_high"]}  # fmt: skip
+            effect = (f"{num(eff['value'], 1, signed=True)} pts [{num(eff['ci_low'], 1)} ; "
+                      f"{num(eff['ci_high'], 1)}]")  # fmt: skip
+            w = "exclu" if r["m5_weight"] is None else num(r["m5_weight"], 3, signed=True)
+            lines.append(f"| {FACTOR_LABELS[r['factor']]} | {r['n_present']} | "
+                         f"{pct(r['fail_present'])} | {pct(r['fail_absent'])} | {effect} | {w} |")
+        return "\n".join(lines)
+    raise KeyError(f"tableau inconnu : {name}")
+
+
+def tables(text: str, m: Metrics) -> str:
+    return TABLE_RE.sub(lambda g: _table(g.group(1), m), text)
+
+
 def fill(text: str, m: Metrics) -> str:
     """Remplace chaque {{clé}} par le chiffre mis en forme ; erreur si une clé est inconnue."""
 
@@ -53,7 +109,7 @@ def fill(text: str, m: Metrics) -> str:
             raise KeyError(f"clé inconnue dans le gabarit : {key}")
         return m.txt[key]
 
-    return KEY_RE.sub(rep, text)
+    return tables(KEY_RE.sub(rep, text), m)
 
 
 def template_keys(text: str) -> set[str]:
@@ -139,6 +195,13 @@ def render_resume(m: Metrics) -> str:
     header = ("<!-- Fichier généré par `uv run python -m investagents.report.build` depuis "
               "src/investagents/report/resume_template.md : ne pas modifier à la main. -->\n")
     return header + fill(RESUME_TEMPLATE.read_text(encoding="utf-8"), m)
+
+
+def render_bloc_e(m: Metrics) -> str:
+    """Rapport du bloc E (part du pays), chiffres lus dans experiments/blocE/results.json."""
+    header = ("<!-- Fichier généré par `uv run python -m investagents.report.build` depuis "
+              "src/investagents/report/blocE_template.md : ne pas modifier à la main. -->\n")
+    return header + fill(BLOC_E_TEMPLATE.read_text(encoding="utf-8"), m)
 
 
 def render_md(m: Metrics) -> tuple[str, dict[str, str]]:
@@ -273,6 +336,7 @@ def main() -> None:
     HTML_OUT.write_text(render_html(m), encoding="utf-8")
     SHOWCASE.write_text(update_showcase(m), encoding="utf-8")
     RESUME_OUT.write_text(render_resume(m), encoding="utf-8")
+    BLOC_E_OUT.write_text(render_bloc_e(m), encoding="utf-8")
     print(f"écrit : {MD_OUT.relative_to(ROOT)}, {HTML_OUT.relative_to(ROOT)}, {len(svgs)} figures")
     if not args.no_pdf:
         render_pdf(HTML_OUT, PDF_OUT)

@@ -24,4 +24,4 @@ c2.caption(f"{t['bt_pool_gap']} projets d'écart suffisent à déplacer le résu
 c3.metric("Textes du coffre-fort téléchargés", t["vault_text_n"], border=True)
 c3.caption(f"sur {t['vault_n']} projets : le serveur a refusé les téléchargements (403).")
 
-st.markdown(section_markdown(11, m).split("**En technique.**", 1)[1])
+st.markdown(section_markdown(12, m).split("**En technique.**", 1)[1])
