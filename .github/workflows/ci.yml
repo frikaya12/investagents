@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # historique complet : un test vérifie les commits cités comme preuves
       - uses: astral-sh/setup-uv@v6
       - name: Installer Python et les dépendances
         run: uv sync --python 3.12
